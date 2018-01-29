@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "852631298890",
+    "firebase_url": "https://ckdas-f867a.firebaseio.com",
+    "project_id": "ckdas-f867a",
+    "storage_bucket": "ckdas-f867a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:852631298890:android:46903587296aad22",
+        "android_client_info": {
+          "package_name": "CKD.Android"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "852631298890-p67a96g8cqgmffhvqld3713on41o27gv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "CKD.Android",
+            "certificate_hash": "16a85253aa1bd0dc1ee91f16f850842e4c9cc3fb"
+          }
+        },
+        {
+          "client_id": "852631298890-mtnsinlgqf3j8tamgmn4j3618pe4frt8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBzX1wvAQ5ZEMuNBgel4rVTfdNzOSz7gaU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "852631298890-mtnsinlgqf3j8tamgmn4j3618pe4frt8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
