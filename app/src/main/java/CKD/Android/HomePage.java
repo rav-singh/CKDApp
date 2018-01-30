@@ -12,7 +12,7 @@ import com.google.firebase.auth.FirebaseAuth;
 public class HomePage  extends AppCompatActivity {
 
     private Button diet_Button, exercise_Button, mood_Button,
-            social_Button,leaderboards_Button;
+            social_Button,leaderboards_Button,logout_Button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -77,6 +77,20 @@ public class HomePage  extends AppCompatActivity {
                  startActivity(launchActivity1);
              }
     });
+        logout_Button.setOnClickListener(new View.OnClickListener()
+        {
+
+            public void onClick(View v)
+            {
+                AppData.getInstance().mAuth.signOut();
+                AppData.signOut();
+
+                Intent launchActivity1=
+                        new Intent(CKD.Android.HomePage.this,MainActivity.class);
+                startActivity(launchActivity1);
+
+            }
+        });
 
     }
 
@@ -87,6 +101,8 @@ public class HomePage  extends AppCompatActivity {
         exercise_Button = findViewById(R.id.Home_Btn_Exerxcise);
         social_Button = findViewById(R.id.Home_Btn_Social);
         leaderboards_Button = findViewById(R.id.Home_Btn_Leaderboards);
+        logout_Button = findViewById(R.id.HomePage_Btn_Logout);
     }
+
 
 }
