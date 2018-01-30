@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -54,8 +56,21 @@ public class LoginActivity extends AppCompatActivity
                                         // User unable to register_class user to database
                                         else
                                         {
-                                            @SuppressWarnings("ThrowableNotThrown")
-                                            Exception exception = task.getException();
+                                            String error_Message = task.getException().toString();
+                                            if(error_Message.contains("password"))
+                                            {
+                                                Toast.makeText(LoginActivity.this,
+                                                        "Incorrect Password!", Toast.LENGTH_LONG).show();
+                                            }
+                                            else if(error_Message.contains("email"))
+                                            {
+                                                Toast.makeText(LoginActivity.this,
+                                                        "Incorrect Email!", Toast.LENGTH_LONG).show();
+                                            }
+                                            else
+                                            {
+                                                Toast.makeText(LoginActivity.this,error_Message, Toast.LENGTH_LONG).show();
+                                            }
                                         }
                                     }
                                 });
