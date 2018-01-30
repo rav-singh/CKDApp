@@ -11,10 +11,8 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class HomePage  extends AppCompatActivity {
 
-    public EditText name;
-    private String mDisplayName;
-    private Button Register;
-    private FirebaseAuth mAuth;
+    private Button diet_Button, exercise_Button, mood_Button,
+            social_Button,leaderboards_Button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -22,12 +20,7 @@ public class HomePage  extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
 
-        // UI Component
-        Button diet_Button = findViewById(R.id.Home_Btn_Diet);
-        Button mood_Button = findViewById(R.id.Home_Btn_Mood);
-        Button exercise_Button = findViewById(R.id.Home_Btn_Exerxcise);
-        Button social_Button = findViewById(R.id.Home_Btn_Social);
-        Button leaderboards_Button = findViewById(R.id.Home_Btn_Leaderboards);
+        InitializeComponents();
 
 
         diet_Button.setOnClickListener(new View.OnClickListener()
@@ -85,6 +78,15 @@ public class HomePage  extends AppCompatActivity {
              }
     });
 
+    }
+
+    private void InitializeComponents() {
+        // UI Component
+        diet_Button = findViewById(R.id.Home_Btn_Diet);
+        mood_Button = findViewById(R.id.Home_Btn_Mood);
+        exercise_Button = findViewById(R.id.Home_Btn_Exerxcise);
+        social_Button = findViewById(R.id.Home_Btn_Social);
+        leaderboards_Button = findViewById(R.id.Home_Btn_Leaderboards);
     }
 
 }

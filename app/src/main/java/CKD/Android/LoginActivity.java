@@ -28,8 +28,8 @@ public class LoginActivity extends AppCompatActivity
         setContentView(R.layout.activity_login);
 
         // UI Components
-        final EditText Email =  findViewById(R.id.Login_TF_EmailAddress);
-        final EditText Password = findViewById(R.id.Login_TF_Password);
+        final EditText Login_Email =  findViewById(R.id.Login_TF_EmailAddress);
+        final EditText Login_Password = findViewById(R.id.Login_TF_Password);
         Button Login = findViewById(R.id.Login_Btn_Login);
 
         // OnClick Listener that redirects to Register Page
@@ -37,13 +37,13 @@ public class LoginActivity extends AppCompatActivity
 
             public void onClick(View v) {
 
-                String newEmail = Email.getText().toString();
-                String newPassword= Password.getText().toString();
+                String UserEmail = Login_Email.getText().toString();
+                String UserPassword= Login_Password.getText().toString();
 
                 mAuth = FirebaseAuth.getInstance();
 
                 Task<AuthResult> Auth =
-                        mAuth.signInWithEmailAndPassword(newEmail, newPassword)
+                        mAuth.signInWithEmailAndPassword(UserEmail, UserPassword)
                                 .addOnCompleteListener(new OnCompleteListener<AuthResult>()
                                 {
                                     @Override

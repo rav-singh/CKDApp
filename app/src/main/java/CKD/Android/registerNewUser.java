@@ -9,8 +9,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
 
 
 public class registerNewUser extends AppCompatActivity {
@@ -19,6 +21,7 @@ public class registerNewUser extends AppCompatActivity {
     private String mDisplayName;
     private Button Register;
     private FirebaseAuth mAuth;
+    private FirebaseDatabase database;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -28,6 +31,7 @@ public class registerNewUser extends AppCompatActivity {
 
         // UI Components
         final EditText Email =  findViewById(R.id.Register_TF_EmailAddress);
+        final EditText Name = findViewById(R.id.Register_TF_Name);
         final EditText Password = findViewById(R.id.Register_TF_Password);
         Button Register = findViewById(R.id.Register_Btn_Register);
 
@@ -36,8 +40,9 @@ public class registerNewUser extends AppCompatActivity {
 
             public void onClick(View v) {
 
-                String newEmail = Email.getText().toString();
-                String newPassword= Password.getText().toString();
+                final String newEmail = Email.getText().toString();
+                final String newPassword = Password.getText().toString();
+                final String newName = Name.getText().toString();
 
                 mAuth = FirebaseAuth.getInstance();
 
@@ -52,6 +57,9 @@ public class registerNewUser extends AppCompatActivity {
                         if (task.isSuccessful())
                         {
                             AuthResult result = task.getResult();
+                            // TODO Code Analysis says .getUID may produce null pointer
+                            writeUserData(newEmail,newPassword,newName,mAuth.getCurrentUser().getUid());
+
                             Intent launchActivity1= new Intent(
                                     CKD.Android.registerNewUser.this,HomePage.class);
                             startActivity(launchActivity1);
@@ -69,4 +77,24 @@ public class registerNewUser extends AppCompatActivity {
             }
         });
     }
+
+    private void writeUserData(String newEmail, String newPassword, String newName,String UID)
+    {
+
+        final FirebaseDatabase db = FirebaseDatabase.getInstance();
+
+        DatabaseReference User_node = db.getReference("User_node");
+
+        User_node.child(newName).child("Email").setValue(newEmail);
+        User_node.child(newName).child("Age").setValue("120");
+        User_node.child(newName).child("Phone").setValue("86753099");
+        User_node.child(newName).child("UID").setValue(UID);
+
+
+
+    }
+
 }
+
+
+

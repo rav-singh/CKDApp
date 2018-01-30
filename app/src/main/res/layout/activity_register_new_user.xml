@@ -4,50 +4,63 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="CKD.Android.registerNewUser">
+    tools:context="CKD.Android.registerNewUser"
+    tools:layout_editor_absoluteY="81dp">
 
     <EditText
         android:id="@+id/Register_TF_EmailAddress"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="72dp"
         android:ems="14"
         android:hint="Email Address"
         android:inputType="textEmailAddress"
         android:textSize="26sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintBottom_toTopOf="@+id/Register_TF_Password"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.354" />
+        app:layout_constraintTop_toBottomOf="@+id/Register_TF_Name" />
 
     <Button
         android:id="@+id/Register_Btn_Register"
         android:layout_width="0dp"
-        android:layout_height="79dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="43dp"
         android:text="Register"
         android:textSize="32sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.918" />
+        app:layout_constraintTop_toBottomOf="@+id/Register_TF_Password" />
 
     <EditText
         android:id="@+id/Register_TF_Password"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="72dp"
         android:ems="10"
         android:hint="Password"
         android:inputType="textPassword"
         android:textSize="26sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/Register_Btn_Register"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Register_TF_EmailAddress" />
+
+    <EditText
+        android:id="@+id/Register_TF_Name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="66dp"
+        android:layout_marginTop="103dp"
+        android:hint="Name"
+        android:textSize="26sp"
+        app:layout_constraintBottom_toTopOf="@+id/Register_TF_EmailAddress"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.564" />
+        app:layout_constraintTop_toTopOf="parent" />
 </android.support.constraint.ConstraintLayout>
