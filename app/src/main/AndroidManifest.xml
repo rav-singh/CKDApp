@@ -26,6 +26,7 @@
             android:label="@string/title_activity_login" />
         <activity android:name=".registerNewUser"/>
         <activity android:name=".HomePage"/>
+        <activity android:name=".Demographics"/>
     </application>
 
 </manifest>
