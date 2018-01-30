@@ -36,7 +36,6 @@ public class Demographics extends AppCompatActivity
 
         //  Fills in Name and Email Data for profile
         // May be excessive and might simplify by removing name from Register Page
-        Name.setText(mAuth.getDisplayName());
         Email.setText(mAuth.getEmail());
         UID.setText(mAuth.getUid());
 
@@ -45,7 +44,6 @@ public class Demographics extends AppCompatActivity
         {
             public void onClick(View v)
             {
-
                 String userName = Name.getText().toString();
                 String userEmail = Email.getText().toString();
                 String phoneNumber = Phone.getText().toString();
