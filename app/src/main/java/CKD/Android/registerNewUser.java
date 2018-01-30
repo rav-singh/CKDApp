@@ -10,9 +10,12 @@ import android.widget.EditText;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 
 
 public class registerNewUser extends AppCompatActivity {
+
+    private FirebaseAuth Authenticator = AppData.getInstance().mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -34,7 +37,7 @@ public class registerNewUser extends AppCompatActivity {
                 final String newPassword = Password.getText().toString();
 
                 Task<AuthResult> Auth =
-                     AppData.getInstance().mAuth.createUserWithEmailAndPassword(newEmail, newPassword)
+                     Authenticator.createUserWithEmailAndPassword(newEmail, newPassword)
                     .addOnCompleteListener(new OnCompleteListener<AuthResult>()
                 {
                     @Override
@@ -45,6 +48,11 @@ public class registerNewUser extends AppCompatActivity {
                         {
                             AuthResult result = task.getResult();
 
+                            // Takes Users Name and Generated UID and adds it to the Current UserClass
+                            AppData.cur_user = new UserClass(null,newEmail,null,
+                                                null,null,AppData.mAuth.getCurrentUser().getUid());
+
+                            // Directs User to the Demographics Page
                             Intent launchActivity1= new Intent(
                                     CKD.Android.registerNewUser.this,Demographics.class);
                             startActivity(launchActivity1);
