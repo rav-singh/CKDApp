@@ -4,19 +4,19 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
 
-/**
- * Created by Matt on 1/30/2018.
- */
 
 public class AppData
 {
     private static AppData instance;
 
     public static UserClass cur_user;
-    FirebaseDatabase db;
-    FirebaseAuth mAuth;
-    FirebaseUser firebaseUser;
+    public static FirebaseDatabase db;
+    public static FirebaseAuth mAuth;
+    public static FirebaseUser firebaseUser;
 
+
+    // If an instance of AppData hasn't been created yet create it
+    // return instance
     public static AppData getInstance()
     {
         if(instance == null)
@@ -25,14 +25,25 @@ public class AppData
         return instance;
     }
 
+    // Constructor contains all of the firebase References needed
+    // If needed just refer to AppData.getInstance().Variable
     private AppData()
     {
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseDatabase.getInstance();
         firebaseUser = mAuth.getCurrentUser();
-        db = FirebaseDatabase.getInstance();
-
     }
 
-
+    // completely clears AppData class to sign user out.
+    // Maybe have some data structure holding all users?
+    // Possibly a HashMap with UID as the key and a Dictionary
+    // containing UserClass variables
+    public static void signOut()
+    {
+        mAuth = null;
+        db = null;
+        firebaseUser = null;
+        instance = null;
+        cur_user = null;
+    }
 }
