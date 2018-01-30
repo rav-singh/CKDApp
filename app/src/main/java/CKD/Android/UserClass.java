@@ -4,7 +4,6 @@ package CKD.Android;
 
 public class UserClass
 {
-
     private String name;
     private String email;
     private String phone;
@@ -40,5 +39,35 @@ public class UserClass
     public String getActivityLevel(){return activityLevel;}
 
     public String getUID(){return UID;}
+
+    public void setName(String name)
+    {
+        this.name = name;
+    }
+
+    public void setEmail(String email)
+    {
+        this.email = email;
+    }
+
+    public void setPhone(String phone)
+    {
+        this.phone = phone;
+    }
+
+    public void setAge(String age)
+    {
+        this.age = age;
+    }
+
+    public void setActivityLevel(String activityLevel)
+    {
+        this.activityLevel = activityLevel;
+    }
+
+    public void setUID(String UID)
+    {
+        this.UID = UID;
+    }
 
 }
