@@ -19,7 +19,6 @@ public class Demographics extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_demographics);
 
-
         // UI Components
         final EditText Name = findViewById(R.id.Demo_TF_Name);
         final EditText Email =  findViewById(R.id.Demo_TF_Email);
@@ -31,14 +30,15 @@ public class Demographics extends AppCompatActivity
 
         //  Fills in Name and Email Data for profile
         // May be excessive and might simplify by removing name from Register Page
-        Email.setText(AppData.getInstance().firebaseUser.getEmail());
-        UID.setText(AppData.getInstance().firebaseUser.getUid());
+        Email.setText(AppData.cur_user.getEmail());
+        UID.setText(AppData.cur_user.getUID());
 
         // OnClick Listener that redirects to homePage
         Register.setOnClickListener(new View.OnClickListener()
         {
             public void onClick(View v)
             {
+                // Grabs all user input into strings
                 String userName = Name.getText().toString();
                 String userEmail = Email.getText().toString();
                 String phoneNumber = Phone.getText().toString();
@@ -46,12 +46,24 @@ public class Demographics extends AppCompatActivity
                 String activityLevel = ActivityLevel.getText().toString();
                 String userUID = UID.getText().toString();
 
-                addUserToDatabase(userName, userEmail, phoneNumber, userAge, activityLevel, userUID);
+                // Adds users input into Current_user Class in AppData
+                addUserClassValues(userName,phoneNumber,userAge,activityLevel);
 
+                // Adds User to RealTime Database under Users Node
+                addUserToDatabase(userName, userEmail, phoneNumber, userAge, activityLevel, userUID);
+                // Directs User to HomePage
                 switchPages();
             }
         });
 
+    }
+
+    private void addUserClassValues(String userName, String phoneNumber, String userAge, String activityLevel)
+    {
+        AppData.cur_user.setName(userName);
+        AppData.cur_user.setPhone(phoneNumber);
+        AppData.cur_user.setAge(userAge);
+        AppData.cur_user.setActivityLevel(activityLevel);
     }
 
     private void switchPages()
@@ -64,7 +76,7 @@ public class Demographics extends AppCompatActivity
     private void addUserToDatabase(String userName, String userEmail, String phone, String age, String activity, String UID)
     {
 
-       FirebaseDatabase db = AppData.getInstance().db;
+       FirebaseDatabase db = AppData.db;
 
         DatabaseReference User_node = db.getReference("Users");
 
