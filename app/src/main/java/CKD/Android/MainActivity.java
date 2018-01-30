@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // Grab Login Button by ID
-        Button Login = findViewById(R.id.btn_login);
+        Button Login = findViewById(R.id.Main_Btn_Login);
 
         // OnClick Listener redirects to Login Page
         Login.setOnClickListener(new View.OnClickListener() {
@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         // Grab Register Button By ID
-        Button Register = findViewById(R.id.btn_register);
+        Button Register = findViewById(R.id.Main_Btn_Register);
 
         // OnClick Listener that redirects to Register Page
         Register.setOnClickListener(new View.OnClickListener() {

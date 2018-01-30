@@ -24,7 +24,8 @@
         <activity
             android:name=".LoginActivity"
             android:label="@string/title_activity_login" />
-        <activity android:name=".registerNewUser"></activity>
+        <activity android:name=".registerNewUser"/>
+        <activity android:name=".HomePage"/>
     </application>
 
 </manifest>

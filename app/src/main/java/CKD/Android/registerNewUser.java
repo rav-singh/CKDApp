@@ -27,9 +27,9 @@ public class registerNewUser extends AppCompatActivity {
         setContentView(R.layout.activity_register_new_user);
 
         // UI Components
-        final EditText Email =  findViewById(R.id.TF_EmailAddress);
-        final EditText Password = findViewById(R.id.TF_password);
-        Button Register = findViewById(R.id.btn_register);
+        final EditText Email =  findViewById(R.id.Register_TF_EmailAddress);
+        final EditText Password = findViewById(R.id.Register_TF_Password);
+        Button Register = findViewById(R.id.Register_Btn_Register);
 
         // OnClick Listener that redirects to Register Page
         Register.setOnClickListener(new View.OnClickListener() {
@@ -41,7 +41,7 @@ public class registerNewUser extends AppCompatActivity {
 
                 mAuth = FirebaseAuth.getInstance();
 
-                Task<AuthResult> password =
+                Task<AuthResult> Auth =
                                  mAuth.createUserWithEmailAndPassword(newEmail, newPassword)
                                 .addOnCompleteListener(new OnCompleteListener<AuthResult>()
                 {
@@ -53,7 +53,7 @@ public class registerNewUser extends AppCompatActivity {
                         {
                             AuthResult result = task.getResult();
                             Intent launchActivity1= new Intent(
-                                    CKD.Android.registerNewUser.this,MainActivity.class);
+                                    CKD.Android.registerNewUser.this,HomePage.class);
                             startActivity(launchActivity1);
 
                         }
