@@ -16,11 +16,6 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class LoginActivity extends AppCompatActivity
 {
-    public EditText name;
-    private String email;
-    private Button Register;
-    private FirebaseAuth mAuth;
-
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -30,7 +25,7 @@ public class LoginActivity extends AppCompatActivity
         // UI Components
         final EditText Login_Email =  findViewById(R.id.Login_TF_EmailAddress);
         final EditText Login_Password = findViewById(R.id.Login_TF_Password);
-        Button Login = findViewById(R.id.Login_Btn_Login);
+        final Button Login = findViewById(R.id.Login_Btn_Login);
 
         // OnClick Listener that redirects to Register Page
         Login.setOnClickListener(new View.OnClickListener() {
@@ -40,10 +35,8 @@ public class LoginActivity extends AppCompatActivity
                 String UserEmail = Login_Email.getText().toString();
                 String UserPassword= Login_Password.getText().toString();
 
-                mAuth = FirebaseAuth.getInstance();
-
                 Task<AuthResult> Auth =
-                        mAuth.signInWithEmailAndPassword(UserEmail, UserPassword)
+                        AppData.getInstance().mAuth.signInWithEmailAndPassword(UserEmail, UserPassword)
                                 .addOnCompleteListener(new OnCompleteListener<AuthResult>()
                                 {
                                     @Override
@@ -69,4 +62,4 @@ public class LoginActivity extends AppCompatActivity
             }
         });
     }
-}
+    }
