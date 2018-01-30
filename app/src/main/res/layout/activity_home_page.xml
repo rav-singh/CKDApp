@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="CKD.Android.HomePage"
+    tools:layout_editor_absoluteY="81dp">
+
+    <Button
+        android:id="@+id/Home_Btn_Mood"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Mood"
+        app:layout_constraintBottom_toTopOf="@+id/Home_Btn_Exerxcise"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.6" />
+
+    <Button
+        android:id="@+id/Home_Btn_Exerxcise"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Exercise"
+        app:layout_constraintBottom_toTopOf="@+id/Home_Btn_Diet"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Home_Btn_Mood" />
+
+    <Button
+        android:id="@+id/Home_Btn_Diet"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Diet"
+        app:layout_constraintBottom_toTopOf="@+id/Home_Btn_Social"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Home_Btn_Exerxcise" />
+
+    <Button
+        android:id="@+id/Home_Btn_Social"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Social"
+        app:layout_constraintBottom_toTopOf="@+id/Home_Btn_Leaderboards"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Home_Btn_Diet" />
+
+    <Button
+        android:id="@+id/Home_Btn_Leaderboards"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Leaderboards"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Home_Btn_Social" />
+</android.support.constraint.ConstraintLayout>
