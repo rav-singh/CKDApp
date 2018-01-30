@@ -10,17 +10,9 @@ import android.widget.EditText;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.FirebaseDatabase;
 
 
 public class registerNewUser extends AppCompatActivity {
-
-    public EditText name;
-    private String mDisplayName;
-    private Button Register;
-    private FirebaseAuth mAuth;
-    private FirebaseDatabase database;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -31,7 +23,7 @@ public class registerNewUser extends AppCompatActivity {
         // UI Components
         final EditText Email =  findViewById(R.id.Register_TF_EmailAddress);
         final EditText Password = findViewById(R.id.Register_TF_Password);
-        Button Register = findViewById(R.id.Register_Btn_Register);
+        final Button Register = findViewById(R.id.Register_Btn_Register);
 
         // OnClick Listener that redirects to Register Page
         Register.setOnClickListener(new View.OnClickListener() {
@@ -41,11 +33,9 @@ public class registerNewUser extends AppCompatActivity {
                 final String newEmail = Email.getText().toString();
                 final String newPassword = Password.getText().toString();
 
-                mAuth = FirebaseAuth.getInstance();
-
                 Task<AuthResult> Auth =
-                                 mAuth.createUserWithEmailAndPassword(newEmail, newPassword)
-                                .addOnCompleteListener(new OnCompleteListener<AuthResult>()
+                     AppData.getInstance().mAuth.createUserWithEmailAndPassword(newEmail, newPassword)
+                    .addOnCompleteListener(new OnCompleteListener<AuthResult>()
                 {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task)
