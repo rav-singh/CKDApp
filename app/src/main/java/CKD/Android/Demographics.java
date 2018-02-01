@@ -58,7 +58,7 @@ public class Demographics extends AppCompatActivity
 
     }
 
-    private void addUserClassValues(String userName, String phoneNumber, String userAge, String activityLevel)
+    private void addUserClassValues(String  userName, String phoneNumber, String userAge, String activityLevel)
     {
         AppData.cur_user.setName(userName);
         AppData.cur_user.setPhone(phoneNumber);
