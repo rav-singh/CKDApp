@@ -11,8 +11,12 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class HomePage  extends AppCompatActivity {
 
-    private Button diet_Button, exercise_Button, mood_Button,
-            social_Button,leaderboards_Button,logout_Button;
+    private Button diet_Button,
+                   exercise_Button,
+                   mood_Button,
+                   social_Button,
+                   leaderboards_Button,
+                   logout_Button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -29,7 +33,7 @@ public class HomePage  extends AppCompatActivity {
             public void onClick(View v)
             {
                 Intent launchActivity1=
-                        new Intent(CKD.Android.HomePage.this,MainActivity.class);
+                        new Intent(CKD.Android.HomePage.this,Diet.class);
                 startActivity(launchActivity1);
             }
         });
@@ -51,7 +55,7 @@ public class HomePage  extends AppCompatActivity {
             public void onClick(View v)
             {
                 Intent launchActivity1=
-                        new Intent(CKD.Android.HomePage.this,MainActivity.class);
+                        new Intent(CKD.Android.HomePage.this,Exercise.class);
                 startActivity(launchActivity1);
             }
         });
@@ -62,7 +66,7 @@ public class HomePage  extends AppCompatActivity {
             public void onClick(View v)
             {
                 Intent launchActivity1=
-                        new Intent(CKD.Android.HomePage.this,MainActivity.class);
+                        new Intent(CKD.Android.HomePage.this,Social.class);
                 startActivity(launchActivity1);
             }
         });
@@ -73,10 +77,11 @@ public class HomePage  extends AppCompatActivity {
             public void onClick(View v)
              {
                  Intent launchActivity1=
-                         new Intent(CKD.Android.HomePage.this,MainActivity.class);
+                         new Intent(CKD.Android.HomePage.this,Leaderboards.class);
                  startActivity(launchActivity1);
              }
     });
+
         logout_Button.setOnClickListener(new View.OnClickListener()
         {
 
