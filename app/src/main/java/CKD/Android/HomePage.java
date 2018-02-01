@@ -40,7 +40,7 @@ public class HomePage  extends AppCompatActivity {
             public void onClick(View v)
             {
                 Intent launchActivity1=
-                        new Intent(CKD.Android.HomePage.this,MainActivity.class);
+                        new Intent(CKD.Android.HomePage.this,Mood.class);
                 startActivity(launchActivity1);
             }
         });
