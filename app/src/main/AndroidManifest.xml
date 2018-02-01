@@ -29,6 +29,10 @@
         <activity android:name=".HomePage"/>
         <activity android:name=".Demographics"/>
         <activity android:name=".Mood"/>
+        <activity android:name=".Exercise"/>
+        <activity android:name=".Diet"/>
+        <activity android:name=".Leaderboards"/>
+        <activity android:name=".Social"/>
     </application>
 
 </manifest>
