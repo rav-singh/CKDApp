@@ -69,7 +69,7 @@ public class Demographics extends AppCompatActivity
     private void switchPages()
     {
         Intent launchActivity1= new Intent(
-                CKD.Android.Demographics.this,HomePage.class);
+                CKD.Android.Demographics.this,Mood.class);
         startActivity(launchActivity1);
     }
 
