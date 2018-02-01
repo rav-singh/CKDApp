@@ -1,7 +1,5 @@
 package CKD.Android;
 
-
-
 public class UserClass
 {
     private String name;

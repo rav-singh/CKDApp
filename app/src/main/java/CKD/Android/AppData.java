@@ -14,7 +14,6 @@ public class AppData
     public static FirebaseAuth mAuth;
     public static FirebaseUser firebaseUser;
 
-
     // If an instance of AppData hasn't been created yet create it
     // return instance
     public static AppData getInstance()

@@ -49,8 +49,8 @@ public class registerNewUser extends AppCompatActivity {
                             AuthResult result = task.getResult();
 
                             // Takes Users Name and Generated UID and adds it to the Current UserClass
-                            AppData.cur_user = new UserClass(null,newEmail,null,
-                                                null,null,AppData.mAuth.getCurrentUser().getUid());
+                             AppData.cur_user = new UserClass(null,newEmail,null,
+                                             null,null,AppData.mAuth.getCurrentUser().getUid());
 
                             // Directs User to the Demographics Page
                             Intent launchActivity1= new Intent(

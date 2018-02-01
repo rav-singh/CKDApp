@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="CKD.Android.Mood"
+    tools:layout_editor_absoluteY="81dp">
+
+    <Button
+        android:id="@+id/Mood_Btn_Happy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Happy"
+        app:layout_constraintBottom_toTopOf="@+id/Mood_Btn_Drunk"
+        app:layout_constraintEnd_toStartOf="@+id/Mood_Btn_Sad"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/Mood_Btn_Sad"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sad"
+        app:layout_constraintBottom_toTopOf="@+id/Mood_Btn_Sleepy"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/Mood_Btn_Happy"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <Button
+        android:id="@+id/Mood_Btn_Drunk"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Drunk"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/Mood_Btn_Sleepy"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Mood_Btn_Happy" />
+
+    <Button
+        android:id="@+id/Mood_Btn_Sleepy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sleepy"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/Mood_Btn_Drunk"
+        app:layout_constraintTop_toBottomOf="@+id/Mood_Btn_Sad" />
+</android.support.constraint.ConstraintLayout>
