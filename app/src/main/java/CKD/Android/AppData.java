@@ -39,6 +39,7 @@ public class AppData
     // containing UserClass variables
     public static void signOut()
     {
+        // confirm that this actually deletes the references, not hides them
         mAuth = null;
         db = null;
         firebaseUser = null;
