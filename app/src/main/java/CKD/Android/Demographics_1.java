@@ -1,6 +1,5 @@
 package CKD.Android;
 
-
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,27 +10,24 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 
-public class Demographics extends AppCompatActivity
+public class Demographics_1 extends AppCompatActivity
 {
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_demographics);
+        setContentView(R.layout.activity_demographics_1);
 
         // UI Components
         final EditText Name = findViewById(R.id.Demo_TF_Name);
         final EditText Email =  findViewById(R.id.Demo_TF_Email);
         final EditText Phone = findViewById(R.id.Demo_TF_Phone);
-        final EditText Age = findViewById(R.id.Demo_TF_Age);
         final EditText ActivityLevel = findViewById(R.id.Demo_TF_ActivityL);
-        final EditText UID = findViewById(R.id.Demo_TF_UID);
-        final Button Register = findViewById(R.id.Demo_Btn_Register);
+        final Button Register = findViewById(R.id.Demo_Btn_Next_1);
 
         //  Fills in Name and Email Data for profile
         // May be excessive and might simplify by removing name from Register Page
         Email.setText(AppData.cur_user.getEmail());
-        UID.setText(AppData.cur_user.getUID());
 
         // OnClick Listener that redirects to homePage
         Register.setOnClickListener(new View.OnClickListener()
@@ -42,15 +38,13 @@ public class Demographics extends AppCompatActivity
                 String userName = Name.getText().toString();
                 String userEmail = Email.getText().toString();
                 String phoneNumber = Phone.getText().toString();
-                String userAge = Age.getText().toString();
                 String activityLevel = ActivityLevel.getText().toString();
-                String userUID = UID.getText().toString();
 
                 // Adds users input into Current_user Class in AppData
-                addUserClassValues(userName,phoneNumber,userAge,activityLevel);
+                addUserClassValues(userName,phoneNumber, activityLevel);
 
                 // Adds User to RealTime Database under Users Node
-                addUserToDatabase(userName, userEmail, phoneNumber, userAge, activityLevel, userUID);
+                addUserToDatabase(userName, userEmail, phoneNumber, activityLevel, AppData.cur_user.getUID());
                 // Directs User to HomePage
                 switchPages();
             }
@@ -58,33 +52,35 @@ public class Demographics extends AppCompatActivity
 
     }
 
-    private void addUserClassValues(String  userName, String phoneNumber, String userAge, String activityLevel)
+    private void addUserClassValues(String  userName, String phoneNumber, String activityLevel)
     {
         AppData.cur_user.setName(userName);
         AppData.cur_user.setPhone(phoneNumber);
-        AppData.cur_user.setAge(userAge);
         AppData.cur_user.setActivityLevel(activityLevel);
     }
 
     private void switchPages()
     {
-        Intent launchActivity1= new Intent(
-                CKD.Android.Demographics.this,Mood.class);
+        Intent launchActivity1= new Intent(CKD.Android.Demographics_1.this,Demographics_2.class);
         startActivity(launchActivity1);
     }
 
-    private void addUserToDatabase(String userName, String userEmail, String phone, String age, String activity, String UID)
+    private void addUserToDatabase(String userName, String userEmail, String phone, String activity, String UID)
     {
 
        FirebaseDatabase db = AppData.db;
 
         DatabaseReference User_node = db.getReference("Users");
 
-        User_node.child(userName).child("Email").setValue(userEmail);
-        User_node.child(userName).child("Phone Number").setValue(phone);
-        User_node.child(userName).child("Age").setValue(age);
-        User_node.child(userName).child("Activity Level").setValue(activity);
-        User_node.child(userName).child("UID").setValue(UID);
+        User_node.child("UID").setValue(UID);
+
+        DatabaseReference UID_node = User_node.child(UID);
+        DatabaseReference Add_node = User_node.child(UID).child("Additional");
+
+        UID_node.child("Name").setValue(userName);
+        UID_node.child("Email").setValue(userEmail);
+        UID_node.child("Phone Number").setValue(phone);
+        Add_node.child("Activity Level").setValue(activity);
     }
 
 

@@ -54,9 +54,9 @@ public class registerNewUser extends AppCompatActivity {
                              AppData.cur_user = new UserClass(null,newEmail,null,
                                              null,null,AppData.mAuth.getCurrentUser().getUid());
 
-                            // Directs User to the Demographics Page
+                            // Directs User to the Demographics_1 Page
                             Intent launchActivity1= new Intent(
-                                    CKD.Android.registerNewUser.this,Demographics.class);
+                                    CKD.Android.registerNewUser.this,Demographics_1.class);
                             startActivity(launchActivity1);
 
                         }

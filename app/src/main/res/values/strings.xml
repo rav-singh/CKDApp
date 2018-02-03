@@ -12,6 +12,30 @@
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
     <string name="permission_rationale">"Contacts permissions are needed for providing email
-        completions."
-    </string>
+        completions." </string>
+
+    <!-- Strings related to demographics -->
+    <string name="age_prompt">What is your age?</string>
+    <string-array name="age_array">
+        <item>18 to 24 years</item>
+        <item>25 to 34 years</item>
+        <item>35 to 44 years</item>
+        <item>45 to 54 years</item>
+        <item>55 to 64 years</item>
+        <item>65 to 74 years</item>
+        <item>75 or older</item>
+    </string-array>
+    <string name="marital_prompt">What is your marital status?</string>
+    <string-array name="marital_array">
+        <item>Single (never married)</item>
+        <item>Married</item>
+        <item>Separated</item>
+        <item>Widowed</item>
+        <item>Divorced</item>
+        <item>Partnership</item>
+    </string-array>
+    <string name="gender_prompt">I identify my gender as... </string>
+    <string name="race_prompt">What is your race? Check as many of the following federal
+        category(ies) that best describes the <i>race</i> of your family and yourself.</string>
+
 </resources>

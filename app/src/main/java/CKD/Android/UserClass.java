@@ -8,6 +8,10 @@ public class UserClass
     private String age;
     private String activityLevel;
     private String UID;
+    private String marital;
+    private String gender;
+    private String race;
+
 
     public UserClass(String name, String email, String phone, String age, String activityLevel, String UID )
     {
@@ -38,6 +42,12 @@ public class UserClass
 
     public String getUID(){return UID;}
 
+    public String getMarital(){return marital;}
+
+    public String getGender(){return gender;}
+
+    public String getRace(){return race;}
+
     public void setName(String name)
     {
         this.name = name;
@@ -67,5 +77,11 @@ public class UserClass
     {
         this.UID = UID;
     }
+
+    public void setMarital(String marital) {this.marital = marital;}
+
+    public void setGender(String gender) {this.gender = gender;}
+
+    public void setRace (String race) {this.race = race;}
 
 }

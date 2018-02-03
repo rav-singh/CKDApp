@@ -27,7 +27,8 @@
 
         <activity android:name=".registerNewUser"/>
         <activity android:name=".HomePage"/>
-        <activity android:name=".Demographics"/>
+        <activity android:name=".Demographics_1"/>
+        <activity android:name=".Demographics_2"/>
         <activity android:name=".Mood"/>
         <activity android:name=".Exercise"/>
         <activity android:name=".Diet"/>
