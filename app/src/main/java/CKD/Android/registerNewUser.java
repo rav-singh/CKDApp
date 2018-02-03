@@ -31,67 +31,79 @@ public class registerNewUser extends AppCompatActivity {
         final Button Register = findViewById(R.id.Register_Btn_Register);
 
         // OnClick Listener that redirects to Register Page
-        Register.setOnClickListener(new View.OnClickListener() {
-
-            public void onClick(View v) {
-
+        Register.setOnClickListener(new View.OnClickListener()
+        {
+            public void onClick(View v)
+            {
                 final String newEmail = Email.getText().toString();
                 final String newPassword = Password.getText().toString();
 
-                Task<AuthResult> Auth =
-                     Authenticator.createUserWithEmailAndPassword(newEmail, newPassword)
-                    .addOnCompleteListener(new OnCompleteListener<AuthResult>()
+                if(fieldsAreEmpty(newEmail, newPassword))
                 {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task)
-                    {
-                        // User Successfully Registered to database
-                        if (task.isSuccessful())
-                        {
-                            AuthResult result = task.getResult();
+                    Toast.makeText(registerNewUser.this,
+                                    "Please Fill in Both Text Fields",
+                                    Toast.LENGTH_LONG).show();
+                }
 
-                            // Takes Users Name and Generated UID and adds it to the Current UserClass
-                             AppData.cur_user = new UserClass(null,newEmail,null,
-                                             null,null,AppData.mAuth.getCurrentUser().getUid());
+                else
+                {
+                        Task<AuthResult> Auth =
+                            Authenticator.createUserWithEmailAndPassword(newEmail, newPassword)
+                            .addOnCompleteListener(new OnCompleteListener<AuthResult>()
+                             {
+                                    @Override
+                                public void onComplete(@NonNull Task<AuthResult> task)
+                                {
+                                    // User Successfully Registered to database
+                                    if (task.isSuccessful())
+                                    {
+                                        AuthResult result = task.getResult();
 
-                            // Directs User to the Demographics_1 Page
-                            Intent launchActivity1= new Intent(
-                                    CKD.Android.registerNewUser.this,Demographics_1.class);
-                            startActivity(launchActivity1);
+                                        // Takes Users Name and Generated UID and adds it to the Current UserClass
+                                        AppData.cur_user = new UserClass(null, newEmail, null,
+                                                null, null, AppData.mAuth.getCurrentUser().getUid());
 
-                        }
-                        // User unable to register_class user to database
-                        else
-                        {
+                                        // Directs User to the Demographics_1 Page
+                                        Intent launchActivity1 = new Intent(
+                                                CKD.Android.registerNewUser.this, Demographics_1.class);
+                                        startActivity(launchActivity1);
 
-                            @SuppressWarnings("ThrowableNotThrown")
-                            Exception exception = task.getException();
+                                    }
+                                        // User unable to register_class user to database
+                                    else
+                                    {
+                                        // print out error when we can't register user
+                                        String error_Message = task.getException().toString();
+                                        if(error_Message.contains("password"))
+                                        {
+                                            Toast.makeText(registerNewUser.this,
+                                                    "Sorry but your password must be atleast 6 characters long",
+                                                    Toast.LENGTH_LONG).show();
+                                        }
+                                        else if(error_Message.contains("email"))
+                                        {
+                                            Toast.makeText(registerNewUser.this,
+                                                    "Invalid Email!", Toast.LENGTH_LONG).show();
+                                        }
+                                        else
+                                        {
+                                            Toast.makeText(registerNewUser.this,
+                                                            error_Message,
+                                                            Toast.LENGTH_LONG).show();
+                                        }
 
-                            /*
-                            // print out error when we can't register user
+                                    }
 
-                            String error_Message = task.getException().toString();
-                            if(error_Message.contains("password"))
-                            {
-                                Toast.makeText(LoginActivity.this,
-                                        "Incorrect Password!", Toast.LENGTH_LONG).show();
-                            }
-                            else if(error_Message.contains("email"))
-                            {
-                                Toast.makeText(LoginActivity.this,
-                                        "Incorrect Email!", Toast.LENGTH_LONG).show();
-                            }
-                            else
-                            {
-                                Toast.makeText(LoginActivity.this,error_Message, Toast.LENGTH_LONG).show();
-                            }
-                            */
-                        }
-
-                    }
-                });
-            }
+                                }
+                            });
+                }
+             }
         });
+    }
+
+    private boolean fieldsAreEmpty(String newEmail, String newPassword)
+    {
+        return newEmail.isEmpty() || newPassword.isEmpty();
     }
 }
 

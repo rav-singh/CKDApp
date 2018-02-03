@@ -37,44 +37,61 @@ public class LoginActivity extends AppCompatActivity
                 String UserEmail = Login_Email.getText().toString();
                 String UserPassword= Login_Password.getText().toString();
 
-                Task<AuthResult> Auth =
-                        AppData.getInstance().mAuth.signInWithEmailAndPassword(UserEmail, UserPassword)
-                                .addOnCompleteListener(new OnCompleteListener<AuthResult>()
-                                {
-                                    @Override
-                                    public void onComplete(@NonNull Task<AuthResult> task)
-                                    {
-                                        // User Successfully Registered to database
-                                        if (task.isSuccessful())
-                                        {
-                                            AuthResult result = task.getResult();
-                                            Intent launchActivity1= new Intent(
-                                                    CKD.Android.LoginActivity.this,HomePage.class);
-                                            startActivity(launchActivity1);
+                if(fieldsAreEmpty(UserEmail,UserPassword))
+                    {
+                        Toast.makeText(LoginActivity.this,
+                                "Please Fill in Both Text Fields",
+                                Toast.LENGTH_LONG).show();
+                        return;
+                    }
 
-                                        }
-                                        // User unable to register_class user to database
-                                        else
-                                        {
-                                            String error_Message = task.getException().toString();
-                                            if(error_Message.contains("password"))
-                                            {
-                                                Toast.makeText(LoginActivity.this,
-                                                        "Incorrect Password!", Toast.LENGTH_LONG).show();
-                                            }
-                                            else if(error_Message.contains("email"))
-                                            {
-                                                Toast.makeText(LoginActivity.this,
-                                                        "Incorrect Email!", Toast.LENGTH_LONG).show();
-                                            }
-                                            else
-                                            {
-                                                Toast.makeText(LoginActivity.this,error_Message, Toast.LENGTH_LONG).show();
-                                            }
-                                        }
-                                    }
-                                });
+                else
+                {
+                    Task<AuthResult> Auth =
+                    AppData.getInstance().mAuth.signInWithEmailAndPassword(UserEmail, UserPassword)
+                    .addOnCompleteListener(new OnCompleteListener<AuthResult>()
+                    {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task)
+                        {
+                            // User Successfully Registered to database
+                            if (task.isSuccessful())
+                            {
+                                AuthResult result = task.getResult();
+                                Intent launchActivity1= new Intent(
+                                        CKD.Android.LoginActivity.this,HomePage.class);
+                                startActivity(launchActivity1);
+
+                            }
+                            // User unable to register_class user to database
+                            else
+                            {
+                                String error_Message = task.getException().toString();
+                                if(error_Message.contains("password"))
+                                {
+                                    Toast.makeText(LoginActivity.this,
+                                            "Incorrect Password!", Toast.LENGTH_LONG).show();
+                                }
+                                else if(error_Message.contains("email"))
+                                {
+                                    Toast.makeText(LoginActivity.this,
+                                            "Incorrect Email!", Toast.LENGTH_LONG).show();
+                                }
+                                else
+                                {
+                                    Toast.makeText(LoginActivity.this,error_Message, Toast.LENGTH_LONG).show();
+                                }
+                            }
+                        }
+                    });
+                }
             }
         });
     }
+
+    private boolean fieldsAreEmpty(String userEmail, String userPassword)
+    {
+        return userEmail.isEmpty() || userPassword.isEmpty();
     }
+
+}
