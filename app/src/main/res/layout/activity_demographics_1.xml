@@ -27,70 +27,86 @@
         android:id="@+id/Demo_TF_Name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
         android:ems="10"
         android:hint="Full Name"
         android:inputType="textPersonName"
         android:textSize="26sp"
-        app:layout_constraintBottom_toTopOf="@+id/Demo_TF_Email"
+        app:layout_constraintBottom_toTopOf="@+id/Demo_Btn_Next_1"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <EditText
         android:id="@+id/Demo_TF_Email"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
         android:ems="10"
         android:hint="Email"
         android:inputType="textEmailAddress"
-        app:layout_constraintBottom_toTopOf="@+id/Demo_TF_Phone"
+        android:textSize="26sp"
+        app:layout_constraintBottom_toTopOf="@+id/Demo_Btn_Next_1"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Demo_TF_Name"
-        android:textSize="26sp"/>
+        app:layout_constraintVertical_bias="0.0" />
+
+    <EditText
+        android:id="@+id/Demo_TF_Email_Confirm"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:hint="Confirm Email"
+        android:inputType="textEmailAddress"
+        android:textSize="26sp"
+        app:layout_constraintBottom_toTopOf="@+id/Demo_Btn_Next_1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Demo_TF_Email"
+        app:layout_constraintVertical_bias="0.0" />
 
     <EditText
         android:id="@+id/Demo_TF_Phone"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
         android:ems="10"
         android:hint="Phone Number"
-        android:inputType="text|phone"
-        app:layout_constraintBottom_toTopOf="@+id/Demo_TF_Age"
+        android:inputType="number|phone"
+        android:textSize="26sp"
+        app:layout_constraintBottom_toTopOf="@+id/Demo_Btn_Next_1"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Demo_TF_Email"
-        android:textSize="26sp"/>
-
-    <EditText
-        android:id="@+id/Demo_TF_Age"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Age"
-        android:inputType="text"
-        app:layout_constraintBottom_toTopOf="@+id/Demo_TF_ActivityL"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Demo_TF_Phone"
-        android:textSize="26sp"/>
+        app:layout_constraintTop_toBottomOf="@+id/Demo_TF_Email_Confirm"
+        app:layout_constraintVertical_bias="0.0" />
 
     <EditText
         android:id="@+id/Demo_TF_ActivityL"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
         android:ems="10"
         android:hint="Activity Level"
         android:inputType="text"
         android:textSize="26sp"
+        app:layout_constraintBottom_toTopOf="@+id/Demo_Btn_Next_1"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Demo_TF_Age" />
+        app:layout_constraintTop_toBottomOf="@+id/Demo_TF_Phone"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/Demo_Btn_Next_1"
