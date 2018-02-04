@@ -1,5 +1,10 @@
 package CKD.Android;
 
+
+import java.util.ArrayList;
+import java.util.List;
+
+
 public class UserClass
 {
     private String name;
@@ -10,9 +15,12 @@ public class UserClass
     private String UID;
     private String marital;
     private String gender;
-    private String race;
+    private List<String> race;
+    private int numOfRaces;
+    private String password;
 
-
+    // TODO May need to instantiate all variables for login and grab data from Database using
+    // TODO mAuth.getCurrentUser.getUID to access their information
     public UserClass(String name, String email, String phone, String age, String activityLevel, String UID )
     {
         this.name = name;
@@ -21,6 +29,7 @@ public class UserClass
         this.age = age;
         this.activityLevel =  activityLevel;
         this.UID = UID;
+        this.race = new ArrayList<String>();
     }
 
 
@@ -46,7 +55,11 @@ public class UserClass
 
     public String getGender(){return gender;}
 
-    public String getRace(){return race;}
+    public List<String> getRace(){return race;}
+
+    public int getNumOfRaces(){return numOfRaces;}
+
+    public String getPassword(){return password;}
 
     public void setName(String name)
     {
@@ -82,6 +95,12 @@ public class UserClass
 
     public void setGender(String gender) {this.gender = gender;}
 
-    public void setRace (String race) {this.race = race;}
+    public void setRace (List<String> race) {this.race = race;}
+
+    public void setPassword(String password) {this.password = password;}
+
+    public void setNumOfRaces(int numOfRaces){this.numOfRaces = numOfRaces;}
+
+    public void clearPassword(){this.password = "";}
 
 }
