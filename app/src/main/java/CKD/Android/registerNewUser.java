@@ -17,8 +17,6 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class registerNewUser extends AppCompatActivity {
 
-    private FirebaseAuth Authenticator = AppData.getInstance().mAuth;
-
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -38,7 +36,9 @@ public class registerNewUser extends AppCompatActivity {
                 final String newEmail = Email.getText().toString();
                 final String newPassword = Password.getText().toString();
 
-                if(fieldsAreEmpty(newEmail, newPassword))
+                //TODO create second Password for verification and check ==
+                //TODO create second if statement for appropriate Toast
+                if(fieldsAreEmpty(newEmail, newPassword) && validEmail(newEmail))
                 {
                     Toast.makeText(registerNewUser.this,
                                     "Please Fill in Both Text Fields",
@@ -47,58 +47,24 @@ public class registerNewUser extends AppCompatActivity {
 
                 else
                 {
-                        Task<AuthResult> Auth =
-                            Authenticator.createUserWithEmailAndPassword(newEmail, newPassword)
-                            .addOnCompleteListener(new OnCompleteListener<AuthResult>()
-                             {
-                                    @Override
-                                public void onComplete(@NonNull Task<AuthResult> task)
-                                {
-                                    // User Successfully Registered to database
-                                    if (task.isSuccessful())
-                                    {
-                                        AuthResult result = task.getResult();
+                    // Creates UserClass instance in AppData with only the Email instantiated
+                    AppData.cur_user = new UserClass(null, newEmail, null,
+                            null, null, null);
 
-                                        // Takes Users Name and Generated UID and adds it to the Current UserClass
-                                        AppData.cur_user = new UserClass(null, newEmail, null,
-                                                null, null, AppData.mAuth.getCurrentUser().getUid());
+                    // holds the users password
+                    AppData.cur_user.setPassword(newPassword);
 
-                                        // Directs User to the Demographics_1 Page
-                                        Intent launchActivity1 = new Intent(
-                                                CKD.Android.registerNewUser.this, Demographics_1.class);
-                                        startActivity(launchActivity1);
-
-                                    }
-                                        // User unable to register_class user to database
-                                    else
-                                    {
-                                        // print out error when we can't register user
-                                        String error_Message = task.getException().toString();
-                                        if(error_Message.contains("password"))
-                                        {
-                                            Toast.makeText(registerNewUser.this,
-                                                    "Sorry but your password must be atleast 6 characters long",
-                                                    Toast.LENGTH_LONG).show();
-                                        }
-                                        else if(error_Message.contains("email"))
-                                        {
-                                            Toast.makeText(registerNewUser.this,
-                                                    "Invalid Email!", Toast.LENGTH_LONG).show();
-                                        }
-                                        else
-                                        {
-                                            Toast.makeText(registerNewUser.this,
-                                                            error_Message,
-                                                            Toast.LENGTH_LONG).show();
-                                        }
-
-                                    }
-
-                                }
-                            });
+                    Intent launchActivity1= new Intent(CKD.Android.registerNewUser.this,Demographics_1.class);
+                    startActivity(launchActivity1);
                 }
              }
         });
+    }
+
+    private boolean validEmail(String newEmail)
+    {
+        return newEmail.contains("@") &&
+               newEmail.contains(".com");
     }
 
     private boolean fieldsAreEmpty(String newEmail, String newPassword)
