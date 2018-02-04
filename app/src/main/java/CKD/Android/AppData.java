@@ -5,13 +5,13 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
 
 
-public class AppData
+class AppData
 {
     private static AppData instance;
 
     public static UserClass cur_user;
     public static FirebaseDatabase db;
-    public static FirebaseAuth mAuth;
+    private static FirebaseAuth mAuth;
     public static FirebaseUser firebaseUser;
 
     // If an instance of AppData hasn't been created yet create it
@@ -39,11 +39,9 @@ public class AppData
     // containing UserClass variables
     public static void signOut()
     {
-        // confirm that this actually deletes the references, not hides them
-        mAuth = null;
-        db = null;
-        firebaseUser = null;
-        instance = null;
-        cur_user = null;
+        mAuth.signOut();
     }
+
+    public FirebaseAuth getmAuth(){return this.mAuth;}
+    public void setmAuth(FirebaseAuth mAuth){this.mAuth = mAuth;}
 }
