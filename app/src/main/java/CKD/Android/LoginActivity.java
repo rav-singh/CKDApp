@@ -48,7 +48,7 @@ public class LoginActivity extends AppCompatActivity
                 else
                 {
                     Task<AuthResult> Auth =
-                    AppData.getInstance().mAuth.signInWithEmailAndPassword(UserEmail, UserPassword)
+                    AppData.getInstance().getmAuth().signInWithEmailAndPassword(UserEmail, UserPassword)
                     .addOnCompleteListener(new OnCompleteListener<AuthResult>()
                     {
                         @Override
