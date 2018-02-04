@@ -87,9 +87,8 @@ public class HomePage  extends AppCompatActivity {
 
             public void onClick(View v)
             {
-                AppData.getInstance().mAuth.signOut();
-                AppData.signOut();
-
+                //LOGOUT NOT FUNCTIONAL
+                //TODO Get Logout working properly
                 Intent launchActivity1=
                         new Intent(CKD.Android.HomePage.this,MainActivity.class);
                 startActivity(launchActivity1);
