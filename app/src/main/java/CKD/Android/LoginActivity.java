@@ -18,6 +18,8 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class LoginActivity extends AppCompatActivity
 {
+    FirebaseAuth Authenticator = FirebaseAuth.getInstance();
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -48,7 +50,7 @@ public class LoginActivity extends AppCompatActivity
                 else
                 {
                     Task<AuthResult> Auth =
-                    AppData.getInstance().getmAuth().signInWithEmailAndPassword(UserEmail, UserPassword)
+                    Authenticator.signInWithEmailAndPassword(UserEmail, UserPassword)
                     .addOnCompleteListener(new OnCompleteListener<AuthResult>()
                     {
                         @Override
@@ -57,7 +59,10 @@ public class LoginActivity extends AppCompatActivity
                             // User Successfully Registered to database
                             if (task.isSuccessful())
                             {
+
+                                //TODO Check to make sure AppData.mAuth is correctly updated
                                 AuthResult result = task.getResult();
+                                AppData.setmAuth(Authenticator);
                                 Intent launchActivity1= new Intent(
                                         CKD.Android.LoginActivity.this,HomePage.class);
                                 startActivity(launchActivity1);
