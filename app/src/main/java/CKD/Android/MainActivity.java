@@ -6,7 +6,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.FirebaseDatabase;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -16,11 +18,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        FirebaseUser logged_In_User= AppData.firebaseUser;
 
-        // TODO Compare FireBase User to AppData.cur_User as well
        /// Check to see if the User is logged in. If they are bring them to the home page
-        if(logged_In_User != null ) {
+
+        if(FirebaseAuth.getInstance() != null && AppData.getInstance().mAuth !=null)
+        {
             Intent launchActivity1 = new Intent(MainActivity.this, HomePage.class);
             startActivity(launchActivity1);
         }
