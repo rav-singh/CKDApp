@@ -4,6 +4,7 @@ package CKD.Android;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -87,12 +88,14 @@ public class HomePage  extends AppCompatActivity {
 
             public void onClick(View v)
             {
-                //LOGOUT NOT FUNCTIONAL
-                //TODO Get Logout working properly
-                Intent launchActivity1=
-                        new Intent(CKD.Android.HomePage.this,MainActivity.class);
-                startActivity(launchActivity1);
-
+        //TODO Once user Logs in Load AppData with their information from the database
+      /*   Log.i("Tag",AppData.cur_user.getUID());
+          Log.i("Tag",AppData.cur_user.getGender());
+          Log.i("Tag",AppData.cur_user.getEmail());
+          Log.i("Tag",AppData.cur_user.getName());
+          Log.i("Tag",AppData.cur_user.getPhone());
+          Log.i("Tag",AppData.cur_user.getActivityLevel());
+      */
             }
         });
 
