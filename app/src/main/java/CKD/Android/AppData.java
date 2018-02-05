@@ -4,44 +4,51 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.security.PublicKey;
 
-class AppData
+
+public final class  AppData
 {
-    private static AppData instance;
-
+    private static AppData instance = null;
     public static UserClass cur_user;
     public static FirebaseDatabase db;
-    private static FirebaseAuth mAuth;
+    public static FirebaseAuth mAuth;
     public static FirebaseUser firebaseUser;
 
-    // If an instance of AppData hasn't been created yet create it
-    // return instance
     public static AppData getInstance()
     {
-        if(instance == null)
-            instance = new AppData();
+        if (instance == null)
+          return new AppData();
 
         return instance;
     }
 
-    // Constructor contains all of the firebase References needed
-    // If needed just refer to AppData.getInstance().Variable
-    private AppData()
+
+    static void signOut()
     {
-        mAuth = FirebaseAuth.getInstance();
-        db = FirebaseDatabase.getInstance();
-        firebaseUser = mAuth.getCurrentUser();
+        AppData.mAuth.signOut();
+
     }
 
-    // completely clears AppData class to sign user out.
-    // Maybe have some data structure holding all users?
-    // Possibly a HashMap with UID as the key and a Dictionary
-    // containing UserClass variables
-    public static void signOut()
+    static void setCur_User(UserClass cur_User)
     {
-        mAuth.signOut();
+        AppData.cur_user = cur_User;
     }
 
-    public FirebaseAuth getmAuth(){return this.mAuth;}
-    public void setmAuth(FirebaseAuth mAuth){this.mAuth = mAuth;}
+    static void setFirebaseUser(FirebaseUser firebaseUser)
+    {
+        AppData.firebaseUser = firebaseUser;
+    }
+
+    static void setmAuth(FirebaseAuth mAuth)
+    {
+        AppData.mAuth = mAuth;
+    }
+
+    static void setDb(FirebaseDatabase db)
+    {
+        AppData.db = db;
+    }
+
+    static FirebaseAuth getmAuth(){return AppData.mAuth;}
 }
