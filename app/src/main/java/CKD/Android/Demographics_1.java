@@ -40,6 +40,14 @@ public class Demographics_1 extends AppCompatActivity
         // May be excessive and might simplify by removing name from Register Page
          Email.setText(AppData.cur_user.getEmail());
 
+
+       /*   //TODO Used for debugging
+         Name.setText("Matt");
+         ConfirmEmail.setText(AppData.cur_user.getEmail());
+         Phone.setText("123");
+         ActivityLevel.setText("123");
+*/
+
         // OnClick Listener that redirects to homePage
         Register.setOnClickListener(new View.OnClickListener()
         {
@@ -93,25 +101,6 @@ public class Demographics_1 extends AppCompatActivity
         Intent launchActivity1= new Intent(CKD.Android.Demographics_1.this,Demographics_2.class);
         startActivity(launchActivity1);
     }
-
-    private void addUserToDatabase(String userName, String userEmail, String phone, String activity, String UID)
-    {
-
-       FirebaseDatabase db = AppData.db;
-
-        DatabaseReference User_node = db.getReference("Users");
-
-        User_node.child("UID").setValue(UID);
-
-        DatabaseReference UID_node = User_node.child(UID);
-        DatabaseReference Add_node = User_node.child(UID).child("Additional");
-
-        UID_node.child("Name").setValue(userName);
-        UID_node.child("Email").setValue(userEmail);
-        UID_node.child("Phone Number").setValue(phone);
-        Add_node.child("Activity Level").setValue(activity);
-    }
-
 
 }
 
