@@ -28,6 +28,9 @@ public class registerNewUser extends AppCompatActivity {
         final EditText Password = findViewById(R.id.Register_TF_Password);
         final Button Register = findViewById(R.id.Register_Btn_Register);
 
+        Email.setText("Matt@gmail.com");
+        Password.setText("123123");
+
         // OnClick Listener that redirects to Register Page
         Register.setOnClickListener(new View.OnClickListener()
         {
@@ -48,9 +51,10 @@ public class registerNewUser extends AppCompatActivity {
                 else
                 {
                     // Creates UserClass instance in AppData with only the Email instantiated
-                    AppData.cur_user = new UserClass(null, newEmail, null,
-                            null, null, null);
-
+                   // AppData.cur_user = new UserClass(null, newEmail, null,
+                     //       null, null, null);
+                    AppData.setCur_User((new UserClass( null, newEmail, null,null,
+                            null,null)));
                     // holds the users password
                     AppData.cur_user.setPassword(newPassword);
 
