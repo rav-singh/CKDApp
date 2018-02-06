@@ -79,52 +79,12 @@ public class Demographics_2 extends AppCompatActivity
             {
                 // After User clicks register the races selected are placed into a temporary ArrayList
                 // containing all of the races
-                if (race1.isChecked()) {
-                    raceList.add(race1.getText().toString());
-                    //_Race += race1.getText().toString();
-                    // addRaceToDatabase(race1.getText().toString(), checked, AppData.cur_user.getUID());
-                    //checked++;
-                }
-                if (race2.isChecked()){
-                    raceList.add(race2.getText().toString());
-//                    if(checked > 0)
-                    //                      _Race += ",";
-                    //                _Race += race2.getText().toString();
-                    // addRaceToDatabase(race2.getText().toString(), checked, AppData.cur_user.getUID());
-                   // checked++;
-                }
-                if (race3.isChecked()){
-                    raceList.add(race3.getText().toString());
-                    //                 if(checked > 0)
-                    //                 _Race += ",";
-                    //           _Race += race3.getText().toString();
-                    // addRaceToDatabase(race3.getText().toString(), checked, AppData.cur_user.getUID());
-                  //  checked++;
-                }
-                if (race4.isChecked()){
-                    raceList.add(race4.getText().toString());
-
-                    // if(checked > 0)
-                    //   _Race += ",";
-                    // _Race += race4.getText().toString();
-                    //  addRaceToDatabase(race4.getText().toString(),checked, AppData.cur_user.getUID());
-                  //  checked++;
-                }
-                if (race5.isChecked()){
-                    raceList.add(race5.getText().toString());
-                    //if(checked > 0)
-                    //  _Race += ",";
-                    //_Race += race5.getText().toString();
-                    // addRaceToDatabase(race5.getText().toString(), checked, AppData.cur_user.getUID());
-                    //checked++;
-                }
-                if (race6.isChecked()) {
-                    raceList.add(race6.getText().toString());
-                    //if(checked > 0)
-                    //  _Race += ",";
-                    //_Race += race6.getText().toString();
-                    // addRaceToDatabase(race6.getText().toString(), checked, AppData.cur_user.getUID());
-                }
+                if (race1.isChecked()) {raceList.add(race1.getText().toString());}
+                if (race2.isChecked()){raceList.add(race2.getText().toString());}
+                if (race3.isChecked()){raceList.add(race3.getText().toString());}
+                if (race4.isChecked()){raceList.add(race4.getText().toString());}
+                if (race5.isChecked()){raceList.add(race5.getText().toString());}
+                if (race6.isChecked()) {raceList.add(race6.getText().toString());}
 
             }
         });
