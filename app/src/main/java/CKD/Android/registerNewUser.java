@@ -28,8 +28,9 @@ public class registerNewUser extends AppCompatActivity {
         final EditText Password = findViewById(R.id.Register_TF_Password);
         final Button Register = findViewById(R.id.Register_Btn_Register);
 
-        Email.setText("Matt@gmail.com");
-        Password.setText("123123");
+        //TODO Used for debugging
+/*        Email.setText("Matt@gmail.com");
+        Password.setText("123123"); */
 
         // OnClick Listener that redirects to Register Page
         Register.setOnClickListener(new View.OnClickListener()
