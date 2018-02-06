@@ -16,12 +16,14 @@ public class UserClass
     private String marital;
     private String gender;
     private List<String> race;
-    private int numOfRaces;
     private String password;
+    private String education;
+    private String workStatus;
+    private String healthRating;
 
     // TODO May need to instantiate all variables for login and grab data from Database using
     // TODO mAuth.getCurrentUser.getUID to access their information
-    public UserClass(String name, String email, String phone, String age, String activityLevel, String UID )
+    UserClass(String name, String email, String phone, String age, String activityLevel, String UID)
     {
         this.name = name;
         this.email = email;
@@ -33,74 +35,54 @@ public class UserClass
     }
 
 
-    public String getName(){
-        return name;
-    }
-
-    public String getEmail(){
+    String getName(){return name;}
+    String getEmail(){
         return email;
     }
-
-    public String getPhone(){
+    String getPhone(){
         return phone;
     }
+    String getAge(){return age;}
+    String getActivityLevel(){return activityLevel;}
+    String getUID(){return UID;}
+    String getMarital(){return marital;}
+    String getGender(){return gender;}
+    List<String> getRace(){return race;}
+    int getNumOfRaces(){return race.size();}
+    String getPassword(){return password;}
 
-    public String getAge(){return age;}
-
-    public String getActivityLevel(){return activityLevel;}
-
-    public String getUID(){return UID;}
-
-    public String getMarital(){return marital;}
-
-    public String getGender(){return gender;}
-
-    public List<String> getRace(){return race;}
-
-    public int getNumOfRaces(){return numOfRaces;}
-
-    public String getPassword(){return password;}
-
-    public void setName(String name)
+    void setName(String name)
     {
         this.name = name;
     }
-
-    public void setEmail(String email)
+    void setEmail(String email)
     {
         this.email = email;
     }
-
-    public void setPhone(String phone)
+    void setPhone(String phone)
     {
         this.phone = phone;
     }
-
-    public void setAge(String age)
+    void setAge(String age)
     {
         this.age = age;
     }
-
-    public void setActivityLevel(String activityLevel)
+    void setActivityLevel(String activityLevel)
     {
         this.activityLevel = activityLevel;
     }
-
-    public void setUID(String UID)
+    void setUID(String UID)
     {
         this.UID = UID;
     }
+    void setMarital(String marital) {this.marital = marital;}
+    void setGender(String gender) {this.gender = gender;}
+    void setRace (List<String> race) {this.race = race;}
+    void setPassword(String password) {this.password = password;}
+    void setEducation(String education) {this.education = education;}
+    void setWork(String work) {this.workStatus = work;}
+    void setHealth(String health) {this.healthRating = health;}
 
-    public void setMarital(String marital) {this.marital = marital;}
-
-    public void setGender(String gender) {this.gender = gender;}
-
-    public void setRace (List<String> race) {this.race = race;}
-
-    public void setPassword(String password) {this.password = password;}
-
-    public void setNumOfRaces(int numOfRaces){this.numOfRaces = numOfRaces;}
-
-    public void clearPassword(){this.password = "";}
+    void clearPassword(){this.password = "";}
 
 }
