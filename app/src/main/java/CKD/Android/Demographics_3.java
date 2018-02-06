@@ -71,10 +71,19 @@ public class Demographics_3 extends AppCompatActivity
                     return;
                 }
 
+                addValuesToUserClass(selectedEducation,selectedWork,selectedHealth);
+
                 switchPages(Demographics_3.this,Demographics_2.class);
 
             }
         });
+    }
+
+    private void addValuesToUserClass(String selectedEducation, String selectedWork, String selectedHealth)
+    {
+        AppData.cur_user.setEducation(selectedEducation);
+        AppData.cur_user.setWork(selectedWork);
+        AppData.cur_user.setHealth(selectedHealth);
     }
 
     private void switchPages(Demographics_3 currentPage, Class nextPage)
@@ -89,6 +98,8 @@ public class Demographics_3 extends AppCompatActivity
                 "Please Select A Present Health",
                 Toast.LENGTH_LONG).show();
     }
+
+
 }
 
 
