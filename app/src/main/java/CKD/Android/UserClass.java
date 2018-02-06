@@ -50,6 +50,9 @@ public class UserClass
     List<String> getRace(){return race;}
     int getNumOfRaces(){return race.size();}
     String getPassword(){return password;}
+    String getWorkStatus(){return workStatus;}
+    String getEducation(){return education;}
+    String getHealthRating(){return healthRating;}
 
     void setName(String name)
     {
