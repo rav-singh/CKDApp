@@ -96,21 +96,27 @@ public class Demographics_2 extends AppCompatActivity
         FirebaseDatabase db = FirebaseDatabase.getInstance();
 
         //Creates a UID Node under Users
-
         DatabaseReference User_node = db.getReference("Users");
 
+        //Grabs the UID Created by Firebase Auth and stored in Current user class
         String UID = cur_user.getUID();
 
+        //References Nodes that will have children
         DatabaseReference UID_node = User_node.child(UID);
         DatabaseReference Add_node = User_node.child(UID).child("Additional");
-        DatabaseReference Race_node = User_node.child(UID).child("Race");
+        DatabaseReference Race_node = Add_node.child("Races");
 
+        //Adds values to above defined nodes
         UID_node.child("Name").setValue(AppData.cur_user.getName());
         UID_node.child("Email").setValue(AppData.cur_user.getEmail());
         UID_node.child("Phone Number").setValue(AppData.cur_user.getPhone());
         Add_node.child("Activity Level").setValue(AppData.cur_user.getActivityLevel());
         Add_node.child("Marital Status").setValue(AppData.cur_user.getMarital());
         Add_node.child("Gender").setValue(AppData.cur_user.getGender());
+        Add_node.child("Age").setValue(AppData.cur_user.getAge());
+        Add_node.child("Work").setValue(AppData.cur_user.getWorkStatus());
+        Add_node.child("Health").setValue(AppData.cur_user.getHealthRating());
+        Add_node.child("Education").setValue(AppData.cur_user.getEducation());
 
         for(int i = 0; i< AppData.cur_user.getRace().size(); i++)
         {
