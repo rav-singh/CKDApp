@@ -3,6 +3,7 @@ package CKD.Android;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -20,7 +21,6 @@ public class Mood extends AppCompatActivity
         final Button sad_btn = findViewById(R.id.Mood_Btn_Sad);
         final Button drunk_btn = findViewById(R.id.Mood_Btn_Drunk);
         final Button sleepy_btn = findViewById(R.id.Mood_Btn_Sleepy);
-
 
         // TODO Implement some way to record user submission and send to database for each button
         happy_btn.setOnClickListener(new View.OnClickListener()
@@ -63,7 +63,7 @@ public class Mood extends AppCompatActivity
                 startActivity(launchActivity1);
             }
         });
-
     }
+
 }
 
