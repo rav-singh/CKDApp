@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="CKD.Android.Demographics"
+    tools:context="CKD.Android.Demographics_1"
     tools:layout_editor_absoluteY="81dp">
 
     <android.support.constraint.Guideline
@@ -12,111 +12,98 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="20dp"
-        android:textSize="26sp"/>
+        android:textSize="26sp"
+        app:layout_constraintGuide_begin="20dp" />
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="20dp"
-        />
+        app:layout_constraintGuide_begin="20dp" />
 
     <EditText
         android:id="@+id/Demo_TF_Name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginTop="8dp"
         android:ems="10"
         android:hint="Full Name"
         android:inputType="textPersonName"
         android:textSize="26sp"
-        app:layout_constraintBottom_toTopOf="@+id/Demo_Btn_Next_1"
+        app:layout_constraintBottom_toTopOf="@+id/Demo_TF_Email"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.035" />
 
     <EditText
         android:id="@+id/Demo_TF_Email"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_height="50dp"
         android:ems="10"
-        android:hint="Email"
         android:inputType="textEmailAddress"
         android:textSize="26sp"
-        app:layout_constraintBottom_toTopOf="@+id/Demo_Btn_Next_1"
+        android:enabled="false"
+        app:layout_constraintBottom_toTopOf="@+id/Demo_TF_Email_Confirm"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Demo_TF_Name"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.174" />
 
     <EditText
         android:id="@+id/Demo_TF_Email_Confirm"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginTop="8dp"
         android:ems="10"
         android:hint="Confirm Email"
         android:inputType="textEmailAddress"
         android:textSize="26sp"
-        app:layout_constraintBottom_toTopOf="@+id/Demo_Btn_Next_1"
+        app:layout_constraintBottom_toTopOf="@+id/Demo_TF_Phone"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Demo_TF_Email"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.318" />
 
     <EditText
         android:id="@+id/Demo_TF_Phone"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_height="61dp"
         android:ems="10"
         android:hint="Phone Number"
         android:inputType="number|phone"
         android:textSize="26sp"
-        app:layout_constraintBottom_toTopOf="@+id/Demo_Btn_Next_1"
+        app:layout_constraintBottom_toTopOf="@+id/Demo_TF_ActivityL"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Demo_TF_Email_Confirm"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.462" />
 
     <EditText
         android:id="@+id/Demo_TF_ActivityL"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginTop="8dp"
         android:ems="10"
         android:hint="Activity Level"
         android:inputType="text"
         android:textSize="26sp"
         app:layout_constraintBottom_toTopOf="@+id/Demo_Btn_Next_1"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Demo_TF_Phone"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.621" />
 
     <Button
         android:id="@+id/Demo_Btn_Next_1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="28dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
+        android:layout_marginBottom="6dp"
         android:background="@android:color/holo_green_light"
-        android:text="Next"
+        android:text="@string/next_button"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
