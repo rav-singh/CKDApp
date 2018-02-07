@@ -16,6 +16,7 @@ public class UserClass
     private String marital;
     private String gender;
     private List<String> race;
+    private List<String> coMorbs;
     private String password;
     private String education;
     private String workStatus;
@@ -48,7 +49,9 @@ public class UserClass
     String getMarital(){return marital;}
     String getGender(){return gender;}
     List<String> getRace(){return race;}
-    int getNumOfRaces(){return race.size();}
+    List<String> getCoMorbs(){return coMorbs;}
+    int getNumOfRaces(){return race.size();}        //Will be used for reading data
+    int getNumOfCoMorbs(){return coMorbs.size();}   //Will be used for reading data
     String getPassword(){return password;}
     String getWorkStatus(){return workStatus;}
     String getEducation(){return education;}
@@ -81,6 +84,7 @@ public class UserClass
     void setMarital(String marital) {this.marital = marital;}
     void setGender(String gender) {this.gender = gender;}
     void setRace (List<String> race) {this.race = race;}
+    void setCoMorbs (List<String> coMorbs) {this.coMorbs = coMorbs;}
     void setPassword(String password) {this.password = password;}
     void setEducation(String education) {this.education = education;}
     void setWork(String work) {this.workStatus = work;}
