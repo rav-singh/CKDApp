@@ -26,10 +26,7 @@ public final class  AppData
 
     static void signOut()
     {
-        // TODO double check that this following line isn't necessary
-        // AppData.mAuth.signOut();
-        // TODO after we populate AppData and UserClass, then test the following line
-        // cur_user.logout();
+        cur_user.logout();
         instance = null;
         cur_user = null;
         db = null;
