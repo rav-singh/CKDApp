@@ -56,13 +56,13 @@ public class Demographics_3 extends AppCompatActivity
                 if(health1.isChecked())
                     selectedHealth = health1.getText().toString();
                 else if(health2.isChecked())
-                    selectedHealth = health1.getText().toString();
+                    selectedHealth = health2.getText().toString();
                 else if(health3.isChecked())
-                    selectedHealth = health1.getText().toString();
+                    selectedHealth = health3.getText().toString();
                 else if(health4.isChecked())
-                    selectedHealth = health1.getText().toString();
+                    selectedHealth = health4.getText().toString();
                 else if(health5.isChecked())
-                    selectedHealth = health1.getText().toString();
+                    selectedHealth = health5.getText().toString();
                 // If no health was selected onClick method Stops and user is given
                 // an appropriate message
                 else
@@ -73,7 +73,7 @@ public class Demographics_3 extends AppCompatActivity
 
                 addValuesToUserClass(selectedEducation,selectedWork,selectedHealth);
 
-                switchPages(Demographics_3.this,Demographics_2.class);
+                switchPages(Demographics_3.this,Demographics_4.class);
 
             }
         });
