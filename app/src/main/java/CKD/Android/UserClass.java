@@ -90,25 +90,6 @@ public class UserClass
     void setWork(String work) {this.workStatus = work;}
     void setHealth(String health) {this.healthRating = health;}
 
-    void logout()
-    {
-        name = null;
-        email = null;
-        phone = null;
-        age = null;
-        activityLevel = null;
-        UID = null;
-        marital = null;
-        gender = null;
-        race = null;
-        coMorbs = null;
-        password = null;
-        education = null;
-        workStatus = null;
-        healthRating = null;
-    }
-
-
     void clearPassword(){this.password = "";}
 
 }

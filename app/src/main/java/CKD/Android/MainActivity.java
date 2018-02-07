@@ -31,7 +31,6 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 // Check to see if the User is logged in. If they are bring them to the home page
-
                 if(FirebaseAuth.getInstance().getCurrentUser() != null)
                 {
                     Intent launchActivity1 = new Intent(MainActivity.this, HomePage.class);

@@ -26,7 +26,6 @@ public final class  AppData
 
     static void signOut()
     {
-        cur_user.logout();
         instance = null;
         cur_user = null;
         db = null;
