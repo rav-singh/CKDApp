@@ -96,6 +96,8 @@ public class HomePage  extends AppCompatActivity {
             public void onClick(View v)
             {
                 FirebaseAuth.getInstance().signOut();
+                AppData.signOut();
+
                 Intent launchActivity1=
                         new Intent(CKD.Android.HomePage.this,MainActivity.class);
                 startActivity(launchActivity1);
@@ -113,6 +115,4 @@ public class HomePage  extends AppCompatActivity {
         leaderboards_Button = findViewById(R.id.Home_Btn_Leaderboards);
         logout_Button = findViewById(R.id.HomePage_Btn_Logout);
     }
-
-
 }

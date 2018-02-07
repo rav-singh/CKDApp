@@ -6,7 +6,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import android.util.Log;
+
 import com.google.firebase.auth.FirebaseAuth;
+
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -28,10 +31,8 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 // Check to see if the User is logged in. If they are bring them to the home page
-                // TODO AppData.getInstance().mAuth is null when the Firebase says the user is still logged
-                // TODO in. We need to make sure that mAuth is receiving the something other than null here.
+
                 if(FirebaseAuth.getInstance().getCurrentUser() != null)
-                // if(FirebaseAuth.getInstance().getCurrentUser() != null && AppData.getInstance().mAuth !=null)
                 {
                     Intent launchActivity1 = new Intent(MainActivity.this, HomePage.class);
                     startActivity(launchActivity1);

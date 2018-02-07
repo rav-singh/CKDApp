@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -49,8 +50,9 @@ public class LoginActivity extends AppCompatActivity
 
                 else
                 {
-                    Task<AuthResult> Auth =
-                    Authenticator.signInWithEmailAndPassword(UserEmail, UserPassword)
+                    FirebaseAuth.getInstance().signInWithEmailAndPassword(UserEmail, UserPassword)
+                    // Task<AuthResult> Auth =
+                    // Authenticator.signInWithEmailAndPassword(UserEmail, UserPassword)
                     .addOnCompleteListener(new OnCompleteListener<AuthResult>()
                     {
                         @Override
@@ -59,10 +61,8 @@ public class LoginActivity extends AppCompatActivity
                             // User Successfully Registered to database
                             if (task.isSuccessful())
                             {
-
-                                //TODO Check to make sure AppData.mAuth is correctly updated
-                                AuthResult result = task.getResult();
-                                AppData.setmAuth(Authenticator);
+                                AppData.setmAuth(FirebaseAuth.getInstance());
+                                // populate data into AppData class
                                 Intent launchActivity1= new Intent(
                                         CKD.Android.LoginActivity.this,HomePage.class);
                                 startActivity(launchActivity1);
