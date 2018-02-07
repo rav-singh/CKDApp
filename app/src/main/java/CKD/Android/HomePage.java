@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import com.google.firebase.auth.FirebaseAuth;
 
+
 public class HomePage  extends AppCompatActivity {
 
     private Button diet_Button,

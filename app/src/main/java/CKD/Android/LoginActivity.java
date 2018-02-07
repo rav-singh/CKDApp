@@ -62,7 +62,7 @@ public class LoginActivity extends AppCompatActivity
                             if (task.isSuccessful())
                             {
                                 AppData.setmAuth(FirebaseAuth.getInstance());
-                                // populate data into AppData class
+                                // populate data into AppData class and UserClass
                                 Intent launchActivity1= new Intent(
                                         CKD.Android.LoginActivity.this,HomePage.class);
                                 startActivity(launchActivity1);
