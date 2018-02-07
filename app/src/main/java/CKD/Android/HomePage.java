@@ -1,6 +1,7 @@
 package CKD.Android;
 
 
+import android.util.Log;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -29,7 +30,8 @@ public class HomePage  extends AppCompatActivity {
         InitializeComponents();
 
         //TODO Once user Logs in Load AppData with their information from the database
-        /*   Log.i("Tag",AppData.cur_user.getUID());
+        /*
+           Log.d("HEYO",AppData.cur_user.getUID());
              Log.i("Tag",AppData.cur_user.getGender());
              Log.i("Tag",AppData.cur_user.getEmail());
              Log.i("Tag",AppData.cur_user.getName());
