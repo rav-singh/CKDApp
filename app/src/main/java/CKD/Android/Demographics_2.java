@@ -105,6 +105,7 @@ public class Demographics_2 extends AppCompatActivity
         DatabaseReference UID_node = User_node.child(UID);
         DatabaseReference Add_node = User_node.child(UID).child("Additional");
         DatabaseReference Race_node = Add_node.child("Races");
+        DatabaseReference morbid_node = Add_node.child("Diseases");
 
         //Adds values to above defined nodes
         UID_node.child("Name").setValue(AppData.cur_user.getName());
@@ -117,6 +118,11 @@ public class Demographics_2 extends AppCompatActivity
         Add_node.child("Work").setValue(AppData.cur_user.getWorkStatus());
         Add_node.child("Health").setValue(AppData.cur_user.getHealthRating());
         Add_node.child("Education").setValue(AppData.cur_user.getEducation());
+
+        for(int i = 0; i< AppData.cur_user.getCoMorbs().size(); i++)
+        {
+            morbid_node.child(String.valueOf(i)).setValue(AppData.cur_user.getCoMorbs().get(i));
+        }
 
         for(int i = 0; i< AppData.cur_user.getRace().size(); i++)
         {
