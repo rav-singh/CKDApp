@@ -27,6 +27,14 @@ public class HomePage  extends AppCompatActivity {
 
         InitializeComponents();
 
+        //TODO Once user Logs in Load AppData with their information from the database
+        /*   Log.i("Tag",AppData.cur_user.getUID());
+             Log.i("Tag",AppData.cur_user.getGender());
+             Log.i("Tag",AppData.cur_user.getEmail());
+             Log.i("Tag",AppData.cur_user.getName());
+             Log.i("Tag",AppData.cur_user.getPhone());
+             Log.i("Tag",AppData.cur_user.getActivityLevel());
+         */
 
         diet_Button.setOnClickListener(new View.OnClickListener()
         {
@@ -81,21 +89,16 @@ public class HomePage  extends AppCompatActivity {
                          new Intent(CKD.Android.HomePage.this,Leaderboards.class);
                  startActivity(launchActivity1);
              }
-    });
+         });
 
         logout_Button.setOnClickListener(new View.OnClickListener()
         {
-
             public void onClick(View v)
             {
-        //TODO Once user Logs in Load AppData with their information from the database
-      /*   Log.i("Tag",AppData.cur_user.getUID());
-          Log.i("Tag",AppData.cur_user.getGender());
-          Log.i("Tag",AppData.cur_user.getEmail());
-          Log.i("Tag",AppData.cur_user.getName());
-          Log.i("Tag",AppData.cur_user.getPhone());
-          Log.i("Tag",AppData.cur_user.getActivityLevel());
-      */
+                FirebaseAuth.getInstance().signOut();
+                Intent launchActivity1=
+                        new Intent(CKD.Android.HomePage.this,MainActivity.class);
+                startActivity(launchActivity1);
             }
         });
 

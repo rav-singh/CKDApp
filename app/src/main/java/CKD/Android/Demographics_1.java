@@ -36,7 +36,7 @@ public class Demographics_1 extends AppCompatActivity
         //TODO Make user do Email Verfication
         //TODO Push Activity Level onto a different page. It's placement here is awkward.
 
-        //  Fills in Name and Email Data for profile
+        // Fills in Name and Email Data for profile
         // May be excessive and might simplify by removing name from Register Page
          Email.setText(AppData.cur_user.getEmail());
 
@@ -46,7 +46,7 @@ public class Demographics_1 extends AppCompatActivity
          ConfirmEmail.setText(AppData.cur_user.getEmail());
          Phone.setText("123");
          ActivityLevel.setText("123");
-*/
+        */
 
         // OnClick Listener that redirects to homePage
         Register.setOnClickListener(new View.OnClickListener()
