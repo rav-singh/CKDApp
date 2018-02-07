@@ -26,8 +26,12 @@ public final class  AppData
 
     static void signOut()
     {
-        AppData.mAuth.signOut();
-
+        cur_user.logout();
+        instance = null;
+        cur_user = null;
+        db = null;
+        mAuth = null;
+        firebaseUser = null;
     }
 
     static void setCur_User(UserClass cur_User)

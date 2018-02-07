@@ -6,7 +6,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import android.util.Log;
+
 import com.google.firebase.auth.FirebaseAuth;
+
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -14,18 +17,10 @@ import com.google.firebase.database.FirebaseDatabase;
 public class MainActivity extends AppCompatActivity {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
-       /// Check to see if the User is logged in. If they are bring them to the home page
-
-        if(FirebaseAuth.getInstance() != null && AppData.getInstance().mAuth !=null)
-        {
-            Intent launchActivity1 = new Intent(MainActivity.this, HomePage.class);
-            startActivity(launchActivity1);
-        }
 
         Button Login = findViewById(R.id.Main_Btn_Login);
 
@@ -34,8 +29,19 @@ public class MainActivity extends AppCompatActivity {
         // OnClick Listener redirects to Login Page
         Login.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent launchActivity1 = new Intent(MainActivity.this, LoginActivity.class);
-                startActivity(launchActivity1);
+
+                // Check to see if the User is logged in. If they are bring them to the home page
+
+                if(FirebaseAuth.getInstance().getCurrentUser() != null)
+                {
+                    Intent launchActivity1 = new Intent(MainActivity.this, HomePage.class);
+                    startActivity(launchActivity1);
+                }
+                else {
+                    Intent launchActivity1 = new Intent(MainActivity.this, LoginActivity.class);
+                    startActivity(launchActivity1);
+                }
+
             }
         });
 
