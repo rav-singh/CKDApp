@@ -13,6 +13,7 @@
     <string name="error_field_required">This field is required</string>
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions." </string>
+    <string name="next_button">"Next" </string>
 
     <!-- Strings related to demographics -->
     <string name="age_prompt">What is your age?</string>
@@ -34,8 +35,37 @@
         <item>Divorced</item>
         <item>Partnership</item>
     </string-array>
-    <string name="gender_prompt">I identify my gender as... </string>
+
+    <string name="gender_prompt">I identify my gender as… </string>
+
     <string name="race_prompt">What is your race? Check as many of the following federal
         category(ies) that best describes the <i>race</i> of your family and yourself.</string>
+
+    <string name="education_prompt">What is your highest level of education?</string>
+
+      <string-array name="education_array">
+        <item>Please select an option from the drop down menu</item>
+        <item>Grade school/Intermediate school</item>
+        <item>Completed some high school</item>
+        <item>High school graduate</item>
+        <item>Completed some college</item>
+        <item>Associate degree</item>
+        <item>Bachelor's degree</item>
+        <item>Graduate degree</item>
+        <item>Ph.D., law degree, medical degree</item>
+    </string-array>
+
+    <string name="work_prompt">What is your work status?</string>
+    <string-array name="work_array">
+        <item>Please select an option from the drop down menu</item>
+        <item>Employed Full time</item>
+        <item>Employed Part time</item>
+        <item>Self-Employed</item>
+        <item>Retired</item>
+        <item>Disabled</item>
+    </string-array>
+
+    <string name="present_health_prompt">How would you rate your current health (1 = Very bad 5 = Very Good</string>
+    <string name="comorbidities_prompt">Please select which of the following conditions you have had or do have</string>
 
 </resources>
