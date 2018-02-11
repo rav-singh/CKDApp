@@ -17,7 +17,61 @@ public class Social extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_social);
 
-        TextView Temp = findViewById(R.id.Social_TF_Title);
+        TextView Title = findViewById(R.id.Social_TV_Title);
+        Button gen_Disc_Cat = findViewById(R.id.Social_Btn_General);
+        Button new_Mem_Cat = findViewById(R.id.Social_Btn_NewMembers);
+        Button recipes_cat= findViewById(R.id.Social_Btn_Recipes);
+        Button help_cat = findViewById(R.id.Social_Btn_Help);
+
+
+        gen_Disc_Cat.setOnClickListener(new View.OnClickListener()
+        {
+
+            public void onClick(View v)
+            {
+                AppData.cur_Category = "General Discussion";
+                Intent launchActivity1 =
+                        new Intent(CKD.Android.Social.this,ThreadsList.class);
+                startActivity(launchActivity1);
+            }
+        });
+
+        new_Mem_Cat.setOnClickListener(new View.OnClickListener()
+        {
+
+            public void onClick(View v)
+            {
+                AppData.cur_Category = "New Members";
+                Intent launchActivity1=
+                        new Intent(CKD.Android.Social.this,ThreadsList.class);
+                startActivity(launchActivity1);
+            }
+        });
+
+        recipes_cat.setOnClickListener(new View.OnClickListener()
+        {
+
+            public void onClick(View v)
+            {
+                AppData.cur_Category = "Recipes";
+                Intent launchActivity1=
+                        new Intent(CKD.Android.Social.this,ThreadsList.class);
+                startActivity(launchActivity1);
+            }
+        });
+
+        help_cat.setOnClickListener(new View.OnClickListener()
+        {
+
+            public void onClick(View v)
+            {
+                AppData.cur_Category = "HELP";
+                Intent launchActivity1=
+                        new Intent(CKD.Android.Social.this,ThreadsList.class);
+                startActivity(launchActivity1);
+            }
+        });
+
 
 
     }
