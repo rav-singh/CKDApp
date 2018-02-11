@@ -32,6 +32,9 @@
         <activity android:name=".Diet"/>
         <activity android:name=".Leaderboards"/>
         <activity android:name=".Social"/>
+        <activity android:name=".ThreadsList"/>
+        <activity android:name=".Thread"/>
+        <activity android:name=".NewThread"/>
     </application>
 
 </manifest>
