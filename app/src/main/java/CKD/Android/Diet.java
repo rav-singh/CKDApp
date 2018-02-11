@@ -17,7 +17,6 @@ public class Diet extends AppCompatActivity {
 
         TextView Temp = findViewById(R.id.Diet_TF_Title);
 
-
     }
 }
 

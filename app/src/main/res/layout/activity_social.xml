@@ -9,18 +9,62 @@
 
 
     <TextView
-        android:id="@+id/Social_TF_Title"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:text="SOCIAL PAGE"
+        android:id="@+id/Social_TV_Title"
+        android:layout_width="363dp"
+        android:layout_height="wrap_content"
+        android:text="Forums"
         android:textAlignment="center"
-        android:textSize="30dp"
+        android:textSize="32sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.523"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.494" />
+        app:layout_constraintVertical_bias="0.014" />
+
+    <Button
+        android:id="@+id/Social_Btn_General"
+        android:layout_width="match_parent"
+        android:layout_height="81dp"
+        android:text="General Discussion"
+        app:layout_constraintBottom_toTopOf="@+id/Social_Btn_NewMembers"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Social_TV_Title" />
+
+    <Button
+        android:id="@+id/Social_Btn_NewMembers"
+        android:layout_width="match_parent"
+        android:layout_height="81dp"
+        android:text="New Members"
+        app:layout_constraintBottom_toTopOf="@+id/Social_Btn_Recipes"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Social_Btn_General" />
+
+    <Button
+        android:id="@+id/Social_Btn_Recipes"
+        android:layout_width="match_parent"
+        android:layout_height="81dp"
+        android:text="Recipes"
+        app:layout_constraintBottom_toTopOf="@+id/Social_Btn_Help"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Social_Btn_NewMembers" />
+
+    <Button
+        android:id="@+id/Social_Btn_Help"
+        android:layout_width="match_parent"
+        android:layout_height="81dp"
+        android:text="HELP"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Social_Btn_Recipes" />
 </android.support.constraint.ConstraintLayout>
