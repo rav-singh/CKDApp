@@ -14,6 +14,7 @@ public final class  AppData
     public static FirebaseDatabase db;
     public static FirebaseAuth mAuth;
     public static FirebaseUser firebaseUser;
+    public static String cur_Category;
 
     public static AppData getInstance()
     {
