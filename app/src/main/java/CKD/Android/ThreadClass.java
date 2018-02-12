@@ -22,6 +22,7 @@ public class ThreadClass {
         this.title = title;
         this.body = body;
         this.date = date;
+        this.category = category;
     }
 
     public String getAuthor() {
