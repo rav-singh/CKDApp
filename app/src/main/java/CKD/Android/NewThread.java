@@ -44,7 +44,7 @@ public class NewThread extends AppCompatActivity
                 String date = new SimpleDateFormat("YYYY-MM-dd HH:mm:ss",
                         Locale.getDefault()).format(new Date());
 
-                ThreadClass newThread = new ThreadClass(authorName,authorUID,title,body,date,category);
+                ThreadClass newThread = new ThreadClass(authorName,authorUID, title, body, date, category);
 
                 FirebaseDatabase db;
 
@@ -58,13 +58,9 @@ public class NewThread extends AppCompatActivity
 
                 //References the Node under data and the current category the user is in
                 DatabaseReference Category_node = db.getReference("Data").child("Social").child(category);
-                DatabaseReference Thread_node = Category_node.child("THREAD2");
+                String key = Category_node.push().getKey();
 
-                Thread_node.setValue(newThread);
-
-
-
-
+                Category_node.child(key).setValue(newThread);
 
 
                 Intent launchActivity1 =
