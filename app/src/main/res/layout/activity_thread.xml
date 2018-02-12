@@ -10,7 +10,8 @@
         android:id="@+id/Thread_TV_ThreadBody"
         android:layout_width="match_parent"
         android:layout_height="36dp"
-        android:text="   This is where the users post will be put!                                                                                                                       "
+        android:text="   This is where the users post will be put!"
+        android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -22,7 +23,7 @@
         android:id="@+id/Thread_TV_ThreadAuthor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="By: Author"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -34,7 +35,7 @@
         android:id="@+id/Thread_TV_Comment1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="     Comment 1"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -46,7 +47,7 @@
         android:id="@+id/Thread_TV_Comment2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="     Comment 2"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -56,9 +57,9 @@
 
     <TextView
         android:id="@+id/Thread_TV_Comment3"
-        android:layout_width="385dp"
-        android:layout_height="19dp"
-        android:text="     Comment 3"
+        android:layout_width="403dp"
+        android:layout_height="13dp"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -69,7 +70,7 @@
         android:id="@+id/Thread_TV_Comment4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="        Comment 4"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -81,7 +82,7 @@
         android:id="@+id/Thread_TV_Comment5"
         android:layout_width="match_parent"
         android:layout_height="20dp"
-        android:text="     Comment 5"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -93,7 +94,7 @@
         android:id="@+id/Thread_TV_Cmnt1_author"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="By:          "
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -105,7 +106,7 @@
         android:id="@+id/Thread_TV_Cmnt2_author"
         android:layout_width="wrap_content"
         android:layout_height="15dp"
-        android:text="By:              "
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -117,7 +118,7 @@
         android:id="@+id/Thread_TV_Cmnt3_author"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="By:              "
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -129,7 +130,7 @@
         android:id="@+id/Thread_TV_Cmnt4_author"
         android:layout_width="wrap_content"
         android:layout_height="18dp"
-        android:text="By:                      "
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -141,7 +142,7 @@
         android:id="@+id/Thread_TV_Cmnt5_author"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="By:            "
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -152,7 +153,7 @@
     <TextView
         android:id="@+id/Thread_TV_ThreadTitle"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="38dp"
         android:text="THREAD TITLE"
         android:textSize="32sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -164,6 +165,8 @@
         android:id="@+id/Thread_Btn_Comment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+
+        android:background="@android:color/holo_green_dark"
         android:text="Comment"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
