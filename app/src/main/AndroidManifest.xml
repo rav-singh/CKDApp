@@ -35,6 +35,7 @@
         <activity android:name=".ThreadsList"/>
         <activity android:name=".Thread"/>
         <activity android:name=".NewThread"/>
+        <activity android:name=".Comment"/>
     </application>
 
 </manifest>
