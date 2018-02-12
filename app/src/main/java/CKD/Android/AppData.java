@@ -15,8 +15,8 @@ public final class  AppData
     public static FirebaseAuth mAuth;
     public static FirebaseUser firebaseUser;
     public static String cur_Category;
-    public static int numThreads;
-    public static String threadCount;
+    public static String cur_Thread_Key;
+    public static ThreadClass cur_Thread;
 
     public static AppData getInstance()
     {
@@ -58,11 +58,4 @@ public final class  AppData
 
     static FirebaseAuth getmAuth(){return AppData.mAuth;}
 
-    static int getNumThreads(){return AppData.numThreads;}
-
-    static void setNumThreads(int num){AppData.numThreads = num;}
-
-    static String getThreadCount(){return AppData.threadCount;}
-
-    static void setThreadCount(String count){AppData.threadCount = count;}
 }
