@@ -8,9 +8,19 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class ThreadsList extends AppCompatActivity
 {
+    final List<String> keyList= new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,11 +37,15 @@ public class ThreadsList extends AppCompatActivity
 
         categoryTitle.setText(AppData.cur_Category);
 
+        grabKeysInCategory();
+
+
         thread1.setOnClickListener(new View.OnClickListener()
         {
 
             public void onClick(View v)
             {
+                AppData.cur_Thread_Key = keyList.get(keyList.size()-1);
                 Intent launchActivity1 =
                         new Intent(CKD.Android.ThreadsList.this,Thread.class);
                 startActivity(launchActivity1);
@@ -42,6 +56,7 @@ public class ThreadsList extends AppCompatActivity
 
             public void onClick(View v)
             {
+                AppData.cur_Thread_Key = keyList.get(keyList.size()-2);
                 Intent launchActivity1 =
                         new Intent(CKD.Android.ThreadsList.this,Thread.class);
                 startActivity(launchActivity1);
@@ -52,6 +67,7 @@ public class ThreadsList extends AppCompatActivity
 
             public void onClick(View v)
             {
+                AppData.cur_Thread_Key = keyList.get(keyList.size()-3);
                 Intent launchActivity1 =
                         new Intent(CKD.Android.ThreadsList.this,Thread.class);
                 startActivity(launchActivity1);
@@ -62,6 +78,7 @@ public class ThreadsList extends AppCompatActivity
 
             public void onClick(View v)
             {
+                AppData.cur_Thread_Key = keyList.get(keyList.size()-4);
                 Intent launchActivity1 =
                         new Intent(CKD.Android.ThreadsList.this,Thread.class);
                 startActivity(launchActivity1);
@@ -75,6 +92,7 @@ public class ThreadsList extends AppCompatActivity
                 //TODO Grab next 4 Threads
             }
         });
+
         newThread.setOnClickListener(new View.OnClickListener()
         {
 
@@ -86,5 +104,48 @@ public class ThreadsList extends AppCompatActivity
             }
         });
 
+    }
+
+    private void grabKeysInCategory()
+    {
+        FirebaseDatabase db = FirebaseDatabase.getInstance();
+        DatabaseReference Category_node = db.getReference("Data").child("Social").child(AppData.cur_Category);
+
+        Category_node.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot)
+            {
+                for(DataSnapshot d : dataSnapshot.getChildren())
+                {
+                    keyList.add(d.getKey());
+                }
+
+
+                Button thread1 = findViewById(R.id.ThreadsList_Btn_Thread1);
+                Button thread2 = findViewById(R.id.ThreadsList_Btn_Thread2);
+                Button thread3 = findViewById(R.id.ThreadsList_Btn_Thread3);
+                Button thread4 = findViewById(R.id.ThreadsList_Btn_Thread4);
+
+                fillThread(thread1,keyList, keyList.size()-1, dataSnapshot);
+                fillThread(thread2,keyList, keyList.size()-2, dataSnapshot);
+                fillThread(thread3,keyList, keyList.size()-3, dataSnapshot);
+                fillThread(thread4,keyList, keyList.size()-4, dataSnapshot);
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError)
+            {
+
+            }
+        });
+
+    }
+
+    private void fillThread(Button thread, List<String> keylist, int i, DataSnapshot dataSnapshot)
+    {
+        String title = (String) dataSnapshot.child(keylist.get(i)).child("title").getValue();
+        String author = (String) dataSnapshot.child(keylist.get(i)).child("author").getValue();
+        thread.setText(title.concat("    ").concat("By:").concat(author));
     }
 }
