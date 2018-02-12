@@ -17,40 +17,94 @@ import com.google.firebase.database.ValueEventListener;
 
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
+import java.util.List;
 
-public class Thread extends AppCompatActivity {
+
+public class Thread extends AppCompatActivity
+{
+    final List<String> keyList= new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
         setContentView(R.layout.activity_thread);
-
-        TextView comment1 = findViewById(R.id.Thread_TV_Comment1);
-        TextView cmnt1Author = findViewById(R.id.Thread_TV_Cmnt1_author);
-
-        TextView comment2 = findViewById(R.id.Thread_TV_Comment2);
-        TextView cmnt2Author = findViewById(R.id.Thread_TV_Cmnt2_author);
-
-        TextView comment3 = findViewById(R.id.Thread_TV_Comment3);
-        TextView cmnt3Author = findViewById(R.id.Thread_TV_Cmnt3_author);
-
-        TextView comment4 = findViewById(R.id.Thread_TV_Comment4);
-        TextView cmnt4Author = findViewById(R.id.Thread_TV_Cmnt4_author);
-
-        TextView comment5 = findViewById(R.id.Thread_TV_Comment5);
-        TextView cmnt5Author = findViewById(R.id.Thread_TV_Cmnt5_author);
+        Button comment_btn = findViewById(R.id.Thread_Btn_Comment);
 
         getCurrentThread();
-        ThreadClass currentThread = AppData.cur_Thread;
+        getComments();
 
+
+        comment_btn.setOnClickListener(new View.OnClickListener()
+        {
+            public void onClick(View v)
+            {
+                Intent launchActivity1=
+                        new Intent(CKD.Android.Thread.this,Comment.class);
+                startActivity(launchActivity1);
+            }
+        });
 
 
     }
 
-    private void getCurrentThread() {
+    private void getComments()
+    {
+        FirebaseDatabase db = FirebaseDatabase.getInstance();
+        DatabaseReference Comments_node = db.getReference("Data").child("Social").child(AppData.cur_Category).child(AppData.cur_Thread_Key).child("Comments");
 
+        Comments_node.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot)
+            {
+                for(DataSnapshot d : dataSnapshot.getChildren())
+                {
+                    keyList.add(d.getKey());
+
+                }
+
+                TextView Comment1 = findViewById(R.id.Thread_TV_Comment1);
+                TextView Comment1Auth = findViewById(R.id.Thread_TV_Cmnt1_author);
+
+                //If there are no comments on this thread
+                if (keyList.size() == 0)
+                {
+                    Comment1.setText("There are no comments on this thread");
+                    return;
+                }
+                //TODO Implement a way to dynamically fill all/some of the comment boxes
+                fillInComments(Comment1, Comment1Auth,0,dataSnapshot);
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError)
+            {
+
+            }
+        });
+    }
+
+    private void fillInComments(TextView comment1, TextView comment1Auth, int i, DataSnapshot dataSnapshot)
+    {
+        comment1.setText((String)dataSnapshot.child(keyList.get(i)).child("comment").getValue());
+        comment1Auth.setText((String)dataSnapshot.child(keyList.get(0)).child("userName").getValue());
+    }
+
+    private void fillInThread(ThreadClass thread)
+    {
+        TextView threadTitle = findViewById(R.id.Thread_TV_ThreadTitle);
+        TextView threadBody = findViewById(R.id.Thread_TV_ThreadBody);
+        TextView threadAuthor = findViewById(R.id.Thread_TV_ThreadAuthor);
+
+        threadTitle.setText(thread.getTitle());
+        threadAuthor.setText(thread.getAuthor());
+        threadBody.setText(thread.getBody());
+    }
+
+    private void getCurrentThread()
+    {
         FirebaseDatabase db = FirebaseDatabase.getInstance();
 
         DatabaseReference Thread_node = db.getReference("Data").child("Social").
@@ -64,15 +118,10 @@ public class Thread extends AppCompatActivity {
 
                 // Use this thread to fill the values on the page
                 ThreadClass thread = dataSnapshot.getValue(ThreadClass.class);
+                fillInThread(thread);
 
-                TextView threadTitle = findViewById(R.id.Thread_TV_ThreadTitle);
-                TextView threadBody = findViewById(R.id.Thread_TV_ThreadBody);
-                TextView threadAuthor = findViewById(R.id.Thread_TV_ThreadAuthor);
+                AppData.setCurrentThread(thread);
 
-
-                threadTitle.setText(thread.getTitle());
-                threadAuthor.setText(thread.getAuthor());
-                threadBody.setText(thread.getBody());
             }
 
             @Override
@@ -82,4 +131,8 @@ public class Thread extends AppCompatActivity {
             }
         });
     }
+
+
+
+
 }
