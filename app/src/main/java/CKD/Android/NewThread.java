@@ -61,6 +61,7 @@ public class NewThread extends AppCompatActivity
                 String key = Category_node.push().getKey();
 
                 Category_node.child(key).setValue(newThread);
+                Category_node.child(key).child("Comments").setValue("No comments");
 
 
                 Intent launchActivity1 =
