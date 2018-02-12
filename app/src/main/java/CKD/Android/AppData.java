@@ -58,4 +58,6 @@ public final class  AppData
 
     static FirebaseAuth getmAuth(){return AppData.mAuth;}
 
+    static void setCurrentThread(ThreadClass cur_Thread){AppData.cur_Thread = cur_Thread;}
+
 }
