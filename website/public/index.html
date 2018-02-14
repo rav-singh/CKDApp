@@ -85,9 +85,7 @@
         var password = document.querySelector('#password').value
 
           firebase.auth().signInWithEmailAndPassword(email, password).then(function(){
-
             window.location.href = "404.html";
-
 
           }).catch(function(error) {
             var errorMessage = error.message;
