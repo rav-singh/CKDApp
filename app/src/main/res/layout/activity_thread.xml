@@ -9,7 +9,7 @@
     <TextView
         android:id="@+id/Thread_TV_ThreadBody"
         android:layout_width="match_parent"
-        android:layout_height="36dp"
+        android:layout_height="wrap_content"
         android:text="   This is where the users post will be put!"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
