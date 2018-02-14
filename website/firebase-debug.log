@@ -1,0 +1,83 @@
+[debug] [2018-02-14T18:16:57.732Z] ----------------------------------------------------------------------
+[debug] [2018-02-14T18:16:57.734Z] Command:       /Users/madeleinecassidy/.nvm/versions/node/v7.10.1/bin/node /usr/local/bin/firebase serve --only hosting,functions
+[debug] [2018-02-14T18:16:57.734Z] CLI Version:   3.17.4
+[debug] [2018-02-14T18:16:57.734Z] Platform:      darwin
+[debug] [2018-02-14T18:16:57.734Z] Node Version:  v7.10.1
+[debug] [2018-02-14T18:16:57.735Z] Time:          Wed Feb 14 2018 13:16:57 GMT-0500 (EST)
+[debug] [2018-02-14T18:16:57.735Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2018-02-14T18:16:57.749Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2018-02-14T18:16:57.749Z] > authorizing via signed-in user
+[debug] [2018-02-14T18:16:57.751Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2018-02-14T18:16:57.751Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ { refresh_token: '1/-td99namhCz8waJ7CHWR6HJsbE1hhJSR2ZO1IrBN4rE',
+  client_id: '563584335869-fgrhgmd47bqnekij5i8b5pr03ho849e6.apps.googleusercontent.com',
+  client_secret: 'j9iVZfS8kkCEFUPaAeJV0sAi',
+  grant_type: 'refresh_token',
+  scope: 'email https://www.googleapis.com/auth/cloud-platform https://www.googleapis.com/auth/cloudplatformprojects.readonly https://www.googleapis.com/auth/firebase openid' } 
+ Wed Feb 14 2018 13:16:57 GMT-0500 (EST)
+[debug] [2018-02-14T18:16:57.924Z] <<< HTTP RESPONSE 200
+[debug] [2018-02-14T18:16:57.943Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/ckdas-f867a  
+  
+ Wed Feb 14 2018 13:16:57 GMT-0500 (EST)
+[debug] [2018-02-14T18:16:58.316Z] <<< HTTP RESPONSE 200
+[debug] [2018-02-14T18:16:58.317Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/ckdas-f867a/tokens  
+  
+ Wed Feb 14 2018 13:16:58 GMT-0500 (EST)
+[debug] [2018-02-14T18:16:58.737Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Serving from '/Users/madeleinecassidy/Desktop/SocialDialysis/CKDApp/website'...
+[info] 
+[warn] ⚠  functions: Cannot start emulator. Error: The module '/usr/local/lib/node_modules/grpc/src/node/extension_binary/grpc_node.node'
+was compiled against a different Node.js version using
+NODE_MODULE_VERSION 57. This version of Node.js requires
+NODE_MODULE_VERSION 51. Please try re-compiling or re-installing
+the module (for instance, using `npm rebuild` or`npm install`).
+[debug] [2018-02-14T18:16:58.989Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/ckdas-f867a  
+  
+ Wed Feb 14 2018 13:16:58 GMT-0500 (EST)
+[debug] [2018-02-14T18:16:59.258Z] <<< HTTP RESPONSE 200
+[debug] [2018-02-14T18:16:59.259Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/852631298890/clients/_:getWebAppConfig  
+  
+ Wed Feb 14 2018 13:16:59 GMT-0500 (EST)
+[debug] [2018-02-14T18:16:59.880Z] <<< HTTP RESPONSE 200
+[info] i  hosting: Serving hosting files from: public
+[info] ✔  hosting: Local server: http://localhost:5000
+
+[debug] [2018-02-14T18:28:45.926Z] ----------------------------------------------------------------------
+[debug] [2018-02-14T18:28:45.928Z] Command:       /Users/madeleinecassidy/.nvm/versions/node/v7.10.1/bin/node /usr/local/bin/firebase serve --only hosting,functions
+[debug] [2018-02-14T18:28:45.928Z] CLI Version:   3.17.4
+[debug] [2018-02-14T18:28:45.929Z] Platform:      darwin
+[debug] [2018-02-14T18:28:45.929Z] Node Version:  v7.10.1
+[debug] [2018-02-14T18:28:45.929Z] Time:          Wed Feb 14 2018 13:28:45 GMT-0500 (EST)
+[debug] [2018-02-14T18:28:45.929Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2018-02-14T18:28:45.940Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2018-02-14T18:28:45.940Z] > authorizing via signed-in user
+[debug] [2018-02-14T18:28:45.943Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/ckdas-f867a  
+  
+ Wed Feb 14 2018 13:28:45 GMT-0500 (EST)
+[debug] [2018-02-14T18:28:46.319Z] <<< HTTP RESPONSE 200
+[debug] [2018-02-14T18:28:46.320Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/ckdas-f867a/tokens  
+  
+ Wed Feb 14 2018 13:28:46 GMT-0500 (EST)
+[debug] [2018-02-14T18:28:46.795Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Serving from '/Users/madeleinecassidy/Desktop/SocialDialysis/CKDApp/website'...
+[info] 
+[warn] ⚠  functions: Cannot start emulator. Error: The module '/usr/local/lib/node_modules/grpc/src/node/extension_binary/grpc_node.node'
+was compiled against a different Node.js version using
+NODE_MODULE_VERSION 57. This version of Node.js requires
+NODE_MODULE_VERSION 51. Please try re-compiling or re-installing
+the module (for instance, using `npm rebuild` or`npm install`).
+[debug] [2018-02-14T18:28:46.996Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/ckdas-f867a  
+  
+ Wed Feb 14 2018 13:28:46 GMT-0500 (EST)
+[debug] [2018-02-14T18:28:47.242Z] <<< HTTP RESPONSE 200
+[debug] [2018-02-14T18:28:47.243Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/852631298890/clients/_:getWebAppConfig  
+  
+ Wed Feb 14 2018 13:28:47 GMT-0500 (EST)
+[debug] [2018-02-14T18:28:47.734Z] <<< HTTP RESPONSE 200
+[info] i  hosting: Serving hosting files from: public
+[info] ✔  hosting: Local server: http://localhost:5000
+
