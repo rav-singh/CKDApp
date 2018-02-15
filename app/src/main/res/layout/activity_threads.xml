@@ -1,112 +1,150 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
     tools:layout_editor_absoluteY="81dp">
 
-    <TextView
-        android:id="@+id/ThreadsList_TV_Category"
+    <LinearLayout
+        android:id = "@+id/ThreadsList_Layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="General Discussion"
-        android:textAlignment="center"
-        android:textSize="32sp"
-        app:layout_constraintBottom_toTopOf="@+id/ThreadsList_Btn_NewThread"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:orientation="vertical"
+        android:padding="10dp">
 
-    <Button
-        android:id="@+id/ThreadsList_Btn_Thread1"
-        android:layout_width="match_parent"
-        android:layout_height="60sp"
-        android:text="Thread1"
-        android:textAlignment="viewStart"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.31" />
+        <TextView
+            android:id="@+id/ThreadsList_TV_Category"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textSize="32sp"
+            tools:layout_editor_absoluteY="26dp"
+            android:clickable="true"
+            />
 
-    <Button
-        android:id="@+id/ThreadsList_Btn_Thread2"
-        android:layout_width="match_parent"
-        android:layout_height="58dp"
-        android:text="Thread2"
-        android:textAlignment="viewStart"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.498" />
+        <Button
+            android:id="@+id/ThreadsList_Btn_Thread1"
+            android:layout_width="match_parent"
+            android:layout_height="60sp"
+            android:background="@android:color/transparent"
+            android:clickable="false"
+            android:textAlignment="viewStart"
 
-    <Button
-        android:id="@+id/ThreadsList_Btn_Thread3"
-        android:layout_width="match_parent"
-        android:layout_height="60sp"
-        android:text="Thread3"
-        android:textAlignment="viewStart"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.678" />
+             />
 
-    <Button
-        android:id="@+id/ThreadsList_Btn_Thread4"
-        android:layout_width="match_parent"
-        android:layout_height="60sp"
-        android:text="Thread4"
-        android:textAlignment="viewStart"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.844" />
+        <Button
+            android:id="@+id/ThreadsList_Btn_Thread2"
+            android:layout_width="match_parent"
+            android:layout_height="58dp"
+            android:textAlignment="viewStart"
+            tools:layout_editor_absoluteY="271dp"
+            android:background="@android:color/transparent"
+            android:clickable="false"
+            />
 
-    <Button
-        android:id="@+id/ThreadsList_Btn_Next"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="16dp"
-        android:text="Next Page"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.943"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ThreadsList_Btn_Thread4"
-        app:layout_constraintVertical_bias="0.681" />
+        <Button
+            android:id="@+id/ThreadsList_Btn_Thread3"
+            android:layout_width="match_parent"
+            android:layout_height="60sp"
+            android:textAlignment="viewStart"
+            tools:layout_editor_absoluteY="367dp"
+            android:background="@android:color/transparent"
+            android:clickable="false"
+            />
 
-    <Button
-        android:id="@+id/ThreadsList_Btn_NewThread"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="16dp"
-        android:background="@android:color/holo_green_light"
-        android:text="New Thread   "
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.172" />
+        <Button
+            android:id="@+id/ThreadsList_Btn_Thread4"
+            android:layout_width="match_parent"
+            android:layout_height="60sp"
+            android:textAlignment="viewStart"
+            tools:layout_editor_absoluteY="458dp"
+            android:background="@android:color/transparent"
+            android:clickable="false"
+            />
 
 
-</android.support.constraint.ConstraintLayout>
+        <Button
+            android:id="@+id/ThreadsList_Btn_Thread5"
+            android:layout_width="match_parent"
+            android:layout_height="60sp"
+            android:textAlignment="viewStart"
+            tools:layout_editor_absoluteY="458dp"
+            android:background="@android:color/transparent"
+            android:clickable="false"
+            />
+
+        <Button
+            android:id="@+id/ThreadsList_Btn_Thread6"
+            android:layout_width="match_parent"
+            android:layout_height="60sp"
+            android:textAlignment="viewStart"
+            tools:layout_editor_absoluteY="458dp"
+            android:background="@android:color/transparent"
+            android:clickable="false"
+            />
+
+        <Button
+            android:id="@+id/ThreadsList_Btn_Thread7"
+            android:layout_width="match_parent"
+            android:layout_height="60sp"
+            android:textAlignment="viewStart"
+            tools:layout_editor_absoluteY="458dp"
+            android:background="@android:color/transparent"
+            android:clickable="false"
+            />
+
+        <Button
+            android:id="@+id/ThreadsList_Btn_Thread8"
+            android:layout_width="match_parent"
+            android:layout_height="60sp"
+            android:textAlignment="viewStart"
+            tools:layout_editor_absoluteY="458dp"
+            android:background="@android:color/transparent"
+            android:clickable="false"
+            />
+
+        <Button
+            android:id="@+id/ThreadsList_Btn_Thread9"
+            android:layout_width="match_parent"
+            android:layout_height="60sp"
+            android:textAlignment="viewStart"
+            tools:layout_editor_absoluteY="458dp"
+            android:background="@android:color/transparent"
+            android:clickable="false"
+            />
+
+        <Button
+            android:id="@+id/ThreadsList_Btn_Thread10"
+            android:layout_width="match_parent"
+            android:layout_height="60sp"
+            android:textAlignment="viewStart"
+            tools:layout_editor_absoluteY="458dp"
+            android:background="@android:color/transparent"
+            android:clickable="false"
+            />
+
+        <Button
+            android:id="@+id/ThreadsList_Btn_Next"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Next Page"
+            android:layout_gravity="right"
+            tools:layout_editor_absoluteX="280dp"
+            tools:layout_editor_absoluteY="543dp"
+            />
+
+        <Button
+            android:id="@+id/ThreadsList_Btn_NewThread"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/holo_green_light"
+            android:layout_gravity="right"
+            android:text="New Thread   "
+            tools:layout_editor_absoluteX="296dp"
+            tools:layout_editor_absoluteY="95dp"
+            />
+
+
+    </LinearLayout>
+</ScrollView>
