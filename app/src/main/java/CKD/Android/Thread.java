@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
@@ -26,6 +27,8 @@ public class Thread extends AppCompatActivity
     final List<String> keyList= new ArrayList<>();
     final List<TextView> cmntList= new ArrayList<>();
     final List<TextView> authList= new ArrayList<>();
+    List<TextView> activeCommentList = new ArrayList<>();
+    List<TextView> activeCommentAuthList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,71 +69,31 @@ public class Thread extends AppCompatActivity
             @Override
             public void onDataChange(DataSnapshot dataSnapshot)
             {
+                int numComments = 0;
+
                 for(DataSnapshot d : dataSnapshot.getChildren())
                 {
                     keyList.add(d.getKey());
                 }
 
-                TextView Comment1 = findViewById(R.id.Thread_TV_Comment1);
-                TextView Comment1Auth = findViewById(R.id.Thread_TV_Cmnt1_author);
-                cmntList.add(Comment1);
-                authList.add(Comment1Auth);
-
-                TextView Comment2 = findViewById(R.id.Thread_TV_Comment2);
-                TextView Comment2Auth = findViewById(R.id.Thread_TV_Cmnt2_author);
-                cmntList.add(Comment2);
-                authList.add(Comment2Auth);
-
-                TextView Comment3 = findViewById(R.id.Thread_TV_Comment3);
-                TextView Comment3Auth = findViewById(R.id.Thread_TV_Cmnt3_author);
-                cmntList.add(Comment3);
-                authList.add(Comment3Auth);
-
-                TextView Comment4 = findViewById(R.id.Thread_TV_Comment4);
-                TextView Comment4Auth = findViewById(R.id.Thread_TV_Cmnt4_author);
-                cmntList.add(Comment4);
-                authList.add(Comment4Auth);
-
-                TextView Comment5 = findViewById(R.id.Thread_TV_Comment5);
-                TextView Comment5Auth = findViewById(R.id.Thread_TV_Cmnt5_author);
-                cmntList.add(Comment5);
-                authList.add(Comment5Auth);
-
-                TextView Comment6 = findViewById(R.id.Thread_TV_Comment6);
-                TextView Comment6Auth = findViewById(R.id.Thread_TV_Cmnt6_author);
-                cmntList.add(Comment6);
-                authList.add(Comment6Auth);
-
-                TextView Comment7 = findViewById(R.id.Thread_TV_Comment7);
-                TextView Comment7Auth = findViewById(R.id.Thread_TV_Cmnt7_author);
-                cmntList.add(Comment7);
-                authList.add(Comment7Auth);
-
-                TextView Comment8 = findViewById(R.id.Thread_TV_Comment8);
-                TextView Comment8Auth = findViewById(R.id.Thread_TV_Cmnt8_author);
-                cmntList.add(Comment8);
-                authList.add(Comment8Auth);
-
-                TextView Comment9 = findViewById(R.id.Thread_TV_Comment9);
-                TextView Comment9Auth = findViewById(R.id.Thread_TV_Cmnt9_author);
-                cmntList.add(Comment9);
-                authList.add(Comment9Auth);
-
-                TextView Comment10 = findViewById(R.id.Thread_TV_Comment10);
-                TextView Comment10Auth = findViewById(R.id.Thread_TV_Cmnt10_author);
-                cmntList.add(Comment10);
-                authList.add(Comment10Auth);
+                fillLists();
 
                 //If there are no comments on this thread
                 if (keyList.size() == 0)
                 {
-                    Comment1.setText("There are no comments on this thread");
-                    return;
+                    cmntList.get(0).setText("There are no comments on this thread");
+                    authList.get(0).setText("");
+                    numComments++;
                 }
-                for(int i = keyList.size()-1; i >=0 ; i--)
+
+                for(int i = 0; i < keyList.size() && numComments < 10; i++, numComments++)
                 {
                     fillInComments(cmntList.get(i), authList.get(i), i, dataSnapshot);
                 }
+
+                activeCommentList = cmntList.subList(0, numComments);
+                activeCommentAuthList = authList.subList(0, numComments);
+                reOrderLayout();
             }
 
             @Override
@@ -139,6 +102,83 @@ public class Thread extends AppCompatActivity
 
             }
         });
+    }
+
+    private void reOrderLayout ()
+    {
+        LinearLayout ll = findViewById(R.id.Thread_Layout);
+
+        for(TextView TV : cmntList)
+        {
+            if(activeCommentList.contains(TV))
+                continue;
+            else
+                ll.removeView(TV);
+        }
+
+        for(TextView TV: authList)
+        {
+            if(activeCommentAuthList.contains(TV))
+                continue;
+            else
+                ll.removeView(TV);
+        }
+
+
+    }
+
+    private void fillLists ()
+    {
+
+        TextView Comment1 = findViewById(R.id.Thread_TV_Comment1);
+        TextView Comment1Auth = findViewById(R.id.Thread_TV_Cmnt1_author);
+        cmntList.add(Comment1);
+        authList.add(Comment1Auth);
+
+        TextView Comment2 = findViewById(R.id.Thread_TV_Comment2);
+        TextView Comment2Auth = findViewById(R.id.Thread_TV_Cmnt2_author);
+        cmntList.add(Comment2);
+        authList.add(Comment2Auth);
+
+        TextView Comment3 = findViewById(R.id.Thread_TV_Comment3);
+        TextView Comment3Auth = findViewById(R.id.Thread_TV_Cmnt3_author);
+        cmntList.add(Comment3);
+        authList.add(Comment3Auth);
+
+        TextView Comment4 = findViewById(R.id.Thread_TV_Comment4);
+        TextView Comment4Auth = findViewById(R.id.Thread_TV_Cmnt4_author);
+        cmntList.add(Comment4);
+        authList.add(Comment4Auth);
+
+        TextView Comment5 = findViewById(R.id.Thread_TV_Comment5);
+        TextView Comment5Auth = findViewById(R.id.Thread_TV_Cmnt5_author);
+        cmntList.add(Comment5);
+        authList.add(Comment5Auth);
+
+        TextView Comment6 = findViewById(R.id.Thread_TV_Comment6);
+        TextView Comment6Auth = findViewById(R.id.Thread_TV_Cmnt6_author);
+        cmntList.add(Comment6);
+        authList.add(Comment6Auth);
+
+        TextView Comment7 = findViewById(R.id.Thread_TV_Comment7);
+        TextView Comment7Auth = findViewById(R.id.Thread_TV_Cmnt7_author);
+        cmntList.add(Comment7);
+        authList.add(Comment7Auth);
+
+        TextView Comment8 = findViewById(R.id.Thread_TV_Comment8);
+        TextView Comment8Auth = findViewById(R.id.Thread_TV_Cmnt8_author);
+        cmntList.add(Comment8);
+        authList.add(Comment8Auth);
+
+        TextView Comment9 = findViewById(R.id.Thread_TV_Comment9);
+        TextView Comment9Auth = findViewById(R.id.Thread_TV_Cmnt9_author);
+        cmntList.add(Comment9);
+        authList.add(Comment9Auth);
+
+        TextView Comment10 = findViewById(R.id.Thread_TV_Comment10);
+        TextView Comment10Auth = findViewById(R.id.Thread_TV_Cmnt10_author);
+        cmntList.add(Comment10);
+        authList.add(Comment10Auth);
     }
 
     private void fillInComments(TextView comment1, TextView comment1Auth, int i, DataSnapshot dataSnapshot)
