@@ -31,6 +31,8 @@ public class Thread extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        // TODO Make only comments scrollable
+
         setContentView(R.layout.activity_thread);
         Button comment_btn = findViewById(R.id.Thread_Btn_Comment);
 
@@ -55,10 +57,10 @@ public class Thread extends AppCompatActivity
     {
         FirebaseDatabase db = FirebaseDatabase.getInstance();
         DatabaseReference Comments_node = db.getReference("Data")
-                                            .child("Social")
-                                            .child(AppData.cur_Category)
-                                            .child(AppData.cur_Thread_Key)
-                                            .child("Comments");
+                .child("Social")
+                .child(AppData.cur_Category)
+                .child(AppData.cur_Thread_Key)
+                .child("Comments");
 
         Comments_node.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -94,6 +96,31 @@ public class Thread extends AppCompatActivity
                 cmntList.add(Comment5);
                 authList.add(Comment5Auth);
 
+                TextView Comment6 = findViewById(R.id.Thread_TV_Comment6);
+                TextView Comment6Auth = findViewById(R.id.Thread_TV_Cmnt6_author);
+                cmntList.add(Comment6);
+                authList.add(Comment6Auth);
+
+                TextView Comment7 = findViewById(R.id.Thread_TV_Comment7);
+                TextView Comment7Auth = findViewById(R.id.Thread_TV_Cmnt7_author);
+                cmntList.add(Comment7);
+                authList.add(Comment7Auth);
+
+                TextView Comment8 = findViewById(R.id.Thread_TV_Comment8);
+                TextView Comment8Auth = findViewById(R.id.Thread_TV_Cmnt8_author);
+                cmntList.add(Comment8);
+                authList.add(Comment8Auth);
+
+                TextView Comment9 = findViewById(R.id.Thread_TV_Comment9);
+                TextView Comment9Auth = findViewById(R.id.Thread_TV_Cmnt9_author);
+                cmntList.add(Comment9);
+                authList.add(Comment9Auth);
+
+                TextView Comment10 = findViewById(R.id.Thread_TV_Comment10);
+                TextView Comment10Auth = findViewById(R.id.Thread_TV_Cmnt10_author);
+                cmntList.add(Comment10);
+                authList.add(Comment10Auth);
+
                 //If there are no comments on this thread
                 if (keyList.size() == 0)
                 {
@@ -117,7 +144,7 @@ public class Thread extends AppCompatActivity
     private void fillInComments(TextView comment1, TextView comment1Auth, int i, DataSnapshot dataSnapshot)
     {
         comment1.setText((String)dataSnapshot.child(keyList.get(i)).child("comment").getValue());
-        comment1Auth.setText((String)dataSnapshot.child(keyList.get(0)).child("userName").getValue());
+        comment1Auth.setText((String)dataSnapshot.child(keyList.get(i)).child("userName").getValue());
     }
 
     private void fillInThread(ThreadClass thread)
