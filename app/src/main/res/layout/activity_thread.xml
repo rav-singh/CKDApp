@@ -1,177 +1,166 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:layout_editor_absoluteY="81dp">
 
-    <TextView
-        android:id="@+id/Thread_TV_ThreadBody"
+    <LinearLayout
+        android:id = "@+id/ThreadsList_Layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="   This is where the users post will be put!"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.126" />
+        android:orientation="vertical"
+        android:padding="10dp">
 
-    <TextView
-        android:id="@+id/Thread_TV_ThreadAuthor"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        <TextView
+            android:id="@+id/Thread_TV_ThreadTitle"
+            android:layout_width="match_parent"
+            android:layout_height="38dp"
+            android:text="THREAD TITLE"
+            android:textSize="32sp" />
 
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.195" />
+        <TextView
+            android:id="@+id/Thread_TV_ThreadBody"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="   This is where the users post will be put!"
+            android:textSize="24sp" />
 
-    <TextView
-        android:id="@+id/Thread_TV_Comment1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        <TextView
+            android:id="@+id/Thread_TV_ThreadAuthor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Thread auth" />
 
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.269" />
+        <TextView
+            android:id="@+id/Thread_TV_Comment1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Comment1" />
 
-    <TextView
-        android:id="@+id/Thread_TV_Comment2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        <TextView
+            android:id="@+id/Thread_TV_Cmnt1_author"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Comment1 auth" />
 
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.388" />
+        <TextView
+            android:id="@+id/Thread_TV_Comment2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Comment2" />
 
-    <TextView
-        android:id="@+id/Thread_TV_Comment3"
-        android:layout_width="403dp"
-        android:layout_height="13dp"
+        <TextView
+            android:id="@+id/Thread_TV_Cmnt2_author"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Comment2 auth" />
 
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/Thread_TV_Comment3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Comment3" />
 
-    <TextView
-        android:id="@+id/Thread_TV_Comment4"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        <TextView
+            android:id="@+id/Thread_TV_Cmnt3_author"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Comment3 auth" />
 
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.626" />
+        <TextView
+            android:id="@+id/Thread_TV_Comment4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Comment4" />
 
-    <TextView
-        android:id="@+id/Thread_TV_Comment5"
-        android:layout_width="match_parent"
-        android:layout_height="20dp"
+        <TextView
+            android:id="@+id/Thread_TV_Cmnt4_author"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Comment4 auth" />
 
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.753" />
+        <TextView
+            android:id="@+id/Thread_TV_Comment5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Comment5" />
 
-    <TextView
-        android:id="@+id/Thread_TV_Cmnt1_author"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        <TextView
+            android:id="@+id/Thread_TV_Cmnt5_author"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Comment5 auth" />
 
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.31" />
+        <TextView
+            android:id="@+id/Thread_TV_Comment6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Comment6" />
 
-    <TextView
-        android:id="@+id/Thread_TV_Cmnt2_author"
-        android:layout_width="wrap_content"
-        android:layout_height="15dp"
+        <TextView
+            android:id="@+id/Thread_TV_Cmnt6_author"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Comment6 auth" />
 
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.421" />
+        <TextView
+            android:id="@+id/Thread_TV_Comment7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Comment7" />
 
-    <TextView
-        android:id="@+id/Thread_TV_Cmnt3_author"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        <TextView
+            android:id="@+id/Thread_TV_Cmnt7_author"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Comment7 auth" />
 
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.538" />
+        <TextView
+            android:id="@+id/Thread_TV_Comment8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Comment8" />
 
-    <TextView
-        android:id="@+id/Thread_TV_Cmnt4_author"
-        android:layout_width="wrap_content"
-        android:layout_height="18dp"
+        <TextView
+            android:id="@+id/Thread_TV_Cmnt8_author"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Comment8 auth" />
 
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.665" />
+        <TextView
+            android:id="@+id/Thread_TV_Comment9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Comment9" />
 
-    <TextView
-        android:id="@+id/Thread_TV_Cmnt5_author"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        <TextView
+            android:id="@+id/Thread_TV_Cmnt9_author"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Comment9 auth" />
 
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.786" />
+        <TextView
+            android:id="@+id/Thread_TV_Comment10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Comment10" />
 
-    <TextView
-        android:id="@+id/Thread_TV_ThreadTitle"
-        android:layout_width="match_parent"
-        android:layout_height="38dp"
-        android:text="THREAD TITLE"
-        android:textSize="32sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        <TextView
+            android:id="@+id/Thread_TV_Cmnt10_author"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Comment10 auth" />
 
-    <Button
-        android:id="@+id/Thread_Btn_Comment"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        <Button
+            android:id="@+id/Thread_Btn_Comment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/holo_green_dark"
+            android:text="Comment"
+            android:layout_gravity="end" />
 
-        android:background="@android:color/holo_green_dark"
-        android:text="Comment"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Thread_TV_Comment5" />
+    </LinearLayout>
 
-</android.support.constraint.ConstraintLayout>
+</ScrollView>
