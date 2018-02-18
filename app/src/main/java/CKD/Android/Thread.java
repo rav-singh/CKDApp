@@ -2,6 +2,7 @@ package CKD.Android;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -24,11 +25,15 @@ import java.util.List;
 
 public class Thread extends AppCompatActivity
 {
-    final List<String> keyList= new ArrayList<>();
-    final List<TextView> cmntList= new ArrayList<>();
-    final List<TextView> authList= new ArrayList<>();
+    final List<String> keyList = new ArrayList<>();
+    final List<TextView> cmntList = new ArrayList<>();
+    final List<TextView> authList = new ArrayList<>();
+    List<TextView> allViewsList = new ArrayList<>();
     List<TextView> activeCommentList = new ArrayList<>();
     List<TextView> activeCommentAuthList = new ArrayList<>();
+    DataSnapshot DS;
+    int currentPage = 1;
+    int maxPages;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,9 +43,12 @@ public class Thread extends AppCompatActivity
 
         setContentView(R.layout.activity_thread);
         Button comment_btn = findViewById(R.id.Thread_Btn_Comment);
+        Button nextButton = findViewById(R.id.Thread_Btn_Next);
+        Button prevButton = findViewById(R.id.Thread_Btn_Prev);
 
         getCurrentThread();
         getComments();
+
 
 
         comment_btn.setOnClickListener(new View.OnClickListener()
@@ -53,8 +61,109 @@ public class Thread extends AppCompatActivity
             }
         });
 
+        nextButton.setOnClickListener(new View.OnClickListener()
+        {
+            public void onClick(View v)
+            {
+                enablePrevButton();
+                loadNextComments(++currentPage);
+                if(currentPage == maxPages)
+                {
+                    disableNextButton();
+                }
+            }
+        });
+
+        prevButton.setOnClickListener(new View.OnClickListener()
+        {
+            public void onClick(View v)
+            {
+                enableNextButton();
+                loadPrevComments(--currentPage);
+                if(currentPage == 1)
+                {
+                    disablePrevButton();
+                }
+            }
+        });
+
+        if(currentPage == 1)
+            disablePrevButton();
+
+        if(maxPages == 1)
+            disableNextButton();
 
     }
+
+    private void loadPrevComments(int pageNum)
+    {
+        int lowBound = (pageNum - 1) * 10;
+        int numComments = 0;
+        LinearLayout ll = findViewById(R.id.Thread_Layout);
+
+        for(int i = 0; i < 10; i++)
+        {
+            allViewsList.add(cmntList.get(i));
+            allViewsList.add(authList.get(i));
+        }
+
+        for(TextView TV : allViewsList)
+        {
+            if(TV.getParent() == null)
+                ll.addView(TV);
+        }
+
+        for(int i = lowBound; i < keyList.size() && numComments < 10; i++, numComments++)
+        {
+            fillInComments(cmntList.get(i), authList.get(i), i, DS);
+        }
+
+    }
+
+    private void disablePrevButton()
+    {
+        Button prevPage = findViewById(R.id.Thread_Btn_Prev);
+        prevPage.setClickable(false);
+        prevPage.setBackgroundColor(Color.TRANSPARENT);
+    }
+
+    private void enableNextButton()
+    {
+        Button nextPage = findViewById(R.id.Thread_Btn_Next);
+        nextPage.setClickable(true);
+        nextPage.setBackgroundColor(Color.LTGRAY);
+    }
+
+    private void disableNextButton()
+    {
+        Button nextPage = findViewById(R.id.Thread_Btn_Next);
+        nextPage.setClickable(false);
+        nextPage.setBackgroundColor(Color.TRANSPARENT);
+    }
+
+
+    private void enablePrevButton()
+    {
+        Button prevPage = findViewById(R.id.Thread_Btn_Prev);
+        prevPage.setClickable(true);
+        prevPage.setBackgroundColor(Color.LTGRAY);
+    }
+
+    private void loadNextComments(int pageNum)
+    {
+        int lowBound = (pageNum - 1) * 10;
+        int numComments = 0;
+
+        for(int i = lowBound; i < keyList.size() && numComments < 10; i++, numComments++)
+        {
+            fillInComments(cmntList.get(numComments), authList.get(numComments), i, DS);
+        }
+
+        activeCommentList = cmntList.subList(0, numComments);
+        activeCommentAuthList = authList.subList(0, numComments);
+        reOrderLayout();
+    }
+
 
     private void getComments()
     {
@@ -70,12 +179,13 @@ public class Thread extends AppCompatActivity
             public void onDataChange(DataSnapshot dataSnapshot)
             {
                 int numComments = 0;
-
-                for(DataSnapshot d : dataSnapshot.getChildren())
+                DS = dataSnapshot;
+                for(DataSnapshot d : DS.getChildren())
                 {
                     keyList.add(d.getKey());
                 }
 
+                maxPages = (keyList.size() / 10) + 1;
                 fillLists();
 
                 //If there are no comments on this thread
