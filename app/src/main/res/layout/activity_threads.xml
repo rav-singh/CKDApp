@@ -1,126 +1,152 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    tools:layout_editor_absoluteY="81dp">
+    tools:layout_editor_absoluteY="81dp"
+    android:orientation="vertical">
 
-    <LinearLayout
-        android:id = "@+id/ThreadsList_Layout"
+    <TextView
+        android:id="@+id/ThreadsList_TV_Category"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="10dp">
+        android:textAlignment="center"
+        android:textSize="32sp"
+        tools:layout_editor_absoluteY="26dp"
+        android:clickable="true"
+        />
 
-        <TextView
-            android:id="@+id/ThreadsList_TV_Category"
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="300dp"
+        tools:layout_editor_absoluteY="81dp">
+
+        <LinearLayout
+            android:id = "@+id/ThreadsList_Layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAlignment="center"
-            android:textSize="32sp"
-            tools:layout_editor_absoluteY="26dp"
-            android:clickable="true"
-            />
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <Button
+                android:id="@+id/ThreadsList_Btn_Thread1"
+                android:layout_width="match_parent"
+                android:layout_height="60sp"
+                android:background="@android:color/transparent"
+                android:clickable="false"
+                android:textAlignment="viewStart"
+
+                 />
+
+            <Button
+                android:id="@+id/ThreadsList_Btn_Thread2"
+                android:layout_width="match_parent"
+                android:layout_height="58dp"
+                android:textAlignment="viewStart"
+                tools:layout_editor_absoluteY="271dp"
+                android:background="@android:color/transparent"
+                android:clickable="false"
+                />
+
+            <Button
+                android:id="@+id/ThreadsList_Btn_Thread3"
+                android:layout_width="match_parent"
+                android:layout_height="60sp"
+                android:textAlignment="viewStart"
+                tools:layout_editor_absoluteY="367dp"
+                android:background="@android:color/transparent"
+                android:clickable="false"
+                />
+
+            <Button
+                android:id="@+id/ThreadsList_Btn_Thread4"
+                android:layout_width="match_parent"
+                android:layout_height="60sp"
+                android:textAlignment="viewStart"
+                tools:layout_editor_absoluteY="458dp"
+                android:background="@android:color/transparent"
+                android:clickable="false"
+                />
+
+            <Button
+                android:id="@+id/ThreadsList_Btn_Thread5"
+                android:layout_width="match_parent"
+                android:layout_height="60sp"
+                android:textAlignment="viewStart"
+                tools:layout_editor_absoluteY="458dp"
+                android:background="@android:color/transparent"
+                android:clickable="false"
+                />
+
+            <Button
+                android:id="@+id/ThreadsList_Btn_Thread6"
+                android:layout_width="match_parent"
+                android:layout_height="60sp"
+                android:textAlignment="viewStart"
+                tools:layout_editor_absoluteY="458dp"
+                android:background="@android:color/transparent"
+                android:clickable="false"
+                />
+
+            <Button
+                android:id="@+id/ThreadsList_Btn_Thread7"
+                android:layout_width="match_parent"
+                android:layout_height="60sp"
+                android:textAlignment="viewStart"
+                tools:layout_editor_absoluteY="458dp"
+                android:background="@android:color/transparent"
+                android:clickable="false"
+                />
+
+            <Button
+                android:id="@+id/ThreadsList_Btn_Thread8"
+                android:layout_width="match_parent"
+                android:layout_height="60sp"
+                android:textAlignment="viewStart"
+                tools:layout_editor_absoluteY="458dp"
+                android:background="@android:color/transparent"
+                android:clickable="false"
+                />
+
+            <Button
+                android:id="@+id/ThreadsList_Btn_Thread9"
+                android:layout_width="match_parent"
+                android:layout_height="60sp"
+                android:textAlignment="viewStart"
+                tools:layout_editor_absoluteY="458dp"
+                android:background="@android:color/transparent"
+                android:clickable="false"
+                />
+
+            <Button
+                android:id="@+id/ThreadsList_Btn_Thread10"
+                android:layout_width="match_parent"
+                android:layout_height="60sp"
+                android:textAlignment="viewStart"
+                tools:layout_editor_absoluteY="458dp"
+                android:background="@android:color/transparent"
+                android:clickable="false"
+                />
+        </LinearLayout>
+
+    </ScrollView>
+
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/RelativeLayout01"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
 
         <Button
-            android:id="@+id/ThreadsList_Btn_Thread1"
-            android:layout_width="match_parent"
-            android:layout_height="60sp"
-            android:background="@android:color/transparent"
+            android:id="@+id/ThreadsList_Btn_Prev"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Previous Page"
+            android:layout_gravity="left"
             android:clickable="false"
-            android:textAlignment="viewStart"
-
-             />
-
-        <Button
-            android:id="@+id/ThreadsList_Btn_Thread2"
-            android:layout_width="match_parent"
-            android:layout_height="58dp"
-            android:textAlignment="viewStart"
-            tools:layout_editor_absoluteY="271dp"
-            android:background="@android:color/transparent"
-            android:clickable="false"
-            />
-
-        <Button
-            android:id="@+id/ThreadsList_Btn_Thread3"
-            android:layout_width="match_parent"
-            android:layout_height="60sp"
-            android:textAlignment="viewStart"
-            tools:layout_editor_absoluteY="367dp"
-            android:background="@android:color/transparent"
-            android:clickable="false"
-            />
-
-        <Button
-            android:id="@+id/ThreadsList_Btn_Thread4"
-            android:layout_width="match_parent"
-            android:layout_height="60sp"
-            android:textAlignment="viewStart"
-            tools:layout_editor_absoluteY="458dp"
-            android:background="@android:color/transparent"
-            android:clickable="false"
-            />
-
-        <Button
-            android:id="@+id/ThreadsList_Btn_Thread5"
-            android:layout_width="match_parent"
-            android:layout_height="60sp"
-            android:textAlignment="viewStart"
-            tools:layout_editor_absoluteY="458dp"
-            android:background="@android:color/transparent"
-            android:clickable="false"
-            />
-
-        <Button
-            android:id="@+id/ThreadsList_Btn_Thread6"
-            android:layout_width="match_parent"
-            android:layout_height="60sp"
-            android:textAlignment="viewStart"
-            tools:layout_editor_absoluteY="458dp"
-            android:background="@android:color/transparent"
-            android:clickable="false"
-            />
-
-        <Button
-            android:id="@+id/ThreadsList_Btn_Thread7"
-            android:layout_width="match_parent"
-            android:layout_height="60sp"
-            android:textAlignment="viewStart"
-            tools:layout_editor_absoluteY="458dp"
-            android:background="@android:color/transparent"
-            android:clickable="false"
-            />
-
-        <Button
-            android:id="@+id/ThreadsList_Btn_Thread8"
-            android:layout_width="match_parent"
-            android:layout_height="60sp"
-            android:textAlignment="viewStart"
-            tools:layout_editor_absoluteY="458dp"
-            android:background="@android:color/transparent"
-            android:clickable="false"
-            />
-
-        <Button
-            android:id="@+id/ThreadsList_Btn_Thread9"
-            android:layout_width="match_parent"
-            android:layout_height="60sp"
-            android:textAlignment="viewStart"
-            tools:layout_editor_absoluteY="458dp"
-            android:background="@android:color/transparent"
-            android:clickable="false"
-            />
-
-        <Button
-            android:id="@+id/ThreadsList_Btn_Thread10"
-            android:layout_width="match_parent"
-            android:layout_height="60sp"
-            android:textAlignment="viewStart"
-            tools:layout_editor_absoluteY="458dp"
-            android:background="@android:color/transparent"
-            android:clickable="false"
+            android:layout_alignParentLeft="true"
             />
 
         <Button
@@ -129,26 +155,18 @@
             android:layout_height="wrap_content"
             android:text="Next Page"
             android:layout_gravity="right"
+            android:layout_alignParentRight="true"
             />
 
-        <Button
-            android:id="@+id/ThreadsList_Btn_Prev"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Previous Page"
-            android:layout_gravity="right"
-            android:clickable="false"
-            />
+    </RelativeLayout>
 
-        <Button
-            android:id="@+id/ThreadsList_Btn_NewThread"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@android:color/holo_green_light"
-            android:layout_gravity="right"
-            android:text="New Thread   "
-            />
+    <Button
+        android:id="@+id/ThreadsList_Btn_NewThread"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/holo_green_light"
+        android:layout_gravity="right"
+        android:text="New Thread   "
+        />
 
-
-    </LinearLayout>
-</ScrollView>
+</LinearLayout>
