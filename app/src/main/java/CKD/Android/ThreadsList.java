@@ -18,6 +18,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 
@@ -26,6 +27,9 @@ public class ThreadsList extends AppCompatActivity
     final List<String> keyList= new ArrayList<>();
     final List<Button> allThreadBtnList= new ArrayList<>();
     List<Button> activeThreadBtnList = new ArrayList<>();
+    DataSnapshot DS;
+    int currentPage = 1;
+    int maxPages;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,15 +76,43 @@ public class ThreadsList extends AppCompatActivity
         }
 
         Button nextPage = findViewById(R.id.ThreadsList_Btn_Next);
+        Button prevPage = findViewById(R.id.ThreadsList_Btn_Prev);
         Button newThread = findViewById(R.id.ThreadsList_Btn_NewThread);
 
         nextPage.setOnClickListener(new View.OnClickListener()
         {
             public void onClick(View v)
             {
-                //TODO Grab next 10 Threads
+                enablePrevButton();
+                loadNextThreads(++currentPage);
+                if(currentPage == maxPages)
+                {
+                    disableNextButton();
+
+                }
             }
+
         });
+
+        prevPage.setOnClickListener(new View.OnClickListener()
+        {
+            public void onClick(View v)
+            {
+                enableNextButton();
+                loadPreviousThreads(--currentPage);
+                if(currentPage == 1)
+                {
+                    disablePrevButton();
+                }
+            }
+
+        });
+
+        if(currentPage == 1)
+            disablePrevButton();
+
+        if(maxPages == 1)
+            disableNextButton();
 
         newThread.setOnClickListener(new View.OnClickListener()
         {
@@ -92,6 +124,74 @@ public class ThreadsList extends AppCompatActivity
             }
         });
 
+    }
+
+    private void enableNextButton()
+    {
+        Button nextPage = findViewById(R.id.ThreadsList_Btn_Next);
+        nextPage.setClickable(true);
+        nextPage.setBackgroundColor(Color.LTGRAY);
+    }
+
+    private void enablePrevButton()
+    {
+        Button prevPage = findViewById(R.id.ThreadsList_Btn_Prev);
+        prevPage.setClickable(true);
+        prevPage.setBackgroundColor(Color.LTGRAY);
+    }
+
+    private void disableNextButton()
+    {
+        Button nextPage = findViewById(R.id.ThreadsList_Btn_Next);
+        nextPage.setClickable(false);
+        nextPage.setBackgroundColor(Color.TRANSPARENT);
+    }
+
+    private void disablePrevButton()
+    {
+        Button prevPage = findViewById(R.id.ThreadsList_Btn_Prev);
+        prevPage.setClickable(false);
+        prevPage.setBackgroundColor(Color.TRANSPARENT);
+    }
+
+    private void loadPreviousThreads(int pageNum)
+    {
+        int lowBound = (pageNum - 1) * 10;
+        int upBound = lowBound + 9;
+        int numThreads = 0;
+        LinearLayout ll = findViewById(R.id.ThreadsList_Layout);
+
+        for(Button B : allThreadBtnList)
+        {
+            if(B.getParent() == null)
+                ll.addView(B);
+        }
+
+        for(int i = lowBound; i < keyList.size() && numThreads < 10; i++, numThreads++)
+        {
+            activateThreads(allThreadBtnList.get(numThreads), keyList.get(i), DS);
+        }
+
+        // Separates the activated Buttons from unactivated buttons (Instance of less than 10 threads in database
+        // for the given category
+        activeThreadBtnList = allThreadBtnList.subList(0, numThreads);
+
+    }
+
+    private void loadNextThreads(int pageNum)
+    {
+        int lowBound = (pageNum - 1) * 10;
+        int upBound = lowBound + 9;
+        int numThreads = 0;
+
+        for(int i = lowBound; i < keyList.size() && numThreads < 10; i++, numThreads++)
+        {
+            activateThreads(allThreadBtnList.get(numThreads), keyList.get(i), DS);
+        }
+        // Separates the activated Buttons from unactivated buttons (Instance of less than 10 threads in database
+        // for the given category
+        activeThreadBtnList = allThreadBtnList.subList(0, numThreads);
+        reOrderLayout();
     }
 
     private void grabKeysInCategory()
@@ -106,12 +206,15 @@ public class ThreadsList extends AppCompatActivity
             @Override
             public void onDataChange(DataSnapshot dataSnapshot)
             {
+                DS = dataSnapshot;
                 // goes through and adds all of the thread UID's from the database and adds them
                 //to a list
-                for(DataSnapshot d : dataSnapshot.getChildren())
+                for(DataSnapshot d : DS.getChildren())
                 {
                     keyList.add(d.getKey());
                 }
+                maxPages = (keyList.size() / 10) + 1;
+
                 // If no Threads have been created change the first button accordingly and return
                 if(keyList.size() == 0)
                 {
@@ -124,18 +227,19 @@ public class ThreadsList extends AppCompatActivity
                 }
 
                 // Used to keep track which threads were NOT activated to remove from linear layout
-                int threadlistButtonIndex = 0;
+                int numThreads = 0;
 
                 // Starts at the end of List containing Thread Keys and the beginning of list containing Buttons
                 // Once the entire List of Thread Keys is looked through OR 10 Thread Keys have been accessed
-                // the foor loop breaks.
-                for(int i = keyList.size()-1; i>=0 && threadlistButtonIndex < 10; i--, threadlistButtonIndex++ )
+                // the for loop breaks.
+                Collections.reverse(keyList);
+                for(int i = 0; i < keyList.size() && numThreads < 10; i++, numThreads++ )
                 {
-                    activateThreads(allThreadBtnList.get(threadlistButtonIndex), keyList.get(i), dataSnapshot);
+                    activateThreads(allThreadBtnList.get(numThreads), keyList.get(i), dataSnapshot);
                 }
                 // Separates the activated Buttons from unactivated buttons (Instance of less than 10 threads in database
                 // for the given category
-                activeThreadBtnList = allThreadBtnList.subList(0,threadlistButtonIndex);
+                activeThreadBtnList = allThreadBtnList.subList(0,numThreads);
                 reOrderLayout();
             }
 
