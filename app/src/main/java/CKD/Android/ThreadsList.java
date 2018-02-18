@@ -172,10 +172,6 @@ public class ThreadsList extends AppCompatActivity
             activateThreads(allThreadBtnList.get(numThreads), keyList.get(i), DS);
         }
 
-        // Separates the activated Buttons from unactivated buttons (Instance of less than 10 threads in database
-        // for the given category
-        activeThreadBtnList = allThreadBtnList.subList(0, numThreads);
-
     }
 
     private void loadNextThreads(int pageNum)
