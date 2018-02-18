@@ -63,7 +63,6 @@
             android:clickable="false"
             />
 
-
         <Button
             android:id="@+id/ThreadsList_Btn_Thread5"
             android:layout_width="match_parent"
@@ -130,8 +129,15 @@
             android:layout_height="wrap_content"
             android:text="Next Page"
             android:layout_gravity="right"
-            tools:layout_editor_absoluteX="280dp"
-            tools:layout_editor_absoluteY="543dp"
+            />
+
+        <Button
+            android:id="@+id/ThreadsList_Btn_Prev"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Previous Page"
+            android:layout_gravity="right"
+            android:clickable="false"
             />
 
         <Button
@@ -141,8 +147,6 @@
             android:background="@android:color/holo_green_light"
             android:layout_gravity="right"
             android:text="New Thread   "
-            tools:layout_editor_absoluteX="296dp"
-            tools:layout_editor_absoluteY="95dp"
             />
 
 
