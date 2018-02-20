@@ -42,14 +42,25 @@ public class Thread extends AppCompatActivity
         // TODO Make only comments scrollable
 
         setContentView(R.layout.activity_thread);
-        Button comment_btn = findViewById(R.id.Thread_Btn_Comment);
-        Button nextButton = findViewById(R.id.Thread_Btn_Next);
-        Button prevButton = findViewById(R.id.Thread_Btn_Prev);
 
         getCurrentThread();
         getComments();
 
+        setOnClickListeners();
 
+        if(currentPage == 1)
+            disablePrevButton();
+
+        if(maxPages == 1)
+            disableNextButton();
+
+    }
+
+    private void setOnClickListeners()
+    {
+        Button comment_btn = findViewById(R.id.Thread_Btn_Comment);
+        Button nextButton = findViewById(R.id.Thread_Btn_Next);
+        Button prevButton = findViewById(R.id.Thread_Btn_Prev);
 
         comment_btn.setOnClickListener(new View.OnClickListener()
         {
@@ -61,10 +72,8 @@ public class Thread extends AppCompatActivity
             }
         });
 
-        nextButton.setOnClickListener(new View.OnClickListener()
-        {
-            public void onClick(View v)
-            {
+        nextButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
                 enablePrevButton();
                 loadNextComments(++currentPage);
                 if(currentPage == maxPages)
@@ -74,10 +83,8 @@ public class Thread extends AppCompatActivity
             }
         });
 
-        prevButton.setOnClickListener(new View.OnClickListener()
-        {
-            public void onClick(View v)
-            {
+        prevButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
                 enableNextButton();
                 loadPrevComments(--currentPage);
                 if(currentPage == 1)
@@ -86,38 +93,6 @@ public class Thread extends AppCompatActivity
                 }
             }
         });
-
-        if(currentPage == 1)
-            disablePrevButton();
-
-        if(maxPages == 1)
-            disableNextButton();
-
-    }
-
-    private void loadPrevComments(int pageNum)
-    {
-        int lowBound = (pageNum - 1) * 10;
-        int numComments = 0;
-        LinearLayout ll = findViewById(R.id.Thread_Layout);
-
-        for(int i = 0; i < 10; i++)
-        {
-            allViewsList.add(cmntList.get(i));
-            allViewsList.add(authList.get(i));
-        }
-
-        for(TextView TV : allViewsList)
-        {
-            if(TV.getParent() == null)
-                ll.addView(TV);
-        }
-
-        for(int i = lowBound; i < keyList.size() && numComments < 10; i++, numComments++)
-        {
-            fillInComments(cmntList.get(i), authList.get(i), i, DS);
-        }
-
     }
 
     private void disablePrevButton()
@@ -141,7 +116,6 @@ public class Thread extends AppCompatActivity
         nextPage.setBackgroundColor(Color.TRANSPARENT);
     }
 
-
     private void enablePrevButton()
     {
         Button prevPage = findViewById(R.id.Thread_Btn_Prev);
@@ -164,6 +138,34 @@ public class Thread extends AppCompatActivity
         reOrderLayout();
     }
 
+    private void loadPrevComments(int pageNum)
+    {
+        int lowBound = (pageNum - 1) * 10;
+        int numComments = 0;
+        LinearLayout ll = findViewById(R.id.Thread_Layout);
+
+        //This combines all the view references on the page into 1 list
+        //that will be used to add into the Linear layout
+        for(int i = 0; i < 10; i++)
+        {
+            allViewsList.add(cmntList.get(i));
+            allViewsList.add(authList.get(i));
+        }
+
+        // This checks each Textview to make sure it is not already in the Linear Layout
+        for(TextView TV : allViewsList)
+        {
+            if(TV.getParent() == null)
+                ll.addView(TV);
+        }
+
+
+        for(int i = lowBound; i < keyList.size() && numComments < 10; i++, numComments++)
+        {
+            fillInComments(cmntList.get(i), authList.get(i), i, DS);
+        }
+
+    }
 
     private void getComments()
     {
@@ -186,6 +188,10 @@ public class Thread extends AppCompatActivity
                 }
 
                 maxPages = (keyList.size() / 10) + 1;
+
+                if(maxPages == 1)
+                    disableNextButton();
+
                 fillLists();
 
                 //If there are no comments on this thread
