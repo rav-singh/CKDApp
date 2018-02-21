@@ -1,75 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="match_parent" >
-
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="CKD.Android.Exercise"
-    tools:layout_editor_absoluteY="81dp">
+    android:orientation="vertical"
+    android:background="@drawable/main_background_gradient">
+
+        <TextView
+            android:id="@+id/Comment_TV_ThreadTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="This is the location of the thread title"
+            android:textSize="18sp"
+            android:padding="5dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/rounded_corner_textview"
+            />
+
+        <TextView
+            android:id="@+id/Comment_TV_ThreadBody"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:gravity="top"
+            android:padding="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="5dp"
+            android:scrollbars="vertical"
+            android:text="Thread Body"
+            android:textSize="20sp"
+            android:background="@drawable/rounded_corner_textview"/>
+
+        <EditText
+            android:id="@+id/Comment_TE_Comment"
+            android:layout_width="match_parent"
+            android:layout_height="75dp"
+            android:padding="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="5dp"
+            android:gravity="top"
+            android:hint="This is where you comment"
+            android:inputType="textMultiLine"
+            android:scrollbars="vertical"
+            android:background="@drawable/rounded_corner_textview"
+             />
 
 
-    <TextView
-        android:id="@+id/Comment_TV_ThreadTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:text="Thread Title"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/Comment_TV_ThreadBody"
-        android:layout_width="match_parent"
-        android:layout_height="219dp"
-        android:layout_marginTop="8dp"
-        android:gravity="top"
-        android:scrollbars="vertical"
-        android:text="Thread Body"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Comment_TV_ThreadTitle" />
-
-    <EditText
-        android:id="@+id/Comment_TE_Comment"
-        android:layout_width="390dp"
-        android:layout_height="144dp"
-        android:layout_marginTop="36dp"
-        android:gravity="top"
-        android:hint="This is where you comment"
-        android:inputType="textMultiLine"
-        android:scrollbars="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Comment_TV_ThreadBody" />
+        <Button
+            android:id="@+id/Comment_Btn_Submit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Submit"
+            android:
+          />
 
 
-    <Button
-        android:id="@+id/Comment_Btn_Submit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:layout_marginTop="8dp"
-        android:text="Submit"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Comment_TE_Comment" />
-
-
-</android.support.constraint.ConstraintLayout>
-
-</ScrollView>
+    </LinearLayout>
