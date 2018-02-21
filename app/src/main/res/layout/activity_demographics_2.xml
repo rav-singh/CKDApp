@@ -1,217 +1,131 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/main_background_gradient"
+  >
 
-    <TextView
-        android:id="@+id/Demo_TV_Age"
-        android:layout_width="0dp"
-        android:layout_height="25dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="@string/age_prompt"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        app:layout_constraintBottom_toTopOf="@+id/Demo_BTN_Next_2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        tools:text="@string/age_prompt" />
-
-    <Spinner
-        android:id="@+id/Demo_SPN_Age"
-        android:layout_width="0dp"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:entries="@array/age_array"
-        android:spinnerMode="dropdown"
-        app:layout_constraintBottom_toTopOf="@+id/Demo_BTN_Next_2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Demo_TV_Age"
-        app:layout_constraintVertical_bias="0.0" />
+        android:orientation="vertical"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
 
-    <TextView
-        android:id="@+id/Demo_TV_Marital"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
-        android:text="@string/marital_prompt"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        app:layout_constraintBottom_toTopOf="@+id/Demo_BTN_Next_2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Demo_SPN_Age"
-        app:layout_constraintVertical_bias="0.0"
-        tools:text="@string/marital_prompt" />
+        <TextView
+            android:id="@+id/Demo_TV_Age"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="10dp"
+            android:paddingTop="20dp"
+            android:text="@string/age_prompt"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            tools:text="@string/age_prompt" />
 
-    <Spinner
-        android:id="@+id/Demo_SPN_Marital"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:entries="@array/marital_array"
-        app:layout_constraintBottom_toTopOf="@+id/Demo_BTN_Next_2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Demo_TV_Marital"
-        app:layout_constraintVertical_bias="0.0" />
+        <Spinner
+            android:id="@+id/Demo_SPN_Age"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="20dp"
+            android:entries="@array/age_array"
+            android:spinnerMode="dropdown"
+            tools:layout_editor_absoluteX="8dp"
+            tools:layout_editor_absoluteY="41dp" />
 
-    <EditText
-        android:id="@+id/Demo_PT_Gender"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
-        android:ems="10"
-        android:hint="@string/gender_prompt"
-        android:inputType="textShortMessage"
-        app:layout_constraintBottom_toTopOf="@+id/Demo_BTN_Next_2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Demo_SPN_Marital"
-        app:layout_constraintVertical_bias="0.0" />
+        <TextView
+            android:id="@+id/Demo_TV_Marital"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="10dp"
+            android:text="@string/marital_prompt"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            tools:layout_editor_absoluteX="8dp"
+            tools:layout_editor_absoluteY="97dp"
+            tools:text="@string/marital_prompt" />
 
-    <TextView
-        android:id="@+id/Demo_TV_Race"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
-        android:text="@string/race_prompt"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        app:layout_constraintBottom_toTopOf="@+id/Demo_BTN_Next_2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Demo_PT_Gender"
-        app:layout_constraintVertical_bias="0.0"
-        tools:text="@string/race_prompt" />
+        <Spinner
+            android:id="@+id/Demo_SPN_Marital"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="20dp"
+            android:entries="@array/marital_array"
+            tools:layout_editor_absoluteX="8dp"
+            tools:layout_editor_absoluteY="129dp" />
 
-    <CheckBox
-        android:id="@+id/Demo_CB_Race_6"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:text="Other"
-        app:layout_constraintBottom_toTopOf="@+id/Demo_BTN_Next_2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.262"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Demo_CB_Race_4"
-        app:layout_constraintVertical_bias="0.0" />
+        <EditText
+            android:id="@+id/Demo_PT_Gender"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="30dp"
+            android:layout_marginTop="20dp"
+            android:hint="@string/gender_prompt"
+            android:inputType="textShortMessage" />
 
-    <CheckBox
-        android:id="@+id/Demo_CB_Race_1"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="American Indian or Alaskan Native"
-        app:layout_constraintBottom_toTopOf="@+id/Demo_BTN_Next_2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.09"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Demo_TV_Race"
-        app:layout_constraintVertical_bias="0.0" />
+        <TextView
+            android:id="@+id/Demo_TV_Race"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="10dp"
+            android:text="@string/race_prompt"
+            tools:text="@string/race_prompt" />
 
-    <CheckBox
-        android:id="@+id/Demo_CB_Race_2"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:text="Black or African American"
-        app:layout_constraintBottom_toTopOf="@+id/Demo_BTN_Next_2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.09"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Demo_CB_Race_1"
-        app:layout_constraintVertical_bias="0.0" />
+        <CheckBox
+            android:id="@+id/Demo_CB_Race_6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="10dp"
+            android:text="Other" />
 
-    <CheckBox
-        android:id="@+id/Demo_CB_Race_3"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:text="Native Hawaiian or Pacific Islander"
-        app:layout_constraintBottom_toTopOf="@+id/Demo_BTN_Next_2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.08"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Demo_CB_Race_5"
-        app:layout_constraintVertical_bias="0.0" />
+        <CheckBox
+            android:id="@+id/Demo_CB_Race_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="10dp"
+            android:text="American Indian or Alaskan Native" />
 
-    <CheckBox
-        android:id="@+id/Demo_CB_Race_4"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:text="Hispanic or Latino"
-        app:layout_constraintBottom_toTopOf="@+id/Demo_BTN_Next_2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.05"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Demo_CB_Race_3"
-        app:layout_constraintVertical_bias="0.0" />
+        <CheckBox
+            android:id="@+id/Demo_CB_Race_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="10dp"
+            android:text="Black or African American" />
 
-    <CheckBox
-        android:id="@+id/Demo_CB_Race_5"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:text="White or European American"
-        app:layout_constraintBottom_toTopOf="@+id/Demo_BTN_Next_2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.06"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Demo_CB_Race_2"
-        app:layout_constraintVertical_bias="0.0" />
+        <CheckBox
+            android:id="@+id/Demo_CB_Race_3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="10dp"
+            android:text="Native Hawaiian or Pacific Islander" />
 
-    <Button
-        android:id="@+id/Demo_BTN_Next_2"
+        <CheckBox
+            android:id="@+id/Demo_CB_Race_4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="10dp"
+            android:text="Hispanic or Latino" />
+
+        <CheckBox
+            android:id="@+id/Demo_CB_Race_5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="10dp"
+            android:text="White or European American"/>
+    </LinearLayout>
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:background="@android:color/holo_green_light"
-        android:text="Next"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:orientation="vertical"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true">
 
-</android.support.constraint.ConstraintLayout>
+        <Button
+            android:id="@+id/Demo_BTN_Next_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/holo_green_light"
+            android:text="Next"
+            android:layout_margin="10dp"/>
+    </LinearLayout>
+
+</RelativeLayout>
