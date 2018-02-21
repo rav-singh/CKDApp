@@ -56,8 +56,11 @@
             android:id="@+id/Comment_Btn_Submit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:padding="5dp"
             android:text="Submit"
-            android:
+            android:layout_gravity="end"
+            android:textSize="20sp"
+            android:layout_margin="10dp"
           />
 
 
