@@ -1,112 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="CKD.Android.Demographics_1"
-    tools:layout_editor_absoluteY="81dp">
+    android:background="@drawable/main_background_gradient">
 
-    <android.support.constraint.Guideline
-        android:id="@+id/guideline2"
-        android:layout_width="wrap_content"
+    <ScrollView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:textSize="26sp"
-        app:layout_constraintGuide_begin="20dp" />
+        android:id="@+id/Demo1_Scroll"
+        >
 
-    <android.support.constraint.Guideline
-        android:id="@+id/guideline3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_begin="20dp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/main_background_gradient">
 
-    <EditText
-        android:id="@+id/Demo_TF_Name"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Full Name"
-        android:inputType="textPersonName"
-        android:textSize="26sp"
-        app:layout_constraintBottom_toTopOf="@+id/Demo_TF_Email"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.035" />
+            <EditText
+                android:id="@+id/Demo_TF_Name"
+                android:layout_width="match_parent"
+                android:layout_margin="20dp"
+                android:layout_height="wrap_content"
+                android:hint="Full Name"
+                android:inputType="textPersonName"
+                android:textSize="30sp"
+                android:background="@drawable/rounded_corner_textview"
+           />
 
-    <EditText
-        android:id="@+id/Demo_TF_Email"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:ems="10"
-        android:inputType="textEmailAddress"
-        android:textSize="26sp"
-        android:enabled="false"
-        app:layout_constraintBottom_toTopOf="@+id/Demo_TF_Email_Confirm"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Demo_TF_Name"
-        app:layout_constraintVertical_bias="0.174" />
+            <EditText
+                android:id="@+id/Demo_TF_Email"
+                android:layout_width="match_parent"
+                android:layout_margin="20dp"
+                android:layout_height="wrap_content"
+                android:inputType="textEmailAddress"
+                android:textSize="30sp"
+                android:enabled="false"
+                android:background="@drawable/rounded_corner_textview"/>
 
-    <EditText
-        android:id="@+id/Demo_TF_Email_Confirm"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Confirm Email"
-        android:inputType="textEmailAddress"
-        android:textSize="26sp"
-        app:layout_constraintBottom_toTopOf="@+id/Demo_TF_Phone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Demo_TF_Email"
-        app:layout_constraintVertical_bias="0.318" />
+            <EditText
+                android:id="@+id/Demo_TF_Email_Confirm"
+                android:layout_width="match_parent"
+                android:layout_margin="20dp"
+                android:layout_height="wrap_content"
+                android:hint="Confirm Email"
+                android:inputType="textEmailAddress"
+                android:textSize="30sp"
+                android:background="@drawable/rounded_corner_textview"
+             />
 
-    <EditText
-        android:id="@+id/Demo_TF_Phone"
-        android:layout_width="0dp"
-        android:layout_height="61dp"
-        android:ems="10"
-        android:hint="Phone Number"
-        android:inputType="number|phone"
-        android:textSize="26sp"
-        app:layout_constraintBottom_toTopOf="@+id/Demo_TF_ActivityL"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Demo_TF_Email_Confirm"
-        app:layout_constraintVertical_bias="0.462" />
+            <EditText
+                android:id="@+id/Demo_TF_Phone"
+                android:layout_width="match_parent"
+                android:layout_margin="20dp"
+                android:layout_height="wrap_content"
+                android:hint="Phone Number"
+                android:inputType="number|phone"
+                android:textSize="30sp"
+                android:background="@drawable/rounded_corner_textview"/>
 
-    <EditText
-        android:id="@+id/Demo_TF_ActivityL"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Activity Level"
-        android:inputType="text"
-        android:textSize="26sp"
-        app:layout_constraintBottom_toTopOf="@+id/Demo_Btn_Next_1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Demo_TF_Phone"
-        app:layout_constraintVertical_bias="0.621" />
+            <EditText
+                android:id="@+id/Demo_TF_ActivityL"
+                android:layout_width="match_parent"
+                android:layout_margin="20dp"
+                android:layout_height="wrap_content"
+                android:hint="Activity Level"
+                android:inputType="text"
+                android:textSize="30sp"
+                android:background="@drawable/rounded_corner_textview"/>
+        </LinearLayout>
+    </ScrollView>
 
-    <Button
-        android:id="@+id/Demo_Btn_Next_1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="6dp"
-        android:background="@android:color/holo_green_light"
-        android:text="@string/next_button"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="bottom|center_horizontal"
+            android:layout_below="@+id/Demo1_Scroll">
 
-</android.support.constraint.ConstraintLayout>
+            <Button
+                android:id="@+id/Demo_Btn_Next_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:padding="10dp"
+                android:background="@android:color/holo_green_light"
+                android:text="@string/next_button"
+                android:textSize="30sp" />
+        </LinearLayout>
+
+
+</RelativeLayout>
