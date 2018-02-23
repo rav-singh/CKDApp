@@ -18,7 +18,6 @@ public class HomePage  extends AppCompatActivity {
                    exercise_Button,
                    mood_Button,
                    social_Button,
-                   leaderboards_Button,
                    logout_Button;
 
     @Override
@@ -29,15 +28,6 @@ public class HomePage  extends AppCompatActivity {
 
         InitializeComponents();
 
-        //TODO Once user Logs in Load AppData with their information from the database
-        /*
-           Log.d("HEYO",AppData.cur_user.getUID());
-             Log.i("Tag",AppData.cur_user.getGender());
-             Log.i("Tag",AppData.cur_user.getEmail());
-             Log.i("Tag",AppData.cur_user.getName());
-             Log.i("Tag",AppData.cur_user.getPhone());
-             Log.i("Tag",AppData.cur_user.getActivityLevel());
-         */
 
         diet_Button.setOnClickListener(new View.OnClickListener()
         {
@@ -83,16 +73,6 @@ public class HomePage  extends AppCompatActivity {
             }
         });
 
-        leaderboards_Button.setOnClickListener(new View.OnClickListener()
-         {
-
-            public void onClick(View v)
-             {
-                 Intent launchActivity1=
-                         new Intent(CKD.Android.HomePage.this,Leaderboards.class);
-                 startActivity(launchActivity1);
-             }
-         });
 
         logout_Button.setOnClickListener(new View.OnClickListener()
         {
@@ -116,7 +96,6 @@ public class HomePage  extends AppCompatActivity {
         mood_Button = findViewById(R.id.Home_Btn_Mood);
         exercise_Button = findViewById(R.id.Home_Btn_Exerxcise);
         social_Button = findViewById(R.id.Home_Btn_Social);
-        leaderboards_Button = findViewById(R.id.Home_Btn_Leaderboards);
         logout_Button = findViewById(R.id.HomePage_Btn_Logout);
     }
 }

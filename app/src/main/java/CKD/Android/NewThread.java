@@ -21,7 +21,6 @@ import java.util.Locale;
 
 public class NewThread extends AppCompatActivity
 {
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState) ;
@@ -33,9 +32,12 @@ public class NewThread extends AppCompatActivity
 
         submit_btn.setOnClickListener(new View.OnClickListener()
         {
-
+            //TODO Add a max character limit for Title Length
+            //TODO Make sure no fields are empty before proceeding
             public void onClick(View v)
             {
+                // Grabs all of the users enteries and an instance of the current time
+                // Instantiates a new Thread class with the collected variable
                 String authorUID = AppData.cur_user.getUID();
                 String authorName = AppData.cur_user.getName();
                 String title = threadTitle.getText().toString();
@@ -58,24 +60,20 @@ public class NewThread extends AppCompatActivity
 
                 //References the Node under data and the current category the user is in
                 DatabaseReference Category_node = db.getReference("Data").child("Social").child(category);
+
+                // Creates a child under the given category node with an automatically
+                // generated UID and saves it adding to the database
                 String key = Category_node.push().getKey();
 
+                // Under newly created thread UID the Thread Class is placed into the database
+                // and then adds an empty child for comments to be added later
                 Category_node.child(key).setValue(newThread);
                 Category_node.child(key).child("Comments").setValue("No comments");
-
 
                 Intent launchActivity1 =
                         new Intent(CKD.Android.NewThread.this,ThreadsList.class);
                 startActivity(launchActivity1);
             }
-
-
         });
-
     }
-
-
-
-
-
 }
