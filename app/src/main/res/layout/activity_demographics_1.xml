@@ -85,7 +85,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"
                 android:padding="10dp"
-                android:background="@android:color/holo_green_light"
+                android:background="@drawable/button_background"
                 android:text="@string/next_button"
                 android:textSize="30sp" />
         </LinearLayout>

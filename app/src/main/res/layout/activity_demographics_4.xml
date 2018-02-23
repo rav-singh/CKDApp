@@ -1,300 +1,316 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/constraintLayout"
+    android:id="@+id/ScrollView_Layout_demo4"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/main_background_gradient"
     tools:layout_editor_absoluteY="81dp">
 
-    <TextView
-        android:id="@+id/Demo4_TV_Comorbid_prompt"
-        android:layout_width="392dp"
-        android:layout_height="wrap_content"
-        android:text="@string/comorbidities_prompt"
-        android:textAlignment="center"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/Demo4_CB_Allergy"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <android.support.constraint.Guideline
-        android:id="@+id/guideline7"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.033167496" />
+        android:orientation="vertical">
 
-    <CheckBox
-        android:id="@+id/Demo4_CB_Arthritis"
-        android:layout_width="175sp"
-        android:layout_height="wrap_content"
-        android:text="Arthritis   "
-        app:layout_constraintBottom_toTopOf="@+id/Demo4_CB_BloodClots"
-        app:layout_constraintEnd_toStartOf="@+id/Demo4_CB_LiverDiesease"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Demo4_CB_Allergy" />
+        <TextView
+            android:id="@+id/Demo4_TV_Comorbid_prompt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/comorbidities_prompt"
+            android:textAlignment="center"
+            android:textSize="30sp"
+            android:layout_margin="10dp"
+            android:padding="5dp"
+            android:textColor="@android:color/white"/>
 
-    <CheckBox
-        android:id="@+id/Demo4_CB_BloodClots"
-        android:layout_width="175sp"
-        android:layout_height="wrap_content"
-        android:text="Blood Clots   "
-        app:layout_constraintBottom_toTopOf="@+id/Demo4_CB_BloodDisorder"
-        app:layout_constraintEnd_toStartOf="@+id/Demo4_CB_KidneyDisease"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Demo4_CB_Arthritis" />
+        <CheckBox
+            android:id="@+id/Demo4_CB_Allergy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:padding="5dp"
+            android:background="@android:color/transparent"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:text="Allergies" />
 
-    <CheckBox
-        android:id="@+id/Demo4_CB_BloodDisorder"
-        android:layout_width="175sp"
-        android:layout_height="wrap_content"
-        android:text="Blood Disorder   "
-        app:layout_constraintBottom_toTopOf="@+id/Demo4_CB_Cancer"
-        app:layout_constraintEnd_toStartOf="@+id/Demo4_CB_Lupus"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Demo4_CB_BloodClots" />
+        <CheckBox
+            android:id="@+id/Demo4_CB_Arthritis"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:padding="5dp"
+            android:background="@android:color/transparent"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:text="Arthritis   " />
 
-    <CheckBox
-        android:id="@+id/Demo4_CB_Cancer"
-        android:layout_width="175sp"
-        android:layout_height="wrap_content"
-        android:text="Cancer    "
-        app:layout_constraintBottom_toTopOf="@+id/Demo4_CB_ChronObsPDis"
-        app:layout_constraintEnd_toStartOf="@+id/Demo4_CB_MentalHthCond"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Demo4_CB_BloodDisorder" />
+        <CheckBox
+            android:id="@+id/Demo4_CB_BloodClots"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:padding="5dp"
+            android:background="@android:color/transparent"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:text="Blood Clots   " />
 
-    <CheckBox
-        android:id="@+id/Demo4_CB_Allergy"
-        android:layout_width="175sp"
-        android:layout_height="wrap_content"
-        android:text="Allergies   "
-        app:layout_constraintBottom_toTopOf="@+id/Demo4_CB_Arthritis"
-        app:layout_constraintEnd_toStartOf="@+id/Demo4_CB_HighBPHighChol"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Demo4_TV_Comorbid_prompt" />
+        <CheckBox
+            android:id="@+id/Demo4_CB_BloodDisorder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:padding="5dp"
+            android:background="@android:color/transparent"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:text="Blood Disorder"
+            />
 
-    <CheckBox
-        android:id="@+id/Demo4_CB_ChronObsPDis"
-        android:layout_width="175sp"
-        android:layout_height="wrap_content"
-        android:text="COPD   "
-        app:layout_constraintBottom_toTopOf="@+id/Demo4_CB_Dementia"
-        app:layout_constraintEnd_toStartOf="@+id/Demo4_CB_MacularDegen"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Demo4_CB_Cancer" />
+        <CheckBox
+            android:id="@+id/Demo4_CB_Cancer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:padding="5dp"
+            android:background="@android:color/transparent"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:text="Cancer    " />
 
-    <CheckBox
-        android:id="@+id/Demo4_CB_Dementia"
-        android:layout_width="175sp"
-        android:layout_height="wrap_content"
-        android:text="Dementia   "
-        app:layout_constraintBottom_toTopOf="@+id/Demo4_CB_Depression"
-        app:layout_constraintEnd_toStartOf="@+id/Demo4_CB_Migraines"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Demo4_CB_ChronObsPDis" />
 
-    <CheckBox
-        android:id="@+id/Demo4_CB_Depression"
-        android:layout_width="175sp"
-        android:layout_height="wrap_content"
-        android:text="Depression   "
-        app:layout_constraintBottom_toTopOf="@+id/Demo4_CB_Diabetes"
-        app:layout_constraintEnd_toStartOf="@+id/Demo4_CB_MS"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Demo4_CB_Dementia" />
+        <CheckBox
+            android:id="@+id/Demo4_CB_ChronObsPDis"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:padding="5dp"
+            android:background="@android:color/transparent"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:text="COPD   " />
 
-    <CheckBox
-        android:id="@+id/Demo4_CB_Diabetes"
-        android:layout_width="175sp"
-        android:layout_height="wrap_content"
-        android:text="Diabetes   "
-        app:layout_constraintBottom_toTopOf="@+id/Demo4_CB_Glaucoma"
-        app:layout_constraintEnd_toStartOf="@+id/Demo4_CB_Stroke"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Demo4_CB_Depression" />
+        <CheckBox
+            android:id="@+id/Demo4_CB_Dementia"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:padding="5dp"
+            android:background="@android:color/transparent"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:text="Dementia   " />
 
-    <CheckBox
-        android:id="@+id/Demo4_CB_Glaucoma"
-        android:layout_width="175sp"
-        android:layout_height="wrap_content"
-        android:text="Glaucoma"
-        app:layout_constraintBottom_toTopOf="@+id/Demo4_CB_HeartDisease"
-        app:layout_constraintEnd_toStartOf="@+id/Demo4_CB_ParkDis"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Demo4_CB_Diabetes" />
+        <CheckBox
+            android:id="@+id/Demo4_CB_Depression"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:padding="5dp"
+            android:background="@android:color/transparent"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:text="Depression   " />
 
-    <CheckBox
-        android:id="@+id/Demo4_CB_HeartDisease"
-        android:layout_width="175sp"
-        android:layout_height="wrap_content"
-        android:text="Heart Disease   "
-        app:layout_constraintBottom_toTopOf="@+id/Demo4_CB_Other"
-        app:layout_constraintEnd_toStartOf="@+id/Demo4_CB_Thyroid"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Demo4_CB_Glaucoma" />
+        <CheckBox
+            android:id="@+id/Demo4_CB_Diabetes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:padding="5dp"
+            android:background="@android:color/transparent"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:text="Diabetes   " />
 
-    <CheckBox
-        android:id="@+id/Demo4_CB_HighBPHighChol"
-        android:layout_width="175sp"
-        android:layout_height="wrap_content"
-        android:text="High BP/Cholesterol   "
-        app:layout_constraintBottom_toTopOf="@+id/Demo4_CB_LiverDiesease"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/Demo4_CB_Allergy"
-        app:layout_constraintTop_toBottomOf="@+id/Demo4_TV_Comorbid_prompt" />
+        <CheckBox
+            android:id="@+id/Demo4_CB_Glaucoma"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:padding="5dp"
+            android:background="@android:color/transparent"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:text="Glaucoma" />
 
-    <CheckBox
-        android:id="@+id/Demo4_CB_KidneyDisease"
-        android:layout_width="175sp"
-        android:layout_height="wrap_content"
-        android:text="Kidney Disease   "
-        app:layout_constraintBottom_toTopOf="@+id/Demo4_CB_Lupus"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/Demo4_CB_BloodClots"
-        app:layout_constraintTop_toBottomOf="@+id/Demo4_CB_LiverDiesease" />
+        <CheckBox
+            android:id="@+id/Demo4_CB_HeartDisease"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:padding="5dp"
+            android:background="@android:color/transparent"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:text="Heart Disease" />
 
-    <CheckBox
-        android:id="@+id/Demo4_CB_LiverDiesease"
-        android:layout_width="175sp"
-        android:layout_height="wrap_content"
-        android:text="Liver Disease   "
-        app:layout_constraintBottom_toTopOf="@+id/Demo4_CB_KidneyDisease"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/Demo4_CB_Arthritis"
-        app:layout_constraintTop_toBottomOf="@+id/Demo4_CB_HighBPHighChol" />
+        <CheckBox
+            android:id="@+id/Demo4_CB_HighBPHighChol"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:padding="5dp"
+            android:background="@android:color/transparent"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:text="High BP/Cholesterol   " />
 
-    <CheckBox
-        android:id="@+id/Demo4_CB_Lupus"
-        android:layout_width="175sp"
-        android:layout_height="wrap_content"
-        android:text="Lupus   "
-        app:layout_constraintBottom_toTopOf="@+id/Demo4_CB_MentalHthCond"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/Demo4_CB_BloodDisorder"
-        app:layout_constraintTop_toBottomOf="@+id/Demo4_CB_KidneyDisease" />
+        <CheckBox
+            android:id="@+id/Demo4_CB_KidneyDisease"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:padding="5dp"
+            android:background="@android:color/transparent"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:text="Kidney Disease   " />
 
-    <CheckBox
-        android:id="@+id/Demo4_CB_MentalHthCond"
-        android:layout_width="175sp"
-        android:layout_height="wrap_content"
-        android:text="Mental Health Disease"
-        app:layout_constraintBottom_toTopOf="@+id/Demo4_CB_MacularDegen"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/Demo4_CB_Cancer"
-        app:layout_constraintTop_toBottomOf="@+id/Demo4_CB_Lupus" />
+        <CheckBox
+            android:id="@+id/Demo4_CB_LiverDiesease"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:padding="5dp"
+            android:background="@android:color/transparent"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:text="Liver Disease   " />
 
-    <CheckBox
-        android:id="@+id/Demo4_CB_MacularDegen"
-        android:layout_width="175sp"
-        android:layout_height="wrap_content"
-        android:text="Macular Degeneration   "
-        app:layout_constraintBottom_toTopOf="@+id/Demo4_CB_Migraines"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/Demo4_CB_ChronObsPDis"
-        app:layout_constraintTop_toBottomOf="@+id/Demo4_CB_MentalHthCond" />
+        <CheckBox
+            android:id="@+id/Demo4_CB_Lupus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:padding="5dp"
+            android:background="@android:color/transparent"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:text="Lupus   " />
 
-    <CheckBox
-        android:id="@+id/Demo4_CB_Migraines"
-        android:layout_width="175sp"
-        android:layout_height="wrap_content"
-        android:text="Migraines   "
-        app:layout_constraintBottom_toTopOf="@+id/Demo4_CB_MS"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/Demo4_CB_Dementia"
-        app:layout_constraintTop_toBottomOf="@+id/Demo4_CB_MacularDegen" />
+        <CheckBox
+            android:id="@+id/Demo4_CB_MacularDegen"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:padding="5dp"
+            android:background="@android:color/transparent"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:text="Macular Degeneration   " />
 
-    <CheckBox
-        android:id="@+id/Demo4_CB_MS"
-        android:layout_width="175sp"
-        android:layout_height="wrap_content"
-        android:text="Multiple Sclerosis   "
-        app:layout_constraintBottom_toTopOf="@+id/Demo4_CB_Stroke"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/Demo4_CB_Depression"
-        app:layout_constraintTop_toBottomOf="@+id/Demo4_CB_Migraines" />
+        <CheckBox
+            android:id="@+id/Demo4_CB_MentalHthCond"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:padding="5dp"
+            android:background="@android:color/transparent"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:text="Mental Health Disease" />
 
-    <CheckBox
-        android:id="@+id/Demo4_CB_ParkDis"
-        android:layout_width="175sp"
-        android:layout_height="wrap_content"
-        android:text="Parkinson's Disease   "
-        app:layout_constraintBottom_toTopOf="@+id/Demo4_CB_Thyroid"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/Demo4_CB_Glaucoma"
-        app:layout_constraintTop_toBottomOf="@+id/Demo4_CB_Stroke" />
+        <CheckBox
+            android:id="@+id/Demo4_CB_Migraines"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:padding="5dp"
+            android:background="@android:color/transparent"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:text="Migraines   " />
 
-    <Button
-        android:id="@+id/Demo4_Btn_Next"
-        android:layout_width="411dp"
-        android:layout_height="wrap_content"
-        android:text="@string/next_button"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Demo4_CB_Other" />
+        <CheckBox
+            android:id="@+id/Demo4_CB_MS"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:padding="5dp"
+            android:background="@android:color/transparent"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:text="Multiple Sclerosis   " />
 
-    <CheckBox
-        android:id="@+id/Demo4_CB_Stroke"
-        android:layout_width="175sp"
-        android:layout_height="wrap_content"
-        android:text="Stroke   "
-        app:layout_constraintBottom_toTopOf="@+id/Demo4_CB_ParkDis"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/Demo4_CB_Diabetes"
-        app:layout_constraintTop_toBottomOf="@+id/Demo4_CB_MS" />
+        <CheckBox
+            android:id="@+id/Demo4_CB_ParkDis"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:padding="5dp"
+            android:background="@android:color/transparent"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:text="Parkinson's Disease   " />
 
-    <CheckBox
-        android:id="@+id/Demo4_CB_Other"
-        android:layout_width="0dp"
-        android:layout_height="29dp"
-        android:text="Other   "
-        app:layout_constraintBottom_toTopOf="@+id/Demo4_Btn_Next"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Demo4_CB_HeartDisease" />
+        <CheckBox
+            android:id="@+id/Demo4_CB_Stroke"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:padding="5dp"
+            android:background="@android:color/transparent"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:text="Stroke" />
 
-    <CheckBox
-        android:id="@+id/Demo4_CB_Thyroid"
-        android:layout_width="175sp"
-        android:layout_height="wrap_content"
-        android:text="Thyroid Disease  "
-        app:layout_constraintBottom_toTopOf="@+id/Demo4_CB_Other"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/Demo4_CB_HeartDisease"
-        app:layout_constraintTop_toBottomOf="@+id/Demo4_CB_ParkDis" />
+        <CheckBox
+            android:id="@+id/Demo4_CB_Thyroid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:padding="5dp"
+            android:background="@android:color/transparent"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:text="Thyroid Disease" />
 
-    <android.support.constraint.Guideline
-        android:id="@+id/guideline9"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="20dp" />
-</android.support.constraint.ConstraintLayout>
+        <CheckBox
+            android:id="@+id/Demo4_CB_Other"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:padding="5dp"
+            android:background="@android:color/transparent"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:text="Other" />
+
+
+        <Button
+            android:id="@+id/Demo4_Btn_Next"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:layout_margin="5dp"
+            android:padding="10dp"
+            android:text="@string/next_button"
+            android:background="@drawable/button_background"/>
+
+    </LinearLayout>
+</ScrollView>

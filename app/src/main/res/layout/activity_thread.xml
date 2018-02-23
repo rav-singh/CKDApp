@@ -53,11 +53,11 @@
             android:id="@+id/Thread_Btn_Comment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@android:color/holo_green_dark"
+            android:background="@drawable/button_background"
             android:padding="5dp"
             android:text="Make comment"
             android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"/>
+            android:layout_centerVertical="true" />
     </RelativeLayout>
 
     <ScrollView
@@ -294,6 +294,7 @@
             android:layout_gravity="left"
             android:clickable="false"
             android:layout_alignParentStart="true"
+            android:background="@drawable/button_background"
             />
 
         <Button
@@ -303,6 +304,7 @@
             android:text="Next Page"
             android:layout_gravity="right"
             android:layout_alignParentEnd="true"
+            android:background="@drawable/button_background"
             />
 
     </RelativeLayout>

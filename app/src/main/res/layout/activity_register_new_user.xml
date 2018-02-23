@@ -1,53 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="CKD.Android.registerNewUser"
-    tools:layout_editor_absoluteY="81dp">
+    android:background="@drawable/main_background_gradient"
+    tools:context="CKD.Android.registerNewUser">
 
-    <EditText
-        android:id="@+id/Register_TF_EmailAddress"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:ems="14"
-        android:hint="Email Address"
-        android:inputType="textEmailAddress"
-        android:textSize="26sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.316" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_gravity="center_vertical">
+
+        <EditText
+            android:id="@+id/Register_TF_EmailAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Email Address"
+            android:inputType="textEmailAddress"
+            android:background="@drawable/rounded_corner_textview"
+            android:textSize="26sp"
+            android:layout_margin="20dp"/>
+
+        <EditText
+            android:id="@+id/Register_TF_Password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_corner_textview"
+            android:hint="Password"
+            android:layout_margin="20dp"
+            android:inputType="textPassword"
+            android:textSize="26sp" />
+    </LinearLayout>
 
     <Button
         android:id="@+id/Register_Btn_Register"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/button_background"
+        android:padding="10dp"
         android:text="Register"
+        android:layout_centerInParent="true"
         android:textSize="32sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.929" />
+        android:layout_margin="20dp" />
 
-    <EditText
-        android:id="@+id/Register_TF_Password"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Password"
-        android:inputType="textPassword"
-        android:textSize="26sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.499" />
-
-</android.support.constraint.ConstraintLayout>
+</RelativeLayout>

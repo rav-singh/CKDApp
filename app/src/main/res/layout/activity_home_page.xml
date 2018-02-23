@@ -1,86 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/main_background_gradient"
     tools:context="CKD.Android.HomePage"
-    tools:layout_editor_absoluteY="81dp">
+    android:gravity="center_vertical"
+    android:orientation="vertical">
 
     <Button
         android:id="@+id/Home_Btn_Mood"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:layout_margin="10dp"
+        android:textSize="32sp"
         android:text="Mood"
-        app:layout_constraintBottom_toTopOf="@+id/Home_Btn_Exerxcise"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.6" />
+ />
 
     <Button
-        android:id="@+id/Home_Btn_Exerxcise"
-        android:layout_width="0dp"
+        android:id="@+id/Home_Btn_Exercise"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:layout_margin="10dp"
+        android:textSize="32sp"
+        android:gravity="center"
         android:text="Exercise"
-        app:layout_constraintBottom_toTopOf="@+id/Home_Btn_Diet"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Home_Btn_Mood" />
+ />
 
     <Button
         android:id="@+id/Home_Btn_Diet"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:layout_margin="10dp"
+        android:textSize="32sp"
         android:text="Diet"
-        app:layout_constraintBottom_toTopOf="@+id/Home_Btn_Social"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Home_Btn_Exerxcise" />
+ />
 
     <Button
         android:id="@+id/Home_Btn_Social"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Social"
-        app:layout_constraintBottom_toTopOf="@+id/Home_Btn_Leaderboards"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Home_Btn_Diet" />
+        android:padding="10dp"
+        android:layout_margin="10dp"
+        android:textSize="32sp"
+        android:text="Social" />
 
-    <Button
-        android:id="@+id/Home_Btn_Leaderboards"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Leaderboards"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Home_Btn_Social" />
 
     <Button
         android:id="@+id/HomePage_Btn_Logout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:padding="10dp"
+        android:layout_margin="20dp"
+        android:textSize="32sp"
         android:text="Logout"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Home_Btn_Leaderboards" />
-</android.support.constraint.ConstraintLayout>
+/>
+</LinearLayout>

@@ -3,8 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/main_background_gradient"
-  >
+    android:background="@drawable/main_background_gradient">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -29,9 +28,7 @@
             android:layout_height="wrap_content"
             android:paddingBottom="20dp"
             android:entries="@array/age_array"
-            android:spinnerMode="dropdown"
-            tools:layout_editor_absoluteX="8dp"
-            tools:layout_editor_absoluteY="41dp" />
+            android:spinnerMode="dropdown" />
 
         <TextView
             android:id="@+id/Demo_TV_Marital"
@@ -40,8 +37,6 @@
             android:paddingBottom="10dp"
             android:text="@string/marital_prompt"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            tools:layout_editor_absoluteX="8dp"
-            tools:layout_editor_absoluteY="97dp"
             tools:text="@string/marital_prompt" />
 
         <Spinner
@@ -49,9 +44,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingBottom="20dp"
-            android:entries="@array/marital_array"
-            tools:layout_editor_absoluteX="8dp"
-            tools:layout_editor_absoluteY="129dp" />
+            android:entries="@array/marital_array" />
 
         <EditText
             android:id="@+id/Demo_PT_Gender"
@@ -60,22 +53,16 @@
             android:layout_marginBottom="30dp"
             android:layout_marginTop="20dp"
             android:hint="@string/gender_prompt"
-            android:inputType="textShortMessage" />
+            android:inputType="textShortMessage"
+            android:textColor="@android:color/white"
+            android:textColorHint="@android:color/white"/>
 
         <TextView
             android:id="@+id/Demo_TV_Race"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingBottom="10dp"
-            android:text="@string/race_prompt"
-            tools:text="@string/race_prompt" />
-
-        <CheckBox
-            android:id="@+id/Demo_CB_Race_6"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingBottom="10dp"
-            android:text="Other" />
+            android:text="@string/race_prompt" />
 
         <CheckBox
             android:id="@+id/Demo_CB_Race_1"
@@ -111,7 +98,15 @@
             android:layout_height="wrap_content"
             android:paddingBottom="10dp"
             android:text="White or European American"/>
+
+        <CheckBox
+            android:id="@+id/Demo_CB_Race_6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="10dp"
+            android:text="Other" />
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -123,7 +118,7 @@
             android:id="@+id/Demo_BTN_Next_2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@android:color/holo_green_light"
+            android:background="@drawable/button_background"
             android:text="Next"
             android:layout_margin="10dp"/>
     </LinearLayout>

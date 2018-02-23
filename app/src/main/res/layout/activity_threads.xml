@@ -4,10 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="match_parent"
-    tools:layout_editor_absoluteY="81dp"
     android:orientation="vertical"
     android:background="@drawable/main_background_gradient">
-
 
         <TextView
             android:id="@+id/ThreadsList_TV_Category"
@@ -16,23 +14,18 @@
             android:textAlignment="center"
             android:textSize="32sp"
             android:layout_margin="10dp"
-            android:text =" Category"
-            tools:layout_editor_absoluteY="26dp"
-
-            android:background="@drawable/rounded_corner_textview"
-            />
-
+            tools:text="Category"
+            android:background="@drawable/rounded_corner_textview"/>
 
         <Button
             android:id="@+id/ThreadsList_Btn_NewThread"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@android:color/holo_green_light"
+            android:background="@drawable/button_background"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="10dp"
             android:layout_gravity="end"
             android:text="New Thread" />
-
 
     <ScrollView
             android:layout_width="match_parent"
@@ -56,116 +49,106 @@
                     android:clickable="false"
                     android:textAlignment="viewStart"
                     android:layout_margin="@dimen/activity_horizontal_margin"
-                    android:text="This is a sample thread"
-                     />
+                    tools:text="This is a sample thread" />
 
                 <Button
                     android:id="@+id/ThreadsList_Btn_Thread2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="This is a sample thread"
+                    tools:text="This is a sample thread"
                     android:textAlignment="viewStart"
                     tools:layout_editor_absoluteY="271dp"
                     android:background="@drawable/rounded_corner_textview"
                     android:clickable="false"
-                    android:layout_margin="@dimen/activity_horizontal_margin"
-                    />
+                    android:layout_margin="@dimen/activity_horizontal_margin" />
 
                 <Button
                     android:id="@+id/ThreadsList_Btn_Thread3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="This is a sample thread"
+                    tools:text="This is a sample thread"
                     android:textAlignment="viewStart"
                     tools:layout_editor_absoluteY="367dp"
                     android:background="@drawable/rounded_corner_textview"
                     android:clickable="false"
-                    android:layout_margin="@dimen/activity_horizontal_margin"
-                    />
+                    android:layout_margin="@dimen/activity_horizontal_margin" />
 
                 <Button
                     android:id="@+id/ThreadsList_Btn_Thread4"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="This is a sample thread"
+                    tools:text="This is a sample thread"
                     android:textAlignment="viewStart"
                     tools:layout_editor_absoluteY="458dp"
                     android:background="@drawable/rounded_corner_textview"
                     android:clickable="false"
-                    android:layout_margin="@dimen/activity_horizontal_margin"
-                    />
+                    android:layout_margin="@dimen/activity_horizontal_margin" />
 
                 <Button
                     android:id="@+id/ThreadsList_Btn_Thread5"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="This is a sample thread"
+                    tools:text="This is a sample thread"
                     android:textAlignment="viewStart"
                     tools:layout_editor_absoluteY="458dp"
                     android:background="@drawable/rounded_corner_textview"
                     android:clickable="false"
-                    android:layout_margin="@dimen/activity_horizontal_margin"
-                    />
+                    android:layout_margin="@dimen/activity_horizontal_margin"/>
 
                 <Button
                     android:id="@+id/ThreadsList_Btn_Thread6"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="This is a sample thread"
+                    tools:text="This is a sample thread"
                     android:textAlignment="viewStart"
                     tools:layout_editor_absoluteY="458dp"
                     android:background="@drawable/rounded_corner_textview"
                     android:clickable="false"
-                    android:layout_margin="@dimen/activity_horizontal_margin"
-                    />
+                    android:layout_margin="@dimen/activity_horizontal_margin" />
 
                 <Button
                     android:id="@+id/ThreadsList_Btn_Thread7"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="This is a sample thread"
+                    tools:text="This is a sample thread"
                     android:textAlignment="viewStart"
                     tools:layout_editor_absoluteY="458dp"
                     android:background="@drawable/rounded_corner_textview"
                     android:clickable="false"
-                    android:layout_margin="@dimen/activity_horizontal_margin"
-                    />
+                    android:layout_margin="@dimen/activity_horizontal_margin" />
 
                 <Button
                     android:id="@+id/ThreadsList_Btn_Thread8"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="This is a sample thread"
+                    tools:text="This is a sample thread"
                     android:textAlignment="viewStart"
                     tools:layout_editor_absoluteY="458dp"
                     android:background="@drawable/rounded_corner_textview"
                     android:clickable="false"
-                    android:layout_margin="@dimen/activity_horizontal_margin"
-                    />
+                    android:layout_margin="@dimen/activity_horizontal_margin"  />
 
                 <Button
                     android:id="@+id/ThreadsList_Btn_Thread9"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="This is a sample thread"
+                    tools:text="This is a sample thread"
                     android:textAlignment="viewStart"
                     tools:layout_editor_absoluteY="458dp"
                     android:background="@drawable/rounded_corner_textview"
                     android:clickable="false"
-                    android:layout_margin="@dimen/activity_horizontal_margin"
-                    />
+                    android:layout_margin="@dimen/activity_horizontal_margin"            />
 
                 <Button
                     android:id="@+id/ThreadsList_Btn_Thread10"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="This is a sample thread"
+                    tools:text="This is a sample thread"
                     android:textAlignment="viewStart"
                     tools:layout_editor_absoluteY="458dp"
                     android:background="@drawable/rounded_corner_textview"
                     android:clickable="false"
-                    android:layout_margin="@dimen/activity_horizontal_margin"
-                    />
+                    android:layout_margin="@dimen/activity_horizontal_margin"/>
             </LinearLayout>
 
         </ScrollView>
@@ -184,7 +167,7 @@
                 android:layout_gravity="start"
                 android:clickable="false"
                 android:layout_alignParentStart="true"
-                />
+                android:background="@drawable/button_background"   />
 
             <Button
                 android:id="@+id/ThreadsList_Btn_Next"
@@ -193,6 +176,7 @@
                 android:text="Next Page"
                 android:layout_gravity="end"
                 android:layout_alignParentEnd="true"
-                />
+                android:background="@drawable/button_background" />
+
         </RelativeLayout>
 </LinearLayout>

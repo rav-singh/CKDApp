@@ -1,97 +1,103 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="CKD.Android.Mood"
-    tools:layout_editor_absoluteY="81dp">
-
+    android:background="@drawable/main_background_gradient"
+    android:orientation="vertical"
+    tools:context="CKD.Android.Mood">
 
     <TextView
         android:id="@+id/MoodText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Please Select the Emoji That best Represents your Mood"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/Mood_ImBtn_Happy"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:textColor="@android:color/white"
+        android:textSize="32sp"
+        android:textStyle="bold"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal">
+
+                <ImageButton
+                    android:id="@+id/Mood_ImBtn_Anxious"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:background="@android:color/transparent"
+                    app:srcCompat="@drawable/happy_emoji_resized" />
+
+                <ImageButton
+                    android:id="@+id/Mood_ImBtn_Depressed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    app:srcCompat="@drawable/fatigued_emoji_resized" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal">
+
+               <ImageButton
+                    android:id="@+id/Mood_ImBtn_Fatigued"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    app:srcCompat="@drawable/meh_emoji_resized" />
+
+                <ImageButton
+                    android:id="@+id/Mood_ImBtn_Happy"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    app:srcCompat="@drawable/depressed_emoji_resized" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal">
+
+                <ImageButton
+                    android:id="@+id/Mood_ImBtn_Nausea"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    app:srcCompat="@drawable/anxious_emoji_resized"/>
+
+                <ImageButton
+                    android:id="@+id/Mood_ImBtn_Flat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    app:srcCompat="@drawable/nausea_emoji_resized"/>
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 
     <Button
         android:id="@+id/Mood_Btn_Next"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/next_button"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Mood_ImBtn_Fatigued" />
+        android:textSize="32sp"
+        android:layout_gravity="end|bottom"/>
+</LinearLayout>
 
-    <ImageButton
-        android:id="@+id/Mood_ImBtn_Anxious"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/Mood_ImBtn_Depressed"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/Mood_ImBtn_Happy"
-        app:layout_constraintTop_toBottomOf="@+id/MoodText"
-        app:srcCompat="@drawable/anxious_emoji_resized" />
 
-    <ImageButton
-        android:id="@+id/Mood_ImBtn_Depressed"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/Mood_ImBtn_Nausea"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/Mood_ImBtn_Flat"
-        app:layout_constraintTop_toBottomOf="@+id/Mood_ImBtn_Anxious"
-        app:srcCompat="@drawable/depressed_emoji_resized" />
-
-    <ImageButton
-        android:id="@+id/Mood_ImBtn_Fatigued"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/Mood_Btn_Next"
-        app:layout_constraintEnd_toStartOf="@+id/Mood_ImBtn_Nausea"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Mood_ImBtn_Flat"
-        app:srcCompat="@drawable/fatigued_emoji_resized" />
-
-    <ImageButton
-        android:id="@+id/Mood_ImBtn_Happy"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/Mood_ImBtn_Flat"
-        app:layout_constraintEnd_toStartOf="@+id/Mood_ImBtn_Anxious"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/MoodText"
-        app:srcCompat="@drawable/happy_emoji_resized" />
-
-    <ImageButton
-        android:id="@+id/Mood_ImBtn_Flat"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/Mood_ImBtn_Fatigued"
-        app:layout_constraintEnd_toStartOf="@+id/Mood_ImBtn_Depressed"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Mood_ImBtn_Happy"
-        app:srcCompat="@drawable/meh_emoji_resized" />
-
-    <ImageButton
-        android:id="@+id/Mood_ImBtn_Nausea"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/Mood_Btn_Next"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/Mood_ImBtn_Fatigued"
-        app:layout_constraintTop_toBottomOf="@+id/Mood_ImBtn_Depressed"
-        app:srcCompat="@drawable/nausea_emoji_resized" />
-
-</android.support.constraint.ConstraintLayout>
