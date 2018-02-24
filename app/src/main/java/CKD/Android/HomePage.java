@@ -94,7 +94,7 @@ public class HomePage  extends AppCompatActivity {
         // UI Component
         diet_Button = findViewById(R.id.Home_Btn_Diet);
         mood_Button = findViewById(R.id.Home_Btn_Mood);
-        exercise_Button = findViewById(R.id.Home_Btn_Exerxcise);
+        exercise_Button = findViewById(R.id.Home_Btn_Exercise);
         social_Button = findViewById(R.id.Home_Btn_Social);
         logout_Button = findViewById(R.id.HomePage_Btn_Logout);
     }
