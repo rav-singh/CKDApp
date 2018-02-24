@@ -34,7 +34,8 @@ public class Thread extends AppCompatActivity
     DataSnapshot DS;
     int currentPage = 1;
     int maxPages;
-
+    //TODO Fix the XML file so that longer threads do not cause the navigation
+    //TODO buttons to go off screen
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -99,28 +100,28 @@ public class Thread extends AppCompatActivity
     {
         Button prevPage = findViewById(R.id.Thread_Btn_Prev);
         prevPage.setClickable(false);
-        prevPage.setBackgroundColor(Color.TRANSPARENT);
+        prevPage.setBackground(this.getResources().getDrawable(R.drawable.disabled_button_background));
     }
 
     private void enableNextButton()
     {
         Button nextPage = findViewById(R.id.Thread_Btn_Next);
         nextPage.setClickable(true);
-        nextPage.setBackgroundColor(Color.LTGRAY);
+        nextPage.setBackground(this.getResources().getDrawable(R.drawable.button_background));
     }
 
     private void disableNextButton()
     {
         Button nextPage = findViewById(R.id.Thread_Btn_Next);
         nextPage.setClickable(false);
-        nextPage.setBackgroundColor(Color.TRANSPARENT);
+        nextPage.setBackground(this.getResources().getDrawable(R.drawable.disabled_button_background));
     }
 
     private void enablePrevButton()
     {
         Button prevPage = findViewById(R.id.Thread_Btn_Prev);
         prevPage.setClickable(true);
-        prevPage.setBackgroundColor(Color.LTGRAY);
+        prevPage.setBackground(this.getResources().getDrawable(R.drawable.button_background));
     }
 
     private void loadNextComments(int pageNum)
@@ -342,8 +343,5 @@ public class Thread extends AppCompatActivity
             }
         });
     }
-
-
-
 
 }
