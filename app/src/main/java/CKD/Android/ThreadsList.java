@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -88,30 +89,31 @@ public class ThreadsList extends AppCompatActivity
     {
         Button nextPage = findViewById(R.id.ThreadsList_Btn_Next);
         nextPage.setClickable(true);
-        nextPage.setBackgroundColor(Color.LTGRAY);
+        nextPage.setBackground(this.getResources().getDrawable(R.drawable.button_background));;
     }
 
     private void enablePrevButton()
     {
         Button prevPage = findViewById(R.id.ThreadsList_Btn_Prev);
         prevPage.setClickable(true);
-        prevPage.setBackgroundColor(Color.LTGRAY);
+        prevPage.setBackground(this.getResources().getDrawable(R.drawable.button_background));
     }
 
     private void disableNextButton()
     {
         Button nextPage = findViewById(R.id.ThreadsList_Btn_Next);
         nextPage.setClickable(false);
-        nextPage.setBackgroundColor(Color.TRANSPARENT);
+        nextPage.setBackground(this.getResources().getDrawable(R.drawable.disabled_button_background));
     }
 
     private void disablePrevButton()
     {
         Button prevPage = findViewById(R.id.ThreadsList_Btn_Prev);
         prevPage.setClickable(false);
-        prevPage.setBackgroundColor(Color.TRANSPARENT);
+        prevPage.setBackground(this.getResources().getDrawable(R.drawable.disabled_button_background));
     }
 
+    //TODO Fix bug where Thread titles in buttons are centered and not left-aligned
     private void loadPreviousThreads(int pageNum)
     {
         int lowBound = (pageNum - 1) * 10;
@@ -134,6 +136,7 @@ public class ThreadsList extends AppCompatActivity
             activateThreads(allThreadBtnList.get(numThreads), keyList.get(i), DS);
         }
 
+        activeThreadBtnList = allThreadBtnList.subList(0, numThreads);
         reOrderLayout();
     }
 
@@ -316,6 +319,7 @@ public class ThreadsList extends AppCompatActivity
     {
         String title = (String) dataSnapshot.child(threadKey).child("title").getValue();
         thread.setText(title);
+        thread.setGravity(Gravity.LEFT|Gravity.CENTER);
         thread.setBackgroundColor(Color.LTGRAY);
     }
 }
