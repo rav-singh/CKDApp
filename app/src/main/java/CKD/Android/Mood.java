@@ -39,7 +39,7 @@ public class Mood extends AppCompatActivity
         final ImageButton depressed_btn = findViewById(R.id.Mood_ImBtn_Depressed);
         final ImageButton anxious_btn = findViewById(R.id.Mood_ImBtn_Anxious);
         final ImageButton fatigued_btn = findViewById(R.id.Mood_ImBtn_Fatigued);
-        final ImageButton flat_btn = findViewById(R.id.Mood_ImBtn_Flat);
+        final ImageButton flat_btn = findViewById(R.id.Mood_ImBtn_Meh);
         final ImageButton nausea_btn = findViewById(R.id.Mood_ImBtn_Nausea);
         final Button next_btn = findViewById(R.id.Mood_Btn_Next);
 
