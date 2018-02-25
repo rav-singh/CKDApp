@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "ckdas-f867a"
+    "default": "ckdas-f867a",
+    "admin": "ckd-admin"
   }
 }

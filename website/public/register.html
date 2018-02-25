@@ -5,6 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>CKDApp - Registration</title>
 
+    <!-- creates connection to our database -->
+    <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase.js"></script>
+    <script>
+      // Initialize Firebase
+      firebase.initializeApp({
+        apiKey: "AIzaSyDDXUPqKgP3qRTB1lxCNpjao2jFEcfkwhk",
+        authDomain: "ckd-admin.firebaseapp.com",
+        databaseURL: "https://ckd-admin.firebaseio.com",
+        projectId: "ckd-admin",
+        storageBucket: "",
+        messagingSenderId: "338960764238"
+      });
+    </script>
+
     <!-- update the version number as needed -->
     <script defer src="/__/firebase/4.9.1/firebase-app.js"></script>
     <!-- include only the Firebase features as you need -->
@@ -14,21 +28,6 @@
     <!-- <script defer src="/__/firebase/4.9.1/firebase-storage.js"></script> -->
     <!-- initialize the SDK after all desired features are loaded -->
     <script defer src="/__/firebase/init.js"></script>
-
-    <!-- creates connection to our database -->
-    <script src="https://www.gstatic.com/firebasejs/4.9.1/firebase.js"></script>
-    <script>
-      // Initialize Firebase
-      var config = {
-        apiKey: "AIzaSyBOTdPB3H_vkJjHFeK9mV6P7ValpgK36FM",
-        authDomain: "ckdas-f867a.firebaseapp.com",
-        databaseURL: "https://ckdas-f867a.firebaseio.com",
-        projectId: "ckdas-f867a",
-        storageBucket: "ckdas-f867a.appspot.com",
-        messagingSenderId: "852631298890"
-      };
-      firebase.initializeApp(config);
-    </script>
 
     <style media="screen">
       body { background: #ECEFF1; color: rgba(0,0,0,0.87); font-family: Roboto, Helvetica, Arial, sans-serif; margin: 0; padding: 0; }
@@ -75,6 +74,53 @@
       </div>
 
     </div>
+
+    <script>
+    var createdAccountThisSession = 0;
+
+      document.querySelector('#register').addEventListener('click', function(e)
+      {
+        e.preventDefault();
+        e.stopPropagation();
+        var email = document.querySelector('#email').value;
+        var password = document.querySelector('#password').value
+
+          firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION).then(function()
+          {
+            createdAccountThisSession = 1;
+            return firebase.auth().createUserWithEmailAndPassword(email, password);
+          }).catch(function(error) {
+              var errorMessage = error.message;
+              alert(errorMessage);
+          });
+      });
+
+    document.addEventListener('DOMContentLoaded', function() {
+      firebase.auth().onAuthStateChanged(function (user)
+      {
+        if (user && createdAccountThisSession == 1)
+        {
+
+          firebase.database().ref('Admins/' + firebase.auth().currentUser.uid).set({
+            Name: document.querySelector('#name').value,
+            Email: document.querySelector('#email').value,
+            Faility : document.querySelector('#facility').value
+          });
+          createdAccountThisSession = 0;
+
+          alert("Thank you for registering.\nPlease wait for your credentials to be approved before attempting to login.");
+
+          var timer = setTimeout(function() {
+            firebase.auth().signOut();
+            window.location.href = "index.html"
+          }, 1000);
+
+        }
+        else {
+        }
+      });
+    });
+    </script>
 
   </body>
 </html>

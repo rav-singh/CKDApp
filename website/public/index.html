@@ -5,30 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>CKDApp - Web Portal</title>
 
-    <!-- update the version number as needed -->
+      <!-- creates connection to our database -->
+      <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase.js"></script>
+      <script>
+        // Initialize Firebase
+        firebase.initializeApp({
+          apiKey: "AIzaSyDDXUPqKgP3qRTB1lxCNpjao2jFEcfkwhk",
+          authDomain: "ckd-admin.firebaseapp.com",
+          databaseURL: "https://ckd-admin.firebaseio.com",
+          projectId: "ckd-admin",
+          storageBucket: "",
+          messagingSenderId: "338960764238"
+        });
+      </script>
+
     <script defer src="/__/firebase/4.9.1/firebase-app.js"></script>
-    <!-- include only the Firebase features as you need -->
     <script defer src="/__/firebase/4.9.1/firebase-auth.js"></script>
     <script defer src="/__/firebase/4.9.1/firebase-database.js"></script>
     <script defer src="/__/firebase/4.9.1/firebase-messaging.js"></script>
-    <!-- <script defer src="/__/firebase/4.9.1/firebase-storage.js"></script> -->
-    <!-- initialize the SDK after all desired features are loaded -->
     <script defer src="/__/firebase/init.js"></script>
-
-    <!-- creates connection to our database -->
-    <script src="https://www.gstatic.com/firebasejs/4.9.1/firebase.js"></script>
-    <script>
-      // Initialize Firebase
-      var config = {
-        apiKey: "AIzaSyBOTdPB3H_vkJjHFeK9mV6P7ValpgK36FM",
-        authDomain: "ckdas-f867a.firebaseapp.com",
-        databaseURL: "https://ckdas-f867a.firebaseio.com",
-        projectId: "ckdas-f867a",
-        storageBucket: "ckdas-f867a.appspot.com",
-        messagingSenderId: "852631298890"
-      };
-      firebase.initializeApp(config);
-    </script>
 
     <style media="screen">
       body { background: #ECEFF1; color: rgba(0,0,0,0.87); font-family: Roboto, Helvetica, Arial, sans-serif; margin: 0; padding: 0; }
@@ -67,14 +62,7 @@
           <button id="sign-out">Sign Out</button>
         </div>
       </form>
-
-      <!-- Open Hosting Documentation Stuffs
-      <br>
-        <a target="_blank" href="https://firebase.google.com/docs/hosting/">Open Hosting Documentation</a>
-      -->
     </div>
-    <p id="load">Firebase SDK Loading&hellip;</p>
-
     <script>
       // logs user in
       document.querySelector('#sign-in').addEventListener('click', function(e)
@@ -84,9 +72,8 @@
         var email = document.querySelector('#email').value;
         var password = document.querySelector('#password').value
 
-          firebase.auth().signInWithEmailAndPassword(email, password).then(function(){
-            window.location.href = "404.html";
-
+          firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION).then(function() {
+            return firebase.auth().signInWithEmailAndPassword(email, password);
           }).catch(function(error) {
             var errorMessage = error.message;
             alert(errorMessage);
@@ -97,6 +84,7 @@
       {
         e.preventDefault();   // if we dont have these two lines,
         e.stopPropagation();  // the browser will entirely skip over the html file
+        firebase.auth().signOut();
         window.location.href = "register.html";
       });
       // logs user out
@@ -105,26 +93,27 @@
         e.preventDefault();
         e.stopPropagation();
         firebase.auth().signOut();
+        alert("You have been signed out.");
       });
-
     </script>
 
     <script>
       document.addEventListener('DOMContentLoaded', function() {
+        firebase.auth().onAuthStateChanged(function (user)
+        {
+          if (user)
+          {
+            window.location.href = "data.html";
+          }
+          else {
+          }
+        });
+
         // // The Firebase SDK is initialized and available here!
         // firebase.auth().onAuthStateChanged(user => { });
         // firebase.database().ref('/path/to/ref').on('value', snapshot => { });
         // firebase.messaging().requestPermission().then(() => { });
         // firebase.storage().ref('/path/to/ref').getDownloadURL().then(() => { });
-
-        try {
-          let app = firebase.app();
-          let features = ['auth', 'database', 'messaging', 'storage'].filter(feature => typeof app[feature] === 'function');
-          document.getElementById('load').innerHTML = `Firebase SDK loaded with ${features.join(', ')}`;
-        } catch (e) {
-          console.error(e);
-          document.getElementById('load').innerHTML = 'Error loading the Firebase SDK, check the console.';
-        }
       });
     </script>
   </body>
