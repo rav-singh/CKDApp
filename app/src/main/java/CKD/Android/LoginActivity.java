@@ -47,13 +47,14 @@ public class LoginActivity extends AppCompatActivity
                 String UserEmail = Login_Email.getText().toString();
                 String UserPassword= Login_Password.getText().toString();
 
+                // Makes sure user does not leave either field empty
                 if(fieldsAreEmpty(UserEmail,UserPassword))
-                    {
+                {
                         Toast.makeText(LoginActivity.this,
                                 "Please Fill in Both Text Fields",
                                 Toast.LENGTH_LONG).show();
                         return;
-                    }
+                }
 
                 else
                 {
@@ -71,6 +72,7 @@ public class LoginActivity extends AppCompatActivity
                                 switchPages();
                             }
                             // User unable to register_class user to database
+                            // User is prompted with the appropriate error message
                             else
                             {
                                 String error_Message = task.getException().toString();
@@ -182,6 +184,11 @@ public class LoginActivity extends AppCompatActivity
         {
             Toast.makeText(LoginActivity.this,
                     "Incorrect Email!", Toast.LENGTH_LONG).show();
+        }
+        else if(error_Message.contains("no user record"))
+        {
+            Toast.makeText(LoginActivity.this,
+                    "Sorry there is no account registered to that email", Toast.LENGTH_LONG).show();
         }
         else
         {
