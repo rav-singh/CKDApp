@@ -31,22 +31,13 @@ public class Demographics_1 extends AppCompatActivity
         final EditText ActivityLevel = findViewById(R.id.Demo_TF_ActivityL);
         final Button Register = findViewById(R.id.Demo_Btn_Next_1);
 
-        //TODO Verify that the email and confirm email are the same
+
         //TODO Verify that the email matches the general convention of [a-zA-Z0-9]@[a-z].[a-z]
-        //TODO Make user do Email Verfication
+        //TODO Make user do Email Verification
         //TODO Push Activity Level onto a different page. It's placement here is awkward.
 
-        // Fills in Name and Email Data for profile
         // May be excessive and might simplify by removing name from Register Page
          Email.setText(AppData.cur_user.getEmail());
-
-
-       /*   //TODO Used for debugging
-         Name.setText("Matt");
-         ConfirmEmail.setText(AppData.cur_user.getEmail());
-         Phone.setText("123");
-         ActivityLevel.setText("123");
-        */
 
         // OnClick Listener that redirects to homePage
         Register.setOnClickListener(new View.OnClickListener()
@@ -60,32 +51,56 @@ public class Demographics_1 extends AppCompatActivity
                 String activityLevel = ActivityLevel.getText().toString();
                 String confirmEmail = ConfirmEmail.getText().toString();
 
-                if(validEmail(userEmail, confirmEmail))
+                // If user does not match the email typed on the previous page
+                // they are prompted with an error message and the textView
+                // becomes editable
+                if(!emailsMatch(userEmail, confirmEmail))
                 {
-                    // Adds users input into Current_user Class in AppData
-                    addUserClassValues(userName,userEmail, phoneNumber, activityLevel);
-
-                    // Adds User to RealTime Database under Users Node
-                 //   addUserToDatabase(userName, userEmail, phoneNumber, activityLevel, AppData.cur_user.getUID());
-                    // Directs User to HomePage
-                    switchPages();
-                }
-                else
-                {
-                    // Because the user entered an invalid email they can now edit the email
-                    // they typed in on the previous page
-                    //TODO update the users email they registered with mAuth.currentuser.setEmail();
+                    Toast.makeText(Demographics_1.this,
+                            "Emails do not Match!",
+                            Toast.LENGTH_LONG).show();
                     Email.setEnabled(true);
-
+                    return;
                 }
+
+                if(!validEmail(userEmail))
+                {
+                    Toast.makeText(Demographics_1.this,
+                            "Please enter a valid Email!",
+                            Toast.LENGTH_LONG).show();
+                    return;
+                }
+
+                if(!allFieldsEntered(userEmail,userName,phoneNumber,activityLevel))
+                {
+                    Toast.makeText(Demographics_1.this,
+                            "Please fill in all data entry fields to continue!",
+                            Toast.LENGTH_LONG).show();
+                    return;
+                }
+
+                // Adds users input into Current_user Class in AppData
+                addUserClassValues(userName,userEmail, phoneNumber, activityLevel);
+
+                // Directs User to HomePage
+                switchPages();
             }
         });
-
     }
 
-    private boolean validEmail(String userEmail, String confirmEmail)
+    private boolean allFieldsEntered(String userEmail, String userName, String phoneNumber, String activityLevel)
     {
-        return  userEmail.equals(confirmEmail);
+        return !(userEmail.isEmpty() || userName.isEmpty() || phoneNumber.isEmpty() || activityLevel.isEmpty());
+    }
+
+    private boolean emailsMatch(String userEmail, String confirmEmail)
+    {
+        return userEmail.equals(confirmEmail);
+    }
+
+    private boolean validEmail(String userEmail)
+    {
+        return  userEmail.contains("@") && userEmail.contains(".com");
     }
 
     private void addUserClassValues(String  userName,String userEmail, String phoneNumber, String activityLevel)
@@ -98,7 +113,7 @@ public class Demographics_1 extends AppCompatActivity
 
     private void switchPages()
     {
-        Intent launchActivity1= new Intent(CKD.Android.Demographics_1.this,Demographics_3.class);
+        Intent launchActivity1= new Intent(CKD.Android.Demographics_1.this, Demographics_3.class);
         startActivity(launchActivity1);
     }
 
