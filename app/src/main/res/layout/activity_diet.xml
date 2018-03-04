@@ -9,37 +9,104 @@
 
 
     <TextView
-        android:id="@+id/Diet_TF_Title"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:text="DIET PAGE"
-        android:textAlignment="center"
-        android:textSize="30dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+        android:id="@+id/textView"
+        android:layout_width="140dp"
+        android:layout_height="47dp"
+        android:layout_marginBottom="275dp"
+        android:layout_marginEnd="48dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="51dp"
+        android:text="Breakfast"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/textView4"
+        app:layout_constraintEnd_toStartOf="@+id/addBreakfast_btn"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.494" />
-
-    <Button
-        android:id="@+id/sendHttp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="85dp"
-        android:text="Send Http "
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/jsonResponse"
-        android:layout_width="327dp"
-        android:layout_height="277dp"
-        android:text="TextView"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        tools:layout_editor_absoluteY="201dp" />
+        android:id="@+id/textView2"
+        android:layout_width="133dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="44dp"
+        android:layout_marginStart="16dp"
+        android:text="Dinner"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/textView"
+        app:layout_constraintEnd_toStartOf="@+id/addDinner_btn"
+        app:layout_constraintHorizontal_bias="0.8"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintVertical_bias="0.451" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="131dp"
+        android:layout_height="45dp"
+        android:layout_marginBottom="262dp"
+        android:layout_marginEnd="45dp"
+        android:layout_marginStart="16dp"
+        android:text="Lunch"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/addLunch_btn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="139dp"
+        android:layout_height="39dp"
+        android:layout_marginBottom="95dp"
+        android:layout_marginEnd="44dp"
+        android:layout_marginStart="16dp"
+        android:text="Snacks"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/textView2"
+        app:layout_constraintEnd_toStartOf="@+id/addSnacks_btn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <Button
+        android:id="@+id/addBreakfast_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="47dp"
+        android:layout_marginTop="80dp"
+        android:text="Add"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/addLunch_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="51dp"
+        android:layout_marginEnd="47dp"
+        android:text="Add"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView3"
+        app:layout_constraintTop_toTopOf="@+id/textView3" />
+
+    <Button
+        android:id="@+id/addDinner_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="47dp"
+        android:text="Add"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView2"
+        app:layout_constraintTop_toTopOf="@+id/textView2" />
+
+    <Button
+        android:id="@+id/addSnacks_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="116dp"
+        android:layout_marginEnd="47dp"
+        android:text="Add"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView4" />
 </android.support.constraint.ConstraintLayout>
