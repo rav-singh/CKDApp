@@ -9,14 +9,15 @@
       <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase.js"></script>
       <script>
         // Initialize Firebase
-        firebase.initializeApp({
-          apiKey: "AIzaSyDDXUPqKgP3qRTB1lxCNpjao2jFEcfkwhk",
-          authDomain: "ckd-admin.firebaseapp.com",
-          databaseURL: "https://ckd-admin.firebaseio.com",
-          projectId: "ckd-admin",
-          storageBucket: "",
-          messagingSenderId: "338960764238"
-        });
+        var config = {
+          apiKey: "AIzaSyBOTdPB3H_vkJjHFeK9mV6P7ValpgK36FM",
+          authDomain: "ckdas-f867a.firebaseapp.com",
+          databaseURL: "https://ckdas-f867a.firebaseio.com",
+          projectId: "ckdas-f867a",
+          storageBucket: "ckdas-f867a.appspot.com",
+          messagingSenderId: "852631298890"
+        };
+        firebase.initializeApp(config);
       </script>
 
     <script defer src="/__/firebase/4.9.1/firebase-app.js"></script>
@@ -103,7 +104,9 @@
         {
           if (user)
           {
-            window.location.href = "data.html";
+            var timer = setTimeout(function() {
+              window.location.href = "data.html" + "?uid=" + user.uid;
+            }, 1000);
           }
           else {
           }
