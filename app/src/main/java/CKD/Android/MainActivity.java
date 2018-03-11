@@ -34,24 +34,13 @@ public class MainActivity extends AppCompatActivity {
 
         Button Register = findViewById(R.id.Main_Btn_Register);
 
+        isUserLoggedIn();
+
         // OnClick Listener redirects to Login Page
         Login.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-
-                // Check to see if the User is logged in. If they are bring them to the home page
-                if(FirebaseAuth.getInstance().getCurrentUser() != null)
-                {
-                    updateFirebaseInAppData();
-                    loadUserClass();
-
-                    Intent launchActivity1 = new Intent(MainActivity.this, HomePage.class);
-                    startActivity(launchActivity1);
-                }
-                else {
-                    Intent launchActivity1 = new Intent(MainActivity.this, LoginActivity.class);
-                    startActivity(launchActivity1);
-                }
-
+                Intent launchActivity1 = new Intent(MainActivity.this, LoginActivity.class);
+                startActivity(launchActivity1);
             }
         });
 
@@ -64,6 +53,18 @@ public class MainActivity extends AppCompatActivity {
         });
 
         }
+
+    private void isUserLoggedIn()
+    {
+        if(FirebaseAuth.getInstance().getCurrentUser() != null)
+        {
+            updateFirebaseInAppData();
+            loadUserClass();
+
+            Intent launchActivity1 = new Intent(MainActivity.this, HomePage.class);
+            startActivity(launchActivity1);
+        }
+    }
 
     private void loadUserClass()
     {
