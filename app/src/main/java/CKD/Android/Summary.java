@@ -66,6 +66,8 @@ public class Summary extends AppCompatActivity
             public void onClick(View v)
             {
                 addPatientsUIDToSelectedAdmins();
+                Intent launchActivity1 = new Intent(Summary.this, HomePage.class);
+                startActivity(launchActivity1);
             }
         });
 
