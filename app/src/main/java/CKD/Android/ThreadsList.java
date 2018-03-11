@@ -96,21 +96,21 @@ public class ThreadsList extends AppCompatActivity
     {
         Button prevPage = findViewById(R.id.ThreadsList_Btn_Prev);
         prevPage.setClickable(true);
-       // prevPage.setBackground(this.getResources().getDrawable(R.drawable.button_background));
+        prevPage.setBackground(this.getResources().getDrawable(R.drawable.button_background));
     }
 
     private void disableNextButton()
     {
         Button nextPage = findViewById(R.id.ThreadsList_Btn_Next);
         nextPage.setClickable(false);
-        //nextPage.setBackground(this.getResources().getDrawable(R.drawable.disabled_button_background));
+        nextPage.setBackground(this.getResources().getDrawable(R.drawable.disabled_button_background));
     }
 
     private void disablePrevButton()
     {
         Button prevPage = findViewById(R.id.ThreadsList_Btn_Prev);
         prevPage.setClickable(false);
-        //prevPage.setBackground(this.getResources().getDrawable(R.drawable.disabled_button_background));
+        prevPage.setBackground(this.getResources().getDrawable(R.drawable.disabled_button_background));
     }
 
     //TODO Fix bug where Thread titles in buttons are centered and not left-aligned
