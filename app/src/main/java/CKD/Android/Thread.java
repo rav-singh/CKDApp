@@ -100,28 +100,28 @@ public class Thread extends AppCompatActivity
     {
         Button prevPage = findViewById(R.id.Thread_Btn_Prev);
         prevPage.setClickable(false);
-        //prevPage.setBackground(this.getResources().getDrawable(R.drawable.disabled_button_background));
+        prevPage.setBackground(this.getResources().getDrawable(R.drawable.disabled_button_background));
     }
 
     private void enableNextButton()
     {
         Button nextPage = findViewById(R.id.Thread_Btn_Next);
         nextPage.setClickable(true);
-        //nextPage.setBackground(this.getResources().getDrawable(R.drawable.button_background));
+        nextPage.setBackground(this.getResources().getDrawable(R.drawable.button_background));
     }
 
     private void disableNextButton()
     {
         Button nextPage = findViewById(R.id.Thread_Btn_Next);
         nextPage.setClickable(false);
-        //nextPage.setBackground(this.getResources().getDrawable(R.drawable.disabled_button_background));
+        nextPage.setBackground(this.getResources().getDrawable(R.drawable.disabled_button_background));
     }
 
     private void enablePrevButton()
     {
         Button prevPage = findViewById(R.id.Thread_Btn_Prev);
         prevPage.setClickable(true);
-     //   prevPage.setBackground(this.getResources().getDrawable(R.drawable.button_background));
+        prevPage.setBackground(this.getResources().getDrawable(R.drawable.button_background));
     }
 
     private void loadNextComments(int pageNum)
