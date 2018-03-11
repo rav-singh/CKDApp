@@ -128,7 +128,7 @@ public class Mood extends AppCompatActivity
             private void addDateAndMoodsToDB()
             {
                 //TODO Need to make sure that the date still works appropriately when past the 10th
-                String date = new SimpleDateFormat("YYYY-MM-dd HH:mm:ss", Locale.getDefault()).format(new Date());
+                String date = new SimpleDateFormat("YYYY-MM-dd", Locale.getDefault()).format(new Date());
                 String UID = FirebaseAuth.getInstance().getCurrentUser().getUid();
                 String moods = selectedMoods.toString();
 
