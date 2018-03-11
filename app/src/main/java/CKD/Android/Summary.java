@@ -25,11 +25,27 @@ import java.util.List;
 
 public class Summary extends AppCompatActivity
 {
+    Button  admin1, admin2,
+            admin3, admin4,
+            admin5, export;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_summary);
 
+        initializeButtons();
+
+
+    }
+
+    private void initializeButtons()
+    {
+        admin1 = findViewById(R.id.Summary_Admin1);
+        admin2 = findViewById(R.id.Summary_Admin2);
+        admin3 = findViewById(R.id.Summary_Admin3);
+        admin4 = findViewById(R.id.Summary_Admin4);
+        admin5 = findViewById(R.id.Summary_Admin5);
+        export = findViewById(R.id.Summary_Export);
     }
 }
