@@ -18,6 +18,7 @@ public class HomePage  extends AppCompatActivity {
                    exercise_Button,
                    mood_Button,
                    social_Button,
+                   summary_Button,
                    logout_Button;
 
     @Override
@@ -73,6 +74,16 @@ public class HomePage  extends AppCompatActivity {
             }
         });
 
+        summary_Button.setOnClickListener(new View.OnClickListener()
+        {
+
+            public void onClick(View v)
+            {
+                Intent launchActivity1=
+                        new Intent(CKD.Android.HomePage.this,Summary.class);
+                startActivity(launchActivity1);
+            }
+        });
 
         logout_Button.setOnClickListener(new View.OnClickListener()
         {
@@ -96,6 +107,7 @@ public class HomePage  extends AppCompatActivity {
         mood_Button = findViewById(R.id.Home_Btn_Mood);
         exercise_Button = findViewById(R.id.Home_Btn_Exercise);
         social_Button = findViewById(R.id.Home_Btn_Social);
+        summary_Button = findViewById(R.id.Home_Btn_Summary);
         logout_Button = findViewById(R.id.HomePage_Btn_Logout);
     }
 }
