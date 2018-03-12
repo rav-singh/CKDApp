@@ -68,4 +68,18 @@
     <string name="present_health_prompt">How would you rate your current health (1 = Very bad 5 = Very Good</string>
     <string name="comorbidities_prompt">Please select which of the following conditions you have had or do have</string>
 
+    <string-array name="activity_array">
+        <item>Select Activity Level</item>
+        <item>1 (Very Inactive)</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10 (Very Active)</item>
+        </string-array>
+
 </resources>
