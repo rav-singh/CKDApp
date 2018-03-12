@@ -34,9 +34,7 @@ public class Demographics_3 extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_demographics_3);
 
-        final TextView educationPrompt = findViewById(R.id.Demo3_TV_EducationPrompt);
         final Spinner userEducation = findViewById(R.id.Demo3_SPN_Education);
-        final TextView workPrompt = findViewById(R.id.Demo3_TV_WorkPrompt);
         final Spinner userWork = findViewById(R.id.Demo3_SPN_Work);
         final CheckBox health1 = findViewById(R.id.Demo3_CB_Health_1);
         final CheckBox health2 = findViewById(R.id.Demo3_CB_Health_2);
@@ -68,6 +66,22 @@ public class Demographics_3 extends AppCompatActivity
                 else
                 {
                     errorNoHealthSelected();
+                    return;
+                }
+                //TODO Ask Valenti if they should have option
+                if(selectedEducation.contains("option"))
+                {
+                    Toast.makeText(Demographics_3.this,
+                            "Please select your highest level of education",
+                            Toast.LENGTH_LONG).show();
+                    return;
+                }
+
+                if(selectedWork.contains("option"))
+                {
+                    Toast.makeText(Demographics_3.this,
+                            "Please select your current work status",
+                            Toast.LENGTH_LONG).show();
                     return;
                 }
 
