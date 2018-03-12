@@ -8,6 +8,7 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,7 +29,7 @@ public class Demographics_1 extends AppCompatActivity
         final EditText Email =  findViewById(R.id.Demo_TF_Email);
         final EditText ConfirmEmail = findViewById(R.id.Demo_TF_Email_Confirm);
         final EditText Phone = findViewById(R.id.Demo_TF_Phone);
-        final EditText ActivityLevel = findViewById(R.id.Demo_TF_ActivityL);
+        final Spinner ActivityLevel = findViewById(R.id.Demo_Spn_ActivityL);
         final Button Register = findViewById(R.id.Demo_Btn_Next_1);
 
 
@@ -48,8 +49,13 @@ public class Demographics_1 extends AppCompatActivity
                 String userName = Name.getText().toString();
                 String userEmail = Email.getText().toString();
                 String phoneNumber = Phone.getText().toString();
-                String activityLevel = ActivityLevel.getText().toString();
+                String activityLevel = (String) ActivityLevel.getSelectedItem();
                 String confirmEmail = ConfirmEmail.getText().toString();
+
+                if(activityLevel.contains("Inactive"))
+                    activityLevel = "1";
+                if(activityLevel.contains("Active"))
+                    activityLevel = "10";
 
                 // If user does not match the email typed on the previous page
                 // they are prompted with an error message and the textView
@@ -90,7 +96,7 @@ public class Demographics_1 extends AppCompatActivity
 
     private boolean allFieldsEntered(String userEmail, String userName, String phoneNumber, String activityLevel)
     {
-        return !(userEmail.isEmpty() || userName.isEmpty() || phoneNumber.isEmpty() || activityLevel.isEmpty());
+        return !(userEmail.isEmpty() || userName.isEmpty() || phoneNumber.isEmpty() || activityLevel.contains("Select"));
     }
 
     private boolean emailsMatch(String userEmail, String confirmEmail)
