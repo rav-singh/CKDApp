@@ -16,50 +16,109 @@
         android:layout_marginBottom="20dp"
         android:background="@drawable/rounded_corner_textview"/>
 
-    <Button
-        android:id="@+id/Summary_Admin1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:text="Admin Name"
-        android:padding="5dp"
-        android:layout_margin="5dp"
-        android:background="@drawable/rounded_corner_textview"/>
 
-    <Button
-        android:id="@+id/Summary_Admin2"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:text="Admin Name"
-        android:padding="5dp"
-        android:layout_margin="5dp"
-        android:background="@drawable/rounded_corner_textview"/>
+        android:layout_height="250dp">
 
-    <Button
-        android:id="@+id/Summary_Admin3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:text="Admin Name"
-        android:padding="5dp"
-        android:layout_margin="5dp"
-        android:background="@drawable/rounded_corner_textview"/>
+        <LinearLayout
+            android:id ="@+id/Summary_AdminListView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-    <Button
-        android:id="@+id/Summary_Admin4"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:text="Admin Name"
-        android:padding="5dp"
-        android:layout_margin="5dp"
-        android:background="@drawable/rounded_corner_textview"/>
+            <Button
+                android:id="@+id/Summary_Admin1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:text="Admin Name"
+                android:padding="5dp"
+                android:layout_margin="5dp"
+                android:background="@drawable/rounded_corner_textview"/>
 
-    <Button
-        android:id="@+id/Summary_Admin5"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:text="Admin Name"
-        android:padding="5dp"
-        android:layout_margin="5dp"
-        android:background="@drawable/rounded_corner_textview"/>
+            <Button
+                android:id="@+id/Summary_Admin2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:text="Admin Name"
+                android:padding="5dp"
+                android:layout_margin="5dp"
+                android:background="@drawable/rounded_corner_textview"/>
+
+            <Button
+                android:id="@+id/Summary_Admin3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:text="Admin Name"
+                android:padding="5dp"
+                android:layout_margin="5dp"
+                android:background="@drawable/rounded_corner_textview"/>
+
+            <Button
+                android:id="@+id/Summary_Admin4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:text="Admin Name"
+                android:padding="5dp"
+                android:layout_margin="5dp"
+                android:background="@drawable/rounded_corner_textview"/>
+
+            <Button
+                android:id="@+id/Summary_Admin5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:text="Admin Name"
+                android:padding="5dp"
+                android:layout_margin="5dp"
+                android:background="@drawable/rounded_corner_textview"/>
+
+            <Button
+                android:id="@+id/Summary_Admin6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:text="Admin Name"
+                android:padding="5dp"
+                android:layout_margin="5dp"
+                android:background="@drawable/rounded_corner_textview"/>
+
+            <Button
+                android:id="@+id/Summary_Admin7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:text="Admin Name"
+                android:padding="5dp"
+                android:layout_margin="5dp"
+                android:background="@drawable/rounded_corner_textview"/>
+
+            <Button
+                android:id="@+id/Summary_Admin8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:text="Admin Name"
+                android:padding="5dp"
+                android:layout_margin="5dp"
+                android:background="@drawable/rounded_corner_textview"/>
+
+            <Button
+                android:id="@+id/Summary_Admin9"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:text="Admin Name"
+                android:padding="5dp"
+                android:layout_margin="5dp"
+                android:background="@drawable/rounded_corner_textview"/>
+
+            <Button
+                android:id="@+id/Summary_Admin10"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:text="Admin Name"
+                android:padding="5dp"
+                android:layout_margin="5dp"
+                android:background="@drawable/rounded_corner_textview"/>
+
+        </LinearLayout>
+    </ScrollView>
 
     <Button
         android:id="@+id/Summary_Export"
