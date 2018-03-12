@@ -56,10 +56,13 @@ public class Demographics_2 extends AppCompatActivity
                 String _Age = userAge.getSelectedItem().toString();
                 String _Marital = userMarital.getSelectedItem().toString();
                 String _Gender = userGender.getText().toString();
-                String _Race = "";
 
                 collectSelectedRaces();
 
+                if(_Gender.contains("my"))
+                {
+                    _Gender = "User did not enter gender";
+                }
                 // Adds users input into Current_user Class in AppData
                 addUserClassValues(_Age, _Marital, _Gender, raceList);
 
@@ -68,7 +71,6 @@ public class Demographics_2 extends AppCompatActivity
                 createUserAuth(AppData.cur_user.getEmail(),
                         AppData.cur_user.getPassword());
 
-                // Adds User to RealTime Database under Users Node
 
 
                 // Directs User to HomePage
@@ -149,6 +151,7 @@ public class Demographics_2 extends AppCompatActivity
                                 AppData.setFirebaseUser(Authenticator.getCurrentUser());
                                 AppData.cur_user.setUID(AppData.firebaseUser.getUid());
                                 AppData.cur_user.clearPassword();
+
                                 addCurrentUserToDatabase(AppData.cur_user);
                             }
                             // User unable to register_class user to database
