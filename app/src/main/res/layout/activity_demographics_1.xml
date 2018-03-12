@@ -60,15 +60,16 @@
                 android:textSize="30sp"
                 android:background="@drawable/rounded_corner_textview"/>
 
-            <EditText
-                android:id="@+id/Demo_TF_ActivityL"
+            <Spinner
+                android:id="@+id/Demo_Spn_ActivityL"
                 android:layout_width="match_parent"
-                android:layout_margin="20dp"
                 android:layout_height="wrap_content"
-                android:hint="Activity Level"
-                android:inputType="text"
-                android:textSize="30sp"
-                android:background="@drawable/rounded_corner_textview"/>
+                android:entries="@array/activity_array"
+                android:layout_margin="20dp"
+                android:textColor="@android:color/black"
+                android:spinnerMode="dropdown"
+                android:theme="@style/Spinner1" />
+
         </LinearLayout>
     </ScrollView>
 

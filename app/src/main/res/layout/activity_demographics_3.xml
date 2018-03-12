@@ -23,9 +23,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:entries="@array/education_array"
-        android:spinnerMode="dropdown"
         android:layout_margin="20dp"
-        android:textColor="@android:color/white"/>
+        android:textColor="@android:color/black"
+        android:spinnerMode="dropdown"
+        android:theme="@style/Spinner2"/>
 
     <TextView
         android:id="@+id/Demo3_TV_WorkPrompt"
@@ -38,11 +39,13 @@
 
     <Spinner
         android:id="@+id/Demo3_SPN_Work"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:entries="@array/work_array"
         android:layout_margin="20dp"
-        android:textColor="@android:color/white"/>
+        android:textColor="@android:color/black"
+        android:spinnerMode="dropdown"
+        android:theme="@style/Spinner2"/>
 
     <TextView
         android:id="@+id/Demo3_TV_HealthPrompt"
