@@ -26,6 +26,7 @@
         <activity android:name=".Demographics_3" />
         <activity android:name=".Demographics_4" />
         <activity android:name=".Mood" />
+        <activity android:name=".AppetiteAndFatigue" />
         <activity android:name=".Exercise" />
         <activity android:name=".Diet" />
         <activity android:name=".Leaderboards" />
