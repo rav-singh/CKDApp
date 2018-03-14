@@ -82,4 +82,22 @@
         <item>10 (Very Active)</item>
         </string-array>
 
+    <string-array name="appetite_array">
+        <item>Select Appetite</item>
+        <item>Good Appetite</item>
+        <item>Great Appetite</item>
+        <item>Average Appetite</item>
+        <item>Bad Appetite</item>
+        <item>No Appetite</item>
+    </string-array>
+
+    <string-array name="fatigue_array">
+        <item>Select fatigue</item>
+        <item>Tired</item>
+        <item>Not Tired</item>
+        <item>Really Tired</item>
+        <item>Really Not Tired</item>
+        <item>Great!</item>
+    </string-array>
+
 </resources>
