@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/main_background_gradient"
+    android:orientation="vertical">
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_corner_textview"
+        android:text="How is your appetite today?"
+        android:textSize="24sp"
+        android:textStyle="bold"/>
+
+    <Spinner
+        android:id="@+id/app_SPN_appetite"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:entries="@array/appetite_array"
+        android:layout_margin="20dp"
+        android:textColor="@android:color/black"
+        android:spinnerMode="dropdown"
+        android:theme="@style/Spinner2"  />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_corner_textview"
+        android:text="How are your fatigue levels today?"
+        android:textSize="24sp"
+        android:textStyle="bold"/>
+
+    <Spinner
+        android:id="@+id/app_SPN_fatigue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:entries="@array/fatigue_array"
+        android:layout_margin="20dp"
+        android:textColor="@android:color/black"
+        android:spinnerMode="dropdown"
+        android:theme="@style/Spinner2"  />
+
+    <Button
+        android:id="@+id/app_Btn_Next"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_background"
+        android:text="Next"
+        android:textSize="24sp"/>
+
+
+</LinearLayout>
