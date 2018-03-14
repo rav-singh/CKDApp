@@ -9,10 +9,9 @@
     tools:context="CKD.Android.Mood">
 
     <TextView
-        android:id="@+id/MoodText"
+        android:id="@+id/Mood_TV_MoodPrompt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Please Select the Emoji That best Represents your Mood"
         android:textColor="@android:color/white"
         android:textSize="32sp"
         android:textStyle="bold"/>
