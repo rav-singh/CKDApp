@@ -19,43 +19,61 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 
 public class Mood extends AppCompatActivity
 {
+    final Calendar cal = Calendar.getInstance();
+    Map<ImageButton,String> imageButtonsMap  = new HashMap<>();
+
+    final List<String> selectedMoods = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_mood);
 
-        final List<String> selectedMoods = new ArrayList<>();
-
-        // UI Components
-        //TODO Add alternate images in resources file
-        final ImageButton happy_btn = findViewById(R.id.Mood_ImBtn_Happy);
-        final ImageButton depressed_btn = findViewById(R.id.Mood_ImBtn_Depressed);
-        final ImageButton anxious_btn = findViewById(R.id.Mood_ImBtn_Anxious);
-        final ImageButton fatigued_btn = findViewById(R.id.Mood_ImBtn_Fatigued);
-        final ImageButton flat_btn = findViewById(R.id.Mood_ImBtn_Meh);
-        final ImageButton nausea_btn = findViewById(R.id.Mood_ImBtn_Nausea);
         final Button next_btn = findViewById(R.id.Mood_Btn_Next);
 
+        initializeImageButtons();
 
-        happy_btn.setOnClickListener(new View.OnClickListener()
+        for(ImageButton ib : imageButtonsMap.keySet())
+            setOnClickListeners(ib);
+
+        next_btn.setOnClickListener(new View.OnClickListener()
         {
             public void onClick(View v)
             {
+                for(ImageButton ib : imageButtonsMap.keySet())
+                    checkForSelectedMoods(ib);
+
+                addDateAndMoodsToDB();
+
+                Intent launchActivity1= new Intent(
+                        CKD.Android.Mood.this,AppetiteAndFatigue.class);
+                startActivity(launchActivity1);
+
+            }
+        });
+    }
+
+    private void setOnClickListeners(final ImageButton ib)
+    {
+        ib.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
                 //When the user Clicks on the image it either selects it or de-selects it
                 //based on previous state
-                happy_btn.setSelected(!happy_btn.isSelected());
-
-                setBackgroundOnSelection(happy_btn);
-               }
+                ib.setSelected(!ib.isSelected());
+                setBackgroundOnSelection(ib);
+            }
         });
-
+    }
+        /*
         depressed_btn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v)
             {
@@ -111,53 +129,7 @@ public class Mood extends AppCompatActivity
             }
         });
 
-        next_btn.setOnClickListener(new View.OnClickListener()
-        {
-            public void onClick(View v)
-            {
-                checkForSelectedMoods();
-
-                addDateAndMoodsToDB();
-
-                Intent launchActivity1= new Intent(
-                        CKD.Android.Mood.this,HomePage.class);
-                startActivity(launchActivity1);
-
-            }
-
-            private void addDateAndMoodsToDB()
-            {
-                //TODO Need to make sure that the date still works appropriately when past the 10th
-                String date = new SimpleDateFormat("YYYY-MM-dd", Locale.getDefault()).format(new Date());
-                String UID = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                String moods = selectedMoods.toString();
-
-                //Grabs references to the Root node and Users Node
-                FirebaseDatabase db = FirebaseDatabase.getInstance();
-
-                // Creates a Mood Child Node under Data
-                // Creates a UID Child Node under Mood
-
-                DatabaseReference Data_node = db.getReference("Data");
-                DatabaseReference Mood_node = Data_node.child("Mood");
-                DatabaseReference UID_node = Mood_node.child(UID);
-
-                UID_node.child(date).setValue(moods);
-            }
-
-            private void checkForSelectedMoods()
-            {
-                if(happy_btn.isSelected()) selectedMoods.add("Happy");
-                if(anxious_btn.isSelected()) selectedMoods.add("Anxious");
-                if(fatigued_btn.isSelected()) selectedMoods.add("Fatigued");
-                if(depressed_btn.isSelected()) selectedMoods.add("Depressed");
-                if(nausea_btn.isSelected()) selectedMoods.add("Nausea");
-                if(flat_btn.isSelected()) selectedMoods.add("Flat");
-            }
-        });
-
-
-    }
+    } */
 
 
     private void setBackgroundOnSelection(ImageButton button)
@@ -168,4 +140,54 @@ public class Mood extends AppCompatActivity
             button.setBackgroundColor(Color.TRANSPARENT);
     }
 
+    private Date yesterday()
+    {
+        final Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.DATE, -1);
+        return cal.getTime();
+    }
+
+    private void addDateAndMoodsToDB()
+    {
+        String date = new SimpleDateFormat("YYYY-MM-dd", Locale.getDefault()).format(new Date());
+        String UID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        String moods = selectedMoods.toString();
+
+        //Grabs references to the Root node and Users Node
+        FirebaseDatabase db = FirebaseDatabase.getInstance();
+
+        // Creates a Mood Child Node under Data
+        // Creates a UID Child Node under Mood
+
+        DatabaseReference Data_node = db.getReference("Data");
+        DatabaseReference Mood_node = Data_node.child("Mood");
+        DatabaseReference UID_node = Mood_node.child(UID);
+
+        UID_node.child(date).setValue(moods);
+    }
+
+    // If the image Button is selected, it grabs the associated String
+    // in the Map for Happy, Sad, Etc
+    private void checkForSelectedMoods(ImageButton ib)
+    {
+        if(ib.isSelected())
+            selectedMoods.add(imageButtonsMap.get(ib));
+    }
+
+    private void initializeImageButtons()
+    {
+        //TODO Add alternate images in resources file
+        final ImageButton happy_btn = findViewById(R.id.Mood_ImBtn_Happy);
+        imageButtonsMap.put(happy_btn,"Happy");
+        final ImageButton depressed_btn = findViewById(R.id.Mood_ImBtn_Depressed);
+        imageButtonsMap.put(depressed_btn,"Depressed");
+        final ImageButton anxious_btn = findViewById(R.id.Mood_ImBtn_Anxious);
+        imageButtonsMap.put(anxious_btn,"Anxious");
+        final ImageButton fatigued_btn = findViewById(R.id.Mood_ImBtn_Fatigued);
+        imageButtonsMap.put(fatigued_btn, "Fatigued");
+        final ImageButton flat_btn = findViewById(R.id.Mood_ImBtn_Meh);
+        imageButtonsMap.put(flat_btn,"Meh");
+        final ImageButton nausea_btn = findViewById(R.id.Mood_ImBtn_Nausea);
+        imageButtonsMap.put(nausea_btn,"Nauseous");
+    }
 }
