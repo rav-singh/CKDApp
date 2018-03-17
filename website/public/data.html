@@ -20,7 +20,6 @@
         firebase.initializeApp(config);
       </script>
 
-
     <script defer src="/__/firebase/4.9.1/firebase-app.js"></script>
     <script defer src="/__/firebase/4.9.1/firebase-auth.js"></script>
     <script defer src="/__/firebase/4.9.1/firebase-database.js"></script>
@@ -50,13 +49,6 @@
   <body>
     <div id="message">
       <h2>Data</h1>
-        <div align="center">
-          <button id="mood">See Mood</button>
-          <!--
-          <button id="diet">See Diet</button>
-          <button id="exercise">See Exercise</button>
-          -->
-        </div>
         <p id="moodData"></p>
     </div>
 
@@ -67,35 +59,35 @@
     // grab facilitator's facility and hunt for it amoung the users
     var queryString = decodeURIComponent(window.location.search);
     queries = queryString.substring(1).split("=");
-    var ref = firebase.database().ref("Admin/" + queries[1] + "/Facility");
+    var ref = firebase.database().ref("Admins/" + queries[1] + "/Patients");
     ref.on("value", function(snapshot) {
 
-       // grab each user by their matching facility
-       var ptref = firebase.database().ref("Users/");
-       ptref.orderByChild('Facility').equalTo(snapshot.val()).once("value", function(snap) {
-         snap.forEach(function(childSnap) {
+       snapshot.forEach(function(snap) {
+           usersUnderAdminsCare.push(snap.val());
            numberOfUsersUnderAdminsCare++;
-           usersUnderAdminsCare.push(childSnap.key);
+
+           firebase.database().ref("Users/" + snap.val() + "/Name").on("value", function(s) {
+             document.getElementById("moodData").innerHTML += s.val() + "<br>";
+           });
+
+           firebase.database().ref("Data/Mood/" + snap.val()).on("value", function(s) {
+              s.forEach(function (day) {
+
+                document.getElementById("moodData").innerHTML += day.key + " ";
+                var moods = day.val().replace('[', '').replace(']','').split(',');
+                for (var i = 0; typeof moods[i] !== "undefined"; i++)
+                  document.getElementById("moodData").innerHTML += moods[i] + " ";
+                document.getElementById("moodData").innerHTML += "<br>"
+
+              });
+              document.getElementById("moodData").innerHTML += "<br>"
+
+           });
          });
-       });
     }, function (error) {
        alert("Error: " + error.code + "\nPlease contact the administrator.");
+       window.location.href = "index.html";
     });
-
-    // create an array that has all mood references for each user under admin's care
-    document.querySelector('#mood').addEventListener('click', function(e)
-    {
-        var moodRef = [];
-        for (var i = 0; i < numberOfUsersUnderAdminsCare; i++)
-        {
-          // print users under admin's facility to screen
-          moodRef.push(firebase.database().ref("Data/Mood/" + usersUnderAdminsCare[i]));
-          document.getElementById("moodData").innerHTML += usersUnderAdminsCare[i] + "<br>";
-
-          console.log(moodRef[i]);
-        }
-    });
-
 
     </script>
 
