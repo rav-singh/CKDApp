@@ -15,6 +15,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
@@ -35,11 +36,11 @@ public class Diet extends AppCompatActivity {
     private String thisFoodName;
     private int thisFoodNbdNo;
 
-    // Hashmaps for every meal type (will probably not use)
-    Map<String,foodItem> breakfast = new HashMap<>();
-    Map<String,foodItem> lunch = new HashMap<>();
-    Map<String,foodItem> dinner = new HashMap<>();
-    Map<String,foodItem> snacks = new HashMap<>();
+    // Arraylists for every meal type
+    ArrayList<foodItem> breakfast = new ArrayList<foodItem>();
+    ArrayList<foodItem> lunch = new ArrayList<foodItem>();
+    ArrayList<foodItem> dinner = new ArrayList<foodItem>();
+    ArrayList<foodItem> snacks = new ArrayList<foodItem>();
 
     String UID = FirebaseAuth.getInstance().getCurrentUser().getUid();
     FirebaseDatabase db = FirebaseDatabase.getInstance();
@@ -125,35 +126,39 @@ public class Diet extends AppCompatActivity {
 
             // Creates a Diet Child Node under Data
             // Creates a UID Child Node under Diet
-            DatabaseReference Data_node = db.getReference("Data");
-            DatabaseReference Diet_node = db.getReference("Diet");
+            DatabaseReference Diet_node = db.getReference().child("Data").child("Diet");
             DatabaseReference UID_node = Diet_node.child(UID);
 
             switch(requestCode)
             {
                 case 1111: // Breakfast
+                    breakfast.add(newFood);
                     DatabaseReference Breakfast_node = db.getReference("Breakfast");
-                    UID_node.child(date).child("Breakfast").setValue(newFood);
+                    UID_node.child(date).child("Breakfast").setValue(breakfast);
                     return;
 
                 case 2222: // Lunch
+                    lunch.add(newFood);
                     DatabaseReference Lunch_node = db.getReference("Lunch");
-                    UID_node.child(date).child("Lunch").setValue(newFood);
+                    UID_node.child(date).child("Lunch").setValue(lunch);
                     return;
 
                 case 3333: // Dinner
+                    dinner.add(newFood);
                     DatabaseReference Dinner_node = db.getReference("Dinner");
-                    UID_node.child(date).child("Dinner").setValue(newFood);
+                    UID_node.child(date).child("Dinner").setValue(dinner);
                     return;
 
                 case 4444: // Snacks
+                    snacks.add(newFood);
                     DatabaseReference Snacks_node = db.getReference("Snacks");
-                    UID_node.child(date).child("Snacks").setValue(newFood);
+                    UID_node.child(date).child("Snacks").setValue(snacks);
                     return;
 
                 default:
+                    breakfast.add(newFood);
                     Breakfast_node = db.getReference("Breakfast");
-                    UID_node.child(date).child("Breakfast").setValue(newFood);
+                    UID_node.child(date).child("Breakfast").setValue(breakfast);
                     return;
             }
 
