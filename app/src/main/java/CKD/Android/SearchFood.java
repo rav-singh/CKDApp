@@ -1,6 +1,8 @@
 package CKD.Android;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,6 +14,9 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
@@ -19,8 +24,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.jar.Attributes;
 
 import okhttp3.Call;
@@ -40,9 +48,9 @@ public class SearchFood extends AppCompatActivity {
     private Button btnSearchFood;
     private EditText searchedFood;
     private foodItem foods;
-    private foodItem selectedFood;
     ArrayList<foodItem> foodsList = new ArrayList<foodItem>();
     private ListView lv;
+    private int grabPosition;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +65,7 @@ public class SearchFood extends AppCompatActivity {
             public void onClick(View v) {
 
                 foodsList.clear();
+
                 // Grab keywords from text field
                 String item = searchedFood.getText().toString();
                 Log.i(TAG, "You typed: " + item);
@@ -102,10 +111,6 @@ public class SearchFood extends AppCompatActivity {
                                 foodsList.add(foods);
                             }
 
-                            System.out.println(foodsList);
-                            /*Gson gson = new Gson();
-                            foodItem foods = gson.fromJson(jsonData, foodItem.class);
-*/
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -117,15 +122,6 @@ public class SearchFood extends AppCompatActivity {
         });
 
 
-       /* // Grab the user`s choice
-        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
-              //String selectedFoodString = lv.getItemAtPosition(i).toString();
-            }
-        });*/
-
         // This is the array adapter, it takes the context of the activity as a
         // first parameter, the type of list view as a second parameter and your
         // array as a third parameter.
@@ -136,7 +132,28 @@ public class SearchFood extends AppCompatActivity {
 
         lv.setAdapter(arrayAdapter);
 
-    }
+        // Grab the user`s choice
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
+                foodItem selectedFood = (foodItem) lv.getItemAtPosition(i);
+                Log.i("You selected :", selectedFood.toString());
+
+                // Pass Data back to Diet class to log into the Database
+                Intent myIntent = new Intent();
+                Bundle extras = new Bundle();
+                myIntent.putExtra("FoodName", selectedFood.getName());
+                myIntent.putExtra("NdbNo", selectedFood.getNdbno());
+                setResult(Activity.RESULT_OK, myIntent);
+                finish();
+            }
+        });
+
+}
+
+public static Intent makeIntent(Context context) {
+    return new Intent(context, SearchFood.class);
+}
 
 }
