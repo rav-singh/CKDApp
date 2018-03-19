@@ -28,12 +28,12 @@
 
     <style media="screen">
       body { background: #ECEFF1; color: rgba(0,0,0,0.87); font-family: Roboto, Helvetica, Arial, sans-serif; margin: 0; padding: 0; }
-      #message { background: white; max-width: 700px; margin: 100px auto 16px; padding: 32px 24px; border-radius: 3px; }
+      #message { background: #ffffff; max-width: 700px; margin: 100px auto 16px; padding: 32px 24px; border-radius: 3px; }
+      #message h3 {font-size: 12px; text-align: center; font-weight: 200; }
       #message h2 { color: #ffa100; text-align: center; font-weight: bold; font-size: 16px; margin: 0 0 8px; }
       #message h1 { font-size: 22px; font-weight: 300; color: rgba(0,0,0,0.6); margin: 0 0 16px;}
       #message p { line-height: 140%; margin: 16px 0 24px; font-size: 14px; }
-      #message a { display: block; text-align: center; background: #039be5; text-transform: uppercase; text-decoration: none; color: white; padding:10px; border-radius: 4px; }
-      #message, #message a { box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); }
+      #message a { display: block; color: rgba(0,0,0,1); text-align: center; text-decoration: none; border-radius: 4px; }
       #message input { background-color: #fff; box-sizing: border-box; border-radius: 2px; color: #333; -webkit-box-sizing: border-box; -moz-box-sizing: border-box;
         display: block; float: none; font-size: 16px; border: 1px solid #ccc; padding: 6px 10px; height: 38px; width: 100%; line-height: 1.3; }
       #message button { background:linear-gradient(to bottom, #33bdef 5%, #019ad2 100%); border-radius:6px;  cursor:pointer;
@@ -44,44 +44,67 @@
         body, #message { margin-top: 0; background: white; box-shadow: none; }
         body { border-top: 16px solid #ffa100; }
       }
+      table { font-family: arial, sans-serif; border-collapse: collapse; width: 100%; }
+      td, th { border: 1px solid #dddddd; text-align: left; padding: 8px; }
+      tr:nth-child(even) { background-color: #dddddd; }
     </style>
   </head>
   <body>
     <div id="message">
-      <h2>Data</h1>
-        <p id="moodData"></p>
+      <h2>Data</h2>
+      <h3> recent mood entries over the last seven days<br/>check up on patients by clicking on their name<br/>patients in red should recieve attention from their provider</h3>
+        <p id="moodData">
+          <table id="usersMoodsTable"></table>
+        </p>
     </div>
 
     <script>
-    var numberOfUsersUnderAdminsCare = 0;
-    var usersUnderAdminsCare = [];
-
+    var htmlValue;
+    var happy, flat, nausea, anxious, fatigued, depressed;
     // grab facilitator's facility and hunt for it amoung the users
     var queryString = decodeURIComponent(window.location.search);
     queries = queryString.substring(1).split("=");
     var ref = firebase.database().ref("Admins/" + queries[1] + "/Patients");
-    ref.on("value", function(snapshot) {
+    ref.on("value", function(snapshot)
+    {
+      htmlValue = "<tr> <th>Patient</th> <th>Happy</th> <th>Flat</th> <th>Nausea</th> <th>Anxious</th> <th>Fatigued</th> <th>Depressed</th> </tr>";
+      // for each patient
+       snapshot.forEach(function(uid)
+       {
+           // grab that user's name
+           firebase.database().ref("Users/" + uid.val() + "/Name").on("value", function(name)
+           {
+             // for each user, get their moods
+             firebase.database().ref("Data/Mood/" + uid.val()).orderByKey().limitToLast(7).on("value", function(user)
+             {
+               happy = flat = nausea = anxious = fatigued = depressed = 0;
+               // look at each of the last 7 mood entries
+                user.forEach(function(day)
+                {
+                  // document.getElementById("moodData").innerHTML += day.key + " ";
+                  var moods = day.val().replace('[', '').replace(']','').split(',');
+                  for (var i = 0; typeof moods[i] !== "undefined"; i++)
+                  {
+                    if (moods[i].includes("Happy")) happy++;
+                    else if (moods[i].includes("Flat")) flat++;
+                    else if (moods[i].includes("Nausea")) nausea++;
+                    else if (moods[i].includes("Anxious")) anxious++;
+                    else if (moods[i].includes("Fatigued")) fatigued++;
+                    else if (moods[i].includes("Depressed")) depressed++;
+                  }
+                });
 
-       snapshot.forEach(function(snap) {
-           usersUnderAdminsCare.push(snap.val());
-           numberOfUsersUnderAdminsCare++;
+                if (nausea >= 4 || anxious >= 4 || fatigued >= 4 || depressed >= 4 || flat >= 1)
+                  htmlValue += "<tr style=\"background-color:Tomato;\">"
+                else
+                  htmlValue += "<tr>";
 
-           firebase.database().ref("Users/" + snap.val() + "/Name").on("value", function(s) {
-             document.getElementById("moodData").innerHTML += s.val() + "<br>";
-           });
+                htmlValue += "<td><a href=patient.html?uid=" + queries[1] + "&pt=" + uid.val() + ">" + name.val()
+                + "</a></td> <td>" + happy + "</td> <td>" + flat + "</td> <td>" + nausea + "</td> <td>" + anxious
+                + "</td> <td>" + fatigued + "</td> <td>" + depressed + "</td></tr>";
 
-           firebase.database().ref("Data/Mood/" + snap.val()).on("value", function(s) {
-              s.forEach(function (day) {
-
-                document.getElementById("moodData").innerHTML += day.key + " ";
-                var moods = day.val().replace('[', '').replace(']','').split(',');
-                for (var i = 0; typeof moods[i] !== "undefined"; i++)
-                  document.getElementById("moodData").innerHTML += moods[i] + " ";
-                document.getElementById("moodData").innerHTML += "<br>"
-
-              });
-              document.getElementById("moodData").innerHTML += "<br>"
-
+                document.getElementById("usersMoodsTable").innerHTML = htmlValue;
+             });
            });
          });
     }, function (error) {
