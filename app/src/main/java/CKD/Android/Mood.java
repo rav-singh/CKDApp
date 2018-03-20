@@ -32,7 +32,6 @@ public class Mood extends AppCompatActivity
     Boolean userRecordedYesterday = false;
 
     List<String> selectedMoods = new ArrayList<>();
-    List<String> datesSubmitted = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -40,11 +39,14 @@ public class Mood extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mood);
 
-        // If the boolean hasn't been set to true, check if the database
-        // Contains that date for this user
-      //  userRecordedYesterday = didUserSubmitYesterday();
-
-        checkYesterday();
+        if(!AppData.isUserRegistering)
+        {
+            checkYesterday();
+        }
+        else
+        {
+            userRecordedYesterday = true;
+        }
 
         initializeImageButtons();
 
@@ -73,6 +75,8 @@ public class Mood extends AppCompatActivity
                     selectedMoods.clear();
                     return;
                 }
+
+                AppData.isUserRegistering = false;
 
                 Intent launchActivity1= new Intent(
                         CKD.Android.Mood.this,AppetiteAndFatigue.class);
