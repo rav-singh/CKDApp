@@ -45,7 +45,7 @@ public class Summary extends AppCompatActivity
 
 
         int i = 0;
-        for( Button b : activeAdminBtnList)
+        for( Button b : allAdminBtnList)
         {
             setOnClickListeners(b, i++);
         }
