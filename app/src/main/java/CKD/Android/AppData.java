@@ -17,6 +17,7 @@ public final class  AppData
     public static String cur_Category;
     public static String cur_Thread_Key;
     public static ThreadClass cur_Thread;
+    public static Boolean isUserRegistering;
 
     public static AppData getInstance()
     {
