@@ -31,6 +31,9 @@ public class Mood extends AppCompatActivity
     Map<ImageButton,String> imageButtonsMap  = new HashMap<>();
     Boolean userRecordedYesterday = false;
 
+    final private String todayPrompt = "Please Select Your Mood for Today!";
+    final private String yesPrompt = "Please Select your Mood for Yesterday!";
+
     List<String> selectedMoods = new ArrayList<>();
 
     @Override
@@ -46,6 +49,7 @@ public class Mood extends AppCompatActivity
         else
         {
             userRecordedYesterday = true;
+            updateUI(todayPrompt);
         }
 
         initializeImageButtons();
@@ -71,7 +75,7 @@ public class Mood extends AppCompatActivity
                     userRecordedYesterday = true;
 
                     clearSelectedImageButtons();
-                    updateUI("Please Select your mood for today!");
+                    updateUI(todayPrompt);
                     selectedMoods.clear();
                     return;
                 }
@@ -101,13 +105,13 @@ public class Mood extends AppCompatActivity
                 {
                     if(d.getKey().equals(getYesterdaysDate()))
                     {
-                        updateUI("Please Submit for Today");
+                        updateUI(todayPrompt);
                         userRecordedYesterday= true;
                         break;
                     }
                 }
                 if(!userRecordedYesterday)
-                    updateUI("Please Submit for Yesterday");
+                    updateUI(yesPrompt);
             }
 
             @Override
