@@ -42,10 +42,10 @@ public class Mood extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mood);
 
-        if(!AppData.isUserRegistering)
-        {
-            checkYesterday();
-        }
+        // If the User Is directed here from demographics
+        // Data from previous Day is not necessary to add
+        if(!AppData.isUserRegistering) {checkYesterday();}
+
         else
         {
             userRecordedYesterday = true;
@@ -53,21 +53,35 @@ public class Mood extends AppCompatActivity
         }
 
         initializeImageButtons();
+        initializeNextButton();
 
+    }
+
+
+    private void initializeNextButton()
+    {
         Button next_btn = findViewById(R.id.Mood_Btn_Next);
 
+        // When Next is clicked selected moods are added
         next_btn.setOnClickListener(new View.OnClickListener()
         {
             public void onClick(View v)
             {
+                // Goes through the map containing all moods
+                // and checks if the user has selected them
                 for(ImageButton ib : imageButtonsMap.keySet())
                     checkForSelectedMoods(ib);
 
+                // Enters data into database for current day
                 if(userRecordedYesterday)
                 {
                     addDateAndMoodsToDB(getTodaysDate());
+                    // TODO should be able to remove this. Test later
                     selectedMoods.clear();
                 }
+                // Enters data into database for previous day
+                // updates UI and Boolean values and clears
+                // selected moods
                 else
                 {
                     addDateAndMoodsToDB(getYesterdaysDate());
@@ -79,8 +93,10 @@ public class Mood extends AppCompatActivity
                     selectedMoods.clear();
                     return;
                 }
-
+                // TODO Might Crash after user returns to mood
                 AppData.isUserRegistering = false;
+
+                updateDailyChecklist();
 
                 Intent launchActivity1= new Intent(
                         CKD.Android.Mood.this,AppetiteAndFatigue.class);
@@ -89,6 +105,23 @@ public class Mood extends AppCompatActivity
         });
     }
 
+    private void updateDailyChecklist()
+    {
+        String UID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        String date = getTodaysDate();
+        //Grabs references to the Root node and Users Node
+        FirebaseDatabase db = FirebaseDatabase.getInstance();
+
+        DatabaseReference Data_node = db.getReference("Data");
+        DatabaseReference Mood_node = Data_node.child("DailyCheckList");
+        DatabaseReference UID_node = Mood_node.child(UID);
+
+        UID_node.child(date).child("Mood").setValue("1");
+    }
+
+    // Reads from the database to determine if the user has recorded
+    // their mood from the previous day. A boolean is used for later
+    // referencing
     private void checkYesterday()
     {
         FirebaseDatabase db = FirebaseDatabase.getInstance();
@@ -123,6 +156,9 @@ public class Mood extends AppCompatActivity
 
     }
 
+    // If the user submits their mood from the previous day, this method
+    // clears all selected states of image buttons for submitting the
+    // current day
     private void clearSelectedImageButtons()
     {
         for(ImageButton ib : imageButtonsMap.keySet())
@@ -132,13 +168,17 @@ public class Mood extends AppCompatActivity
         }
     }
 
+    // Updates the UI depending on whether the user is submitting for the
+    // current day or the previous day
     private void updateUI(String s)
     {
         TextView header = findViewById(R.id.Mood_TV_MoodPrompt);
         header.setText(s);
     }
 
-    private String getYesterdaysDate() {
+    // Returns yesterdays date in required Dating Format
+    private String getYesterdaysDate()
+    {
         DateFormat dateFormat = new SimpleDateFormat("YYYY-MM-dd");
 
         // Create a calendar object with today date.
@@ -153,6 +193,7 @@ public class Mood extends AppCompatActivity
         return dateFormat.format(yesterday);
     }
 
+    // Returns current date in required Dating Format
     private String getTodaysDate()
     {
         DateFormat dateFormat = new SimpleDateFormat("YYYY-MM-dd");
@@ -166,7 +207,8 @@ public class Mood extends AppCompatActivity
         return dateFormat.format(today);
     }
 
-
+    // Sets all image buttons to select and deselect upon clicking
+    // and sets background to show appropriate selected state
     private void setOnClickListeners(final ImageButton ib)
     {
         ib.setOnClickListener(new View.OnClickListener() {
@@ -179,6 +221,7 @@ public class Mood extends AppCompatActivity
         });
     }
 
+    // Updates ImageButtons backgrounds based on Selected State
     private void setBackgroundOnSelection(ImageButton button)
     {
         if(button.isSelected())
@@ -187,6 +230,8 @@ public class Mood extends AppCompatActivity
             button.setBackgroundColor(Color.TRANSPARENT);
     }
 
+    // Places the users selected moods int a string and enters
+    // the data into the database with appropriate date
     private void addDateAndMoodsToDB(String date)
     {
         String UID = FirebaseAuth.getInstance().getCurrentUser().getUid();
@@ -209,6 +254,10 @@ public class Mood extends AppCompatActivity
         if(ib.isSelected())
             selectedMoods.add(imageButtonsMap.get(ib));
     }
+
+    // Places all of the possible moods into hash map
+    // to correlate the mood with the image button and
+    // then sets all of the onClickListeners
 
     private void initializeImageButtons()
     {
