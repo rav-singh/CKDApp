@@ -133,7 +133,7 @@ public class Diet extends AppCompatActivity {
             Log.i("Logging foodName: " ,thisFoodName);
             Log.i("Logging NdbNo: " ,intfoodNdbNo);
 
-            String date = new SimpleDateFormat("YYYY-MM-dd", Locale.getDefault()).format(new Date());
+            String date = AppData.getTodaysDate();
 
             // Creates a Diet Child Node under Data
             // Creates a UID Child Node under Diet
