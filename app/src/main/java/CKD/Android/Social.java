@@ -8,71 +8,51 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.HashMap;
+import java.util.Map;
+
 
 public class Social extends AppCompatActivity
 {
+    Map<Button,String> buttonMap = new HashMap<>();
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_social);
 
-        TextView Title = findViewById(R.id.Social_TV_Title);
-        Button gen_Disc_Cat = findViewById(R.id.Social_Btn_General);
-        Button new_Mem_Cat = findViewById(R.id.Social_Btn_NewMembers);
-        Button recipes_cat= findViewById(R.id.Social_Btn_Recipes);
-        Button help_cat = findViewById(R.id.Social_Btn_Help);
+        initializeButtons();
 
+        for(Button b : buttonMap.keySet())
+            setOnClickListeners(b);
+    }
 
-        gen_Disc_Cat.setOnClickListener(new View.OnClickListener()
+    private void setOnClickListeners(final Button b)
+    {
+        b.setOnClickListener(new View.OnClickListener()
         {
-
             public void onClick(View v)
             {
-                AppData.cur_Category = "General Discussion";
-                Intent launchActivity1 =
-                        new Intent(CKD.Android.Social.this,ThreadsList.class);
-                startActivity(launchActivity1);
-            }
-        });
+                String category = buttonMap.get(b);
+                AppData.cur_Category = category;
 
-        new_Mem_Cat.setOnClickListener(new View.OnClickListener()
-        {
-
-            public void onClick(View v)
-            {
-                AppData.cur_Category = "New Members";
                 Intent launchActivity1=
                         new Intent(CKD.Android.Social.this,ThreadsList.class);
                 startActivity(launchActivity1);
             }
         });
+    }
 
-        recipes_cat.setOnClickListener(new View.OnClickListener()
-        {
-
-            public void onClick(View v)
-            {
-                AppData.cur_Category = "Recipes";
-                Intent launchActivity1=
-                        new Intent(CKD.Android.Social.this,ThreadsList.class);
-                startActivity(launchActivity1);
-            }
-        });
-
-        help_cat.setOnClickListener(new View.OnClickListener()
-        {
-
-            public void onClick(View v)
-            {
-                AppData.cur_Category = "HELP";
-                Intent launchActivity1=
-                        new Intent(CKD.Android.Social.this,ThreadsList.class);
-                startActivity(launchActivity1);
-            }
-        });
-
-
-
+    private void initializeButtons()
+    {
+        Button general = findViewById(R.id.Social_Btn_General);
+        buttonMap.put(general,"General");
+        Button _new = findViewById(R.id.Social_Btn_NewMembers);
+        buttonMap.put(_new,"New Members");
+        Button recipies= findViewById(R.id.Social_Btn_Recipes);
+        buttonMap.put(recipies,"Recipies");
+        Button help = findViewById(R.id.Social_Btn_Help);
+        buttonMap.put(help,"Help");
     }
 }
