@@ -31,6 +31,7 @@ public class ThreadsList extends AppCompatActivity
     DataSnapshot DS;
     int currentPage = 1;
     int maxPages;
+    Boolean dailyCheckListUpdated = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -161,7 +162,7 @@ public class ThreadsList extends AppCompatActivity
         // AppData accordingly and each button in list gets click listener
 
         final int lowBound = (currentPage-1) *10;
-        for(int i = 0; i<activeThreadBtnList.size(); i++ )
+        for(int i = 0; i < activeThreadBtnList.size(); i++ )
         {
             final int finalI = i;
 
@@ -170,8 +171,16 @@ public class ThreadsList extends AppCompatActivity
                 @Override
                 public void onClick(View v)
                 {
-                    AppData.cur_Thread_Key = keyList.get(lowBound+ finalI);
+                    AppData.cur_Thread_Key = keyList.get(lowBound + finalI);
 
+                    // This avoids the database being written to every time the
+                    // user opens this page. Once the user closes the app the next
+                    // next time this page is opened the
+                    if(!dailyCheckListUpdated)
+                    {
+                        AppData.updateDailyChecklist("Social");
+                        dailyCheckListUpdated = true;
+                    }
                     Intent launchActivity1 =
                             new Intent(CKD.Android.ThreadsList.this,Thread.class);
                     startActivity(launchActivity1);
