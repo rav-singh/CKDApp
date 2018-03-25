@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="CKD.Android.Diet"
-    android:orientation="vertical">
+    android:background="@drawable/main_background_gradient">
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -29,12 +32,18 @@
 
     </LinearLayout>
 
-        <ListView
-            android:id="@+id/Diet_LV_Breakfast"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:clickable="false">
-        </ListView>
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="100dp">
+
+         <LinearLayout
+             android:id="@+id/Diet_LL_Breakfast"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:orientation="vertical">
+
+         </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -56,12 +65,19 @@
             android:text="Add" />
     </LinearLayout>
 
-    <ListView
-        android:id="@+id/Diet_LV_Lunch"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:clickable="false">
-    </ListView>
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="100dp">
+
+        <LinearLayout
+            android:id="@+id/Diet_LL_Lunch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -83,12 +99,19 @@
             android:text="Add" />
     </LinearLayout>
 
-    <ListView
-        android:id="@+id/Diet_LV_Dinner"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:clickable="false">
-    </ListView>
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="100dp">
+
+        <LinearLayout
+            android:id="@+id/Diet_LL_Dinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -110,12 +133,20 @@
             android:text="Add" />
     </LinearLayout>
 
-    <ListView
-        android:id="@+id/Diet_LV_Snacks"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:clickable="false">
-    </ListView>
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="100dp">
+
+        <LinearLayout
+            android:id="@+id/Diet_LL_Snacks"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+
 
 
 </LinearLayout>
+</ScrollView>
