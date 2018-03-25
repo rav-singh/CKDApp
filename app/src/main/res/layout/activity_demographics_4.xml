@@ -289,17 +289,34 @@
             android:textSize="20dp"
             android:text="Thyroid Disease" />
 
-        <CheckBox
-            android:id="@+id/Demo4_CB_Other"
+        <LinearLayout
+            android:id="@+id/Demo4_LL_other"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:padding="5dp"
-            android:background="@android:color/transparent"
-            android:textColor="@android:color/white"
-            android:textStyle="bold"
-            android:textSize="20dp"
-            android:text="Other" />
+            android:layout_height="wrap_content">
+
+            <CheckBox
+                android:id="@+id/Demo4_CB_Other"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:padding="5dp"
+                android:background="@android:color/transparent"
+                android:textColor="@android:color/white"
+                android:textStyle="bold"
+                android:textSize="20dp"
+                android:text="Other" />
+
+            <EditText
+                android:id="@+id/Demo4_ET_Other"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:padding="5dp"
+                android:background="@drawable/rounded_corner_textview"
+                android:textStyle="bold"
+                android:textSize="20dp"
+                android:inputType="text"/>
+        </LinearLayout>
 
 
         <Button
@@ -311,6 +328,7 @@
             android:padding="10dp"
             android:text="@string/next_button"
             android:background="@drawable/button_background"/>
+
 
     </LinearLayout>
 </ScrollView>

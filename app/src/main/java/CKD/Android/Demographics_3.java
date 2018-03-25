@@ -28,6 +28,9 @@ import java.util.List;
 
 public class Demographics_3 extends AppCompatActivity
 {
+    List<CheckBox> allHealthCB = new ArrayList<>();
+    String selectedHealth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -36,38 +39,24 @@ public class Demographics_3 extends AppCompatActivity
 
         final Spinner userEducation = findViewById(R.id.Demo3_SPN_Education);
         final Spinner userWork = findViewById(R.id.Demo3_SPN_Work);
-        final CheckBox health1 = findViewById(R.id.Demo3_CB_Health_1);
-        final CheckBox health2 = findViewById(R.id.Demo3_CB_Health_2);
-        final CheckBox health3 = findViewById(R.id.Demo3_CB_Health_3);
-        final CheckBox health4 = findViewById(R.id.Demo3_CB_Health_4);
-        final CheckBox health5 = findViewById(R.id.Demo3_CB_Health_5);
-        final Button next = findViewById(R.id.Demo3_Btn_next);
 
+        initiliazeAndStoreCheckBoxes();
+
+        for(CheckBox cb : allHealthCB)
+        {
+            setOnClickListeners(cb);
+        }
+
+        final Button next = findViewById(R.id.Demo3_Btn_next);
         next.setOnClickListener(new View.OnClickListener()
         {
             public void onClick(View v)
             {
                 String selectedEducation = userEducation.getSelectedItem().toString();
                 String selectedWork = userWork.getSelectedItem().toString();
-                String selectedHealth;
 
-                if(health1.isChecked())
-                    selectedHealth = health1.getText().toString();
-                else if(health2.isChecked())
-                    selectedHealth = health2.getText().toString();
-                else if(health3.isChecked())
-                    selectedHealth = health3.getText().toString();
-                else if(health4.isChecked())
-                    selectedHealth = health4.getText().toString();
-                else if(health5.isChecked())
-                    selectedHealth = health5.getText().toString();
-                // If no health was selected onClick method Stops and user is given
-                // an appropriate message
-                else
-                {
-                    errorNoHealthSelected();
-                    return;
-                }
+                checkSelectedHealth();
+
                 //TODO Ask Valenti if they should have option
                 if(selectedEducation.contains("option"))
                 {
@@ -91,6 +80,63 @@ public class Demographics_3 extends AppCompatActivity
 
             }
         });
+    }
+
+    private void setOnClickListeners(final CheckBox cb)
+    {
+        cb.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                //cb.setChecked(!cb.isChecked());
+                uncheckOtherBoxes(allHealthCB.indexOf(cb));
+            }
+        });
+
+    }
+
+    private void uncheckOtherBoxes(int selectedCheckBoxIndex)
+    {
+        for(CheckBox cb : allHealthCB)
+        {
+            if(!(allHealthCB.indexOf(cb) == selectedCheckBoxIndex))
+            {
+                cb.setChecked(false);
+            }
+        }
+    }
+
+    private void checkSelectedHealth()
+    {
+        for(CheckBox cb : allHealthCB)
+        {
+            if (cb.isChecked())
+            {
+                selectedHealth = cb.getText().toString();
+                return;
+            }
+                // If no health was selected onClick method Stops and user is given
+                // an appropriate message
+        }
+
+        errorNoHealthSelected();
+        return;
+
+    }
+
+    private void initiliazeAndStoreCheckBoxes()
+    {
+        CheckBox _1 = findViewById(R.id.Demo3_CB_Health_1);
+        allHealthCB.add(_1);
+        final CheckBox _2 = findViewById(R.id.Demo3_CB_Health_2);
+        allHealthCB.add(_2);
+        final CheckBox _3 = findViewById(R.id.Demo3_CB_Health_3);
+        allHealthCB.add(_3);
+        final CheckBox _4 = findViewById(R.id.Demo3_CB_Health_4);
+        allHealthCB.add(_4);
+        final CheckBox _5 = findViewById(R.id.Demo3_CB_Health_5);
+        allHealthCB.add(_5);
     }
 
     private void addValuesToUserClass(String selectedEducation, String selectedWork, String selectedHealth)

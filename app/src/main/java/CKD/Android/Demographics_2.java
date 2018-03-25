@@ -184,6 +184,7 @@ public class Demographics_2 extends AppCompatActivity
 
     private void switchPages()
     {
+        AppData.isUserRegistering = true;
         Intent launchActivity1 = new Intent(CKD.Android.Demographics_2.this, Mood.class);
         startActivity(launchActivity1);
     }

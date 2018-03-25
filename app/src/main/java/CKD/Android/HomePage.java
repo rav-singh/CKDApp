@@ -5,11 +5,17 @@ import android.util.Log;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
+
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+
 
 
 public class HomePage  extends AppCompatActivity {
@@ -28,8 +34,49 @@ public class HomePage  extends AppCompatActivity {
         setContentView(R.layout.activity_home_page);
 
         InitializeComponents();
+        setOnClickListeners();
+
+        checkDailyCheckList();
+    }
+
+    private void checkDailyCheckList()
+    {
+        String UID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        String date = AppData.getTodaysDate();
+
+        FirebaseDatabase db = FirebaseDatabase.getInstance();
+
+        DatabaseReference Date_node = db.getReference()
+                                        .child("Data")
+                                        .child("DailyCheckList")
+                                        .child(UID)
+                                        .child(date);
 
 
+        Date_node.addListenerForSingleValueEvent(new ValueEventListener()
+        {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot)
+            {
+                long numComponentsCompleted = dataSnapshot.getChildrenCount();
+
+               if(numComponentsCompleted > 3)
+               {
+                    Intent launchActivity1= new Intent(HomePage.this,Pop.class);
+                    startActivity(launchActivity1);
+               }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError)
+            {
+
+            }
+        });
+    }
+
+    private void setOnClickListeners()
+    {
         diet_Button.setOnClickListener(new View.OnClickListener()
         {
 
@@ -98,10 +145,10 @@ public class HomePage  extends AppCompatActivity {
                 startActivity(launchActivity1);
             }
         });
-
     }
 
-    private void InitializeComponents() {
+    private void InitializeComponents()
+    {
         // UI Component
         diet_Button = findViewById(R.id.Home_Btn_Diet);
         mood_Button = findViewById(R.id.Home_Btn_Mood);

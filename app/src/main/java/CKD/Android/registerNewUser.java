@@ -38,16 +38,6 @@ public class registerNewUser extends AppCompatActivity
                 final String newEmail = Email.getText().toString();
                 final String newPassword = Password.getText().toString();
 
-                if( checkAccountEmailExistInFirebase(newEmail) )
-                {
-                    Toast.makeText(registerNewUser.this,
-                            "This email has already been used to create an account!",
-                            Toast.LENGTH_LONG).show();
-                    Log.i("MAIN","THIS IS CALLLEEDD");
-                    return;
-
-                }
-
                 if(eitherFieldIsEmpty(newEmail, newPassword))
                 {
                     Toast.makeText(registerNewUser.this,
@@ -83,23 +73,6 @@ public class registerNewUser extends AppCompatActivity
                 startActivity(launchActivity1);
             }
         });
-    }
-    // If the email is already registered, the method returns true
-    private boolean checkAccountEmailExistInFirebase(String email)
-    {
-        FirebaseAuth mAuth = FirebaseAuth.getInstance();
-
-        final boolean[] b = new boolean[1];
-
-         mAuth.fetchProvidersForEmail(email).addOnCompleteListener(new OnCompleteListener<ProviderQueryResult>() {
-            @Override
-            public void onComplete(@NonNull Task<ProviderQueryResult> task)
-            {
-               b[0] = !task.getResult().getProviders().isEmpty();
-            }
-        });
-
-        return b[0];
     }
 
     private boolean validPassword(String newPassword)

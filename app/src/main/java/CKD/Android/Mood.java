@@ -16,11 +16,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,8 +27,11 @@ public class Mood extends AppCompatActivity
     Map<ImageButton,String> imageButtonsMap  = new HashMap<>();
     Boolean userRecordedYesterday = false;
 
+    final private String todayPrompt = "Please Select Your Mood for Today!";
+    final private String yesPrompt = "Please Select your Mood for Yesterday!";
+
     List<String> selectedMoods = new ArrayList<>();
-    List<String> datesSubmitted = new ArrayList<>();
+    Boolean checklistUpdated = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -40,47 +39,79 @@ public class Mood extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mood);
 
-        // If the boolean hasn't been set to true, check if the database
-        // Contains that date for this user
-      //  userRecordedYesterday = didUserSubmitYesterday();
+        // If the User Is directed here from demographics
+        // Data from previous Day is not necessary to add
+        if(!AppData.isUserRegistering)
+        {
+            checkYesterday();
+        }
 
-        checkYesterday();
+        else
+        {
+            userRecordedYesterday = true;
+            updateUI(todayPrompt);
+        }
 
         initializeImageButtons();
+        initializeNextButton();
 
+    }
+
+
+    private void initializeNextButton()
+    {
         Button next_btn = findViewById(R.id.Mood_Btn_Next);
 
+        // When Next is clicked selected moods are added
         next_btn.setOnClickListener(new View.OnClickListener()
         {
             public void onClick(View v)
             {
+                // Goes through the map containing all moods
+                // and checks if the user has selected them
                 for(ImageButton ib : imageButtonsMap.keySet())
                     checkForSelectedMoods(ib);
 
+                // Enters data into database for current day
                 if(userRecordedYesterday)
                 {
-                    addDateAndMoodsToDB(getTodaysDate());
+                    addDateAndMoodsToDB(AppData.getTodaysDate());
+                    // TODO should be able to remove this. Test later
                     selectedMoods.clear();
                 }
+                // Enters data into database for previous day
+                // updates UI and Boolean values and clears
+                // selected moods
                 else
                 {
-                    addDateAndMoodsToDB(getYesterdaysDate());
+                    addDateAndMoodsToDB(AppData.getYesterdaysDate());
 
                     userRecordedYesterday = true;
 
                     clearSelectedImageButtons();
-                    updateUI("Please Select your mood for today!");
+                    updateUI(todayPrompt);
                     selectedMoods.clear();
                     return;
                 }
+                // TODO Might Crash after user returns to mood after registering
+                AppData.isUserRegistering = false;
+
+                if(!checklistUpdated)
+                {
+                    AppData.updateDailyChecklist("Mood");
+                    checklistUpdated = true;
+                }
 
                 Intent launchActivity1= new Intent(
-                        CKD.Android.Mood.this,AppetiteAndFatigue.class);
+                    Mood.this,AppetiteAndFatigue.class);
                 startActivity(launchActivity1);
             }
         });
     }
 
+    // Reads from the database to determine if the user has recorded
+    // their mood from the previous day. A boolean is used for later
+    // referencing
     private void checkYesterday()
     {
         FirebaseDatabase db = FirebaseDatabase.getInstance();
@@ -95,15 +126,15 @@ public class Mood extends AppCompatActivity
                 // Collects all of the users previously submitted data
                 for (DataSnapshot d : dataSnapshot.getChildren())
                 {
-                    if(d.getKey().equals(getYesterdaysDate()))
+                    if(d.getKey().equals(AppData.getYesterdaysDate()))
                     {
-                        updateUI("Please Submit for Today");
+                        updateUI(todayPrompt);
                         userRecordedYesterday= true;
                         break;
                     }
                 }
                 if(!userRecordedYesterday)
-                    updateUI("Please Submit for Yesterday");
+                    updateUI(yesPrompt);
             }
 
             @Override
@@ -115,6 +146,9 @@ public class Mood extends AppCompatActivity
 
     }
 
+    // If the user submits their mood from the previous day, this method
+    // clears all selected states of image buttons for submitting the
+    // current day
     private void clearSelectedImageButtons()
     {
         for(ImageButton ib : imageButtonsMap.keySet())
@@ -124,41 +158,16 @@ public class Mood extends AppCompatActivity
         }
     }
 
+    // Updates the UI depending on whether the user is submitting for the
+    // current day or the previous day
     private void updateUI(String s)
     {
         TextView header = findViewById(R.id.Mood_TV_MoodPrompt);
         header.setText(s);
     }
 
-    private String getYesterdaysDate() {
-        DateFormat dateFormat = new SimpleDateFormat("YYYY-MM-dd");
-
-        // Create a calendar object with today date.
-        Calendar calendar = Calendar.getInstance();
-
-        // Move calendar to yesterday
-        calendar.add(Calendar.DATE, -1);
-
-        // Get current date of calendar which point to the yesterday now
-        Date yesterday = calendar.getTime();
-
-        return dateFormat.format(yesterday);
-    }
-
-    private String getTodaysDate()
-    {
-        DateFormat dateFormat = new SimpleDateFormat("YYYY-MM-dd");
-
-        // Create a calendar object with today date.
-        Calendar calendar = Calendar.getInstance();
-
-        // Get current date of calendar which point to the yesterday now
-        Date today = calendar.getTime();
-
-        return dateFormat.format(today);
-    }
-
-
+    // Sets all image buttons to select and deselect upon clicking
+    // and sets background to show appropriate selected state
     private void setOnClickListeners(final ImageButton ib)
     {
         ib.setOnClickListener(new View.OnClickListener() {
@@ -171,6 +180,7 @@ public class Mood extends AppCompatActivity
         });
     }
 
+    // Updates ImageButtons backgrounds based on Selected State
     private void setBackgroundOnSelection(ImageButton button)
     {
         if(button.isSelected())
@@ -179,6 +189,8 @@ public class Mood extends AppCompatActivity
             button.setBackgroundColor(Color.TRANSPARENT);
     }
 
+    // Places the users selected moods int a string and enters
+    // the data into the database with appropriate date
     private void addDateAndMoodsToDB(String date)
     {
         String UID = FirebaseAuth.getInstance().getCurrentUser().getUid();
@@ -202,20 +214,29 @@ public class Mood extends AppCompatActivity
             selectedMoods.add(imageButtonsMap.get(ib));
     }
 
+    // Places all of the possible moods into hash map
+    // to correlate the mood with the image button and
+    // then sets all of the onClickListeners
+
     private void initializeImageButtons()
     {
         //TODO Add alternate images in resources file
-        final ImageButton happy_btn = findViewById(R.id.Mood_ImBtn_Happy);
+        ImageButton happy_btn = findViewById(R.id.Mood_ImBtn_Happy);
         imageButtonsMap.put(happy_btn,"Happy");
-        final ImageButton depressed_btn = findViewById(R.id.Mood_ImBtn_Depressed);
+
+        ImageButton depressed_btn = findViewById(R.id.Mood_ImBtn_Depressed);
         imageButtonsMap.put(depressed_btn,"Depressed");
-        final ImageButton anxious_btn = findViewById(R.id.Mood_ImBtn_Anxious);
+
+        ImageButton anxious_btn = findViewById(R.id.Mood_ImBtn_Anxious);
         imageButtonsMap.put(anxious_btn,"Anxious");
-        final ImageButton fatigued_btn = findViewById(R.id.Mood_ImBtn_Fatigued);
+
+        ImageButton fatigued_btn = findViewById(R.id.Mood_ImBtn_Fatigued);
         imageButtonsMap.put(fatigued_btn, "Fatigued");
-        final ImageButton flat_btn = findViewById(R.id.Mood_ImBtn_Meh);
+
+        ImageButton flat_btn = findViewById(R.id.Mood_ImBtn_Meh);
         imageButtonsMap.put(flat_btn,"Meh");
-        final ImageButton nausea_btn = findViewById(R.id.Mood_ImBtn_Nausea);
+
+        ImageButton nausea_btn = findViewById(R.id.Mood_ImBtn_Nausea);
         imageButtonsMap.put(nausea_btn,"Nauseous");
 
         for(ImageButton ib : imageButtonsMap.keySet())

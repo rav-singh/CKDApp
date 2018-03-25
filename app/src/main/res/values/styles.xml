@@ -25,4 +25,9 @@
         <item name="android:background">@drawable/rounded_corner_textview</item>
     </style>
 
+    <style name="AppTheme.CustomTheme">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowCloseOnTouchOutside">true</item>
+    </style>
+
 </resources>
