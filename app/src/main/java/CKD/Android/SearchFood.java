@@ -93,7 +93,12 @@ public class SearchFood extends AppCompatActivity {
                     public void onResponse(Call call, Response response) throws IOException {
                         String jsonData = response.body().string();
                         Log.i(TAG, jsonData);
-
+                        if(jsonData.contains("timeout") || jsonData.contains("error"));
+                        {
+                            //TODO TOAST TO LET USER KNOW
+                        //    Intent launchActivity1= new Intent(SearchFood.this,HomePage.class);
+                          //  startActivity(launchActivity1);
+                        }
                         // Parse the JSON into foodItem Class
                         try {
 
@@ -114,6 +119,9 @@ public class SearchFood extends AppCompatActivity {
 
                         } catch (JSONException e) {
                             e.printStackTrace();
+                            //TODO TOAST TO LET USER KNOW
+                       //     Intent launchActivity1= new Intent(SearchFood.this,HomePage.class);
+                         //   startActivity(launchActivity1);
                         }
 
                     }
