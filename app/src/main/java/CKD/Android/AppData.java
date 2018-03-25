@@ -19,7 +19,7 @@ public final class  AppData
     private static AppData instance = null;
     public static UserClass cur_user;
     public static FirebaseDatabase db;
-    public static FirebaseAuth mAuth;
+    static FirebaseAuth mAuth;
     public static FirebaseUser firebaseUser;
     public static String cur_Category;
     public static String cur_Thread_Key;
