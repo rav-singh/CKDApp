@@ -92,7 +92,7 @@ public class SearchFood extends AppCompatActivity {
                     @Override
                     public void onResponse(Call call, Response response) throws IOException {
                         String jsonData = response.body().string();
-                        Log.i(TAG, jsonData);
+                        //Log.i(TAG, jsonData);
 
                         // Parse the JSON into foodItem Class
                         try {
@@ -105,8 +105,8 @@ public class SearchFood extends AppCompatActivity {
                                 JSONObject postObject = dataInner.getJSONObject(i);
                                 int ndbno = postObject.getInt("ndbno");
                                 String foodName = postObject.getString("name");
-                                Log.i("Data", "ndbno: " + ndbno);
-                                Log.i("Data", "name: " + foodName);
+                               // Log.i("Data", "ndbno: " + ndbno);
+                               // Log.i("Data", "name: " + foodName);
                                 foods = new foodItem(foodName, ndbno);
                                 foodsList.add(foods);
                             }

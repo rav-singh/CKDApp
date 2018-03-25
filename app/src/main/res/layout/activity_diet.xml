@@ -11,14 +11,12 @@
     <TextView
         android:id="@+id/textView"
         android:layout_width="140dp"
-        android:layout_height="47dp"
-        android:layout_marginBottom="275dp"
+        android:layout_height="0dp"
         android:layout_marginEnd="48dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="51dp"
+        android:layout_marginTop="83dp"
         android:text="Breakfast"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/textView4"
         app:layout_constraintEnd_toStartOf="@+id/addBreakfast_btn"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -66,7 +64,8 @@
         app:layout_constraintEnd_toEndOf="@+id/textView2"
         app:layout_constraintEnd_toStartOf="@+id/addSnacks_btn"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintVertical_bias="0.913" />
 
     <Button
         android:id="@+id/addBreakfast_btn"
@@ -109,4 +108,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textView4" />
+
 </android.support.constraint.ConstraintLayout>

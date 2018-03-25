@@ -6,13 +6,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -35,12 +40,18 @@ public class Diet extends AppCompatActivity {
     private Button btnAddSnacks;
     private String thisFoodName;
     private int thisFoodNbdNo;
+    private ListView lvBreakfast;
+    private DatabaseReference mDatabse;
 
-    // Arraylists for every meal type
-    ArrayList<foodItem> breakfast = new ArrayList<foodItem>();
-    ArrayList<foodItem> lunch = new ArrayList<foodItem>();
-    ArrayList<foodItem> dinner = new ArrayList<foodItem>();
-    ArrayList<foodItem> snacks = new ArrayList<foodItem>();
+    // Arraylists for foodNames and Ndbnos for each meal
+    ArrayList<String> breakfastNames = new ArrayList<String>();
+    ArrayList<Integer> breakfastNdbnos = new ArrayList<Integer>();
+    ArrayList<String> lunchNames = new ArrayList<String>();
+    ArrayList<Integer> lunchNdbnos = new ArrayList<Integer>();
+    ArrayList<String> dinnerNames = new ArrayList<String>();
+    ArrayList<Integer> dinnerNdbnos = new ArrayList<Integer>();
+    ArrayList<String> snackNames = new ArrayList<String>();
+    ArrayList<Integer> snackNdbnos = new ArrayList<Integer>();
 
     String UID = FirebaseAuth.getInstance().getCurrentUser().getUid();
     FirebaseDatabase db = FirebaseDatabase.getInstance();
@@ -50,10 +61,13 @@ public class Diet extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_diet);
 
+        mDatabse = FirebaseDatabase.getInstance().getReference();
+
         btnAddBreakfast = (Button) findViewById(R.id.addBreakfast_btn);
         btnAddLunch = (Button) findViewById(R.id.addLunch_btn);
         btnAddDinner = (Button) findViewById(R.id.addDinner_btn);
         btnAddSnacks = (Button) findViewById(R.id.addSnacks_btn);
+
 
         btnAddBreakfast.setOnClickListener(new View.OnClickListener()
         {
@@ -119,9 +133,6 @@ public class Diet extends AppCompatActivity {
             Log.i("Logging foodName: " ,thisFoodName);
             Log.i("Logging NdbNo: " ,intfoodNdbNo);
 
-            // Put values back into foodItem class
-            foodItem newFood = new foodItem(thisFoodName, thisFoodNbdNo);
-
             String date = new SimpleDateFormat("YYYY-MM-dd", Locale.getDefault()).format(new Date());
 
             // Creates a Diet Child Node under Data
@@ -132,33 +143,48 @@ public class Diet extends AppCompatActivity {
             switch(requestCode)
             {
                 case 1111: // Breakfast
-                    breakfast.add(newFood);
-                    DatabaseReference Breakfast_node = db.getReference("Breakfast");
-                    UID_node.child(date).child("Breakfast").setValue(breakfast);
+                    breakfastNames.add(thisFoodName);
+                    breakfastNdbnos.add(thisFoodNbdNo);
+                    String bnames = breakfastNames.toString();
+                    String bndbs = breakfastNdbnos.toString();;
+                    UID_node.child(date).child("Breakfast").child("Food Names").setValue(bnames);
+                    UID_node.child(date).child("Breakfast").child("Food NDBs").setValue(bndbs);
                     return;
 
                 case 2222: // Lunch
-                    lunch.add(newFood);
-                    DatabaseReference Lunch_node = db.getReference("Lunch");
-                    UID_node.child(date).child("Lunch").setValue(lunch);
+                    lunchNames.add(thisFoodName);
+                    lunchNdbnos.add(thisFoodNbdNo);
+                    String lnames = lunchNames.toString();
+                    String lndbs = lunchNdbnos.toString();
+                    UID_node.child(date).child("Lunch").child("Food Names").setValue(lnames);
+                    UID_node.child(date).child("Lunch").child("Food NDBs").setValue(lndbs);
                     return;
 
                 case 3333: // Dinner
-                    dinner.add(newFood);
-                    DatabaseReference Dinner_node = db.getReference("Dinner");
-                    UID_node.child(date).child("Dinner").setValue(dinner);
+                    dinnerNames.add(thisFoodName);
+                    dinnerNdbnos.add(thisFoodNbdNo);
+                    String dnames = dinnerNames.toString();
+                    String dndbs = dinnerNdbnos.toString();
+                    UID_node.child(date).child("Dinner").child("Food Names").setValue(dnames);
+                    UID_node.child(date).child("Dinner").child("Food NDBs").setValue(dndbs);
                     return;
 
                 case 4444: // Snacks
-                    snacks.add(newFood);
-                    DatabaseReference Snacks_node = db.getReference("Snacks");
-                    UID_node.child(date).child("Snacks").setValue(snacks);
+                    snackNames.add(thisFoodName);
+                    snackNdbnos.add(thisFoodNbdNo);
+                    String snames = snackNames.toString();
+                    String sndbs = snackNdbnos.toString();
+                    UID_node.child(date).child("Snack").child("Food Names").setValue(snames);
+                    UID_node.child(date).child("Snack").child("Food NDBs").setValue(sndbs);
                     return;
 
                 default:
-                    breakfast.add(newFood);
-                    Breakfast_node = db.getReference("Breakfast");
-                    UID_node.child(date).child("Breakfast").setValue(breakfast);
+                    breakfastNames.add(thisFoodName);
+                    breakfastNdbnos.add(thisFoodNbdNo);
+                    String bdnames = breakfastNames.toString();
+                    String bdndbs = breakfastNdbnos.toString();
+                    UID_node.child(date).child("Breakfast").child("Food Names").setValue(bdnames);
+                    UID_node.child(date).child("Breakfast").child("Food NDBs").setValue(bdndbs);
                     return;
             }
 
