@@ -60,8 +60,10 @@ public class HomePage  extends AppCompatActivity {
             {
                 long numComponentsCompleted = dataSnapshot.getChildrenCount();
 
-               if(numComponentsCompleted > 3)
+               if(numComponentsCompleted > 3 && !AppData.PopUpPresented)
                {
+
+                    AppData.PopUpPresented = true;
                     Intent launchActivity1= new Intent(HomePage.this,Pop.class);
                     startActivity(launchActivity1);
                }
