@@ -24,6 +24,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -49,6 +50,7 @@ public class SearchFood extends AppCompatActivity {
     private EditText searchedFood;
     private foodItem foods;
     ArrayList<foodItem> foodsList = new ArrayList<foodItem>();
+    ArrayList<foodItem> parsedfoodsList = new ArrayList<foodItem>();
     private ListView lv;
     private int grabPosition;
 
@@ -112,10 +114,12 @@ public class SearchFood extends AppCompatActivity {
                                 String foodName = postObject.getString("name");
                                Log.i("Data", "ndbno: " + ndbno);
                                Log.i("Data", "name: " + foodName);
+
+
                                 foods = new foodItem(foodName, ndbno);
                                 foodsList.add(foods);
                             }
-
+                            parseNameStringsInFoodsList();
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -136,7 +140,7 @@ public class SearchFood extends AppCompatActivity {
         ArrayAdapter<foodItem> arrayAdapter = new ArrayAdapter<foodItem>(
                 this,
                 android.R.layout.simple_list_item_1,
-                foodsList);
+                parsedfoodsList);
 
         lv.setAdapter(arrayAdapter);
 
@@ -151,8 +155,10 @@ public class SearchFood extends AppCompatActivity {
                 // Pass Data back to Diet class to log into the Database
                 Intent myIntent = new Intent();
                 Bundle extras = new Bundle();
+
                 myIntent.putExtra("FoodName", selectedFood.getName());
                 myIntent.putExtra("NdbNo", selectedFood.getNdbno());
+
                 setResult(Activity.RESULT_OK, myIntent);
                 //TODO REMOVE COMMENTING OUT ONCE API IS UP
               // AppData.updateDailyChecklist("Diet");
@@ -161,8 +167,44 @@ public class SearchFood extends AppCompatActivity {
         });
 
 }
+    // Each Foodname inside each FoodItem Class contains a Name with a UPC number
+    // as well as commas within the name itself. We need to remove the UPC number
+    // as well as commas with the name
+    private void parseNameStringsInFoodsList()
+    {
+        for(foodItem food : foodsList)
+        {
+            // Contains name with commas and UPC number
+            String name = food.getName();
+            int ndbo = food.getNdbno();
 
-public static Intent makeIntent(Context context) {
+            if (name.contains("UPC:"))
+            {
+                int UPCINDEX = name.indexOf("UPC:");
+
+                // Removes UPC from String as well as commas
+                String temp = name.substring(0, UPCINDEX-2);
+
+                temp = temp.replaceAll("//[^A-Za-z0-9]//","");
+                temp = temp.replaceAll(",","_");
+
+                //Create a new foodItemClass to replace in the foodslist Array
+                foodItem updatedFoodItem = new foodItem(temp, ndbo);
+                //Overwrites the foodItem Class in the array
+               parsedfoodsList.add(updatedFoodItem);
+            }
+            else
+                parsedfoodsList.add(food);
+
+        }
+
+        for(foodItem food : parsedfoodsList) {
+            String temp = food.getName();
+        }
+    }
+
+
+    public static Intent makeIntent(Context context) {
     return new Intent(context, SearchFood.class);
 }
 
