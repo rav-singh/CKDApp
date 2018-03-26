@@ -32,6 +32,7 @@ import com.google.firebase.database.ValueEventListener;
 import org.w3c.dom.Text;
 import org.xmlpull.v1.XmlPullParser;
 
+import java.lang.reflect.Array;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -54,20 +55,20 @@ public class Diet extends AppCompatActivity {
     private Button btnAddSnacks;
     private String thisFoodName;
     private int thisFoodNbdNo;
-    private DatabaseReference mDatabse;
 
     // Arraylists for foodNames and Ndbnos for each meal
-    ArrayList<String> breakfastNames = new ArrayList<String>();
-    ArrayList<String> breakfastNdbnos = new ArrayList<String>();
-    ArrayList<String> lunchNames = new ArrayList<String>();
-    ArrayList<String> lunchNdbnos = new ArrayList<>();
-    ArrayList<String> dinnerNames = new ArrayList<String>();
-    ArrayList<String> dinnerNdbnos = new ArrayList<>();
-    ArrayList<String> snackNames = new ArrayList<String>();
-    ArrayList<String> snackNdbnos = new ArrayList<>();
+    ArrayList<String> breakfastNames, breakfastNdbnos,
+                        lunchNames, lunchNdbnos,
+                        dinnerNames, dinnerNdbnos,
+                        snackNames, snackNdbnos;
+
+    Map <ArrayList<String>,String> mealNameLists = new HashMap<>();
+    Map <ArrayList<String>,String> mealNdbnoLists = new HashMap<>();
+    Map <String, LinearLayout> llList = new HashMap<>();
 
     String UID = FirebaseAuth.getInstance().getCurrentUser().getUid();
     FirebaseDatabase db = FirebaseDatabase.getInstance();
+    private DatabaseReference mDatabse;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -81,10 +82,53 @@ public class Diet extends AppCompatActivity {
         mDatabse = FirebaseDatabase.getInstance().getReference();
 
         initializeButtons();
-
+        initializeAndStoreMealNameLists();
+        initializeAndStoreMealLayoutLists();
         setOnClickListeners();
 
         grabAllUsersDietSubmissions();
+
+    }
+
+    private void initializeAndStoreMealLayoutLists()
+    {
+        LinearLayout breakfastLL = findViewById(R.id.Diet_LL_Breakfast);
+        LinearLayout lunchLL = findViewById(R.id.Diet_LL_Lunch);
+        LinearLayout dinnerll = findViewById(R.id.Diet_LL_Dinner);
+        LinearLayout snacksll = findViewById(R.id.Diet_LL_Snacks);
+
+        llList.put("Breakfast", breakfastLL);
+        llList.put("Lunch",lunchLL);
+        llList.put("Dinner",dinnerll);
+        llList.put("Snacks",snacksll);
+    }
+
+    private void initializeAndStoreMealNameLists()
+    {
+        // Arraylists for foodNames and Ndbnos for each meal
+        breakfastNames = new ArrayList<>();
+        mealNameLists.put(breakfastNames,"Breakfast");
+
+        breakfastNdbnos = new ArrayList<>();
+        mealNdbnoLists.put(breakfastNdbnos,"Breakfast");
+
+        lunchNames = new ArrayList<>();
+        mealNameLists.put(lunchNames,"Lunch");
+
+        lunchNdbnos = new ArrayList<>();
+        mealNdbnoLists.put(lunchNdbnos,"Lunch");
+
+        dinnerNames = new ArrayList<>();
+        mealNameLists.put(dinnerNames,"Dinner");
+
+        dinnerNdbnos = new ArrayList<>();
+        mealNdbnoLists.put(dinnerNdbnos,"Dinner");
+
+        snackNames = new ArrayList<>();
+        mealNameLists.put(snackNames,"Snacks");
+
+        snackNdbnos = new ArrayList<>();
+        mealNdbnoLists.put(snackNdbnos,"Snacks");
 
     }
 
@@ -172,8 +216,8 @@ public class Diet extends AppCompatActivity {
             private void grabMealSubmitted(String meal, DataSnapshot d)
             {
 
-                String foodID = (String) d.child("Food NDBs").getValue();
-                String foodNames = String.valueOf(d.child("Food Names").getValue());
+                String foodID =   (String) d.child("Food NDBs").getValue();
+                String foodNames =(String) d.child("Food Names").getValue();
 
                 foodNames = foodNames.replace("[" ,"");
                 foodNames = foodNames.replace("]","");
@@ -181,30 +225,29 @@ public class Diet extends AppCompatActivity {
                 foodID = foodID.replace("[","");
                 foodID = foodID.replace("]","");
 
-              //  int index = foodNames.indexOf("UPC");
 
-           //     String temp = foodNames.substring(0,index-1);
+                ArrayList<String> ndbnoList = new ArrayList<>(Arrays.asList(foodID.split(",")));
+                ArrayList<String> nameList  = new ArrayList<>(Arrays.asList(foodNames.split(",")));
 
-                breakfastNdbnos =   new ArrayList<String>(Arrays.asList(foodID.split(",")));
-                breakfastNames =   new ArrayList<String>(Arrays.asList(foodNames.split(",")));
+                int numFoodItems = nameList.size();
 
-                int numFoodItems = breakfastNames.size();
+                // Removes the UPC from the ArrayList
                 for(int i=0; i<numFoodItems; i++)
                 {
-                    String temp = breakfastNames.get(i);
+                    String temp = nameList.get(i);
                     if(temp.contains("UPC:"))
                     {
-                        breakfastNames.remove(temp);
+                        nameList.remove(temp);
                         numFoodItems-- ;
                         i--;
                         continue;
                     }
 
                     Log.i("NAMESTEMP", temp);
-                    Log.i("NAMESLIST", breakfastNames.get(i));
+                    Log.i("NAMESLIST", nameList.get(i));
                 }
 
-                addFoodItems();
+                addFoodItems(nameList,ndbnoList,meal);
             }
 
             @Override
@@ -216,13 +259,11 @@ public class Diet extends AppCompatActivity {
 
     }
 
-
-
-    private void addFoodItems()
+    private void addFoodItems(ArrayList<String> nameList, ArrayList<String> ndbnoList, String meal)
      {
-        LinearLayout linear = findViewById(R.id.Diet_LL_Breakfast);
+        LinearLayout linear = llList.get(meal);
 
-        for (int j = 0; j < breakfastNdbnos.size(); j++)
+        for (int j = 0; j < ndbnoList.size(); j++)
         {
             LinearLayout childLayout = new LinearLayout(this);
 
@@ -248,15 +289,15 @@ public class Diet extends AppCompatActivity {
             fName.setTextSize(17);
             fName.setPadding(5, 3, 0, 3);
             fName.setTypeface(Typeface.DEFAULT_BOLD);
-            fName.setGravity(Gravity.LEFT | Gravity.CENTER);
+            fName.setGravity(Gravity.START | Gravity.CENTER);
 
             fID.setTextSize(16);
             fID.setPadding(5, 3, 0, 3);
             fID.setTypeface(null, Typeface.ITALIC);
-            fID.setGravity(Gravity.LEFT | Gravity.CENTER);
+            fID.setGravity(Gravity.START | Gravity.CENTER);
 
-            fName.setText(breakfastNames.get(j));
-            fID.setText(breakfastNdbnos.get(j));
+            fName.setText(nameList.get(j));
+            fID.setText(ndbnoList.get(j));
 
             childLayout.addView(fName);
             childLayout.addView(fID);
@@ -295,7 +336,7 @@ public class Diet extends AppCompatActivity {
                     breakfastNdbnos.add(intFoodNdbNo);
 
                     String bnames = breakfastNames.toString();
-                    String bndbs = breakfastNdbnos.toString();;
+                    String bndbs = breakfastNdbnos.toString();
                     UID_node.child(date).child("Breakfast").child("Food Names").setValue(bnames);
                     UID_node.child(date).child("Breakfast").child("Food NDBs").setValue(bndbs);
                     return;
