@@ -136,7 +136,6 @@ public class Diet extends AppCompatActivity {
     {
         btnAddBreakfast.setOnClickListener(new View.OnClickListener()
         {
-
             public void onClick(View v)
             {
                 // Indicate Breakfast Button was clicked
@@ -148,7 +147,6 @@ public class Diet extends AppCompatActivity {
 
         btnAddLunch.setOnClickListener(new View.OnClickListener()
         {
-
             public void onClick(View v)
             {
                 // Indicate Lunch Button was clicked
@@ -216,7 +214,7 @@ public class Diet extends AppCompatActivity {
             private void grabMealSubmitted(String meal, DataSnapshot d)
             {
 
-                String foodID =   (String) d.child("Food NDBs").getValue();
+                String foodID = (String) d.child("Food NDBs").getValue();
                 String foodNames =(String) d.child("Food Names").getValue();
 
                 foodNames = foodNames.replace("[" ,"");
@@ -229,23 +227,6 @@ public class Diet extends AppCompatActivity {
                 ArrayList<String> ndbnoList = new ArrayList<>(Arrays.asList(foodID.split(",")));
                 ArrayList<String> nameList  = new ArrayList<>(Arrays.asList(foodNames.split(",")));
 
-                int numFoodItems = nameList.size();
-
-                // Removes the UPC from the ArrayList
-                for(int i=0; i<numFoodItems; i++)
-                {
-                    String temp = nameList.get(i);
-                    if(temp.contains("UPC:"))
-                    {
-                        nameList.remove(temp);
-                        numFoodItems-- ;
-                        i--;
-                        continue;
-                    }
-
-                    Log.i("NAMESTEMP", temp);
-                    Log.i("NAMESLIST", nameList.get(i));
-                }
 
                 addFoodItems(nameList,ndbnoList,meal);
             }
@@ -296,7 +277,7 @@ public class Diet extends AppCompatActivity {
             fID.setTypeface(null, Typeface.ITALIC);
             fID.setGravity(Gravity.START | Gravity.CENTER);
 
-            fName.setText(nameList.get(j));
+            fName.setText(nameList.get(j).replaceAll("_",","));
             fID.setText(ndbnoList.get(j));
 
             childLayout.addView(fName);
@@ -317,6 +298,7 @@ public class Diet extends AppCompatActivity {
             thisFoodName = data.getStringExtra("FoodName");
             thisFoodNbdNo = data.getIntExtra("NdbNo", 0);
             String intFoodNdbNo = Integer.toString(thisFoodNbdNo);
+
             Log.i("Logging foodName: " ,thisFoodName);
             Log.i("Logging NdbNo: " ,intFoodNdbNo);
 
