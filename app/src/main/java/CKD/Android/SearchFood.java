@@ -108,13 +108,13 @@ public class SearchFood extends AppCompatActivity {
                             JSONObject foodItems = jsonObj.getJSONObject("list");
                             JSONArray dataInner = foodItems.getJSONArray("item");
                             // looping through all Food results
-                            for (int i = 0; i < dataInner.length(); i++) {
+                            for (int i = 0; i < dataInner.length(); i++)
+                            {
                                 JSONObject postObject = dataInner.getJSONObject(i);
-                                int ndbno = postObject.getInt("ndbno");
-                                String foodName = postObject.getString("name");
-                               Log.i("Data", "ndbno: " + ndbno);
-                               Log.i("Data", "name: " + foodName);
 
+                                int ndbno = postObject.getInt("ndbno");
+
+                                String foodName = postObject.getString("name");
 
                                 foods = new foodItem(foodName, ndbno);
                                 foodsList.add(foods);
@@ -180,27 +180,38 @@ public class SearchFood extends AppCompatActivity {
 
             if (name.contains("UPC:"))
             {
-                int UPCINDEX = name.indexOf("UPC:");
-
-                // Removes UPC from String as well as commas
-                String temp = name.substring(0, UPCINDEX-2);
-
-                temp = temp.replaceAll("//[^A-Za-z0-9]//","");
-                temp = temp.replaceAll(",","_");
-
-                //Create a new foodItemClass to replace in the foodslist Array
-                foodItem updatedFoodItem = new foodItem(temp, ndbo);
-                //Overwrites the foodItem Class in the array
-               parsedfoodsList.add(updatedFoodItem);
+                parseUPCorGTIN(name,"UPC", ndbo);
+            }
+            else if(name.contains("GTIN:"))
+            {
+                parseUPCorGTIN(name,"GTIN", ndbo);
             }
             else
-                parsedfoodsList.add(food);
+            {
+                parseUPCorGTIN(name,null, ndbo);
+            }
 
         }
+    }
 
-        for(foodItem food : parsedfoodsList) {
-            String temp = food.getName();
+    private void parseUPCorGTIN(String name, String remove, int ndbo)
+    {
+        if(remove!=null)
+        {
+            int indexToRemove = name.indexOf(remove);
+
+            // Removes UPC from String as well as commas
+            String temp = name.substring(0, indexToRemove - 2);
+            name = temp;
         }
+
+        name = name.replaceAll("//[^A-Za-z0-9]//","");
+        name = name.replaceAll(",","_");
+
+        //Create a new foodItemClass to replace in the foodslist Array
+        foodItem updatedFoodItem = new foodItem(name, ndbo);
+        //Overwrites the foodItem Class in the array
+        parsedfoodsList.add(updatedFoodItem);
     }
 
 
