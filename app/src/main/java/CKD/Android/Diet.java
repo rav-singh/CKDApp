@@ -62,8 +62,8 @@ public class Diet extends AppCompatActivity {
                         dinnerNames, dinnerNdbnos,
                         snackNames, snackNdbnos;
 
-    Map <ArrayList<String>,String> mealNameLists = new HashMap<>();
-    Map <ArrayList<String>,String> mealNdbnoLists = new HashMap<>();
+    Map <String,ArrayList<String>> mealNameLists = new HashMap<>();
+    Map <String,ArrayList<String>> mealNdbnoLists = new HashMap<>();
     Map <String, LinearLayout> llList = new HashMap<>();
 
     String UID = FirebaseAuth.getInstance().getCurrentUser().getUid();
@@ -79,7 +79,7 @@ public class Diet extends AppCompatActivity {
         //TODO remove once searchclass is good
         AppData.updateDailyChecklist("Diet");
 
-        mDatabse = FirebaseDatabase.getInstance().getReference();
+       // mDatabse = FirebaseDatabase.getInstance().getReference();
 
         initializeButtons();
         initializeAndStoreMealNameLists();
@@ -107,28 +107,29 @@ public class Diet extends AppCompatActivity {
     {
         // Arraylists for foodNames and Ndbnos for each meal
         breakfastNames = new ArrayList<>();
-        mealNameLists.put(breakfastNames,"Breakfast");
+        mealNameLists.put("Breakfast",breakfastNames);
 
         breakfastNdbnos = new ArrayList<>();
-        mealNdbnoLists.put(breakfastNdbnos,"Breakfast");
+        mealNdbnoLists.put("Breakfast", breakfastNdbnos);
 
         lunchNames = new ArrayList<>();
-        mealNameLists.put(lunchNames,"Lunch");
+        mealNameLists.put("Lunch",lunchNames);
 
         lunchNdbnos = new ArrayList<>();
-        mealNdbnoLists.put(lunchNdbnos,"Lunch");
+        mealNdbnoLists.put("Lunch",lunchNdbnos);
 
         dinnerNames = new ArrayList<>();
-        mealNameLists.put(dinnerNames,"Dinner");
+        mealNameLists.put("Dinner",dinnerNames);
 
         dinnerNdbnos = new ArrayList<>();
-        mealNdbnoLists.put(dinnerNdbnos,"Dinner");
+
+        mealNdbnoLists.put("Dinner", dinnerNdbnos);
 
         snackNames = new ArrayList<>();
-        mealNameLists.put(snackNames,"Snacks");
+        mealNameLists.put("Snacks",snackNames);
 
         snackNdbnos = new ArrayList<>();
-        mealNdbnoLists.put(snackNdbnos,"Snacks");
+        mealNdbnoLists.put("Snacks",snackNdbnos);
 
     }
 
@@ -213,22 +214,26 @@ public class Diet extends AppCompatActivity {
 
             private void grabMealSubmitted(String meal, DataSnapshot d)
             {
-
                 String foodID = (String) d.child("Food NDBs").getValue();
                 String foodNames =(String) d.child("Food Names").getValue();
 
+                assert foodNames != null;
                 foodNames = foodNames.replace("[" ,"");
                 foodNames = foodNames.replace("]","");
 
+                assert foodID != null;
                 foodID = foodID.replace("[","");
                 foodID = foodID.replace("]","");
 
-
+                // Commas within the Name of each food item are currently replaced with "_"
                 ArrayList<String> ndbnoList = new ArrayList<>(Arrays.asList(foodID.split(",")));
                 ArrayList<String> nameList  = new ArrayList<>(Arrays.asList(foodNames.split(",")));
 
+                // Stores the data into the HashMap for corresponding meal
+                mealNameLists.get(meal).addAll(nameList);
+                mealNdbnoLists.get(meal).addAll(ndbnoList);
 
-                addFoodItems(nameList,ndbnoList,meal);
+                addFoodItems(meal);
             }
 
             @Override
@@ -240,11 +245,13 @@ public class Diet extends AppCompatActivity {
 
     }
 
-    private void addFoodItems(ArrayList<String> nameList, ArrayList<String> ndbnoList, String meal)
+    private void addFoodItems( String meal)
      {
         LinearLayout linear = llList.get(meal);
+        ArrayList<String> nameList = mealNameLists.get(meal);
+        ArrayList<String> ndbnoList = mealNdbnoLists.get(meal);
 
-        for (int j = 0; j < ndbnoList.size(); j++)
+        for (int j = 0; j < nameList.size() ; j++)
         {
             LinearLayout childLayout = new LinearLayout(this);
 
@@ -302,70 +309,55 @@ public class Diet extends AppCompatActivity {
             Log.i("Logging foodName: " ,thisFoodName);
             Log.i("Logging NdbNo: " ,intFoodNdbNo);
 
-            String date = AppData.getTodaysDate();
-
-            /*
-            Creates a Diet Child Node under Data
-            Creates a UID Child Node under Diet
-            */
-            DatabaseReference Diet_node = db.getReference().child("Data").child("Diet");
-            DatabaseReference UID_node = Diet_node.child(UID);
-
-            switch(requestCode)
-            {
-                case 1111: // Breakfast
-                    breakfastNames.add(thisFoodName);
-                    breakfastNdbnos.add(intFoodNdbNo);
-
-                    String bnames = breakfastNames.toString();
-                    String bndbs = breakfastNdbnos.toString();
-                    UID_node.child(date).child("Breakfast").child("Food Names").setValue(bnames);
-                    UID_node.child(date).child("Breakfast").child("Food NDBs").setValue(bndbs);
-                    return;
-
-                case 2222: // Lunch
-                    lunchNames.add(thisFoodName);
-                    lunchNdbnos.add(intFoodNdbNo);
-                    String lnames = lunchNames.toString();
-                    String lndbs = lunchNdbnos.toString();
-                    UID_node.child(date).child("Lunch").child("Food Names").setValue(lnames);
-                    UID_node.child(date).child("Lunch").child("Food NDBs").setValue(lndbs);
-                    return;
-
-                case 3333: // Dinner
-                    dinnerNames.add(thisFoodName);
-                    dinnerNdbnos.add(intFoodNdbNo);
-                    String dnames = dinnerNames.toString();
-                    String dndbs = dinnerNdbnos.toString();
-                    UID_node.child(date).child("Dinner").child("Food Names").setValue(dnames);
-                    UID_node.child(date).child("Dinner").child("Food NDBs").setValue(dndbs);
-                    return;
-
-                case 4444: // Snacks
-                    snackNames.add(thisFoodName);
-                    snackNdbnos.add(intFoodNdbNo);
-                    String snames = snackNames.toString();
-                    String sndbs = snackNdbnos.toString();
-                    UID_node.child(date).child("Snack").child("Food Names").setValue(snames);
-                    UID_node.child(date).child("Snack").child("Food NDBs").setValue(sndbs);
-                    return;
-
-                default:
-                    breakfastNames.add(thisFoodName);
-                    breakfastNdbnos.add(intFoodNdbNo);
-                    String bdnames = breakfastNames.toString();
-                    String bdndbs = breakfastNdbnos.toString();
-                    UID_node.child(date).child("Breakfast").child("Food Names").setValue(bdnames);
-                    UID_node.child(date).child("Breakfast").child("Food NDBs").setValue(bdndbs);
-                    return;
-            }
-
+            enterSelectedFoodItemIntoDatabase(requestCode, thisFoodName, thisFoodNbdNo );
 
         }
 
         else
         {
             // Handle bad result from SearchFood.java
+        }
+    }
+
+    private void enterSelectedFoodItemIntoDatabase(int requestCode, String thisFoodName, int thisFoodNbdNo)
+    {
+        String meal = getMeal(requestCode);
+        String date = AppData.getTodaysDate();
+
+        DatabaseReference Diet_node = db.getReference().child("Data").child("Diet");
+        DatabaseReference Date_node = Diet_node
+                .child(UID)
+                .child(date);
+
+        mealNameLists.get(meal).add(thisFoodName);
+        mealNdbnoLists.get(meal).add(String.valueOf(thisFoodNbdNo));
+
+        String bnames = mealNameLists.get(meal).toString();
+        String bndbs = mealNdbnoLists.get(meal).toString();
+
+        Date_node.child(meal).child("Food Names").setValue(bnames);
+        Date_node.child(meal).child("Food NDBs").setValue(bndbs);
+    }
+
+    private String getMeal(int requestCode)
+    {
+        switch(requestCode)
+        {
+            case 1111: // Breakfast
+                return "Breakfast";
+
+            case 2222: // Lunch
+                return "Lunch";
+
+            case 3333: // Dinner
+                return "Dinner";
+
+            case 4444: // Snacks
+                return "Snacks";
+
+                    // Incorrect requestCode
+            default:
+                return "Breakfast";
         }
     }
 
