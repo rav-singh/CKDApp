@@ -77,11 +77,6 @@ public class Diet extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_diet);
 
-        //TODO remove once searchclass is good
-        AppData.updateDailyChecklist("Diet");
-
-       // mDatabse = FirebaseDatabase.getInstance().getReference();
-
         initializeButtons();
         initializeAndStoreMealNameLists();
         initializeAndStoreMealLayoutLists();

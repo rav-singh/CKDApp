@@ -14,7 +14,9 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -161,13 +163,26 @@ public class SearchFood extends AppCompatActivity {
                 myIntent.putExtra("FoodName", selectedFood.getName());
                 myIntent.putExtra("NdbNo", selectedFood.getNdbno());
 
+
                 AlertDialog.Builder builder = new AlertDialog.Builder(SearchFood.this);
+
                 builder.setTitle("Confirm Selection and Select Quantity");
+
+                LinearLayout ll = new LinearLayout(SearchFood.this);
+                ll.setOrientation(LinearLayout.VERTICAL);
+
+                TextView selectedFoodName = new TextView(SearchFood.this);
+
+                selectedFoodName.setText("You Selected: ".concat(selectedFood.getName()));
+                ll.addView(selectedFoodName);
 
                 final EditText input = new EditText(SearchFood.this);
 
                 input.setInputType(InputType.TYPE_CLASS_NUMBER);
-                builder.setView(input);
+
+                ll.addView(input);
+
+                builder.setView(ll);
 
                 // Set up the buttons
                 builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
