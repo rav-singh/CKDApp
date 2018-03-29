@@ -25,7 +25,7 @@ public final class  AppData
     public static String cur_Thread_Key;
     public static ThreadClass cur_Thread;
     public static Boolean isUserRegistering = false;
-    static Boolean checkListPopUpPresented = false;
+    static Boolean PopUpPresented = false;
 
     public static AppData getInstance()
     {
@@ -73,14 +73,15 @@ public final class  AppData
     {
         String UID = FirebaseAuth.getInstance().getCurrentUser().getUid();
         String date = getTodaysDate();
-        //Grabs references to the Root node and Users Node
+
         FirebaseDatabase db = FirebaseDatabase.getInstance();
 
-        DatabaseReference Data_node = db.getReference("Data");
-        DatabaseReference Mood_node = Data_node.child("DailyCheckList");
-        DatabaseReference UID_node = Mood_node.child(UID);
+        DatabaseReference Date_Node = db.getReference("Data")
+                                        .child("DailyCheckList")
+                                        .child(UID)
+                                        .child(date);
 
-        UID_node.child(date).child(component).setValue("1");
+        Date_Node.child(component).setValue("1");
     }
 
     static String getTodaysDate()

@@ -63,15 +63,21 @@ public class HomePage  extends AppCompatActivity {
             {
                 long numComponentsCompleted = dataSnapshot.getChildrenCount();
 
-               if(numComponentsCompleted > 3 && !AppData.checkListPopUpPresented)
+                // Only case where the user views the pop up is the first time they
+                // they come to the home page after participating all components
+                // Once Alert is activated it adds another node in the database such
+                // that the user will no longer see this Alert for the day.
+               if(numComponentsCompleted == 4)
                {
-                   AppData.checkListPopUpPresented = true;
+                   AppData.updateDailyChecklist("Awarded");
+
                    AlertDialog alertDialog = new AlertDialog.Builder(HomePage.this).create();
                    alertDialog.setTitle("Daily Checklist Completed!");
                    alertDialog.setMessage("Great job! You completed all your daily components!");
                   // alertDialog.setIcon(R.drawable.welcome);
                    alertDialog.show();
                }
+
             }
 
             @Override
