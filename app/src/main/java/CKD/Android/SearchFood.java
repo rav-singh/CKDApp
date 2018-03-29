@@ -1,10 +1,13 @@
 package CKD.Android;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -53,15 +56,19 @@ public class SearchFood extends AppCompatActivity {
     ArrayList<foodItem> parsedfoodsList = new ArrayList<foodItem>();
     private ListView lv;
     private int grabPosition;
+    private String quantity;
+    private Intent myIntent = new Intent();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_food);
 
-        btnSearchFood = (Button) findViewById(R.id.searchFood_btn);
+        btnSearchFood = findViewById(R.id.searchFood_btn);
         searchedFood = findViewById(R.id.searchFood_EF);
-        lv = (ListView) findViewById(R.id.foods_LV);
+        lv = findViewById(R.id.foods_LV);
+
+        final Boolean userConfirmation= false;
 
         btnSearchFood.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -147,26 +154,51 @@ public class SearchFood extends AppCompatActivity {
         // Grab the user`s choice
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l)
+            {
                 foodItem selectedFood = (foodItem) lv.getItemAtPosition(i);
-                Log.i("You selected :", selectedFood.toString());
-
-                // Pass Data back to Diet class to log into the Database
-                Intent myIntent = new Intent();
-                Bundle extras = new Bundle();
 
                 myIntent.putExtra("FoodName", selectedFood.getName());
                 myIntent.putExtra("NdbNo", selectedFood.getNdbno());
 
-                setResult(Activity.RESULT_OK, myIntent);
-                //TODO REMOVE COMMENTING OUT ONCE API IS UP
-              // AppData.updateDailyChecklist("Diet");
-                finish();
+                AlertDialog.Builder builder = new AlertDialog.Builder(SearchFood.this);
+                builder.setTitle("Confirm Selection and Select Quantity");
+
+                final EditText input = new EditText(SearchFood.this);
+
+                input.setInputType(InputType.TYPE_CLASS_NUMBER);
+                builder.setView(input);
+
+                // Set up the buttons
+                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which)
+                    {
+                        quantity = input.getText().toString();
+
+                        myIntent.putExtra("Quantity", quantity);
+
+                        setResult(Activity.RESULT_OK, myIntent);
+                        AppData.updateDailyChecklist("Diet");
+                        finish();
+                    }
+                });
+
+                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which)
+                    {
+                        dialog.cancel();
+                    }
+                });
+
+                builder.show();
+
             }
         });
 
 }
+
     // Each Foodname inside each FoodItem Class contains a Name with a UPC number
     // as well as commas within the name itself. We need to remove the UPC number
     // as well as commas with the name
@@ -196,7 +228,7 @@ public class SearchFood extends AppCompatActivity {
 
     private void parseUPCorGTIN(String name, String remove, int ndbo)
     {
-        if(remove!=null)
+        if(remove != null)
         {
             int indexToRemove = name.indexOf(remove);
 
@@ -215,8 +247,9 @@ public class SearchFood extends AppCompatActivity {
     }
 
 
-    public static Intent makeIntent(Context context) {
-    return new Intent(context, SearchFood.class);
-}
+    public static Intent makeIntent(Context context)
+    {
+        return new Intent(context, SearchFood.class);
+    }
 
 }
