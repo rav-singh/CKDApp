@@ -25,7 +25,7 @@ public final class  AppData
     public static String cur_Thread_Key;
     public static ThreadClass cur_Thread;
     public static Boolean isUserRegistering = false;
-    static Boolean PopUpPresented = false;
+    static Boolean checkListPopUpPresented = false;
 
     public static AppData getInstance()
     {
