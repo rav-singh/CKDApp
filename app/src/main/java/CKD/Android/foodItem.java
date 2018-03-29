@@ -4,16 +4,17 @@ package CKD.Android;
 public class foodItem {
     private String name;
     private int ndbno;
+    private int quantity;
 
     public foodItem() {
 
     }
 
 
-    public foodItem(String name, int ndbno) {
+    public foodItem(String name, int ndbno)
+    {
         this.name = name;
         this.ndbno = ndbno;
-
     }
 
     public String getName() {
