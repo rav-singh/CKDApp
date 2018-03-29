@@ -1,12 +1,15 @@
 package CKD.Android;
 
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.util.Log;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -60,12 +63,14 @@ public class HomePage  extends AppCompatActivity {
             {
                 long numComponentsCompleted = dataSnapshot.getChildrenCount();
 
-               if(numComponentsCompleted > 3 && !AppData.PopUpPresented)
+               if(numComponentsCompleted > 3 && !AppData.checkListPopUpPresented)
                {
-
-                    AppData.PopUpPresented = true;
-                    Intent launchActivity1= new Intent(HomePage.this,Pop.class);
-                    startActivity(launchActivity1);
+                   AppData.checkListPopUpPresented = true;
+                   AlertDialog alertDialog = new AlertDialog.Builder(HomePage.this).create();
+                   alertDialog.setTitle("Daily Checklist Completed!");
+                   alertDialog.setMessage("Great job! You completed all your daily components!");
+                  // alertDialog.setIcon(R.drawable.welcome);
+                   alertDialog.show();
                }
             }
 
