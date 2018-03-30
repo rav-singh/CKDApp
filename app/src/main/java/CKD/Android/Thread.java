@@ -40,9 +40,18 @@ public class Thread extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // TODO Make only comments scrollable
-
         setContentView(R.layout.activity_thread);
+
+        // The if statements prevents the counter falsely incrementing the counter
+        // when the user is directed here from the Comment class.
+        if(!AppData.userMakingComment)
+        {
+            AppData.userMakingComment = false;
+        }
+        else
+        {
+            AppData.updateParticipation("ThreadsViewed");
+        }
 
         getCurrentThread();
         getComments();
