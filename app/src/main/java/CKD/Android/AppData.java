@@ -2,11 +2,12 @@ package CKD.Android;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
-import java.security.PublicKey;
-import java.sql.Time;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -26,6 +27,7 @@ public final class  AppData
     public static ThreadClass cur_Thread;
     public static Boolean isUserRegistering = false;
     static Boolean PopUpPresented = false;
+    static Boolean userMakingComment = false;
 
     public static AppData getInstance()
     {
@@ -114,4 +116,40 @@ public final class  AppData
 
         return dateFormat.format(yesterday);
     }
+
+    static void updateParticipation(final String node_Name)
+    {
+        String date = getTodaysDate();
+        String UID = cur_user.getUID();
+
+        FirebaseDatabase db = FirebaseDatabase.getInstance();
+        final DatabaseReference Date_Node = db.getReference("Data")
+                .child("Participation")
+                .child(UID)
+                .child(date);
+
+        Date_Node.child(node_Name).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot)
+            {
+                Integer count = dataSnapshot.getValue(Integer.class);
+
+                if(count == null)
+                {
+                    Date_Node.child(node_Name).setValue(1);
+                }
+                else
+                {
+                    Date_Node.child(node_Name).setValue(++count);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError)
+            {
+
+            }
+        });
+    }
+
 }
