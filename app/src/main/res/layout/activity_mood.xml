@@ -13,6 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@android:color/white"
+        tools:text="MOOD PROMPT LOCATION"
         android:textSize="32sp"
         android:textStyle="bold"/>
 
@@ -35,15 +36,17 @@
                     android:id="@+id/Mood_ImBtn_Happy"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    app:srcCompat="@drawable/happy_emoji_resized" />
+                    android:layout_margin="20dp"
+                    android:background="@android:color/transparent"
+                    app:srcCompat="@drawable/happy_transparent" />
 
                 <ImageButton
                     android:id="@+id/Mood_ImBtn_Fatigued"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    app:srcCompat="@drawable/fatigued_emoji_resized" />
+                    android:layout_margin="20dp"
+                    android:background="@android:color/transparent"
+                    app:srcCompat="@drawable/fatigued_transparent" />
             </LinearLayout>
 
             <LinearLayout
@@ -51,19 +54,21 @@
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal">
 
-               <ImageButton
+                <ImageButton
                     android:id="@+id/Mood_ImBtn_Meh"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    app:srcCompat="@drawable/meh_emoji_resized" />
+                    android:layout_margin="20dp"
+                    android:background="@android:color/transparent"
+                    app:srcCompat="@drawable/meh_transparent" />
 
                 <ImageButton
                     android:id="@+id/Mood_ImBtn_Depressed"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    app:srcCompat="@drawable/depressed_emoji_resized" />
+                    android:layout_margin="20dp"
+                    android:background="@android:color/transparent"
+                    app:srcCompat="@drawable/depressed_transparent" />
             </LinearLayout>
 
             <LinearLayout
@@ -75,32 +80,35 @@
                     android:id="@+id/Mood_ImBtn_Anxious"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    app:srcCompat="@drawable/anxious_emoji_resized"/>
+                    android:layout_margin="20dp"
+                    android:background="@android:color/transparent"
+                    app:srcCompat="@drawable/anxious_transparent"/>
 
                 <ImageButton
                     android:id="@+id/Mood_ImBtn_Nausea"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    app:srcCompat="@drawable/nausea_emoji_resized"/>
+                    android:layout_margin="20dp"
+                    android:background="@android:color/transparent"
+                    app:srcCompat="@drawable/nausea_transparent"/>
 
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
 
-    <Button
-        android:id="@+id/Mood_Btn_Next"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/button_background"
-        android:text="@string/next_button"
-        android:textSize="32sp"
-        android:layout_gravity="end|bottom"/>
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/Mood_Btn_Next"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_background"
+            android:text="@string/next_button"
+            android:layout_margin="20dp"
+            android:textSize="24sp"
+            android:layout_alignParentEnd="true"/>
 
         <Button
             android:id="@+id/Mood_btn_home"
@@ -109,7 +117,7 @@
             android:text="Home"
             android:textSize="20sp"
             android:padding="10dp"
-            android:layout_marginBottom="10dp"
+            android:layout_margin="20dp"
             android:background="@drawable/button_home_background"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"/>
