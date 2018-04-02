@@ -43,6 +43,9 @@ public class Summary extends AppCompatActivity
 
         fillInAdminButtons();
 
+        Button home_btn = findViewById(R.id.Summary_btn_home);
+        home_btn = AppData.activateHomeButton(home_btn,Summary.this);
+
 
         int i = 0;
         for( Button b : allAdminBtnList)

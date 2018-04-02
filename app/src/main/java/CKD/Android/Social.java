@@ -26,6 +26,9 @@ public class Social extends AppCompatActivity
 
         for(Button b : buttonMap.keySet())
             setOnClickListeners(b);
+
+        Button home_btn = findViewById(R.id.Social_Btn_Home);
+        home_btn = AppData.activateHomeButton(home_btn,Social.this);
     }
 
     private void setOnClickListeners(final Button b)

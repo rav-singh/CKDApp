@@ -31,14 +31,15 @@ public class Comment extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-
-
         setContentView(R.layout.activity_comment);
 
         final TextView theadTitle = findViewById(R.id.Comment_TV_ThreadTitle);
         final TextView threadBody = findViewById(R.id.Comment_TV_ThreadBody);
         final EditText comment = findViewById(R.id.Comment_TE_Comment);
         Button submit_btn = findViewById(R.id.Comment_Btn_Submit);
+
+        Button home_btn = findViewById(R.id.Comment_Btn_Home);
+        home_btn = AppData.activateHomeButton(home_btn,Comment.this);
 
         threadBody.setMovementMethod(new ScrollingMovementMethod());
 

@@ -26,6 +26,9 @@ public class Exercise extends AppCompatActivity
             AppData.updateDailyChecklist("Exercise");
             checklistUpdated = true;
         }
+
+        Button home_btn = findViewById(R.id.Exervice_btn_home);
+        home_btn = AppData.activateHomeButton(home_btn,Exercise.this);
     }
 }
 

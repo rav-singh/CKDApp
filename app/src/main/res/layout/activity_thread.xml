@@ -304,8 +304,21 @@
             android:text="Next Page"
             android:layout_gravity="right"
             android:layout_alignParentEnd="true"
-            android:background="@drawable/button_background"
-            />
+            android:background="@drawable/button_background" />
+
+
+        <Button
+            android:id="@+id/Thread_btn_home"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="Home"
+            android:textSize="20sp"
+            android:padding="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/button_home_background"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"/>
+
 
     </RelativeLayout>
 </LinearLayout>

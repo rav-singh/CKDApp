@@ -66,8 +66,10 @@ public class SearchFood extends AppCompatActivity {
         setContentView(R.layout.activity_search_food);
 
         btnSearchFood = findViewById(R.id.searchFood_btn);
-        btnHome = findViewById(R.id.searchFood_BTN_home);
+
+        btnHome = findViewById(R.id.searchFood_btn_home);
         btnHome = AppData.activateHomeButton(btnHome, SearchFood.this);
+
         searchedFood = findViewById(R.id.searchFood_EF);
 
         lv = findViewById(R.id.foods_LV);

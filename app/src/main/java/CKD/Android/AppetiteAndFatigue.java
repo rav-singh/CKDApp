@@ -34,8 +34,13 @@ public class AppetiteAndFatigue extends AppCompatActivity
         setContentView(R.layout.activity_appetite);
 
        Button next_btn = findViewById(R.id.app_Btn_Next);
+
+       Button home_btn = findViewById(R.id.Appetite_btn_home);
+       home_btn = AppData.activateHomeButton(home_btn,AppetiteAndFatigue.this);
+
        final Spinner appetite = findViewById(R.id.app_SPN_appetite);
        final Spinner fatigue = findViewById(R.id.app_SPN_fatigue);
+
 
         next_btn.setOnClickListener(new View.OnClickListener()
         {

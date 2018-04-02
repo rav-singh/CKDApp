@@ -36,13 +36,21 @@
         android:layout_marginStart="8dp"
         android:background="@drawable/rounded_corner_textview"/>
 
-    <Button
-        android:id="@+id/searchFood_BTN_home"
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:text="Home"
-        android:textSize="20sp"
-        android:padding="5dp"
-        android:layout_gravity="center" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/searchFood_btn_home"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="Home"
+            android:textSize="20sp"
+            android:padding="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/button_home_background"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"/>
+    </RelativeLayout>
 
 </LinearLayout>

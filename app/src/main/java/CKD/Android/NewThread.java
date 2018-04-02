@@ -30,6 +30,11 @@ public class NewThread extends AppCompatActivity
         final EditText threadBody=  findViewById(R.id.NewThread_TE_Body);
         Button submit_btn = findViewById(R.id.NewThread_Btn_Submit);
 
+        Button home_btn = findViewById(R.id.NewThread_Btn_home);
+        home_btn = AppData.activateHomeButton(home_btn,NewThread.this);
+
+
+
         submit_btn.setOnClickListener(new View.OnClickListener()
         {
             //TODO Add a max character limit for Title Length

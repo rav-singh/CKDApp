@@ -42,6 +42,9 @@ public class Thread extends AppCompatActivity
 
         setContentView(R.layout.activity_thread);
 
+        Button home_btn = findViewById(R.id.Thread_btn_home);
+        home_btn = AppData.activateHomeButton(home_btn,Thread.this);
+
         // The if statements prevents the counter falsely incrementing the counter
         // when the user is directed here from the Comment class.
         if(!AppData.userMakingComment)

@@ -39,6 +39,9 @@ public class ThreadsList extends AppCompatActivity
 
         setContentView(R.layout.activity_threads);
 
+        Button home_btn = findViewById(R.id.Threads_btn_home);
+        home_btn = AppData.activateHomeButton(home_btn,ThreadsList.this);
+
         TextView categoryTitle = findViewById(R.id.ThreadsList_TV_Category);
 
         // Sets the header to the current category
