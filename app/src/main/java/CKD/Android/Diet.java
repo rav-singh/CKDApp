@@ -4,11 +4,14 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -49,10 +52,10 @@ public class Diet extends AppCompatActivity {
     public static final int REQUEST_CODE_Dinner = 3333;
     public static final int REQUEST_CODE_Snacks = 4444;
 
-    private Button btnAddBreakfast;
-    private Button btnAddLunch;
-    private Button btnAddDinner;
-    private Button btnAddSnacks;
+    private Button btnAddBreakfast, btnAddLunch,
+                    btnAddDinner, btnAddSnacks,
+                    btnHome;
+
     private String thisFoodName;
     private int thisFoodNbdNo;
     private String thisFoodQuantity;
@@ -195,6 +198,8 @@ public class Diet extends AppCompatActivity {
         btnAddLunch = findViewById(R.id.addLunch_btn);
         btnAddDinner = findViewById(R.id.addDinner_btn);
         btnAddSnacks = findViewById(R.id.addSnacks_btn);
+        btnHome = findViewById(R.id.Diet_BTN_Home);
+        btnHome = AppData.activateHomeButton(btnHome,Diet.this);
     }
 
     private void grabAllUsersDietSubmissions()
@@ -263,16 +268,23 @@ public class Diet extends AppCompatActivity {
     private void updateUI (String meal)
      {
         LinearLayout linear = llList.get(meal);
+        //This prevents the UI from adding views already added into the LL
+        int start = linear.getChildCount();
+
         ArrayList<String> nameList = mealNameLists.get(meal);
         ArrayList<String> quantityList = mealQuantityLists.get(meal);
 
-        for (int j = 0; j < nameList.size() ; j++)
+         DisplayMetrics dm = new DisplayMetrics();
+
+         getWindowManager().getDefaultDisplay().getMetrics(dm);
+
+         int width = (int) (dm.widthPixels*.8);
+
+         LinearLayout.LayoutParams linearParams = new LinearLayout.LayoutParams(width,LinearLayout.LayoutParams.WRAP_CONTENT);
+
+        for (int j = start ; j < nameList.size() ; j++)
         {
             LinearLayout childLayout = new LinearLayout(this);
-
-            LinearLayout.LayoutParams linearParams = new LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.MATCH_PARENT,
-                    LinearLayout.LayoutParams.WRAP_CONTENT);
 
             childLayout.setOrientation(LinearLayout.VERTICAL);
 
@@ -306,7 +318,10 @@ public class Diet extends AppCompatActivity {
             childLayout.addView(fquantity);
 
             linear.addView(childLayout);
+            linear.setBackground(this.getResources().getDrawable(R.drawable.rounded_corner_textview));
+
         }
+
     }
 
     // Listener for result back from SearchFood

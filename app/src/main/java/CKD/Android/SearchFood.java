@@ -51,13 +51,12 @@ public class SearchFood extends AppCompatActivity {
     private Request request;
     private String apiKey = "kOa0Zd0guy7xjuq3uPP0qYKvZlXRGoT0Joxaidud";
     private String usdaURL;
-    private Button btnSearchFood;
+    private Button btnSearchFood,btnHome;
     private EditText searchedFood;
     private foodItem foods;
     ArrayList<foodItem> foodsList = new ArrayList<foodItem>();
-    ArrayList<foodItem> parsedfoodsList = new ArrayList<foodItem>();
+    ArrayList<foodItem> parsedFoodsList = new ArrayList<foodItem>();
     private ListView lv;
-    private int grabPosition;
     private String quantity;
     private Intent myIntent = new Intent();
 
@@ -67,10 +66,11 @@ public class SearchFood extends AppCompatActivity {
         setContentView(R.layout.activity_search_food);
 
         btnSearchFood = findViewById(R.id.searchFood_btn);
+        btnHome = findViewById(R.id.searchFood_BTN_home);
+        btnHome = AppData.activateHomeButton(btnHome, SearchFood.this);
         searchedFood = findViewById(R.id.searchFood_EF);
-        lv = findViewById(R.id.foods_LV);
 
-        final Boolean userConfirmation= false;
+        lv = findViewById(R.id.foods_LV);
 
         btnSearchFood.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -149,7 +149,7 @@ public class SearchFood extends AppCompatActivity {
         ArrayAdapter<foodItem> arrayAdapter = new ArrayAdapter<foodItem>(
                 this,
                 android.R.layout.simple_list_item_1,
-                parsedfoodsList);
+                parsedFoodsList);
 
         lv.setAdapter(arrayAdapter);
 
@@ -258,7 +258,7 @@ public class SearchFood extends AppCompatActivity {
         //Create a new foodItemClass to replace in the foodslist Array
         foodItem updatedFoodItem = new foodItem(name, ndbo);
         //Overwrites the foodItem Class in the array
-        parsedfoodsList.add(updatedFoodItem);
+        parsedFoodsList.add(updatedFoodItem);
     }
 
 

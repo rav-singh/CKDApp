@@ -1,5 +1,10 @@
 package CKD.Android;
 
+import android.content.Context;
+import android.content.Intent;
+import android.view.View;
+import android.widget.Button;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -152,4 +157,18 @@ public final class  AppData
         });
     }
 
+    static Button activateHomeButton(Button b, final Context page)
+    {
+        b.setOnClickListener(new View.OnClickListener()
+        {
+
+            public void onClick(View v)
+            {
+                Intent launchActivity1=
+                        new Intent(page, HomePage.class);
+                page.startActivity(launchActivity1);
+            }
+        });
+        return b;
+    }
 }
