@@ -1,51 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="CKD.Android.SearchFood">
+    tools:context="CKD.Android.SearchFood"
+    android:orientation="vertical"
+    android:background="@drawable/main_background_gradient">
 
     <EditText
         android:id="@+id/searchFood_EF"
-        android:layout_width="0dp"
-        android:layout_height="59dp"
-        android:layout_marginBottom="63dp"
-        android:layout_marginEnd="26dp"
-        android:layout_marginStart="26dp"
-        android:layout_marginTop="36dp"
-        android:ems="10"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_corner_textview"
+        android:layout_margin="15dp"
+        android:textSize="24sp"
         android:hint="Search Food"
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/foods_LV"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:inputType="textPersonName" />
 
     <Button
         android:id="@+id/searchFood_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="441dp"
+        android:background="@drawable/button_background"
         android:text="Search"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchFood_EF"
-        app:layout_constraintVertical_bias="0.0" />
+        android:layout_gravity="end"
+        android:textSize="24sp"/>
 
     <ListView
         android:id="@+id/foods_LV"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchFood_EF" />
+        android:background="@drawable/rounded_corner_textview"/>
 
-</android.support.constraint.ConstraintLayout>
+
+</LinearLayout>
