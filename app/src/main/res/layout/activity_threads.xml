@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="fill_parent"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@drawable/main_background_gradient">
@@ -38,110 +37,10 @@
                 android:id = "@+id/ThreadsList_Layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="10dp">
+                android:orientation="vertical">
 
-                <Button
-                    android:id="@+id/ThreadsList_Btn_Thread1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/rounded_corner_textview"
-                    android:clickable="false"
-                    android:textAlignment="viewStart"
-                    android:layout_margin="@dimen/activity_horizontal_margin"
-                    tools:text="This is a sample thread" />
 
-                <Button
-                    android:id="@+id/ThreadsList_Btn_Thread2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    tools:text="This is a sample thread"
-                    android:textAlignment="viewStart"
-                    android:background="@drawable/rounded_corner_textview"
-                    android:clickable="false"
-                    android:layout_margin="@dimen/activity_horizontal_margin" />
-
-                <Button
-                    android:id="@+id/ThreadsList_Btn_Thread3"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    tools:text="This is a sample thread"
-                    android:textAlignment="viewStart"
-                    android:background="@drawable/rounded_corner_textview"
-                    android:clickable="false"
-                    android:layout_margin="@dimen/activity_horizontal_margin" />
-
-                <Button
-                    android:id="@+id/ThreadsList_Btn_Thread4"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    tools:text="This is a sample thread"
-                    android:textAlignment="viewStart"
-                    android:background="@drawable/rounded_corner_textview"
-                    android:clickable="false"
-                    android:layout_margin="@dimen/activity_horizontal_margin" />
-
-                <Button
-                    android:id="@+id/ThreadsList_Btn_Thread5"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    tools:text="This is a sample thread"
-                    android:textAlignment="viewStart"
-                    android:background="@drawable/rounded_corner_textview"
-                    android:clickable="false"
-                    android:layout_margin="@dimen/activity_horizontal_margin"/>
-
-                <Button
-                    android:id="@+id/ThreadsList_Btn_Thread6"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    tools:text="This is a sample thread"
-                    android:textAlignment="viewStart"
-                    android:background="@drawable/rounded_corner_textview"
-                    android:clickable="false"
-                    android:layout_margin="@dimen/activity_horizontal_margin" />
-
-                <Button
-                    android:id="@+id/ThreadsList_Btn_Thread7"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    tools:text="This is a sample thread"
-                    android:textAlignment="viewStart"
-                    android:background="@drawable/rounded_corner_textview"
-                    android:clickable="false"
-                    android:layout_margin="@dimen/activity_horizontal_margin" />
-
-                <Button
-                    android:id="@+id/ThreadsList_Btn_Thread8"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    tools:text="This is a sample thread"
-                    android:textAlignment="viewStart"
-                    android:background="@drawable/rounded_corner_textview"
-                    android:clickable="false"
-                    android:layout_margin="@dimen/activity_horizontal_margin"  />
-
-                <Button
-                    android:id="@+id/ThreadsList_Btn_Thread9"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    tools:text="This is a sample thread"
-                    android:textAlignment="viewStart"
-                    android:background="@drawable/rounded_corner_textview"
-                    android:clickable="false"
-                    android:layout_margin="@dimen/activity_horizontal_margin"            />
-
-                <Button
-                    android:id="@+id/ThreadsList_Btn_Thread10"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    tools:text="This is a sample thread"
-                    android:textAlignment="viewStart"
-                    android:background="@drawable/rounded_corner_textview"
-                    android:clickable="false"
-                    android:layout_margin="@dimen/activity_horizontal_margin"/>
             </LinearLayout>
-
         </ScrollView>
 
         <RelativeLayout

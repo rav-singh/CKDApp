@@ -1,15 +1,15 @@
 package CKD.Android;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.TableLayout;
 import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
@@ -20,16 +20,25 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 public class ThreadsList extends AppCompatActivity
 {
     final List<String> keyList= new ArrayList<>();
-    final List<Button> allThreadBtnList= new ArrayList<>();
-    List<Button> activeThreadBtnList = new ArrayList<>();
+    List<Button> activeThreadBtnList= new ArrayList<>();
+    final List<ThreadClass> threadsList= new ArrayList<>();
+
+    final Map<Integer,List<ThreadClass>> threadsMap = new HashMap<>();
+    final Map<Integer,List<String>> threadsKeyMap = new HashMap<>();
+    final int threadsPerPage = 10;
+
+    LinearLayout listOfThreads;
+
     DataSnapshot DS;
-    int currentPage = 1;
+    int currentPage;
     int maxPages;
     Boolean dailyCheckListUpdated = false;
 
@@ -39,54 +48,75 @@ public class ThreadsList extends AppCompatActivity
 
         setContentView(R.layout.activity_threads);
 
-        Button home_btn = findViewById(R.id.Threads_btn_home);
-        home_btn = AppData.activateHomeButton(home_btn,ThreadsList.this);
+        listOfThreads = findViewById(R.id.ThreadsList_Layout);
+
+        currentPage=1;
+
+        initializeButtons();
 
         TextView categoryTitle = findViewById(R.id.ThreadsList_TV_Category);
 
         // Sets the header to the current category
         categoryTitle.setText(AppData.cur_Category);
 
-        //Takes all threadButtons and places them into threadButtonList
-        initializeAndStoreThreadButtons();
-
-        // Takes a DataSnapShot of the CurrentCategory and takes all of the ThreadUID's
-        // places them into keyList
         grabKeysInCategory();
 
     }
 
-    private void initializeAndStoreThreadButtons()
+    private void initializeButtons()
     {
-        Button thread1 = findViewById(R.id.ThreadsList_Btn_Thread1);
-        allThreadBtnList.add(thread1);
+        Button home_btn = findViewById(R.id.Threads_btn_home);
+        home_btn = AppData.activateHomeButton(home_btn,ThreadsList.this);
 
-        Button thread2 = findViewById(R.id.ThreadsList_Btn_Thread2);
-        allThreadBtnList.add(thread2);
+        Button newThread = findViewById(R.id.ThreadsList_Btn_NewThread);
+        newThread.setOnClickListener(new View.OnClickListener()
+        {
+            public void onClick(View v)
+            {
+                Intent launchActivity1 =
+                        new Intent(CKD.Android.ThreadsList.this,NewThread.class);
+                startActivity(launchActivity1);
+            }
+        });
 
-        Button thread3 = findViewById(R.id.ThreadsList_Btn_Thread3);
-        allThreadBtnList.add(thread3);
+        Button nextPage = findViewById(R.id.ThreadsList_Btn_Next);
 
-        Button thread4 = findViewById(R.id.ThreadsList_Btn_Thread4);
-        allThreadBtnList.add(thread4);
+        nextPage.setOnClickListener(new View.OnClickListener()
+        {
+            public void onClick(View v)
+            {
 
-        Button thread5 = findViewById(R.id.ThreadsList_Btn_Thread5);
-        allThreadBtnList.add(thread5);
+                enablePrevButton();
+                activeThreadBtnList.clear();
+                currentPage++;
+                loadNextThreads();
 
-        Button thread6 = findViewById(R.id.ThreadsList_Btn_Thread6);
-        allThreadBtnList.add(thread6);
+                if(currentPage == maxPages)
+                {
+                    disableNextButton();
+                }
+            }
 
-        Button thread7 = findViewById(R.id.ThreadsList_Btn_Thread7);
-        allThreadBtnList.add(thread7);
+        });
+        Button prevPage = findViewById(R.id.ThreadsList_Btn_Prev);
 
-        Button thread8 = findViewById(R.id.ThreadsList_Btn_Thread8);
-        allThreadBtnList.add(thread8);
+        prevPage.setOnClickListener(new View.OnClickListener()
+        {
+            public void onClick(View v)
+            {
 
-        Button thread9 = findViewById(R.id.ThreadsList_Btn_Thread9);
-        allThreadBtnList.add(thread9);
+                enableNextButton();
+                currentPage--;
+                activeThreadBtnList.clear();
+                loadPreviousThreads();
 
-        Button thread10 = findViewById(R.id.ThreadsList_Btn_Thread10);
-        allThreadBtnList.add(thread10);
+                if(currentPage == 1)
+                {
+                    disablePrevButton();
+                }
+            }
+
+        });
     }
 
     private void enableNextButton()
@@ -117,54 +147,22 @@ public class ThreadsList extends AppCompatActivity
         prevPage.setBackground(this.getResources().getDrawable(R.drawable.disabled_button_background));
     }
 
-    //TODO Fix bug where Thread titles in buttons are centered and not left-aligned
-    private void loadPreviousThreads(int pageNum)
+    private void loadPreviousThreads()
     {
-        int lowBound = (pageNum - 1) * 10;
-        int numThreads = 0;
-
-        // This references the LinearList INSIDE of the scrollview therefore does
-        // Not require removing buttons
-        LinearLayout ll = findViewById(R.id.ThreadsList_Layout);
-
-        // Used for instance when the previous page of threads the user was viewing
-        // has less than 10 threads to view. This checks if Buttons were removed.
-        for(Button B : allThreadBtnList)
-        {
-            if(B.getParent() == null)
-                ll.addView(B);
-        }
-
-        for(int i = lowBound; i < keyList.size() && numThreads < 10; i++, numThreads++)
-        {
-            activateThreads(allThreadBtnList.get(numThreads), keyList.get(i), DS);
-        }
-
-        activeThreadBtnList = allThreadBtnList.subList(0, numThreads);
-        reOrderLayout();
+        listOfThreads.removeAllViews();
+        updateUI();
     }
 
-    private void loadNextThreads(int pageNum)
+    private void loadNextThreads()
     {
-        int lowBound = (pageNum - 1) * 10;
-        int numThreads = 0;
-
-        for(int i = lowBound; i < keyList.size() && numThreads < 10; i++, numThreads++)
-        {
-            activateThreads(allThreadBtnList.get(numThreads), keyList.get(i), DS);
-        }
-        // Separates the activated Buttons from unactivated buttons (Instance of less than 10 threads in database
-        // for the given category
-        activeThreadBtnList = allThreadBtnList.subList(0, numThreads);
-        reOrderLayout();
+        listOfThreads.removeAllViews();
+        updateUI();
     }
 
     private void setOnClickOnButtons()
     {
         // Iterates through the ButtonList of activated threads and sets the Cur_thread key in
         // AppData accordingly and each button in list gets click listener
-
-        final int lowBound = (currentPage-1) *10;
         for(int i = 0; i < activeThreadBtnList.size(); i++ )
         {
             final int finalI = i;
@@ -174,7 +172,11 @@ public class ThreadsList extends AppCompatActivity
                 @Override
                 public void onClick(View v)
                 {
-                    AppData.cur_Thread_Key = keyList.get(lowBound + finalI);
+
+                    //Returns a list of Strings to reference the corresponding threads
+                    //in the databse
+                    String threadKey = threadsKeyMap.get(currentPage).get(finalI);
+                    AppData.cur_Thread_Key = threadKey;
 
                     // This avoids the database being written to every time the
                     // user opens this page. Once the user closes the app the next
@@ -191,54 +193,11 @@ public class ThreadsList extends AppCompatActivity
             });
         }
 
-        Button nextPage = findViewById(R.id.ThreadsList_Btn_Next);
-        Button prevPage = findViewById(R.id.ThreadsList_Btn_Prev);
-        Button newThread = findViewById(R.id.ThreadsList_Btn_NewThread);
-
-        nextPage.setOnClickListener(new View.OnClickListener()
-        {
-            public void onClick(View v)
-            {
-                enablePrevButton();
-                loadNextThreads(++currentPage);
-                if(currentPage == maxPages)
-                {
-                    disableNextButton();
-
-                }
-            }
-
-        });
-
-        prevPage.setOnClickListener(new View.OnClickListener()
-        {
-            public void onClick(View v)
-            {
-                enableNextButton();
-                loadPreviousThreads(--currentPage);
-                if(currentPage == 1)
-                {
-                    disablePrevButton();
-                }
-            }
-
-        });
-
         if(currentPage == 1)
             disablePrevButton();
 
         if(maxPages == 1)
             disableNextButton();
-
-        newThread.setOnClickListener(new View.OnClickListener()
-        {
-            public void onClick(View v)
-            {
-                Intent launchActivity1 =
-                        new Intent(CKD.Android.ThreadsList.this,NewThread.class);
-                startActivity(launchActivity1);
-            }
-        });
 
     }
 
@@ -254,46 +213,76 @@ public class ThreadsList extends AppCompatActivity
             @Override
             public void onDataChange(DataSnapshot dataSnapshot)
             {
-                DS = dataSnapshot;
-                // goes through and adds all of the thread UID's from the database and adds them
-                //to a list
-                for(DataSnapshot d : DS.getChildren())
+                for(DataSnapshot d : dataSnapshot.getChildren())
                 {
+                    ThreadClass thread = d.getValue(ThreadClass.class);
+                    threadsList.add(thread);
                     keyList.add(d.getKey());
                 }
-                // Calculates the maximum number of pages the user can navigate through given
-                // 10 threads can be viewed at a time. Used to determine when to disable/enable
-                // navigation buttons
-                maxPages = (keyList.size() / 10) + 1;
+
+                int numThreads = keyList.size();
+
+                //This accounts for when there are a maximum number of threads on a page
+                if(numThreads%threadsPerPage == 0)
+                    maxPages = numThreads/threadsPerPage;
+                else
+                    maxPages = (numThreads / threadsPerPage) + 1;
 
                 // If no Threads have been created change the first button accordingly and return
-                if(keyList.size() == 0)
+                if(threadsList.size() == 0)
                 {
-                    allThreadBtnList.get(0).setText("There are no current threads in this topic!!!");
-                    allThreadBtnList.get(0).setBackgroundColor(Color.GRAY);
-                    //Keeps one thread active
-                    activeThreadBtnList.add(allThreadBtnList.get(0));
-
-                    reOrderLayout();
+                    noThreadsHere();
                     return;
                 }
 
-                // Used to keep track which threads were NOT activated to remove from linear layout
-                int numThreads = 0;
-
-                // The thread keys grabbed from database are placed from oldest to newest order.
-                // We want to Have newest posts at the beginning. So order is reversed to have
                 Collections.reverse(keyList);
+                Collections.reverse(threadsList);
 
-                for(int i = 0; i < keyList.size() && numThreads < 10; i++, numThreads++ )
+                sortPagesIntoMap();
+                sortKeysIntoMap();
+
+                updateUI();
+
+            }
+
+            private void sortPagesIntoMap()
+            {
+                List<ThreadClass> pageOfThreads;
+
+                for(int pagenum = 1; pagenum <= maxPages; pagenum++)
                 {
-                    activateThreads(allThreadBtnList.get(numThreads), keyList.get(i), dataSnapshot);
-                }
-                // Separates the activated Buttons from unactivated buttons
-                // (Instance of <10 threads available to fill all buttons on page)
-                activeThreadBtnList = allThreadBtnList.subList(0,numThreads);
+                    if(pagenum == maxPages)
+                    {
+                        pageOfThreads = threadsList.subList((pagenum-1)*threadsPerPage,threadsList.size());
+                    }
+                    else
+                    {
+                        pageOfThreads = threadsList.subList((pagenum-1)*threadsPerPage, (pagenum-1) + threadsPerPage);
+                    }
 
-                reOrderLayout();
+                    threadsMap.put(pagenum,pageOfThreads);
+                }
+
+
+            }
+
+            private void sortKeysIntoMap()
+            {
+                List<String> threadKey;
+
+                for (int pagenum = 1; pagenum <= maxPages; pagenum++)
+                {
+                    if (pagenum == maxPages)
+                    {
+                        threadKey = keyList.subList((pagenum-1) * threadsPerPage, threadsList.size());
+
+                    } else
+                    {
+                        threadKey = keyList.subList((pagenum-1) * threadsPerPage, (pagenum-1) + threadsPerPage);
+                    }
+
+                    threadsKeyMap.put(pagenum , threadKey);
+                }
             }
 
             @Override
@@ -305,33 +294,130 @@ public class ThreadsList extends AppCompatActivity
 
     }
 
-    // Goes through the list of Activated Buttons and ALL the buttons
-    // If there is a button in the allThreadBtnList that is not in
-    // activeThreadBtnList. It is removed from the linear Layout.
-    // If there are atleast 10 Threads in the Category this will do nothing
-    // TODO Add a check to avoid doing this when there are 10 active threads
-    private void reOrderLayout()
+    private void noThreadsHere()
     {
-        LinearLayout ll = findViewById(R.id.ThreadsList_Layout);
+        Button empty = new Button(this);
 
-        for(Button b : allThreadBtnList)
+        empty.setClickable(false);
+
+        empty.setLayoutParams(new TableLayout.LayoutParams(
+                TableLayout.LayoutParams.MATCH_PARENT,
+                TableLayout.LayoutParams.WRAP_CONTENT, 1f));
+
+        empty.setText("There are currently no posts in this topic!");
+
+        empty.setBackground(this.getResources().getDrawable(R.drawable.rounded_corner_textview));
+
+        listOfThreads.addView(empty);
+    }
+
+    private void updateUI ()
+    {
+        LinearLayout.LayoutParams linearParams = new LinearLayout.LayoutParams
+                (LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+
+        List<ThreadClass> pageOfThreads = threadsMap.get(currentPage);
+
+        //Indicates which threads have already been loaded to avoid referencing that thread again
+        int viewCount = listOfThreads.getChildCount();
+
+        for(int i = viewCount;  i < pageOfThreads.size() ; i++)
         {
-            if(activeThreadBtnList.contains(b))
-                continue;
-            else
-                ll.removeView(b);
+            ThreadClass currentThread = pageOfThreads.get(i);
+
+            LinearLayout threadView = new LinearLayout(this);
+            threadView.setLayoutParams(linearParams);
+            threadView.setOrientation(LinearLayout.HORIZONTAL);
+
+            LinearLayout likesView = new LinearLayout(this);
+            likesView.setLayoutParams(linearParams);
+            likesView.setOrientation(LinearLayout.VERTICAL);
+
+            ImageButton arrow = new ImageButton(this);
+
+            arrow.setLayoutParams(new TableLayout.LayoutParams(
+                    TableLayout.LayoutParams.WRAP_CONTENT,
+                    TableLayout.LayoutParams.WRAP_CONTENT, 1f));
+
+            arrow.setImageDrawable(this.getResources().getDrawable(android.R.drawable.arrow_up_float));
+            arrow.setBackgroundResource(0);
+
+            arrow = setOnClickUpVote(arrow,keyList.get(i));
+
+            likesView.addView(arrow);
+
+            TextView likes = new TextView(this);
+            likes.setLayoutParams(new TableLayout.LayoutParams(
+                    TableLayout.LayoutParams.WRAP_CONTENT,
+                    TableLayout.LayoutParams.WRAP_CONTENT, 1f));
+            likes.setText(String.valueOf(currentThread.getLikes()));
+
+            likesView.addView(likes);
+            threadView.addView(likesView);
+
+            Button thread = new Button(this);
+            thread.setLayoutParams(new TableLayout.LayoutParams(
+                    TableLayout.LayoutParams.WRAP_CONTENT,
+                    TableLayout.LayoutParams.WRAP_CONTENT, 1f));
+            thread.setText(currentThread.getTitle());
+            thread.setBackground(this.getResources().getDrawable(R.drawable.rounded_corner_textview));
+
+            threadView.addView(thread);
+            activeThreadBtnList.add(thread);
+
+
+            listOfThreads.addView(threadView);
         }
 
-        //Sets clicker on all buttons
-        setOnClickOnButtons();
+            setOnClickOnButtons();
+
     }
 
-    // Takes uses the datasnapshot to get the title for a specific thread
-    private void activateThreads(Button thread, String threadKey, DataSnapshot dataSnapshot)
+    private ImageButton setOnClickUpVote(final ImageButton arrow, final String threadKey)
     {
-        String title = (String) dataSnapshot.child(threadKey).child("title").getValue();
-        thread.setText(title);
-        thread.setGravity(Gravity.LEFT|Gravity.CENTER);
-        thread.setBackgroundColor(Color.LTGRAY);
+        arrow.setOnClickListener( new View.OnClickListener()
+        {
+            public void onClick(View v)
+            {
+                //Toggles the selected state of the button
+                arrow.setSelected(!arrow.isSelected());
+                final boolean isSelected = arrow.isSelected();
+
+                FirebaseDatabase db = FirebaseDatabase.getInstance();
+                final DatabaseReference Likes_Node = db.getReference("Data")
+                                                        .child("Social")
+                                                        .child(AppData.cur_Category)
+                                                        .child(threadKey)
+                                                        .child("likes");
+
+                Likes_Node.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot)
+                    {
+                        Integer count = dataSnapshot.getValue(Integer.class);
+                        if(isSelected)
+                        {
+                            Likes_Node.setValue(++count);
+                            arrow.setBackgroundColor(Color.GREEN);
+                        }
+                        else
+                        {
+                            Likes_Node.setValue(--count);
+                            arrow.setBackgroundResource(0);
+                        }
+
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError)
+                    {
+
+                    }
+                });
+            }
+        });
+
+        return arrow;
     }
+
 }
