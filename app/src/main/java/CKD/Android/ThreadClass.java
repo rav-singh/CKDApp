@@ -8,6 +8,7 @@ public class ThreadClass {
     private String body;
     private String date;
     private String category;
+    private int likes;
 
 
     public ThreadClass()
@@ -16,13 +17,14 @@ public class ThreadClass {
     }
 
 
-    public ThreadClass(String author, String authorUID, String title, String body, String date, String category) {
+    public ThreadClass(String author, String authorUID, String title, String body, String date, String category,int likes) {
         this.author = author;
         this.authorUID = authorUID;
         this.title = title;
         this.body = body;
         this.date = date;
         this.category = category;
+        this.likes = likes;
     }
 
     public String getAuthor() {
@@ -72,4 +74,9 @@ public class ThreadClass {
     public void setCategory(String category) {
         this.category = category;
     }
+
+    public void setLikes(int likes){this.likes = likes;}
+
+    public int getLikes(){return this.likes;}
+
 }

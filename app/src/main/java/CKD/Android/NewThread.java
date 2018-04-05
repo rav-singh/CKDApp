@@ -51,7 +51,7 @@ public class NewThread extends AppCompatActivity
                 String category = AppData.cur_Category;
                 String date = AppData.getTodaysDate();
 
-                ThreadClass newThread = new ThreadClass(authorName,authorUID, title, body, date, category);
+                ThreadClass newThread = new ThreadClass(authorName,authorUID, title, body, date, category, 0);
 
                 FirebaseDatabase db;
 
