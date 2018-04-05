@@ -18,6 +18,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -27,17 +29,18 @@ import java.util.Map;
 
 public class ThreadsList extends AppCompatActivity
 {
-    final List<String> keyList= new ArrayList<>();
+    List<String> keyList= new ArrayList<>();
     List<Button> activeThreadBtnList= new ArrayList<>();
-    final List<ThreadClass> threadsList= new ArrayList<>();
+    List<TextView> textViewsList = new ArrayList<>();
+    List<ThreadClass> threadsList= new ArrayList<>();
 
-    final Map<Integer,List<ThreadClass>> threadsMap = new HashMap<>();
-    final Map<Integer,List<String>> threadsKeyMap = new HashMap<>();
-    final int threadsPerPage = 10;
+
+    Map<Integer,List<ThreadClass>> threadsMap = new HashMap<>();
+    Map<Integer,List<String>> threadsKeyMap = new HashMap<>();
+    int threadsPerPage = 10;
 
     LinearLayout listOfThreads;
 
-    DataSnapshot DS;
     int currentPage;
     int maxPages;
     Boolean dailyCheckListUpdated = false;
@@ -150,12 +153,14 @@ public class ThreadsList extends AppCompatActivity
     private void loadPreviousThreads()
     {
         listOfThreads.removeAllViews();
+        textViewsList.clear();
         updateUI();
     }
 
     private void loadNextThreads()
     {
         listOfThreads.removeAllViews();
+        textViewsList.clear();
         updateUI();
     }
 
@@ -317,6 +322,7 @@ public class ThreadsList extends AppCompatActivity
                 (LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
 
         List<ThreadClass> pageOfThreads = threadsMap.get(currentPage);
+        List<String> pageOfKeys = threadsKeyMap.get(currentPage);
 
         //Indicates which threads have already been loaded to avoid referencing that thread again
         int viewCount = listOfThreads.getChildCount();
@@ -342,18 +348,22 @@ public class ThreadsList extends AppCompatActivity
             arrow.setImageDrawable(this.getResources().getDrawable(android.R.drawable.arrow_up_float));
             arrow.setBackgroundResource(0);
 
-            arrow = setOnClickUpVote(arrow,keyList.get(i));
+            arrow = setOnClickUpVote(arrow,pageOfKeys.get(i));
 
-            likesView.addView(arrow);
+            likesView.addView(arrow);////////////////////
 
             TextView likes = new TextView(this);
             likes.setLayoutParams(new TableLayout.LayoutParams(
                     TableLayout.LayoutParams.WRAP_CONTENT,
                     TableLayout.LayoutParams.WRAP_CONTENT, 1f));
             likes.setText(String.valueOf(currentThread.getLikes()));
+            likes.setTextSize(20);
 
             likesView.addView(likes);
-            threadView.addView(likesView);
+
+            textViewsList.add(likes);
+
+            threadView.addView(likesView);///////////////////////
 
             Button thread = new Button(this);
             thread.setLayoutParams(new TableLayout.LayoutParams(
@@ -362,11 +372,12 @@ public class ThreadsList extends AppCompatActivity
             thread.setText(currentThread.getTitle());
             thread.setBackground(this.getResources().getDrawable(R.drawable.rounded_corner_textview));
 
-            threadView.addView(thread);
+            threadView.addView(thread);///////////////////////
             activeThreadBtnList.add(thread);
 
 
-            listOfThreads.addView(threadView);
+            listOfThreads.addView(threadView);/////////////////
+
         }
 
             setOnClickOnButtons();
@@ -381,6 +392,7 @@ public class ThreadsList extends AppCompatActivity
             {
                 //Toggles the selected state of the button
                 arrow.setSelected(!arrow.isSelected());
+
                 final boolean isSelected = arrow.isSelected();
 
                 FirebaseDatabase db = FirebaseDatabase.getInstance();
@@ -405,7 +417,13 @@ public class ThreadsList extends AppCompatActivity
                             Likes_Node.setValue(--count);
                             arrow.setBackgroundResource(0);
                         }
+                        upDateUpVoteCounter(count);
+                    }
 
+                    private void upDateUpVoteCounter(int count)
+                    {
+                        int indexOfThread = threadsKeyMap.get(currentPage).indexOf(threadKey);
+                        textViewsList.get(indexOfThread).setText(String.valueOf(count));
                     }
 
                     @Override
