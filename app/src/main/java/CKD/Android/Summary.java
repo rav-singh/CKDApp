@@ -79,7 +79,8 @@ public class Summary extends AppCompatActivity
 
     private void addPatientsUIDToSelectedAdmins()
     {
-        // String date = new SimpleDateFormat("YYYY-MM-dd", Locale.getDefault()).format(new Date());
+        String date = AppData.getTodaysDate();
+
         String userUID = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
         FirebaseDatabase db = FirebaseDatabase.getInstance();
@@ -89,7 +90,9 @@ public class Summary extends AppCompatActivity
         for(String adminUID : selectedAdmins.keySet())
         {
             DatabaseReference Patients_node = Admin_node.child(adminUID).child("Patients");
-            Patients_node.child(AppData.cur_user.getName()).setValue(userUID);
+            Patients_node.child(userUID).child("Name").setValue(AppData.cur_user.getName());
+            Patients_node.child(userUID).child("Date").setValue(date);
+
         }
     }
 
