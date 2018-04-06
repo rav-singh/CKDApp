@@ -54,19 +54,11 @@
     <div id="message">
       <h2>Registration</h2>
       <form>
-        <div>
+        <div class="required">
           <input id="name" type="text" placeholder="Full Name">
-        </div>
-        <div>
-          <input id="email" type="text" placeholder="Email...">
-        </div>
-        <div>
-          <input id="confirm_email" type="text" placeholder="Retype Email...">
-        </div>
-        <div>
+          <input id='email' type='email' placeholder="Email..." >
+          <input id='confirm_email' type='confirm_email'  placeholder="Confirm Email...">
           <input id="password" type="password" placeholder="Password...">
-        </div>
-        <div>
           <input id="facility" type="text" placeholder="Facility">
         </div>
       </form>
@@ -77,15 +69,20 @@
     </div>
 
     <script>
+
     var createdAccountThisSession = 0;
 
       document.querySelector('#register').addEventListener('click', function(e)
       {
         e.preventDefault();
         e.stopPropagation();
+
         var email = document.querySelector('#email').value;
+        var c_email = document.querySelector('#confirm_email').value;
         var password = document.querySelector('#password').value
 
+        if(email == c_email)
+        {
           firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION).then(function()
           {
             createdAccountThisSession = 1;
@@ -94,6 +91,11 @@
               var errorMessage = error.message;
               alert(errorMessage);
           });
+        }
+        else
+        {
+          alert("Error: Your emails do not match!");
+        }
       });
 
     document.addEventListener('DOMContentLoaded', function() {
@@ -109,7 +111,7 @@
           });
           createdAccountThisSession = 0;
 
-          alert("Thank you for registering.\nPlease wait for your credentials to be approved before attempting to login.");
+          alert("Thank you for registering.\n");
 
           var timer = setTimeout(function() {
             firebase.auth().signOut();
