@@ -143,7 +143,7 @@
       var csv = 'Patient UID, Patient Name, Date, Mood, Threads Read, Threads Created, Meals, Activity, Fatigue\n';
 
       var AppAndFatigueRef, DietRef, MoodRef, PartRef;
-      var promises = [], promise;
+      var promises = [], promise, dataLimit;
       var usedDateArray = [];
 
       ptsUID.forEach(function(uid) {
@@ -152,10 +152,21 @@
         MoodRef = firebase.database().ref("Data/Mood/" + uid + "/");
         PartRef = firebase.database().ref("Data/Participation/" + uid + "/");
 
+        var dataAccess = firebase.database().ref("Admins/" + queries[1] + "/Patients/" + uid);
+
+        promise = dataAccess.once("value", function(snapshot){
+          dataLimit = snapshot.child("Date").val();
+        });
+
+        promises.push(promise);
+
         promise = AppAndFatigueRef.once("value", function(uid) {
           uid.forEach(function(date) {
-            appNodes.push(date);
-            appDates.push(date.key);
+            if(date.key <= dataLimit)
+            {
+              appNodes.push(date);
+              appDates.push(date.key);
+            }
           });
         });
 
@@ -163,8 +174,11 @@
 
         promise = DietRef.once("value", function(uid) {
           uid.forEach(function(date) {
-            dietNodes.push(date);
-            dietDates.push(date.key);
+            if(date.key <= dataLimit)
+            {
+              dietNodes.push(date);
+              dietDates.push(date.key);
+            }
           });
         });
 
@@ -172,8 +186,11 @@
 
         promise = MoodRef.once("value", function(uid) {
           uid.forEach(function(date) {
-            moodNodes.push(date);
-            moodDates.push(date.key);
+            if(date.key <= dataLimit)
+            {
+              moodNodes.push(date);
+              moodDates.push(date.key);
+            }
           });
         });
 
@@ -181,8 +198,11 @@
 
         promise = PartRef.once("value", function(uid) {
           uid.forEach(function(date) {
-          partNodes.push(date);
-          partDates.push(date.key);
+            if(date.key <= dataLimit)
+            {
+              partNodes.push(date);
+              partDates.push(date.key);
+            }
           });
         });
 
