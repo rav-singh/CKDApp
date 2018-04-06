@@ -38,7 +38,7 @@
       #message p { line-height: 140%; margin: 16px 0 24px; font-size: 14px; }
       #message a { display: block; text-align: center; background: #039be5; text-transform: uppercase; text-decoration: none; color: white; padding:10px; border-radius: 4px; }
       #message, #message a { box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); }
-      #message input { background-color: #fff; box-sizing: border-box; border-radius: 2px; color: #333; -webkit-box-sizing: border-box; -moz-box-sizing: border-box;
+      #message input, select { background-color: #fff; box-sizing: border-box; border-radius: 2px; color: #333; -webkit-box-sizing: border-box; -moz-box-sizing: border-box;
         display: block; float: none; font-size: 16px; border: 1px solid #ccc; padding: 6px 10px; height: 38px; width: 100%; line-height: 1.3; }
       #message button { background:linear-gradient(to bottom, #33bdef 5%, #019ad2 100%); border-radius:6px;  cursor:pointer;
     	  color:#ffffff; font-size:15px; font-weight:bold; padding:6px 24px; text-shadow:0px -1px 0px #5b6178; display: block; margin: 0 auto;}
@@ -59,7 +59,12 @@
           <input id='email' type='email' placeholder="Email..." >
           <input id='confirm_email' type='confirm_email'  placeholder="Confirm Email...">
           <input id="password" type="password" placeholder="Password...">
-          <input id="facility" type="text" placeholder="Facility">
+          <select id="occupation" name="type">
+              <option value=1>Are you a...</value>
+              <option value="Medical">Medical Provider</value>
+              <option value="Tech">Technical Support / Developer</value>
+          </select>
+          <input id="facility" type="text" placeholder="Facility Name. Enter N/A if none...">
         </div>
       </form>
       <div>
@@ -71,7 +76,6 @@
     <script>
 
     var createdAccountThisSession = 0;
-
       document.querySelector('#register').addEventListener('click', function(e)
       {
         e.preventDefault();
@@ -81,7 +85,10 @@
         var c_email = document.querySelector('#confirm_email').value;
         var password = document.querySelector('#password').value
 
-        if(email == c_email)
+        var e = document.getElementById("occupation");
+        var strUser = e.options[e.selectedIndex].value;
+
+        if(email == c_email && strUser != 1)
         {
           firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION).then(function()
           {
@@ -94,7 +101,10 @@
         }
         else
         {
-          alert("Error: Your emails do not match!");
+          if (email != c_email)
+            alert("Error: Your emails do not match!");
+          else
+            alert("Please select a occupation!");
         }
       });
 
@@ -103,11 +113,11 @@
       {
         if (user && createdAccountThisSession == 1)
         {
-
           firebase.database().ref('Admins/' + firebase.auth().currentUser.uid).set({
             Name: document.querySelector('#name').value,
             Email: document.querySelector('#email').value,
-            Facility : document.querySelector('#facility').value
+            Facility: document.querySelector('#facility').value,
+            Type: document.getElementById("occupation").options[document.getElementById("occupation").selectedIndex].value
           });
           createdAccountThisSession = 0;
 
