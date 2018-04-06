@@ -191,76 +191,84 @@
         // per each user, do stuff...
         Promise.all(promises).then(function () {
           var date = getDateFromArrays(appDates, moodDates, partDates, dietDates, usedDateArray);
-          var mood = null, meals = null, data = null;
-          row.push(uid);
-          row.push(ptName[ptsUID.findIndex(getname, uid)]);
-          row.push(date);
-
-          // if moodNodes is not empty and it has a valid date, go grab the mood
-          if (moodNodes.length != 0 && moodDates.findIndex(getdate, date) != -1)
-            mood = doTheMoodThang(moodNodes[moodDates.findIndex(getdate, date)]);
-
-          row.push(mood);
-
-          if (partNodes.length != 0 && partDates.findIndex(getdate, date) != -1)
+          while (date != null && !inUsedDateArray(date, usedDateArray))
           {
-            var view = partNodes[partDates.findIndex(getdate, date)].val().ThreadsViewed;
-            var made = partNodes[partDates.findIndex(getdate, date)].val().ThreadsMade;
+            usedDateArray.push(date);
+            var mood = null, meals = null, data = null;
+            row.push(uid);
+            row.push(ptName[ptsUID.findIndex(getname, uid)]);
+            row.push(date);
 
-            if (typeof view != 'undefined')
-              row.push(null);
+            // if moodNodes is not empty and it has a valid date, go grab the mood
+            if (moodNodes.length != 0 && moodDates.findIndex(getdate, date) != -1)
+              mood = doTheMoodThang(moodNodes[moodDates.findIndex(getdate, date)]);
+
+            row.push(mood);
+
+            if (partNodes.length != 0 && partDates.findIndex(getdate, date) != -1)
+            {
+              var view = partNodes[partDates.findIndex(getdate, date)].val().ThreadsViewed;
+              var made = partNodes[partDates.findIndex(getdate, date)].val().ThreadsMade;
+
+              if (strcmp(typeof view,"undefined") == 0)
+                row.push(null);
+              else
+                row.push(view);
+
+              if (strcmp(typeof made,"undefined") == 0)
+                row.push(null);
+              else
+                row.push(made);
+
+            }
+            else {
+              row.push(null); row.push(null);
+            }
+
+            if (dietNodes.length != 0 && dietDates.findIndex(getdate, date) != -1)
+            {
+              var foods = dietNodes[dietDates.findIndex(getdate, date)].val();
+              meals = 0;
+              if (strcmp(typeof foods.Breakfast,"undefined") != 0)
+                meals++
+              if (strcmp(typeof foods.Lunch,"undefined") != 0)
+                meals++
+              if (strcmp(typeof foods.Dinner,"undefined") != 0)
+                meals++
+              if (strcmp(typeof foods.Snacks,"undefined") != 0)
+                meals++
+            }
+
+            row.push(meals);
+
+            if (appNodes.length != 0 && appDates.findIndex(getdate, date) != -1)
+            {
+              data = appNodes[appDates.findIndex(getdate, date)].val();
+
+              if (strcmp(typeof data.Appetite,"undefined") != 0)
+                row.push(data.Appetite);
+              else
+                row.push(null);
+
+              if (strcmp(typeof data.Fatigue,"undefined") != 0)
+                row.push(data.Fatigue);
+              else
+                row.push(null);
+
+            }
             else
-              row.push(view);
-
-            if (typeof made != 'undefined')
+            {
               row.push(null);
-            else
-              row.push(made);
-
-          }
-          else {
-            row.push(null); row.push(null);
-          }
-
-          if (dietNodes.length != 0 && dietDates.findIndex(getdate, date) != -1)
-          {
-            var foods = dietNodes[dietDates.findIndex(getdate, date)].val();
-            meals = 0;
-            if (typeof foods.Breakfast != 'undefined')
-              meals++
-            if (typeof foods.Lunch != 'undefined')
-              meals++
-            if (typeof foods.Dinner != 'undefined')
-              meals++
-            if (typeof foods.Snacks != 'undefined')
-              meals++
-          }
-
-          row.push(meals);
-
-          if (appNodes.length != 0 && appDates.findIndex(getdate, date) != -1)
-          {
-            data = appNodes[appDates.findIndex(getdate, date)].val();
-
-            if (typeof data.Appetite != 'undefined')
-              row.push(data.Appetite);
-            else
               row.push(null);
+            }
 
-            if (typeof data.Fatigue != 'undefined')
-              row.push(data.Fatigue);
-            else
-              row.push(null);
+            csv += row.join(',');
+            csv += '\n';
 
+            row = [];
+
+            date = getDateFromArrays(appDates, moodDates, partDates, dietDates, usedDateArray);
           }
-          else
-          {
-            row.push(null);
-            row.push(null);
-          }
-        }).then(function() {
-          csv += row.join(',');
-          csv += '\n';
         }).then(function() {
           if (ptsUID.findIndex(getname, uid) == (ptsUID.length - 1))
           {
@@ -272,9 +280,10 @@
             hiddenElement.click();
           }
 
+        }).then(function() {
           appNodes = [], dietNodes = [], moodNodes = [], partNodes = [];
           appDates = [], dietDates = [], moodDates = [], partDates = [];
-          row = [], promises = [];
+          promises = [], usedDateArray = [];
         });
       });
     }
@@ -296,29 +305,54 @@
       return mood;
     }
 
+    function inUsedDateArray(date, usedDateArray)
+    {
+      for (var i = 0; i < usedDateArray.length; i++)
+      {
+        if (date.localeCompare(usedDateArray[i]) == 0)
+          return 0 < 1;
+      }
+
+      return 0 > 1;
+
+    }
+
     function getDateFromArrays(appDates, moodDates, partDates, dietDates, usedDateArray)
     {
       var date = null;
 
       if (0 < appDates.length)
-        for (var i = 0, date = appDates[0]; i < appDates.length && (date.localeCompare(appDates[i]) == -1); i++)
+        for (var i = 0, date = appDates[0]; i < appDates.length && inUsedDateArray(date, usedDateArray); i++)
           date = appDates[i];
-      if (0 < dietDates.length)
-        for (var i = 0, date = appDates[0]; i < dietDates.length && (date.localeCompare(dietDates[i]) == -1); i++)
+      if (0 < dietDates.length && inUsedDateArray(date, usedDateArray))
+        for (var i = 0, date = appDates[0]; i < dietDates.length && inUsedDateArray(date, usedDateArray); i++)
           date = dietDates[i];
-      if (0 < moodDates.length)
-        for (var i = 0, date = appDates[0]; i < moodDates.length && (date.localeCompare(moodDates[i]) == -1); i++)
+      if (0 < moodDates.length && inUsedDateArray(date, usedDateArray))
+        for (var i = 0, date = appDates[0]; i < moodDates.length && inUsedDateArray(date, usedDateArray); i++)
           date = moodDates[i];
-      if (0 < partDates.length)
-        for (var i = 0, date = appDates[0]; i < partDates.length && (date.localeCompare(partDates[i]) == -1); i++)
+      if (0 < partDates.length && inUsedDateArray(date, usedDateArray))
+        for (var i = 0, date = appDates[0]; i < partDates.length && inUsedDateArray(date, usedDateArray); i++)
           date = partDates[i];
+
+      if (inUsedDateArray(date, usedDateArray))
+        return null;
 
       return date;
     }
 
+    function strcmp(a, b)
+    {
+        a = a.toString(), b = b.toString();
+
+        for (var i=0,n=Math.max(a.length, b.length); i<n && a.charAt(i) === b.charAt(i); ++i);
+          if (i == n) return 0;
+
+        return a.charAt(i) > b.charAt(i) ? -1 : 1;
+    }
+
     function getdate (wantedDate)
     {
-      if ((wantedDate.localeCompare(this)) == -1)
+      if (strcmp(wantedDate, this) != 0)
         return 1 < 0;
       else
         return 1 > 0;
