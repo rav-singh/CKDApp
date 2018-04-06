@@ -91,13 +91,13 @@
       // for each patient
        snapshot.forEach(function(uid)
        {
-         ptsUID.push(uid.val());
+         ptsUID.push(uid.key);
            // grab that user's name
-           firebase.database().ref("Users/" + uid.val() + "/Name").on("value", function(name)
+           firebase.database().ref("Users/" + uid.key + "/Name").on("value", function(name)
            {
              ptName.push(name.val());
              // for each user, get their moods
-             firebase.database().ref("Data/Mood/" + uid.val()).orderByKey().limitToLast(7).on("value", function(user)
+             firebase.database().ref("Data/Mood/" + uid.key).orderByKey().limitToLast(7).on("value", function(user)
              {
                happy = flat = nausea = anxious = fatigued = depressed = 0;
                // look at each of the last 7 mood entries
@@ -209,6 +209,9 @@
             {
               var view = partNodes[partDates.findIndex(getdate, date)].val().ThreadsViewed;
               var made = partNodes[partDates.findIndex(getdate, date)].val().ThreadsMade;
+              // var made = partNodes[partDates.findIndex(getdate, date)].val().CommentsMade;
+              // var made = partNodes[partDates.findIndex(getdate, date)].val().Activities;
+              // var made = partNodes[partDates.findIndex(getdate, date)].val().Treatment;
 
               if (strcmp(typeof view,"undefined") == 0)
                 row.push(null);
@@ -237,6 +240,11 @@
                 meals++
               if (strcmp(typeof foods.Snacks,"undefined") != 0)
                 meals++
+
+              // salt
+              // calories
+              // potasium
+              // phosporous
             }
 
             row.push(meals);
