@@ -4,11 +4,14 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TableLayout;
 import android.widget.TextView;
 
@@ -37,7 +40,9 @@ public class ThreadsList extends AppCompatActivity
 
     Map<Integer,List<ThreadClass>> threadsMap = new HashMap<>();
     Map<Integer,List<String>> threadsKeyMap = new HashMap<>();
-    int threadsPerPage = 10;
+    int threadsPerPage;
+
+    Spinner spinner;
 
     LinearLayout listOfThreads;
 
@@ -53,7 +58,10 @@ public class ThreadsList extends AppCompatActivity
 
         listOfThreads = findViewById(R.id.ThreadsList_Layout);
 
+        spinner = findViewById(R.id.ThreadsList_SPN_ThreadsPerPage);
+
         currentPage=1;
+        threadsPerPage = 10;
 
         initializeButtons();
 
@@ -64,6 +72,88 @@ public class ThreadsList extends AppCompatActivity
 
         grabKeysInCategory();
 
+        initializeSpinner();
+    }
+
+    private void initializeSpinner()
+    {
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            public void onItemSelected(AdapterView<?> arg0, View view, int position, long id)
+            {
+               int num = Integer.parseInt(spinner.getSelectedItem().toString());
+
+                // They selected the same number so nothing needs to be done
+               if(num == threadsPerPage)
+               {
+                   return;
+               }
+                //Reset all the mappings and data structures for new mappings based on threads
+                //Per Page the user selected
+               listOfThreads.removeAllViews();
+               threadsKeyMap.clear();
+               threadsMap.clear();
+               activeThreadBtnList.clear();
+               textViewsList.clear();
+
+               // Update variable to users selection and set user back to page 1
+                threadsPerPage = num;
+                currentPage = 1;
+
+
+                int numThreads = keyList.size();
+                //This accounts for when there are a maximum number of threads on a page
+                if(numThreads%threadsPerPage == 0)
+                    maxPages = numThreads/threadsPerPage;
+                else
+                    maxPages = (numThreads / threadsPerPage) + 1;
+
+                resortPagesIntoMap();
+                resortKeysIntoMap();
+
+                updateUI();
+            }
+
+            private void resortKeysIntoMap()
+            {
+                List<String> threadKey;
+
+                for (int pagenum = 1; pagenum <= maxPages; pagenum++)
+                {
+                    if (pagenum == maxPages)
+                    {
+                        threadKey = keyList.subList((pagenum-1) * threadsPerPage, threadsList.size());
+
+                    } else
+                    {
+                        threadKey = keyList.subList((pagenum-1) * threadsPerPage, (pagenum-1) + threadsPerPage);
+                    }
+
+                    threadsKeyMap.put(pagenum , threadKey);
+                }
+            }
+
+            private void resortPagesIntoMap()
+            {
+                List<ThreadClass> pageOfThreads;
+
+                for(int pagenum = 1; pagenum <= maxPages; pagenum++)
+                {
+                    if(pagenum == maxPages)
+                    {
+                        pageOfThreads = threadsList.subList((pagenum-1)*threadsPerPage,threadsList.size());
+                    }
+                    else
+                    {
+                        pageOfThreads = threadsList.subList((pagenum-1)*threadsPerPage, (pagenum-1) + threadsPerPage);
+                    }
+
+                    threadsMap.put(pagenum,pageOfThreads);
+                }
+            }
+
+            public void onNothingSelected(AdapterView<?> arg0) { }
+        });
     }
 
     private void initializeButtons()
@@ -201,8 +291,13 @@ public class ThreadsList extends AppCompatActivity
         if(currentPage == 1)
             disablePrevButton();
 
-        if(maxPages == 1)
+        if(maxPages == 1 || maxPages == currentPage)
             disableNextButton();
+
+        if(currentPage < maxPages)
+            enableNextButton();
+
+
 
     }
 
@@ -237,6 +332,7 @@ public class ThreadsList extends AppCompatActivity
                 if(threadsList.size() == 0)
                 {
                     noThreadsHere();
+
                     return;
                 }
 
@@ -267,8 +363,6 @@ public class ThreadsList extends AppCompatActivity
 
                     threadsMap.put(pagenum,pageOfThreads);
                 }
-
-
             }
 
             private void sortKeysIntoMap()
@@ -318,11 +412,22 @@ public class ThreadsList extends AppCompatActivity
 
     private void updateUI ()
     {
-        LinearLayout.LayoutParams linearParams = new LinearLayout.LayoutParams
-                (LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-
         List<ThreadClass> pageOfThreads = threadsMap.get(currentPage);
         List<String> pageOfKeys = threadsKeyMap.get(currentPage);
+
+        DisplayMetrics dm = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(dm);
+        int width = (int) (dm.widthPixels*.75);
+
+        LinearLayout.LayoutParams likesViewParams = new LinearLayout.LayoutParams
+                (LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+
+        LinearLayout.LayoutParams outerParams = new LinearLayout.LayoutParams
+                (LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+
+        LinearLayout.LayoutParams threadParams = new LinearLayout.LayoutParams
+                (width, LinearLayout.LayoutParams.WRAP_CONTENT);
+
 
         //Indicates which threads have already been loaded to avoid referencing that thread again
         int viewCount = listOfThreads.getChildCount();
@@ -332,30 +437,25 @@ public class ThreadsList extends AppCompatActivity
             ThreadClass currentThread = pageOfThreads.get(i);
 
             LinearLayout threadView = new LinearLayout(this);
-            threadView.setLayoutParams(linearParams);
+            threadView.setLayoutParams(outerParams);
             threadView.setOrientation(LinearLayout.HORIZONTAL);
 
             LinearLayout likesView = new LinearLayout(this);
-            likesView.setLayoutParams(linearParams);
+            likesView.setLayoutParams(likesViewParams);
             likesView.setOrientation(LinearLayout.VERTICAL);
 
             ImageButton arrow = new ImageButton(this);
 
-            arrow.setLayoutParams(new TableLayout.LayoutParams(
-                    TableLayout.LayoutParams.WRAP_CONTENT,
-                    TableLayout.LayoutParams.WRAP_CONTENT, 1f));
+            arrow.setLayoutParams(likesViewParams);
 
             arrow.setImageDrawable(this.getResources().getDrawable(android.R.drawable.arrow_up_float));
             arrow.setBackgroundResource(0);
-
             arrow = setOnClickUpVote(arrow,pageOfKeys.get(i));
 
             likesView.addView(arrow);////////////////////
 
             TextView likes = new TextView(this);
-            likes.setLayoutParams(new TableLayout.LayoutParams(
-                    TableLayout.LayoutParams.WRAP_CONTENT,
-                    TableLayout.LayoutParams.WRAP_CONTENT, 1f));
+            likes.setLayoutParams(likesViewParams);
             likes.setText(String.valueOf(currentThread.getLikes()));
             likes.setTextSize(20);
 
@@ -366,10 +466,9 @@ public class ThreadsList extends AppCompatActivity
             threadView.addView(likesView);///////////////////////
 
             Button thread = new Button(this);
-            thread.setLayoutParams(new TableLayout.LayoutParams(
-                    TableLayout.LayoutParams.WRAP_CONTENT,
-                    TableLayout.LayoutParams.WRAP_CONTENT, 1f));
+            thread.setLayoutParams(threadParams);
             thread.setText(currentThread.getTitle());
+            thread.setGravity(Gravity.LEFT);
             thread.setBackground(this.getResources().getDrawable(R.drawable.rounded_corner_textview));
 
             threadView.addView(thread);///////////////////////
@@ -410,12 +509,12 @@ public class ThreadsList extends AppCompatActivity
                         if(isSelected)
                         {
                             Likes_Node.setValue(++count);
-                            arrow.setBackgroundColor(Color.GREEN);
+                            arrow.setColorFilter(Color.GREEN);
                         }
                         else
                         {
                             Likes_Node.setValue(--count);
-                            arrow.setBackgroundResource(0);
+                            arrow.setColorFilter(Color.WHITE);
                         }
                         upDateUpVoteCounter(count);
                     }
