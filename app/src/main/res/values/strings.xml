@@ -100,4 +100,11 @@
         <item>Great!</item>
     </string-array>
 
+    <string-array name="num_threads_array">
+        <item>10</item>
+        <item>15</item>
+        <item>25</item>
+        <item>50</item>
+    </string-array>
+
 </resources>

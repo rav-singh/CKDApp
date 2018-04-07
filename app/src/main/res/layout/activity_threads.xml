@@ -16,16 +16,45 @@
             tools:text="Category"
             android:background="@drawable/rounded_corner_textview"/>
 
-        <Button
-            android:id="@+id/ThreadsList_Btn_NewThread"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/button_background"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_gravity="end"
-            android:text="New Thread" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Threads Per Page"
+                    android:textSize="20sp"
+                    android:textStyle="bold"/>
+
+                <Spinner
+                    android:id="@+id/ThreadsList_SPN_ThreadsPerPage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:entries="@array/num_threads_array"
+                    android:layout_marginLeft="10dp"
+                    android:textColor="@android:color/black"
+                    android:spinnerMode="dropdown"
+                    android:theme="@style/Spinner2"  />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/ThreadsList_Btn_NewThread"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_background"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_alignParentRight="true"
+                android:text="New Thread" />
+        </RelativeLayout>
     <ScrollView
             android:layout_width="match_parent"
             android:layout_height="400dp"
@@ -70,15 +99,14 @@
 
             <Button
                 android:id="@+id/Threads_btn_home"
-                android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:text="Home"
-                android:textSize="20sp"
-                android:padding="10dp"
-                android:layout_marginBottom="10dp"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"
                 android:background="@drawable/button_home_background"
-                android:layout_alignParentBottom="true"
-                android:layout_centerHorizontal="true"/>
+                android:padding="10dp"
+                android:text="Home"
+                android:textSize="20sp" />
 
         </RelativeLayout>
 </LinearLayout>
