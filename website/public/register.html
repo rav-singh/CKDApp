@@ -111,26 +111,23 @@
     document.addEventListener('DOMContentLoaded', function() {
       firebase.auth().onAuthStateChanged(function (user)
       {
-        if (user && createdAccountThisSession == 1)
-        {
-          firebase.database().ref('Admins/' + firebase.auth().currentUser.uid).set({
-            Name: document.querySelector('#name').value,
-            Email: document.querySelector('#email').value,
-            Facility: document.querySelector('#facility').value,
-            Type: document.getElementById("occupation").options[document.getElementById("occupation").selectedIndex].value
-          });
-          createdAccountThisSession = 0;
+          if (user && createdAccountThisSession == 1)
+          {
+            firebase.database().ref('Admins/' + document.getElementById("occupation").options[document.getElementById("occupation").selectedIndex].value + "/" + firebase.auth().currentUser.uid).set({
+              Name: document.querySelector('#name').value,
+              Email: document.querySelector('#email').value,
+              Facility: document.querySelector('#facility').value
+            });
+            createdAccountThisSession = 0;
 
-          alert("Thank you for registering.\n");
+            alert("Thank you for registering.\n");
 
-          var timer = setTimeout(function() {
-            firebase.auth().signOut();
-            window.location.href = "index.html"
-          }, 1000);
+            var timer = setTimeout(function() {
+              firebase.auth().signOut();
+              window.location.href = "index.html"
+            }, 1000);
 
-        }
-        else {
-        }
+          }
       });
     });
     </script>

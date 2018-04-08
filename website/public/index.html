@@ -59,7 +59,7 @@
               <option value="Tech">Technical Support / Developer</value>
           </select>
         </div>
-        <div>
+        <div style="text-align: center; margin: 16px auto 16px;">
           <button id="sign-in">Sign In</button>
           <button id="register">Register</button>
           <!--
@@ -92,6 +92,7 @@
         firebase.auth().signOut();
         window.location.href = "register.html";
       });
+      /*
       // logs user out
       document.querySelector('#sign-out').addEventListener('click', function(e)
       {
@@ -100,9 +101,8 @@
         firebase.auth().signOut();
         alert("You have been signed out.");
       });
-    </script>
+      */
 
-    <script>
       document.addEventListener('DOMContentLoaded', function() {
         firebase.auth().onAuthStateChanged(function (user)
         {
