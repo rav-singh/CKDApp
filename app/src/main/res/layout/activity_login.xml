@@ -23,7 +23,7 @@
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_marginBottom="20dp"
-            android:textSize="32sp"
+            android:textSize="24sp"
           />
 
         <EditText
@@ -31,7 +31,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Password"
-            android:textSize="32sp"
+            android:textSize="24sp"
             android:layout_margin="20dp"
             android:inputType="text|textPassword"
             android:background="@drawable/rounded_corner_textview"/>
