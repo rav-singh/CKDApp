@@ -34,6 +34,6 @@ public class foodItem {
     }
 
     public String toString() {
-        return name +  System.lineSeparator() + "Corresponding NDBNumber: "+ndbno;
+        return name;
     }
 }
