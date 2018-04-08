@@ -84,23 +84,20 @@
     // grab facilitator's facility and hunt for it amoung the users
     var queryString = decodeURIComponent(window.location.search);
     queries = queryString.substring(1).split("=");
-    var ref = firebase.database().ref("Admins/" + queries[1] + "/Patients");
-
-    var typeRef = firebase.database().ref("Admins/" + queries[1] + "/Type");
-    typeRef.on("value", function(snap) {
-      if (strcmp("Medical", snap.val()) != 0)
-      {
-        firebase.auth().signOut();
-        alert("You are not a Medical provider.\nWe are signing you out.\nPlease log in with your appropriate credentials.");
-        var timer = setTimeout(function() {
-          window.location.href = "index.html";
-        }, 1000);
-      }
-    });
+    var ref = firebase.database().ref("Admins/Medical/" + queries[1] + "/Patients");
 
     // creating grid of patients...
     ref.on("value", function(snapshot)
     {
+      if (!snapshot.exists())
+      {
+        firebase.auth().signOut();
+        alert("You are not medical personel.\nWe are signing you out.\nPlease log in with your appropriate credentials.");
+        var timer = setTimeout(function() {
+          window.location.href = "index.html";
+        }, 1000);
+      }
+
       htmlValue = "<tr> <th>Patient</th> <th>Happy</th> <th>Flat</th> <th>Nausea</th> <th>Anxious</th> <th>Fatigued</th> <th>Depressed</th></tr>";
       // for each patient
        snapshot.forEach(function(uid)
@@ -166,7 +163,7 @@
         MoodRef = firebase.database().ref("Data/Mood/" + uid + "/");
         PartRef = firebase.database().ref("Data/Participation/" + uid + "/");
 
-        var dataAccess = firebase.database().ref("Admins/" + queries[1] + "/Patients/" + uid);
+        var dataAccess = firebase.database().ref("Admins/Medical/" + queries[1] + "/Patients/" + uid);
 
         promise = dataAccess.once("value", function(snapshot){
           dataLimit = snapshot.child("Date").val();
