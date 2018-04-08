@@ -27,8 +27,8 @@ public class Mood extends AppCompatActivity
     Map<ImageButton,String> imageButtonsMap  = new HashMap<>();
     Boolean userRecordedYesterday = false;
 
-    final private String todayPrompt = "Please Select Your Mood for Today!";
-    final private String yesPrompt = "Please Select your Mood for Yesterday!";
+    final private String todayPrompt = "How would you describe your overall mood for today?";
+    final private String yesPrompt = "How would you describe your overall mood for yesterday?";
 
     List<String> selectedMoods = new ArrayList<>();
     Boolean checklistUpdated = false;
