@@ -85,6 +85,20 @@
     var queryString = decodeURIComponent(window.location.search);
     queries = queryString.substring(1).split("=");
     var ref = firebase.database().ref("Admins/" + queries[1] + "/Patients");
+
+    var typeRef = firebase.database().ref("Admins/" + queries[1] + "/Type");
+    typeRef.on("value", function(snap) {
+      if (strcmp("Medical", snap.val()) != 0)
+      {
+        firebase.auth().signOut();
+        alert("You are not a Medical provider.\nWe are signing you out.\nPlease log in with your appropriate credentials.");
+        var timer = setTimeout(function() {
+          window.location.href = "index.html";
+        }, 1000);
+      }
+    });
+
+    // creating grid of patients...
     ref.on("value", function(snapshot)
     {
       htmlValue = "<tr> <th>Patient</th> <th>Happy</th> <th>Flat</th> <th>Nausea</th> <th>Anxious</th> <th>Fatigued</th> <th>Depressed</th></tr>";
