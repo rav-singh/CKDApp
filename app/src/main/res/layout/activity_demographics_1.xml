@@ -8,11 +8,9 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/Demo1_Scroll"
-        >
+        android:layout_height="match_parent">
 
-        <LinearLayout
+     <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -21,7 +19,7 @@
             <EditText
                 android:id="@+id/Demo_TF_Name"
                 android:layout_width="match_parent"
-                android:layout_margin="20dp"
+                android:layout_margin="10dp"
                 android:layout_height="wrap_content"
                 android:hint="Full Name"
                 android:inputType="textPersonName"
@@ -32,7 +30,7 @@
             <EditText
                 android:id="@+id/Demo_TF_Email"
                 android:layout_width="match_parent"
-                android:layout_margin="20dp"
+                android:layout_margin="10dp"
                 android:layout_height="wrap_content"
                 android:inputType="textEmailAddress"
                 android:textSize="30sp"
@@ -42,7 +40,7 @@
             <EditText
                 android:id="@+id/Demo_TF_Email_Confirm"
                 android:layout_width="match_parent"
-                android:layout_margin="20dp"
+                android:layout_margin="10dp"
                 android:layout_height="wrap_content"
                 android:hint="Confirm Email"
                 android:inputType="textEmailAddress"
@@ -53,7 +51,7 @@
             <EditText
                 android:id="@+id/Demo_TF_Phone"
                 android:layout_width="match_parent"
-                android:layout_margin="20dp"
+                android:layout_margin="10dp"
                 android:layout_height="wrap_content"
                 android:hint="Phone Number"
                 android:inputType="number|phone"
@@ -65,26 +63,147 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:entries="@array/activity_array"
-                android:layout_margin="20dp"
+                android:layout_margin="10dp"
                 android:textColor="@android:color/black"
                 android:spinnerMode="dropdown"
                 android:theme="@style/Spinner1" />
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Please select your dialysis schedule"
+                android:textStyle="bold"
+                android:textSize="24sp"
+                android:textColor="@android:color/white"
+                android:layout_margin="10dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/Demo1_LL_Sunday"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <CheckBox
+                        android:id="@+id/Demo1_CB_Sunday"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Sunday"
+                        android:layout_marginBottom="10dp"
+                        android:gravity="center_vertical"
+                        android:textStyle="bold"
+                        android:textColor="@android:color/white"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/Demo1_LL_Monday"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <CheckBox
+                        android:id="@+id/Demo1_CB_Monday"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Monday"
+                        android:layout_marginBottom="10dp"
+                        android:gravity="center_vertical"
+                        android:textStyle="bold"
+                        android:textColor="@android:color/white"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/Demo1_LL_Tuesday"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <CheckBox
+                        android:id="@+id/Demo1_CB_Tuesday"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Tuesday"
+                        android:layout_marginBottom="10dp"
+                        android:gravity="center_vertical"
+                        android:textStyle="bold"
+                        android:textColor="@android:color/white"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/Demo1_LL_Wednesday"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <CheckBox
+                        android:id="@+id/Demo1_CB_Wednesday"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Wednesday"
+                        android:layout_marginBottom="10dp"
+                        android:gravity="center_vertical"
+                        android:textStyle="bold"
+                        android:textColor="@android:color/white"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/Demo1_LL_Thursday"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <CheckBox
+                        android:id="@+id/Demo1_CB_Thursday"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Thursday"
+                        android:layout_marginBottom="10dp"
+                        android:gravity="center_vertical"
+                        android:textStyle="bold"
+                        android:textColor="@android:color/white"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/Demo1_LL_Friday"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <CheckBox
+                        android:id="@+id/Demo1_CB_Friday"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Friday"
+                        android:layout_marginBottom="10dp"
+                        android:gravity="center_vertical"
+                        android:textStyle="bold"
+                        android:textColor="@android:color/white"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/Demo1_LL_Saturday"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <CheckBox
+                        android:id="@+id/Demo1_CB_Saturday"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Saturday"
+                        android:textStyle="bold"
+                        android:textColor="@android:color/white"/>
+                </LinearLayout>
+
         </LinearLayout>
-    </ScrollView>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:gravity="bottom|center_horizontal"
-            android:layout_below="@+id/Demo1_Scroll">
+            android:gravity="bottom|center_horizontal">
 
             <Button
                 android:id="@+id/Demo_Btn_Next_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="20dp"
+                android:layout_margin="10dp"
                 android:padding="10dp"
                 android:background="@drawable/button_background"
                 android:text="@string/next_button"
@@ -92,4 +211,7 @@
         </LinearLayout>
 
 
+
+        </LinearLayout>
+    </ScrollView>
 </RelativeLayout>
