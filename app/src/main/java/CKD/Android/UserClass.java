@@ -2,7 +2,10 @@ package CKD.Android;
 
 
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 public class UserClass
@@ -21,6 +24,11 @@ public class UserClass
     private String education;
     private String workStatus;
     private String healthRating;
+    private List<String> scheduledDays;
+    //The Keys for this map are the Days, the Values are the Time in military Time (24:00)
+    private Map<String,String> scheduledStartTimes;
+    private Map<String,String> scheduledEndTimes;
+
 
     // TODO May need to instantiate all variables for login and grab data from Database using
     // TODO mAuth.getCurrentUser.getUID to access their information
@@ -33,6 +41,8 @@ public class UserClass
         this.activityLevel =  activityLevel;
         this.UID = UID;
         this.race = new ArrayList<String>();
+        this.scheduledEndTimes = new HashMap<>();
+        this.scheduledStartTimes = new HashMap<>();
     }
 
 
@@ -50,12 +60,13 @@ public class UserClass
     String getGender(){return gender;}
     List<String> getRace(){return race;}
     List<String> getCoMorbs(){return coMorbs;}
-    int getNumOfRaces(){return race.size();}        //Will be used for reading data
-    int getNumOfCoMorbs(){return coMorbs.size();}   //Will be used for reading data
     String getPassword(){return password;}
     String getWorkStatus(){return workStatus;}
     String getEducation(){return education;}
     String getHealthRating(){return healthRating;}
+    List<String> getScheduledDays(){return scheduledDays;}
+    Map<String,String> getScheduledStartTime(){return scheduledStartTimes;}
+    Map<String,String> getScheduledEndTime(){return scheduledEndTimes;}
 
     void setName(String name)
     {
@@ -89,6 +100,9 @@ public class UserClass
     void setEducation(String education) {this.education = education;}
     void setWork(String work) {this.workStatus = work;}
     void setHealth(String health) {this.healthRating = health;}
+    void setScheduledDays(List<String> scheduledDays){this.scheduledDays = scheduledDays;}
+    void setScheduledStartTime(Map<String,String> scheduledStartTime){this.scheduledStartTimes = scheduledStartTime;}
+    void setScheduledEndTime(Map<String,String> scheduledEndTime){this.scheduledEndTimes = scheduledEndTime;}
 
     void clearPassword(){this.password = "";}
 
