@@ -54,20 +54,29 @@
     <div id="message">
       <h2>Technical Page Of Awesome</h2>
         <div style="text-align: center; margin: 16px auto 16px;">
-            <button id="addBlog" onClick="toggleBlogOn()">Update Blog</button>
+            <button id="Blog" onClick="toggleDietOn()">Diet Blog</button>
+            <button id="Activity" onClick="toggleActivitiesOn()">Exercise Blog</button>
             <button id="Social" onClick="toggleSocialOn()">Social</button>
-            <button id="Activity" onClick="toggleActivitiesOn()">Activities</button>
+            <button id="PinnedPost" onClick="togglePinnedPostOn()">Pinned Post</button>
+
         </div>
         <div style="display:none;" id="bloggy" class="animate-bottom">
-          <input id="blogTitle" type="text" placeholder="Title..."></input>
-          <textarea id="blogBody" rows="15" placeholder="The content of your post..."></textarea>
-          <button id="submitBlogPost" onClick="submitBlog()">Submit Post</button>
+          <input id="dietBlogTitle" type="text" placeholder="Title..."></input>
+          <textarea id="dietBlogBody" rows="15" placeholder="The content of your post..."></textarea>
+          <button id="dietSubmitBlogPost" onClick="submitDietBlog()">Submit Post</button>
         </div>
         <div style="display:none;" id="socially" class="animate-bottom">
           <p>Social!</p>
         </div>
         <div style="display:none;" id="actively" class="animate-bottom">
-          <p>Activity!</p>
+          <input id="exerciseBlogTitle" type="text" placeholder="Title..."></input>
+          <textarea id="exerciseBlogBody" rows="15" placeholder="The content of your post..."></textarea>
+          <button id="exerciseSubmitBlogPost" onClick="submitExerciseBlog()">Submit Post</button>
+        </div>
+        <div style="display:none;" id="pinny" class="animate-bottom">
+          <input id="pinnedPostTitle" type="text" placeholder="Title..."></input>
+          <textarea id="pinnedBody" rows="15" placeholder="The content of your post..."></textarea>
+          <button id="SubmitPinnedPost" onClick="submitPinnedPost()">Submit Post</button>
         </div>
     </div>
 
@@ -95,40 +104,99 @@
 
       Promise.resolve(promise);
 
-      function submitBlog()
+      function togglePinnedPostOn()
       {
-        firebase.database().ref('Admins/Blog/').set({
+        firebase.database().ref('Admins/PinnedPost/title').on("value", function(blogsnap) {
+          document.getElementById("pinnedPostTitle").placeholder = "CURRENT TITLE: " + blogsnap.val();
+        });
+
+        firebase.database().ref('Admins/PinnedPost/body').on("value", function(blogsnap) {
+          document.getElementById("pinnedBody").placeholder = "CURRENT POST CONTENT:\n" + blogsnap.val();
+        });
+
+        document.getElementById("bloggy").style.display = "none";
+        document.getElementById("socially").style.display = "none";
+        document.getElementById("actively").style.display = "none";
+        document.getElementById("pinny").style.display = "block";
+      }
+
+      function submitExerciseBlog()
+      {
+        firebase.database().ref('Admins/ExerciseBlog/').set({
           AuthorUID: queries[1],
           Author: techName,
-          Title: document.querySelector('#blogTitle').value,
-          Body: document.querySelector('#blogBody').value
+          Title: document.querySelector('#exerciseBlogTitle').value,
+          Body: document.querySelector('#exerciseBlogBody').value
+        }).then(function() {
+          alert("Post submitted!");
+          document.querySelector('#exerciseBlogTitle').value ="";
+          document.querySelector('#exerciseBlogBody').value ="";
+        });
+      }
+
+      function submitPinnedPost()
+      {
+        firebase.database().ref('Admins/PinnedPost/').set({
+          authorUID: queries[1],
+          author: techName,
+          title: document.querySelector('#pinnedPostTitle').value,
+          body: document.querySelector('#pinnedBody').value
+        }).then(function() {
+          alert("Post submitted!");
+          document.querySelector('#pinnedPostTitle').value ="";
+          document.querySelector('#pinnedBody').value ="";
+        });
+      }
+
+      function submitDietBlog()
+      {
+        firebase.database().ref('Admins/DietBlog/').set({
+          AuthorUID: queries[1],
+          Author: techName,
+          Title: document.querySelector('#dietBlogTitle').value,
+          Body: document.querySelector('#dietBlogBody').value
+        }).then(function() {
+          alert("Post submitted!");
+          document.querySelector('#dietBlogTitle').value ="";
+          document.querySelector('#dietBlogBody').value ="";
         });
       }
 
       function toggleActivitiesOn() {
+        firebase.database().ref('Admins/ExerciseBlog/Title').on("value", function(blogsnap) {
+          document.getElementById("exerciseBlogTitle").placeholder = "CURRENT TITLE: " + blogsnap.val();
+        });
+
+        firebase.database().ref('Admins/ExerciseBlog/Body').on("value", function(blogsnap) {
+          document.getElementById("exerciseBlogBody").placeholder = "CURRENT POST CONTENT:\n" + blogsnap.val();
+        });
+
         document.getElementById("bloggy").style.display = "none";
         document.getElementById("socially").style.display = "none";
         document.getElementById("actively").style.display = "block";
+        document.getElementById("pinny").style.display = "none";
       }
 
       function toggleSocialOn() {
         document.getElementById("bloggy").style.display = "none";
         document.getElementById("socially").style.display = "block";
         document.getElementById("actively").style.display = "none";
+        document.getElementById("pinny").style.display = "none";
       }
 
-      function toggleBlogOn() {
-        firebase.database().ref('Admins/Blog/Title').on("value", function(blogsnap) {
-          document.getElementById("blogTitle").placeholder = "CURRENT TITLE: " + blogsnap.val();
+      function toggleDietOn() {
+        firebase.database().ref('Admins/DietBlog/Title').on("value", function(blogsnap) {
+          document.getElementById("dietBlogTitle").placeholder = "CURRENT TITLE: " + blogsnap.val();
         });
 
-        firebase.database().ref('Admins/Blog/Body').on("value", function(blogsnap) {
-          document.getElementById("blogBody").placeholder = "CURRENT POST CONTENT:\n" + blogsnap.val();
+        firebase.database().ref('Admins/DietBlog/Body').on("value", function(blogsnap) {
+          document.getElementById("dietBlogBody").placeholder = "CURRENT POST CONTENT:\n" + blogsnap.val();
         });
 
         document.getElementById("bloggy").style.display = "block";
         document.getElementById("socially").style.display = "none";
         document.getElementById("actively").style.display = "none";
+        document.getElementById("pinny").style.display = "none";
       }
 
       function strcmp(a, b)
