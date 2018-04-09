@@ -3,6 +3,7 @@ package CKD.Android;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.provider.ContactsContract;
 import android.util.Log;
 import android.content.Intent;
 import android.os.Bundle;
@@ -48,8 +49,12 @@ public class HomePage  extends AppCompatActivity {
         try
         {
             Boolean treatment = isUserCurrentlyOnDialysis();
+            Boolean treatmentRecorded = isUserTreatmentRecorded(AppData.getTodaysDate());
 
-            if(treatment)
+            // First checks if the user has already been recorded as treated
+            // If they have not recorded yet, it then checks if the current time
+            // is within their scheduled times for dialysis
+            if(!treatmentRecorded && treatment)
             {
 
                 String date = getTodaysDate();
@@ -69,11 +74,10 @@ public class HomePage  extends AppCompatActivity {
         {
             e.printStackTrace();
         }
-
-
     }
 
-    private Boolean isUserCurrentlyOnDialysis() throws ParseException {
+    private Boolean isUserCurrentlyOnDialysis() throws ParseException
+    {
         String currentDay = AppData.getTodaysDay();
 
         if(!AppData.cur_user.getScheduledDays().contains(currentDay))
@@ -92,7 +96,43 @@ public class HomePage  extends AppCompatActivity {
         Date current = militaryTime.parse(currentTime);
 
         return (current.after(start) && current.before(end));
+    }
 
+    private Boolean isUserTreatmentRecorded(String todaysDate)
+    {
+        final boolean[] TreatmentRecorded = {false};
+
+        DatabaseReference db = FirebaseDatabase.getInstance().getReference();
+        DatabaseReference Treatment_Node = db.child("Data")
+                                                .child("Participation")
+                                                .child(AppData.cur_user.getUID())
+                                                .child("Date")
+                                                .child("Treatment");
+
+        Treatment_Node.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot)
+            {
+
+                Integer count = dataSnapshot.getValue(Integer.class);
+
+                if(count == null)
+                {
+                   return;
+                }
+                else
+                {
+                    TreatmentRecorded[0] = true;
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError)
+            {
+
+            }
+        });
+        return TreatmentRecorded[0];
     }
 
     private void checkDailyCheckList()
