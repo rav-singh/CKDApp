@@ -125,9 +125,9 @@ public class Summary extends AppCompatActivity
     {
         FirebaseDatabase db = FirebaseDatabase.getInstance();
 
-        DatabaseReference Admin_node = db.getReference("Admins");
+        DatabaseReference HealthAdmin_node = db.getReference("Admins").child("Medical");
 
-        Admin_node.addListenerForSingleValueEvent(new ValueEventListener()
+        HealthAdmin_node.addListenerForSingleValueEvent(new ValueEventListener()
         {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot)
@@ -155,9 +155,9 @@ public class Summary extends AppCompatActivity
     // Grabs Admins Name from Database and sets the text on that button
     // to said name. Then adds the admins name to the list in the same index
     // as well as adding that button to the activated Buttons list
-    private void fillInAdminButtons(String UID, int i )
+    private void fillInAdminButtons(String AdminUID, int i )
     {
-        String adminName = (String)DS.child(UID).child("Name").getValue();
+        String adminName = (String)DS.child(AdminUID).child("Name").getValue();
 
         allAdminBtnList.get(i).setText(adminName);
 
