@@ -18,7 +18,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
+import static CKD.Android.AppData.getTodaysDate;
 
 
 public class HomePage  extends AppCompatActivity {
@@ -40,12 +44,61 @@ public class HomePage  extends AppCompatActivity {
         setOnClickListeners();
 
         checkDailyCheckList();
+
+        try
+        {
+            Boolean treatment = isUserCurrentlyOnDialysis();
+
+            if(treatment)
+            {
+
+                String date = getTodaysDate();
+                String UID = AppData.cur_user.getUID();
+
+                FirebaseDatabase db = FirebaseDatabase.getInstance();
+                DatabaseReference Treatment_Node = db.getReference("Data")
+                                                .child("Participation")
+                                                .child(UID)
+                                                .child(date)
+                                                .child("Treatment");
+                Treatment_Node.setValue(1);
+
+            }
+        }
+        catch (ParseException e)
+        {
+            e.printStackTrace();
+        }
+
+
+    }
+
+    private Boolean isUserCurrentlyOnDialysis() throws ParseException {
+        String currentDay = AppData.getTodaysDay();
+
+        if(!AppData.cur_user.getScheduledDays().contains(currentDay))
+        {
+            return false;
+        }
+
+        String currentTime = AppData.getTime();
+        String startTime = AppData.cur_user.getScheduledStartTime().get(currentDay);
+        String endTime = AppData.cur_user.getScheduledEndTime().get(currentDay);
+
+        SimpleDateFormat militaryTime = new SimpleDateFormat("HH:mm");
+
+        Date start = militaryTime.parse(startTime);
+        Date end = militaryTime.parse(endTime);
+        Date current = militaryTime.parse(currentTime);
+
+        return (current.after(start) && current.before(end));
+
     }
 
     private void checkDailyCheckList()
     {
         String UID = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        String date = AppData.getTodaysDate();
+        String date = getTodaysDate();
 
         FirebaseDatabase db = FirebaseDatabase.getInstance();
 
@@ -54,7 +107,6 @@ public class HomePage  extends AppCompatActivity {
                                         .child("DailyCheckList")
                                         .child(UID)
                                         .child(date);
-
 
         Date_node.addListenerForSingleValueEvent(new ValueEventListener()
         {
