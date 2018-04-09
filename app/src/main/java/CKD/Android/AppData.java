@@ -105,6 +105,35 @@ public final class  AppData
         return dateFormat.format(today);
     }
 
+
+    static String getTodaysDay()
+    {
+        DateFormat dateFormat = new SimpleDateFormat("EEEE");
+        dateFormat.setTimeZone(TimeZone.getTimeZone("America/New_York"));
+
+        // Create a calendar object with today date.
+        Calendar calendar = Calendar.getInstance();
+
+        // Get current date of calendar which point to the yesterday now
+        Date today = calendar.getTime();
+
+        return dateFormat.format(today);
+    }
+
+    static String getTime()
+    {
+        DateFormat dateFormat = new SimpleDateFormat("HH:mm");
+        dateFormat.setTimeZone(TimeZone.getTimeZone("America/New_York"));
+
+        // Create a calendar object with today date.
+        Calendar calendar = Calendar.getInstance();
+
+        // Get current date of calendar which point to the yesterday now
+        Date today = calendar.getTime();
+
+        return dateFormat.format(today);
+    }
+
     static String getYesterdaysDate()
     {
         DateFormat dateFormat = new SimpleDateFormat("YYYY-MM-dd");
