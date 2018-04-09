@@ -1,325 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="fill_parent"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@drawable/main_background_gradient" >
 
-    <TextView
-        android:id="@+id/Thread_TV_ThreadTitle"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="THREAD TITLE"
-        android:layout_margin ="10dp"
-        android:textSize="32sp"
-        android:padding="5dp"
-        android:background="@drawable/rounded_corner_textview"
-        android:layout_marginBottom="20dp"/>
-
-    <TextView
-        android:id="@+id/Thread_TV_ThreadBody"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="   This is where the users post will be put!"
-        android:textSize="24sp"
-        android:padding="5dp"
-        android:background="@drawable/rounded_corner_textview"
-        android:layout_marginBottom="5dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"/>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_gravity="center_vertical">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <TextView
-            android:id="@+id/Thread_TV_ThreadAuthor"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Thread auth"
-            android:textSize="20sp"
-            android:padding="5dp"
-            android:background="@drawable/rounded_corner_textview"
-            android:layout_marginBottom="20dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_centerVertical="true"/>
-
-        <Button
-            android:id="@+id/Thread_Btn_Comment"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/button_background"
-            android:padding="5dp"
-            android:text="Make comment"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true" />
-    </RelativeLayout>
-
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="275dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:background="@android:color/transparent"
-        tools:layout_editor_absoluteY="81dp">
-
-        <LinearLayout
-            android:id="@+id/Thread_Layout"
+            android:id="@+id/Thread_TV_ThreadTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:text="THREAD TITLE"
+            android:textColor="@android:color/black"
+            android:layout_margin ="10dp"
+            android:textSize="30sp"
+            android:padding="5dp"
+            android:background="@drawable/rounded_corner_textview"
+            android:layout_marginBottom="20dp"/>
+
+        <TextView
+            android:id="@+id/Thread_TV_ThreadBody"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="   This is where the users post will be put!"
+            android:textSize="22sp"
+            android:textColor="@android:color/black"
+            android:padding="5dp"
+            android:background="@drawable/rounded_corner_textview"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"/>
+
+        <RelativeLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent" >
+
+            <TextView
+                    android:id="@+id/Thread_TV_ThreadAuthor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Thread auth"
+                    android:textSize="18sp"
+                    android:textColor="@android:color/black"
+                    android:padding="5dp"
+                    android:background="@drawable/rounded_corner_textview"
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_alignParentStart="true"/>
+
+            <Button
+                android:id="@+id/Thread_Btn_Comment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_background"
+                android:padding="5dp"
+                android:text="Make comment"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true" />
+
+        </RelativeLayout>
+
+        <android.support.v4.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:background="@android:color/transparent"
+            tools:layout_editor_absoluteY="81dp">
 
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/Thread_TV_Comment1"
+            <LinearLayout
+                android:id="@+id/Thread_LL_Comments"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:background="@drawable/rounded_corner_textview"
-                android:padding="5dp"
-                android:text="Comment1"
-                android:textSize="20sp" />
+                android:background="@android:color/transparent"
+                android:orientation="vertical">
+            </LinearLayout>
+        </android.support.v4.widget.NestedScrollView>
 
-            <TextView
-                android:id="@+id/Thread_TV_Cmnt1_author"
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/transparent">
+
+            <Button
+                android:id="@+id/Thread_btn_home"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                android:background="@drawable/rounded_corner_textview"
-                android:padding="5dp"
-                android:text="Comment1 auth"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/button_home_background"
+                android:padding="10dp"
+                android:text="Home"
                 android:textSize="20sp" />
 
-            <TextView
-                android:id="@+id/Thread_TV_Comment2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:background="@drawable/rounded_corner_textview"
-                android:padding="5dp"
-                android:text="Comment2"
-                android:textSize="20sp" />
-
-            <TextView
-                android:id="@+id/Thread_TV_Cmnt2_author"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                android:background="@drawable/rounded_corner_textview"
-                android:padding="5dp"
-                android:text="Comment2 auth"
-                android:textSize="20sp" />
-
-            <TextView
-                android:id="@+id/Thread_TV_Comment3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:background="@drawable/rounded_corner_textview"
-                android:padding="5dp"
-                android:text="Comment3"
-                android:textSize="20sp" />
-
-            <TextView
-                android:id="@+id/Thread_TV_Cmnt3_author"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                android:background="@drawable/rounded_corner_textview"
-                android:padding="5dp"
-                android:text="Comment3 auth"
-                android:textSize="20sp" />
-
-            <TextView
-                android:id="@+id/Thread_TV_Comment4"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:background="@drawable/rounded_corner_textview"
-                android:padding="5dp"
-                android:text="Comment4"
-                android:textSize="20sp" />
-
-            <TextView
-                android:id="@+id/Thread_TV_Cmnt4_author"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                android:background="@drawable/rounded_corner_textview"
-                android:padding="5dp"
-                android:text="Comment4 auth"
-                android:textSize="20sp" />
-
-            <TextView
-                android:id="@+id/Thread_TV_Comment5"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:background="@drawable/rounded_corner_textview"
-                android:padding="5dp"
-                android:text="Comment5"
-                android:textSize="20sp" />
-
-            <TextView
-                android:id="@+id/Thread_TV_Cmnt5_author"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                android:background="@drawable/rounded_corner_textview"
-                android:padding="5dp"
-                android:text="Comment5 auth"
-                android:textSize="20sp" />
-
-            <TextView
-                android:id="@+id/Thread_TV_Comment6"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:background="@drawable/rounded_corner_textview"
-                android:padding="5dp"
-                android:text="Comment6"
-                android:textSize="20sp" />
-
-            <TextView
-                android:id="@+id/Thread_TV_Cmnt6_author"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                android:background="@drawable/rounded_corner_textview"
-                android:padding="5dp"
-                android:text="Comment6 auth"
-
-                android:textSize="20sp" />
-
-            <TextView
-                android:id="@+id/Thread_TV_Comment7"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:background="@drawable/rounded_corner_textview"
-                android:padding="5dp"
-                android:text="Comment7"
-                android:textSize="20sp" />
-
-            <TextView
-                android:id="@+id/Thread_TV_Cmnt7_author"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                android:background="@drawable/rounded_corner_textview"
-                android:padding="5dp"
-                android:text="Comment7 auth"
-                android:textSize="20sp" />
-
-            <TextView
-                android:id="@+id/Thread_TV_Comment8"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:background="@drawable/rounded_corner_textview"
-                android:padding="5dp"
-                android:text="Comment8"
-                android:textSize="20sp" />
-
-            <TextView
-                android:id="@+id/Thread_TV_Cmnt8_author"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                android:background="@drawable/rounded_corner_textview"
-                android:padding="5dp"
-                android:text="Comment8 auth"
-                android:textSize="20sp" />
-
-            <TextView
-                android:id="@+id/Thread_TV_Comment9"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:background="@drawable/rounded_corner_textview"
-                android:padding="5dp"
-                android:text="Comment9"
-                android:textSize="20sp" />
-
-            <TextView
-                android:id="@+id/Thread_TV_Cmnt9_author"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                android:background="@drawable/rounded_corner_textview"
-                android:padding="5dp"
-                android:text="Comment9 auth"
-                android:textSize="20sp" />
-
-            <TextView
-                android:id="@+id/Thread_TV_Comment10"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:background="@drawable/rounded_corner_textview"
-                android:padding="5dp"
-                android:text="Comment10"
-                android:textSize="20sp" />
-
-            <TextView
-                android:id="@+id/Thread_TV_Cmnt10_author"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                android:background="@drawable/rounded_corner_textview"
-                android:padding="5dp"
-                android:text="Comment10 auth"
-                android:textSize="20sp" />
-        </LinearLayout>
-    </ScrollView>
-
-    <RelativeLayout
-        android:id="@+id/RelativeLayout01"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:gravity="center"
-        android:background="@android:color/transparent">
-
-        <Button
-            android:id="@+id/Thread_Btn_Prev"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Previous Page"
-            android:layout_gravity="left"
-            android:clickable="false"
-            android:layout_alignParentStart="true"
-            android:background="@drawable/button_background"
-            />
-
-        <Button
-            android:id="@+id/Thread_Btn_Next"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Next Page"
-            android:layout_gravity="right"
-            android:layout_alignParentEnd="true"
-            android:background="@drawable/button_background" />
-
-
-        <Button
-            android:id="@+id/Thread_btn_home"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:text="Home"
-            android:textSize="20sp"
-            android:padding="10dp"
-            android:layout_marginBottom="10dp"
-            android:background="@drawable/button_home_background"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"/>
-
-
-    </RelativeLayout>
-</LinearLayout>
+        </RelativeLayout>
+    </LinearLayout>
+</ScrollView>
 
