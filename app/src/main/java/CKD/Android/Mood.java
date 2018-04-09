@@ -55,9 +55,6 @@ public class Mood extends AppCompatActivity
         initializeImageButtons();
         initializeNextButton();
 
-        Button home_btn = findViewById(R.id.Mood_btn_home);
-        home_btn = AppData.activateHomeButton(home_btn,Mood.this);
-
     }
 
 
