@@ -130,6 +130,21 @@ public class Demographics_2 extends AppCompatActivity
         {
             Race_node.child(String.valueOf(i)).setValue(AppData.cur_user.getRace().get(i));
         }
+
+        DatabaseReference Schedule_node = User_node.child(UID).child("Schedule");
+
+        for(String s : AppData.cur_user.getScheduledDays())
+        {
+            DatabaseReference Day_node = Schedule_node.child(s);
+
+            String startTime = AppData.cur_user.getScheduledStartTime().get(s);
+            String endTime = AppData.cur_user.getScheduledEndTime().get(s);
+
+            Day_node.child("StartTime").setValue(startTime);
+            Day_node.child("EndTime").setValue(endTime);
+        }
+
+
     }
 
     private void createUserAuth(String newEmail, String newPassword)
