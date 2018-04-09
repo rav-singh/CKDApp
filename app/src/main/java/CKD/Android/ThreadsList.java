@@ -452,7 +452,7 @@ public class ThreadsList extends AppCompatActivity
             arrow.setBackgroundResource(0);
             arrow = setOnClickUpVote(arrow,pageOfKeys.get(i));
 
-            likesView.addView(arrow);////////////////////
+            likesView.addView(arrow);
 
             TextView likes = new TextView(this);
             likes.setLayoutParams(likesViewParams);
@@ -463,7 +463,7 @@ public class ThreadsList extends AppCompatActivity
 
             textViewsList.add(likes);
 
-            threadView.addView(likesView);///////////////////////
+            threadView.addView(likesView);
 
             Button thread = new Button(this);
             thread.setLayoutParams(threadParams);
@@ -471,11 +471,11 @@ public class ThreadsList extends AppCompatActivity
             thread.setGravity(Gravity.LEFT);
             thread.setBackground(this.getResources().getDrawable(R.drawable.rounded_corner_textview));
 
-            threadView.addView(thread);///////////////////////
+            threadView.addView(thread);
             activeThreadBtnList.add(thread);
 
 
-            listOfThreads.addView(threadView);/////////////////
+            listOfThreads.addView(threadView);
 
         }
 
