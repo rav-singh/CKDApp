@@ -26,8 +26,8 @@ public class UserClass
     private String healthRating;
     private List<String> scheduledDays;
     //The Keys for this map are the Days, the Values are the Time in military Time (24:00)
-    private Map<String,String> scheduledStartTimes;
-    private Map<String,String> scheduledEndTimes;
+    private Map<String,String> scheduledStartTime;
+    private Map<String,String> scheduledEndTime;
 
 
     // TODO May need to instantiate all variables for login and grab data from Database using
@@ -42,8 +42,8 @@ public class UserClass
         this.UID = UID;
         this.race = new ArrayList<String>();
         this.scheduledDays = new ArrayList<>();
-        this.scheduledEndTimes = new HashMap<>();
-        this.scheduledStartTimes = new HashMap<>();
+        this.scheduledEndTime = new HashMap<>();
+        this.scheduledStartTime = new HashMap<>();
     }
 
 
@@ -66,8 +66,8 @@ public class UserClass
     String getEducation(){return education;}
     String getHealthRating(){return healthRating;}
     List<String> getScheduledDays(){return scheduledDays;}
-    Map<String,String> getScheduledStartTime(){return scheduledStartTimes;}
-    Map<String,String> getScheduledEndTime(){return scheduledEndTimes;}
+    Map<String,String> getScheduledStartTime(){return scheduledStartTime;}
+    Map<String,String> getScheduledEndTime(){return scheduledEndTime;}
 
     void setName(String name)
     {
@@ -102,8 +102,8 @@ public class UserClass
     void setWork(String work) {this.workStatus = work;}
     void setHealth(String health) {this.healthRating = health;}
     void setScheduledDays(List<String> scheduledDays){this.scheduledDays = scheduledDays;}
-    void setScheduledStartTime(Map<String,String> scheduledStartTime){this.scheduledStartTimes = scheduledStartTime;}
-    void setScheduledEndTime(Map<String,String> scheduledEndTime){this.scheduledEndTimes = scheduledEndTime;}
+    void setScheduledStartTime(Map<String,String> scheduledStartTime){this.scheduledStartTime = scheduledStartTime;}
+    void setScheduledEndTime(Map<String,String> scheduledEndTime){this.scheduledEndTime = scheduledEndTime;}
 
     void clearPassword(){this.password = "";}
 
