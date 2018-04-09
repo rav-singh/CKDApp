@@ -41,6 +41,7 @@ public class UserClass
         this.activityLevel =  activityLevel;
         this.UID = UID;
         this.race = new ArrayList<String>();
+        this.scheduledDays = new ArrayList<>();
         this.scheduledEndTimes = new HashMap<>();
         this.scheduledStartTimes = new HashMap<>();
     }
