@@ -28,11 +28,11 @@ public final class  AppData
     public static UserClass cur_user;
     public static FirebaseDatabase db;
     static FirebaseAuth mAuth;
-    public static FirebaseUser firebaseUser;
-    public static String cur_Category;
-    public static String cur_Thread_Key;
-    public static ThreadClass cur_Thread;
-    public static Boolean isUserRegistering = false;
+    static FirebaseUser firebaseUser;
+    static String cur_Category;
+    static String cur_Thread_Key;
+    static ThreadClass cur_Thread;
+    static Boolean isUserRegistering = false;
     static Boolean PopUpPresented = false;
     static Boolean userMakingComment = false;
 
@@ -259,7 +259,7 @@ public final class  AppData
             }});
     }
 
-    private static void WriteTimesToAppData(DatabaseReference schedule_node)
+    static void WriteTimesToAppData(DatabaseReference schedule_node)
     {
         for(final String Day : AppData.cur_user.getScheduledDays())
         {
@@ -284,7 +284,7 @@ public final class  AppData
                 public void onDataChange(DataSnapshot dataSnapshot)
                 {
                     String EndTime = dataSnapshot.getValue(String.class);
-                    AppData.cur_user.getScheduledStartTime().put(Day, EndTime);
+                    AppData.cur_user.getScheduledEndTime().put(Day, EndTime);
                 }
                 @Override
                 public void onCancelled(DatabaseError databaseError)
