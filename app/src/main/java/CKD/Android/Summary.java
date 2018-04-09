@@ -85,11 +85,11 @@ public class Summary extends AppCompatActivity
 
         FirebaseDatabase db = FirebaseDatabase.getInstance();
 
-        DatabaseReference Admin_node = db.getReference("Admins");
+        DatabaseReference Medical_node = db.getReference("Admins").child("Medical");
 
         for(String adminUID : selectedAdmins.keySet())
         {
-            DatabaseReference Patients_node = Admin_node.child(adminUID).child("Patients");
+            DatabaseReference Patients_node = Medical_node.child(adminUID).child("Patients");
             Patients_node.child(userUID).child("Name").setValue(AppData.cur_user.getName());
             Patients_node.child(userUID).child("Date").setValue(date);
 
