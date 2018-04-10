@@ -28,11 +28,11 @@
 
     <style media="screen">
       body { background: #ECEFF1; color: rgba(0,0,0,0.87); font-family: Roboto, Helvetica, Arial, sans-serif; margin: 0; padding: 0; }
-      #message { background: #ffffff; max-width: auto; margin: 100px auto 16px; padding: 32px 24px; border-radius: 3px; }
+      #message { background: #ffffff; max-width: auto; margin: 100px auto 16px; padding: 32px 24px; border-radius: 3px;}
       #message h3 {font-size: 12px; text-align: center; font-weight: 200; }
       #message h2 { color: #ffa100; text-align: center; font-weight: bold; font-size: 16px; margin: 0 0 8px; }
-      #loadingNotification, #message h1 { font-size: 22px; font-weight: 300; color: rgba(0,0,0,0.6); margin: 0 0 16px;}
-      #message p { line-height: 140%; margin: 16px 0 24px; font-size: 14px; }
+      #message h1 { font-size: 22px; font-weight: 300; color: rgba(0,0,0,0.6); margin: 0 0 16px;}
+      #message p { line-height: 140%; margin: 16px 0 24px; font-size: 16px; }
       #message a { display: block; color: rgba(0,0,0,1); text-align: center; text-decoration: none; border-radius: 4px; }
       #message input, textarea { background-color: #fff; box-sizing: border-box; border-radius: 2px; color: #333; -webkit-box-sizing: border-box; -moz-box-sizing: border-box;
         display: block; float: none; font-size: 16px; border: 1px solid #ccc; padding: 6px 10px; height: auto; width: 100%; line-height: 1.3; }
@@ -58,15 +58,12 @@
             <button id="Activity" onClick="toggleActivitiesOn()">Exercise Blog</button>
             <button id="Social" onClick="toggleSocialOn()">Social</button>
             <button id="PinnedPost" onClick="togglePinnedPostOn()">Pinned Post</button>
-
         </div>
+
         <div style="display:none;" id="bloggy" class="animate-bottom">
           <input id="dietBlogTitle" type="text" placeholder="Title..."></input>
           <textarea id="dietBlogBody" rows="15" placeholder="The content of your post..."></textarea>
           <button id="dietSubmitBlogPost" onClick="submitDietBlog()">Submit Post</button>
-        </div>
-        <div style="display:none;" id="socially" class="animate-bottom">
-          <p>Social!</p>
         </div>
         <div style="display:none;" id="actively" class="animate-bottom">
           <input id="exerciseBlogTitle" type="text" placeholder="Title..."></input>
@@ -78,6 +75,12 @@
           <textarea id="pinnedBody" rows="15" placeholder="The content of your post..."></textarea>
           <button id="SubmitPinnedPost" onClick="submitPinnedPost()">Submit Post</button>
         </div>
+
+        <div style="display:none; max-height:400vh; overflow: auto;" id="socially" class="animate-bottom">
+          <table id="socialTable"></table>
+        </div>
+
+
     </div>
 
     <script>
@@ -85,6 +88,8 @@
       queries = queryString.substring(1).split("=");
       var ref = firebase.database().ref("Admins/Tech/" + queries[1]);
       var techName, promise;
+
+      var htmlValuesForSocial;
 
       promise = ref.once("value", function(snap) {
         if (!snap.exists())
@@ -103,6 +108,115 @@
       });
 
       Promise.resolve(promise);
+
+      function placeButtonForSocialTopics()
+      {
+        var socialRef = firebase.database().ref("Data/Social/");
+
+        htmlValuesForSocial = "<div style=\"text-align: center; margin: 16px auto 16px;\">";
+
+        Promise.resolve(socialRef.once("value", function(snapshot) {
+
+          snapshot.forEach(function(topics) {
+
+            htmlValuesForSocial += "<button id=\"" + topics.key.replace(" ", "") + "\" onClick=\"presentData('" + topics.key + "')\">" + topics.key + "</button>";
+          });
+        })).then(function() {
+          htmlValuesForSocial += "</div>";
+        }).then(function() {
+          document.getElementById("socially").innerHTML = htmlValuesForSocial;
+        });
+
+      }
+
+      function presentData (topic)
+      {
+        var topicRef = firebase.database().ref("Data/Social/" + topic + "/");
+        var topicHTML = "<table id=\"table" + topic + "\">";
+        var show, nshow;
+        Promise.resolve(topicRef.once("value", function(snapshot) {
+          snapshot.forEach(function(threadUID) {
+            show = "display: block;";
+            nshow = "display: none;";
+
+            if (strcmp(typeof threadUID.val().Comments,"undefined") == 0)
+            {
+                firebase.database().ref("Data/Social/" + topic + "/" + threadUID.key + "/").set({
+                  Comments: "No comments",
+                  author: threadUID.val().author,
+                  authorUID: threadUID.val().authorUID,
+                  body: threadUID.val().body,
+                  category: threadUID.val().category,
+                  date: threadUID.val().date,
+                  likes: threadUID.val().likes,
+                  title: threadUID.val().title
+                });
+            }
+
+            if (strcmp(typeof threadUID.val().Comments,"undefined") == 0 || strcmp(threadUID.val().Comments, "No comments") == 0)
+            {
+              show = "display: none;";
+              nshow = "display: block;";
+            }
+
+            topicHTML += "<tr> <th>Author</th> <th>Title</th> <th>Body</th> <th>Date</th> <th>Delete</th> <th>Comments on Thread</th> </tr>";
+            topicHTML += "<tr> <td>" + threadUID.val().author + "</td> <td>"
+              + threadUID.val().title + "</td> <td>" + threadUID.val().body
+              + "</td> <td>" + threadUID.val().date + "</td> <td> <button onClick=\"deleteRecord('"
+              + topic + "', '" + threadUID.key + "', '" + threadUID.val().title
+              + "', '" + threadUID.val().author + "')\">Delete!</button></td>"
+              + "<td><button style=\"" + show + "\" onClick=\"showComments('" + topic + "', '"
+              + threadUID.key + "')\">See Them!</button><p style=\"text-align:center; " + nshow + "\">N/A</p></td></tr>";
+          });
+        })).then(function() {
+          topicHTML += "</table>";
+        }).then(function() {
+          document.getElementById("socially").innerHTML = htmlValuesForSocial + topicHTML;
+        });
+      }
+
+      function showComments(topic, thread)
+      {
+        commentsRef = firebase.database().ref("Data/Social/" + topic + "/" + thread + "/Comments/");
+
+        var topicHTML = "<button onClick=\"presentData('" + topic + "')\">Go Back to Threads</button><table id=\"table" + topic + "\">";
+
+        Promise.resolve(commentsRef.once("value", function(snaps) {
+          snaps.forEach(function(uid) {
+            topicHTML += "<tr> <th>Name</th> <th>Comment</th> <th>Date</th> <th>Delete</th> </tr>";
+            topicHTML += "<tr> <td>" + uid.val().userName + "</td> <td>" + uid.val().comment
+              + "</td> <td>" + uid.val().date + "</td> <td>"
+              + "<button onClick=\"deleteComment('" + topic + "', '" + thread
+              + "', '" + uid.key + "', '" + uid.val().userName + "', '" + uid.val().date + "')\">Delete!</button></td></tr>";
+          });
+        })).then(function() {
+          topicHTML += "</table>";
+        }).then(function() {
+          document.getElementById("socially").innerHTML = htmlValuesForSocial + topicHTML;
+        });
+      }
+
+      function deleteComment (topic, thread, uid, name, date)
+      {
+        var deleteRef = firebase.database().ref("Data/Social/" + topic + "/" + thread + "/Comments/" + uid + "/");
+        if (confirm("Are you sure you want to permanently delete this comment written by " +  name + " on " + date + " ?"))
+        {
+          alert("Record has been permanently deleted");
+          deleteRef.remove();
+          showComments(topic, thread);
+        }
+      }
+
+      function deleteRecord (thread, uid, title, name)
+      {
+        var deleteRef = firebase.database().ref("Data/Social/" + thread + "/" + uid + "/");
+        if (confirm("Are you sure you want to permanently delete this record?\n\n'" + title +"' by " + name))
+        {
+          alert("Record has been permanently deleted");
+          deleteRef.remove();
+        }
+        presentData(thread);
+      }
 
       function togglePinnedPostOn()
       {
@@ -182,6 +296,8 @@
         document.getElementById("socially").style.display = "block";
         document.getElementById("actively").style.display = "none";
         document.getElementById("pinny").style.display = "none";
+
+        placeButtonForSocialTopics();
       }
 
       function toggleDietOn() {
