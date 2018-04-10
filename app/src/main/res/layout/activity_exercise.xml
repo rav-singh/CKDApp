@@ -13,16 +13,80 @@
         android:id="@+id/Exercise_TF_Title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="EXERCISE PAGE"
+        android:text="ACTIVITY BLOG"
         android:textAlignment="center"
         android:textSize="30dp" />
 
+    <TextView
+        android:id="@+id/Exercise_TF_Date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Put Date Here"
+        android:textAlignment="center"
+        android:textSize="30dp" />
+
+    <TextView
+        android:id="@+id/Exercise_TF_Blog_Title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Blog Title"
+        android:textAlignment="center"
+        android:textSize="30dp" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:id="@+id/Exercise_TF_Blog_Text"
+            android:layout_width="match_parent"
+            android:layout_height="275dp"
+            android:text="Blog Content Text"
+            android:textAlignment="center"
+            android:textSize="30dp" />
+    </ScrollView>
+
+
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="75dp">
 
         <Button
-            android:id="@+id/Exervice_btn_home"
+            android:id="@+id/Exercise_btn_ActivityLog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="43dp"
+            android:background="@drawable/button_home_background"
+            android:padding="10dp"
+            android:text="Activity Log"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/Exercise_btn_YouTubeVideos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/Exercise_btn_ActivityLog"
+            android:layout_alignBottom="@+id/Exercise_btn_ActivityLog"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="40dp"
+            android:background="@drawable/button_home_background"
+            android:padding="10dp"
+            android:text="Videos"
+            android:textSize="20sp" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="75dp">
+
+        <Button
+            android:id="@+id/Exercise_btn_home"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
