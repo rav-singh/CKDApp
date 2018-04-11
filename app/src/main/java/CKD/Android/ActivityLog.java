@@ -28,7 +28,7 @@ public class ActivityLog extends AppCompatActivity {
     private EditText activityET;
     private Button addActivity;
     ArrayList<String> ActivityNames;
-    ArrayList<String> ActivityDuration;
+    ArrayList<String> ActivityDurations;
     FirebaseDatabase db = FirebaseDatabase.getInstance();
     String UID = FirebaseAuth.getInstance().getCurrentUser().getUid();
     String duration;
@@ -47,23 +47,23 @@ public class ActivityLog extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 String dbActivityNames = dataSnapshot.child("ActivityNames").getValue(String.class);
-                String dbActivityDuration = dataSnapshot.child("ActivityDurations").getValue(String.class);
+                String dbActivityDurations = dataSnapshot.child("ActivityDurations").getValue(String.class);
                 Log.i("1: Names:", dbActivityNames);
-                Log.i("1: Durations:", dbActivityDuration);
+                Log.i("1: Durations:", dbActivityDurations);
 
                 dbActivityNames = dbActivityNames.replace("]","");
                 dbActivityNames = dbActivityNames.replace("[","");
-                dbActivityDuration = dbActivityDuration.replace("]","");
-                dbActivityDuration = dbActivityDuration.replace("[","");
+                dbActivityDurations = dbActivityDurations.replace("]","");
+                dbActivityDurations = dbActivityDurations.replace("[","");
 
                 Log.i("2: Names:", dbActivityNames);
-                Log.i("2: Durations:", dbActivityDuration);
+                Log.i("2: Durations:", dbActivityDurations);
 
                 ActivityNames = new ArrayList<String>(Arrays.asList(dbActivityNames.split(", ")));
-                ActivityDuration = new ArrayList<String> (Arrays.asList(dbActivityDuration.split(", ")));
+                ActivityDurations = new ArrayList<String> (Arrays.asList(dbActivityDurations.split(", ")));
 
                 Log.i("As ArrayList:", ActivityNames.toString());
-                Log.i("As ArrayList:", ActivityDuration.toString());
+                Log.i("As ArrayList:", ActivityDurations.toString());
 
                 // At this point, I have the Activity Names and Durations stored as ArrayList<String>
                 // Need to display them like with Diet entries.
@@ -99,10 +99,10 @@ public class ActivityLog extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         duration = input.getText().toString();
-                        ActivityDuration.add(duration);
+                        ActivityDurations.add(duration);
                         DatabaseReference dataNode = db.getReference().child("Data").child("Exercise").child(UID).child(AppData.getTodaysDate());
                         dataNode.child("ActivityNames").setValue(ActivityNames.toString());
-                        dataNode.child("ActivityDurations").setValue(ActivityDuration.toString());
+                        dataNode.child("ActivityDurations").setValue(ActivityDurations.toString());
 
 
 
