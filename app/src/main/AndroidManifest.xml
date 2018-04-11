@@ -28,6 +28,8 @@
         <activity android:name=".Mood" />
         <activity android:name=".AppetiteAndFatigue" />
         <activity android:name=".Exercise" />
+        <activity android:name=".ActivityLog" />
+        <activity android:name=".Videos" />
         <activity android:name=".Diet" />
         <activity android:name=".Leaderboards" />
         <activity android:name=".Summary" />
