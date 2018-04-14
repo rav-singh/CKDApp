@@ -16,6 +16,7 @@
         android:layout_margin="10dp"
         android:textSize="32sp"
         android:text="Mood"
+        android:background="@drawable/rounded_corner_textview"
  />
 
     <Button
@@ -27,6 +28,7 @@
         android:textSize="32sp"
         android:gravity="center"
         android:text="Exercise"
+        android:background="@drawable/rounded_corner_textview"
  />
 
     <Button
@@ -37,7 +39,7 @@
         android:layout_margin="10dp"
         android:textSize="32sp"
         android:text="Diet"
- />
+        android:background="@drawable/rounded_corner_textview"/>
 
     <Button
         android:id="@+id/Home_Btn_Social"
@@ -46,7 +48,8 @@
         android:padding="10dp"
         android:layout_margin="10dp"
         android:textSize="32sp"
-        android:text="Social" />
+        android:text="Social"
+        android:background="@drawable/rounded_corner_textview"/>
 
     <Button
         android:id="@+id/Home_Btn_Summary"
@@ -55,7 +58,8 @@
         android:padding="10dp"
         android:layout_margin="10dp"
         android:textSize="32sp"
-        android:text="Summary" />
+        android:text="Summary"
+        android:background="@drawable/rounded_corner_textview"/>
 
 
     <Button
@@ -67,5 +71,6 @@
         android:layout_margin="20dp"
         android:textSize="32sp"
         android:text="Logout"
+        android:background="@drawable/button_logout_background"
 />
 </LinearLayout>
