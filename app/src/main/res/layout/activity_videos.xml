@@ -1,9 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="CKD.Android.Videos">
+    android:background="@drawable/main_background_gradient">
 
-</android.support.constraint.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/Videos_TV_FeaturedVideo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textSize="32sp"
+        android:layout_margin="10dp"
+        android:text="Featured Video"
+        android:background="@drawable/rounded_corner_textview"/>
+
+    <com.google.android.youtube.player.YouTubePlayerView
+        android:id="@+id/youtube_player_Featured"
+        android:layout_width="match_parent"
+        android:layout_height="213dp"
+        android:background="#ffff" />
+
+    <TextView
+        android:id="@+id/Videos_TV_StrengthVideo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textSize="32sp"
+        android:layout_margin="10dp"
+        android:text="Strength"
+        android:background="@drawable/rounded_corner_textview"/>
+
+    <com.google.android.youtube.player.YouTubePlayerView
+        android:id="@+id/youtube_player_Strength"
+        android:layout_width="match_parent"
+        android:layout_height="213dp"
+        android:background="#ffff" />
+
+    <TextView
+        android:id="@+id/Videos_TV_EnduranceVideo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textSize="32sp"
+        android:layout_margin="10dp"
+        android:text="Endurance"
+        android:background="@drawable/rounded_corner_textview"/>
+
+    <com.google.android.youtube.player.YouTubePlayerView
+        android:id="@+id/youtube_player_Endurance"
+        android:layout_width="match_parent"
+        android:layout_height="213dp"
+        android:background="#ffff" />
+
+    <TextView
+        android:id="@+id/Videos_TV_MotionVideo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textSize="32sp"
+        android:layout_margin="10dp"
+        android:text="Range of Motion"
+        android:background="@drawable/rounded_corner_textview"/>
+
+    <com.google.android.youtube.player.YouTubePlayerView
+        android:id="@+id/youtube_player_Motion"
+        android:layout_width="match_parent"
+        android:layout_height="213dp"
+        android:background="#ffff" />
+
+</LinearLayout>
+</ScrollView>
