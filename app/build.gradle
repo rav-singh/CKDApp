@@ -19,8 +19,16 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'com.android.support:appcompat-v7:26.1.0'
+    implementation 'com.google.android.gms:play-services-auth:11.0.4'
+    compile 'pub.devrel:easypermissions:0.3.0'
+    compile('com.google.api-client:google-api-client-android:1.23.0') {
+        exclude group: 'org.apache.httpcomponents'
+    }
+    compile('com.google.apis:google-api-services-youtube:v3-rev193-1.23.0') {
+        exclude group: 'org.apache.httpcomponents'
+    }
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     implementation 'com.google.firebase:firebase-core:11.0.4'
     implementation 'com.google.firebase:firebase-auth:11.0.4'
@@ -33,11 +41,8 @@ dependencies {
     // Third Party Libs
     compile 'com.squareup.okhttp3:okhttp:3.9.1'
     compile 'com.google.code.gson:gson:2.8.2'
-
+    implementation files('libs/YouTubeAndroidPlayerApi.jar')
 }
-
-
-
 
 
 
