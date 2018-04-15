@@ -27,14 +27,40 @@
         android:layout_gravity="end"
         android:textSize="24sp"/>
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/activity_TV_NameHeader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:text="Names"
+            android:textSize="20sp"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:padding="10dp" />
+
+        <TextView
+            android:id="@+id/activity_TV_DurationHeader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:layout_margin="20dp"
+            android:text="Duration"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"/>
+    </RelativeLayout>
+
     <ListView
         android:id="@+id/activities_LV"
-        android:layout_width="match_parent"
+        android:layout_width="400dp"
         android:layout_height="400dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:background="@drawable/rounded_corner_textview"/>
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:textSize="20sp"/>
+
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -51,6 +77,7 @@
             android:background="@drawable/button_home_background"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"/>
+
     </RelativeLayout>
 
 </LinearLayout>
