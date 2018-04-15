@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -16,20 +17,7 @@
         android:layout_margin="10dp"
         android:textSize="32sp"
         android:text="Mood"
-        android:background="@drawable/rounded_corner_textview"
- />
-
-    <Button
-        android:id="@+id/Home_Btn_Exercise"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:layout_margin="10dp"
-        android:textSize="32sp"
-        android:gravity="center"
-        android:text="Exercise"
-        android:background="@drawable/rounded_corner_textview"
- />
+        android:background="@drawable/rounded_corner_textview" />
 
     <Button
         android:id="@+id/Home_Btn_Diet"
@@ -42,13 +30,24 @@
         android:background="@drawable/rounded_corner_textview"/>
 
     <Button
+        android:id="@+id/Home_Btn_Exercise"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:layout_margin="10dp"
+        android:textSize="32sp"
+        android:gravity="center"
+        android:text="Activity"
+        android:background="@drawable/rounded_corner_textview" />
+
+    <Button
         android:id="@+id/Home_Btn_Social"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="10dp"
         android:layout_margin="10dp"
         android:textSize="32sp"
-        android:text="Social"
+        android:text="Community"
         android:background="@drawable/rounded_corner_textview"/>
 
     <Button
@@ -58,7 +57,7 @@
         android:padding="10dp"
         android:layout_margin="10dp"
         android:textSize="32sp"
-        android:text="Summary"
+        android:text="Export"
         android:background="@drawable/rounded_corner_textview"/>
 
 
