@@ -5,9 +5,14 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.DisplayMetrics;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.TextView;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -29,29 +34,23 @@ public class Summary extends AppCompatActivity
     private DataSnapshot DS;
 
     private List<String> adminsUIDList = new ArrayList<>();
-    private List<String> adminsnameList = new ArrayList<>();
-    private Map<String,String> selectedAdmins= new HashMap<>();
-    private List<Button> allAdminBtnList = new ArrayList<>();
-    private List<Button> activeAdminBtnList = new ArrayList<>();
+    private List<String> selectedAdminsUIDList = new ArrayList<>();
+    private List<String> adminsNameList = new ArrayList<>();
+    private List<String> adminsFacilityList = new ArrayList<>();
+    private List<Button> adminsButtonList = new ArrayList<>();
+    private LinearLayout adminLL;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_summary);
 
-        initializeButtons();
-
-        fillInAdminButtons();
+        export = findViewById(R.id.Summary_Export);
+        adminLL = findViewById(R.id.Summary_AdminListView);
 
         Button home_btn = findViewById(R.id.Summary_btn_home);
         home_btn = AppData.activateHomeButton(home_btn,Summary.this);
-
-
-        int i = 0;
-        for( Button b : allAdminBtnList)
-        {
-            setOnClickListeners(b, i++);
-        }
 
         export.setOnClickListener(new View.OnClickListener()
         {
@@ -62,35 +61,25 @@ public class Summary extends AppCompatActivity
                 startActivity(launchActivity1);
             }
         });
+
+        fillInAdminButtons();
     }
 
-    private void UpdateUI()
-    {
-        LinearLayout ll = findViewById(R.id.Summary_AdminListView);
-
-        // If a button has in the list of all buttons has not been activated
-        // then remove it from the Linear Layout
-        for(Button b : allAdminBtnList)
-        {
-            if(!activeAdminBtnList.contains(b))
-                ll.removeView(b);
-        }
-    }
 
     private void addPatientsUIDToSelectedAdmins()
     {
         String date = AppData.getTodaysDate();
-
         String userUID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        String userName = AppData.cur_user.getName();
 
         FirebaseDatabase db = FirebaseDatabase.getInstance();
-
         DatabaseReference Medical_node = db.getReference("Admins").child("Medical");
 
-        for(String adminUID : selectedAdmins.keySet())
+        for(String adminUID : selectedAdminsUIDList)
         {
             DatabaseReference Patients_node = Medical_node.child(adminUID).child("Patients");
-            Patients_node.child(userUID).child("Name").setValue(AppData.cur_user.getName());
+
+            Patients_node.child(userUID).child("Name").setValue(userName);
             Patients_node.child(userUID).child("Date").setValue(date);
 
         }
@@ -105,17 +94,16 @@ public class Summary extends AppCompatActivity
                 b.setSelected(!b.isSelected());
 
                 String adminUID = adminsUIDList.get(i);
-                String adminName = adminsnameList.get(i);
 
                 if(b.isSelected())
                 {
-                    selectedAdmins.put(adminUID, adminName);
-                    b.setBackgroundColor(Color.GREEN);
+                    selectedAdminsUIDList.add(adminUID);
+                    b.setBackground(getResources().getDrawable(R.drawable.rounded_corner_textview_green));
                 }
                 else
                 {
-                    selectedAdmins.remove(adminUID);
-                    b.setBackgroundColor(Color.WHITE);
+                    selectedAdminsUIDList.remove(adminUID);
+                    b.setBackground(getResources().getDrawable(R.drawable.rounded_corner_textview));
                 }
             }
         });
@@ -135,14 +123,24 @@ public class Summary extends AppCompatActivity
                 DS = dataSnapshot;
 
                 // Grabs all of the admins UID's and places them into a List
-                fillAdminUIDList();
+                fillAdminInfoLists();
+                // Creates Buttons Displaying admins name and facility and stores in a list
+                initializeAndStoreAdminButtons();
+                updateUI();
+            }
 
-                int i = 0;
-                for(String adminKey : adminsUIDList)
+
+            private void fillAdminInfoLists()
+            {
+                for(DataSnapshot d : DS.getChildren())
                 {
-                    fillInAdminButtons(adminKey, i++);
+                    String adminName = (String) d.child("Name").getValue();
+                    String adminFacility = (String) d.child("Facility").getValue();
+                    // Stores the admins UID, name and Facility into Lists for referencing later
+                    adminsUIDList.add(d.getKey());
+                    adminsNameList.add(adminName);
+                    adminsFacilityList.add(adminFacility);
                 }
-                UpdateUI();
             }
 
             @Override
@@ -152,53 +150,53 @@ public class Summary extends AppCompatActivity
             }
         });
     }
-    // Grabs Admins Name from Database and sets the text on that button
-    // to said name. Then adds the admins name to the list in the same index
-    // as well as adding that button to the activated Buttons list
-    private void fillInAdminButtons(String AdminUID, int i )
+
+    private void initializeAndStoreAdminButtons()
     {
-        String adminName = (String)DS.child(AdminUID).child("Name").getValue();
-
-        allAdminBtnList.get(i).setText(adminName);
-
-        adminsnameList.add(adminName);
-
-        activeAdminBtnList.add(allAdminBtnList.get(i));
-    }
-
-    private void fillAdminUIDList()
-    {
-        for(DataSnapshot d : DS.getChildren())
+        for(int i = 0; i<adminsUIDList.size(); i++)
         {
-            adminsUIDList.add(d.getKey());
+            String name = adminsNameList.get(i);
+            String facility = adminsFacilityList.get(i);
+            String displayName = name.concat(" - ").concat(facility);
+
+            Button adminButton = new Button (this);
+            adminButton.setText(displayName);
+            adminsButtonList.add(adminButton);
         }
     }
 
-    private void initializeButtons()
+    private void updateUI ()
     {
-        Button admin1 = findViewById(R.id.Summary_Admin1);
-        allAdminBtnList.add(admin1);
-        Button admin2 = findViewById(R.id.Summary_Admin2);
-        allAdminBtnList.add(admin2);
-        Button admin3 = findViewById(R.id.Summary_Admin3);
-        allAdminBtnList.add(admin3);
-        Button admin4 = findViewById(R.id.Summary_Admin4);
-        allAdminBtnList.add(admin4);
-        Button admin5 = findViewById(R.id.Summary_Admin5);
-        allAdminBtnList.add(admin5);
-        Button admin6 = findViewById(R.id.Summary_Admin6);
-        allAdminBtnList.add(admin6);
-        Button admin7 = findViewById(R.id.Summary_Admin7);
-        allAdminBtnList.add(admin7);
-        Button admin8 = findViewById(R.id.Summary_Admin8);
-        allAdminBtnList.add(admin8);
-        Button admin9 = findViewById(R.id.Summary_Admin9);
-        allAdminBtnList.add(admin9);
-        Button admin10 = findViewById(R.id.Summary_Admin10);
-        allAdminBtnList.add(admin10);
+        TextView prompt = findViewById(R.id.Summary_TV_Prompt);
+        int width = prompt.getWidth();
 
-        export = findViewById(R.id.Summary_Export);
+        LinearLayout.LayoutParams params_LL = new LinearLayout.LayoutParams
+            (LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        params_LL.setMargins(10,10,10,10);
 
+        LinearLayout.LayoutParams params_btn = new LinearLayout.LayoutParams
+                (width, LinearLayout.LayoutParams.WRAP_CONTENT);
 
+        LinearLayout ll = new LinearLayout(this);
+        ll.setLayoutParams(params_LL);
+        ll.setOrientation(LinearLayout.VERTICAL);
+        ll.setGravity(Gravity.CENTER);
+        // Adds all of the buttons in the List into a new temporary Linear layout
+        // and then adds the entire temp LL into the adminLL
+        for(int i = 0;  i < adminsButtonList.size() ; i++)
+        {
+            Button adminButton = adminsButtonList.get(i);
+            adminButton.setLayoutParams(params_btn);
+            adminButton.setBackground(this.getResources().getDrawable(R.drawable.rounded_corner_textview));
+            adminButton.setGravity(Gravity.CENTER);
+            setOnClickListeners(adminButton,i);
+
+            ll.addView(adminButton);
+        }
+            adminLL.addView(ll);
     }
+
+
+
+
 }
