@@ -28,8 +28,11 @@
         android:textSize="24sp"/>
 
     <RelativeLayout
+        android:id="@+id/ActivityLog_RL"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_corner_textview"
+        android:layout_margin="10dp">
 
         <TextView
             android:id="@+id/activity_TV_NameHeader"
@@ -37,6 +40,8 @@
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
             android:text="Names"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"
             android:textSize="20sp"
             android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
@@ -49,18 +54,26 @@
             android:textSize="20sp"
             android:layout_margin="20dp"
             android:text="Duration"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"
             android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"/>
+            android:layout_centerVertical="true"
+            android:padding="10dp"/>
     </RelativeLayout>
 
-    <ListView
-        android:id="@+id/activities_LV"
-        android:layout_width="400dp"
-        android:layout_height="400dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-        android:textSize="20sp"/>
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
 
+        <LinearLayout
+            android:id="@+id/ActivityLog_LL"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+        </LinearLayout>
+
+    </ScrollView>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -68,15 +81,15 @@
 
         <Button
             android:id="@+id/activityLog_btn_home"
-            android:layout_height="wrap_content"
             android:layout_width="wrap_content"
-            android:text="Home"
-            android:textSize="20sp"
-            android:padding="10dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
             android:layout_marginBottom="10dp"
             android:background="@drawable/button_home_background"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"/>
+            android:padding="10dp"
+            android:text="Home"
+            android:textSize="20sp" />
 
     </RelativeLayout>
 
