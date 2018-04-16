@@ -51,13 +51,14 @@ public class SearchFood extends AppCompatActivity {
     private Request request;
     private String apiKey = "kOa0Zd0guy7xjuq3uPP0qYKvZlXRGoT0Joxaidud";
     private String usdaURL;
-    private Button btnSearchFood,btnHome;
+    private Button btnSearchFood, btnHome;
     private EditText searchedFood;
+    private int ndbno, chosenNDBNO;
     private foodItem foods;
     ArrayList<foodItem> foodsList = new ArrayList<foodItem>();
     ArrayList<foodItem> parsedFoodsList = new ArrayList<foodItem>();
     private ListView lv;
-    private String quantity;
+    private int quantity;
     private Intent myIntent = new Intent();
 
     @Override
@@ -106,11 +107,9 @@ public class SearchFood extends AppCompatActivity {
                     public void onResponse(Call call, Response response) throws IOException {
                         String jsonData = response.body().string();
                         Log.i(TAG, jsonData);
-                        if(jsonData.contains("timeout") || jsonData.contains("error"));
+                        if (jsonData.contains("timeout") || jsonData.contains("error")) ;
                         {
-                            //TODO TOAST TO LET USER KNOW
-                        //    Intent launchActivity1= new Intent(SearchFood.this,HomePage.class);
-                          //  startActivity(launchActivity1);
+                            // handle api being down
                         }
                         // Parse the JSON into foodItem Class
                         try {
@@ -119,11 +118,10 @@ public class SearchFood extends AppCompatActivity {
                             JSONObject foodItems = jsonObj.getJSONObject("list");
                             JSONArray dataInner = foodItems.getJSONArray("item");
                             // looping through all Food results
-                            for (int i = 0; i < dataInner.length(); i++)
-                            {
+                            for (int i = 0; i < dataInner.length(); i++) {
                                 JSONObject postObject = dataInner.getJSONObject(i);
 
-                                int ndbno = postObject.getInt("ndbno");
+                                ndbno = postObject.getInt("ndbno");
 
                                 String foodName = postObject.getString("name");
 
@@ -134,9 +132,6 @@ public class SearchFood extends AppCompatActivity {
 
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            //TODO TOAST TO LET USER KNOW
-                       //     Intent launchActivity1= new Intent(SearchFood.this,HomePage.class);
-                         //   startActivity(launchActivity1);
                         }
 
                     }
@@ -158,13 +153,13 @@ public class SearchFood extends AppCompatActivity {
         // Grab the user`s choice
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l)
-            {
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 foodItem selectedFood = (foodItem) lv.getItemAtPosition(i);
 
                 myIntent.putExtra("FoodName", selectedFood.getName());
                 myIntent.putExtra("NdbNo", selectedFood.getNdbno());
 
+                chosenNDBNO = selectedFood.getNdbno();
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(SearchFood.this);
 
@@ -189,22 +184,31 @@ public class SearchFood extends AppCompatActivity {
                 // Set up the buttons
                 builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which)
-                    {
-                        quantity = input.getText().toString();
-
+                    public void onClick(DialogInterface dialog, int which) {
+                        String grabQuantity = input.getText().toString();
+                        quantity = Integer.parseInt(grabQuantity);
                         myIntent.putExtra("Quantity", quantity);
 
-                        setResult(Activity.RESULT_OK, myIntent);
-                        AppData.updateDailyChecklist("Diet");
-                        finish();
+                        int cnt = 1;
+                        while (cnt <= 3) {
+                            if (cnt == 1)
+                                getNutritionFacts(305, "Potassium", cnt);
+
+                            if (cnt == 2)
+                                getNutritionFacts(306, "Phosphorus", cnt);
+
+                            if (cnt == 3)
+                                getNutritionFacts(307, "Sodium", cnt);
+
+                            cnt++;
+                        }
+
                     }
                 });
 
                 builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which)
-                    {
+                    public void onClick(DialogInterface dialog, int which) {
                         dialog.cancel();
                     }
                 });
@@ -214,39 +218,30 @@ public class SearchFood extends AppCompatActivity {
             }
         });
 
-}
+    }
 
     // Each Foodname inside each FoodItem Class contains a Name with a UPC number
     // as well as commas within the name itself. We need to remove the UPC number
     // as well as commas with the name
-    private void parseNameStringsInFoodsList()
-    {
-        for(foodItem food : foodsList)
-        {
+    private void parseNameStringsInFoodsList() {
+        for (foodItem food : foodsList) {
             // Contains name with commas and UPC number
             String name = food.getName();
             int ndbo = food.getNdbno();
 
-            if (name.contains("UPC:"))
-            {
-                parseUPCorGTIN(name,"UPC", ndbo);
-            }
-            else if(name.contains("GTIN:"))
-            {
-                parseUPCorGTIN(name,"GTIN", ndbo);
-            }
-            else
-            {
-                parseUPCorGTIN(name,null, ndbo);
+            if (name.contains("UPC:")) {
+                parseUPCorGTIN(name, "UPC", ndbo);
+            } else if (name.contains("GTIN:")) {
+                parseUPCorGTIN(name, "GTIN", ndbo);
+            } else {
+                parseUPCorGTIN(name, null, ndbo);
             }
 
         }
     }
 
-    private void parseUPCorGTIN(String name, String remove, int ndbo)
-    {
-        if(remove != null)
-        {
+    private void parseUPCorGTIN(String name, String remove, int ndbo) {
+        if (remove != null) {
             int indexToRemove = name.indexOf(remove);
 
             // Removes UPC from String as well as commas
@@ -254,14 +249,85 @@ public class SearchFood extends AppCompatActivity {
             name = temp;
         }
 
-        name = name.replaceAll("//[^A-Za-z0-9]//","");
-        name = name.replaceAll(",","_");
+        name = name.replaceAll("//[^A-Za-z0-9]//", "");
+        name = name.replaceAll(",", "_");
 
         //Create a new foodItemClass to replace in the foodslist Array
         foodItem updatedFoodItem = new foodItem(name, ndbo);
         //Overwrites the foodItem Class in the array
         parsedFoodsList.add(updatedFoodItem);
     }
+
+    private void getNutritionFacts(int nutrientId, final String nutrient, final int count) {
+
+    // Build API Request URL
+    String url = "https://api.nal.usda.gov/ndb/nutrients/?format=json&api_key=" + apiKey + "&nutrients=" + nutrientId + "&ndbno=" + chosenNDBNO + "";
+
+    // Initialize a http client
+    okHttpClient = new OkHttpClient();
+
+        // Initialize a request
+        Request request = new Request.Builder().url(url).build();
+
+        okHttpClient.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                Log.i(TAG, e.getMessage());
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+            String jsonDataNutrients = response.body().string();
+            Log.i(TAG, jsonDataNutrients);
+
+            if (jsonDataNutrients.contains("timeout") || jsonDataNutrients.contains("error")) ;
+            {
+                // handle api being down
+            }
+            // Parse the JSON
+            try {
+
+                JSONObject jsonObj = new JSONObject(jsonDataNutrients);
+                JSONObject report = jsonObj.getJSONObject("report");
+                JSONArray foodsArray = report.getJSONArray("foods");
+
+                int length = foodsArray.length();
+                // Missing Nutrient Information
+                if (foodsArray.length() == 0)
+                    return;
+
+                // looping through all Food results
+                for (int i = 0; i < foodsArray.length(); i++) {
+                    //JSONArray nutrients = foodsArray.getJSONArray(i);
+                    JSONObject postObject = foodsArray.getJSONObject(i);
+                    JSONArray nutrientInfo = postObject.getJSONArray("nutrients");
+                    for (int j = 0; j < nutrientInfo.length(); j++) {
+                        JSONObject postObjectInner = nutrientInfo.getJSONObject(j);
+                        int nutrientVal = postObjectInner.getInt("value");
+                        myIntent.putExtra(nutrient, nutrientVal);
+                        Log.i(nutrient, String.valueOf(nutrientVal));
+                    }
+                }
+
+                if(count == 3)
+                {
+                    setResult(Activity.RESULT_OK, myIntent);
+                    AppData.updateDailyChecklist("Diet");
+                    finish();
+
+                }
+            }
+
+            catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+        }
+
+
+    });
+
+}
 
 
     public static Intent makeIntent(Context context)

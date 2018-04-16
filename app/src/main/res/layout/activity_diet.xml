@@ -26,6 +26,16 @@
             android:padding="10dp" />
 
         <Button
+            android:id="@+id/addNoBreakfast_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/addBreakfast_btn"
+            android:layout_alignBottom="@+id/addBreakfast_btn"
+            android:layout_toStartOf="@+id/addBreakfast_btn"
+            android:text="No Meal"
+            android:textSize="20sp" />
+
+        <Button
             android:id="@+id/addBreakfast_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -61,6 +71,15 @@
             android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
             android:padding="10dp" />
+
+        <Button
+            android:id="@+id/addNoLunch_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/textView2"
+            android:layout_toStartOf="@+id/addLunch_btn"
+            android:text="No Meal"
+            android:textSize="20sp" />
 
         <Button
             android:id="@+id/addLunch_btn"
@@ -100,6 +119,16 @@
             android:padding="10dp" />
 
         <Button
+            android:id="@+id/addNoDinner_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/addDinner_btn"
+            android:layout_alignBottom="@+id/addDinner_btn"
+            android:layout_toStartOf="@+id/addDinner_btn"
+            android:text="No Meal"
+            android:textSize="20sp" />
+
+        <Button
             android:id="@+id/addDinner_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -133,6 +162,16 @@
             android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
             android:padding="10dp" />
+
+        <Button
+            android:id="@+id/addNoSnacks_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/addSnacks_btn"
+            android:layout_alignBottom="@+id/addSnacks_btn"
+            android:layout_toStartOf="@+id/addSnacks_btn"
+            android:text="No Meal"
+            android:textSize="20sp" />
 
         <Button
             android:id="@+id/addSnacks_btn"

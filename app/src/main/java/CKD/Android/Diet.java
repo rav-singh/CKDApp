@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -15,6 +16,7 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -52,25 +54,44 @@ public class Diet extends AppCompatActivity {
     public static final int REQUEST_CODE_Dinner = 3333;
     public static final int REQUEST_CODE_Snacks = 4444;
 
-    private Button btnAddBreakfast, btnAddLunch,
-                    btnAddDinner, btnAddSnacks,
+    // Threshold Values
+    public static final int POTASSIUM_THRESHOLD = 1000;
+    public static final int PHOSPHORUS_THRESHOLD = 1000;
+    public static final int SODIUM_THRESHOLD = 1000;
+
+    // String for nutrients thresholds
+    String msg = "";
+
+    private Button btnAddBreakfast, btnAddNoBreakfast, btnAddLunch, btnAddNoLunch,
+                    btnAddDinner, btnAddNoDinner, btnAddSnacks, btnAddNoSnacks,
                     btnHome;
 
+    // Variables to hold return of intent
     private String thisFoodName;
-    private int thisFoodNbdNo;
-    private String thisFoodQuantity;
+    private int thisFoodNbdNo, thisFoodQuantity, Potassium, Phosphorus, Sodium;
 
     // Arraylists for foodNames and Ndbnos for each meal
-    ArrayList<String> breakfastNames, breakfastNdbnos, breakfastQuantity,
-                        lunchNames, lunchNdbnos,lunchQuantity,
-                        dinnerNames, dinnerNdbnos, dinnerQuantity,
-                        snackNames, snackNdbnos, snackQuantity;
+    ArrayList<String> breakfastNames, breakfastNdbnos, breakfastQuantity, breakfastPotassium, breakfastPhosphorus, breakfastSodium,
+                        lunchNames, lunchNdbnos,lunchQuantity, lunchPotassium, lunchPhosphorus, lunchSodium,
+                        dinnerNames, dinnerNdbnos, dinnerQuantity, dinnerPotassium, dinnerPhosphorus, dinnerSodium,
+                        snackNames, snackNdbnos, snackQuantity, snackPotassium, snackPhosphorus, snackSodium;
 
+    // Maps for name, list, ndbno, quantity, potassium, phosphorus, sodium
     Map <String,ArrayList<String>> mealNameLists = new HashMap<>();
     Map <String,ArrayList<String>> mealNdbnoLists = new HashMap<>();
     Map <String,ArrayList<String>> mealQuantityLists = new HashMap<>();
+    Map <String,ArrayList<String>> mealPotassiumLists = new HashMap<>();
+    Map <String,ArrayList<String>> mealPhosphrusLists = new HashMap<>();
+    Map <String,ArrayList<String>> mealSodiumLists = new HashMap<>();
+
+    // Maps for holding the buttons
+    Map <String,Button> addMealBtns = new HashMap<>();
+    Map <String,Button> noMealBtns = new HashMap<>();
+
+    // Map for linear layout
     Map <String, LinearLayout> llList = new HashMap<>();
 
+    // Grab UID from DB Global var and firebase instance
     String UID = FirebaseAuth.getInstance().getCurrentUser().getUid();
     FirebaseDatabase db = FirebaseDatabase.getInstance();
 
@@ -114,6 +135,15 @@ public class Diet extends AppCompatActivity {
         breakfastQuantity = new ArrayList<>();
         mealQuantityLists.put("Breakfast", breakfastQuantity);
 
+        breakfastPotassium = new ArrayList<>();
+        mealPotassiumLists.put("Breakfast", breakfastPotassium);
+
+        breakfastPhosphorus = new ArrayList<>();
+        mealPhosphrusLists.put("Breakfast", breakfastPhosphorus);
+
+        breakfastSodium = new ArrayList<>();
+        mealSodiumLists.put("Breakfast", breakfastSodium);
+
         lunchNames = new ArrayList<>();
         mealNameLists.put("Lunch",lunchNames);
 
@@ -122,6 +152,15 @@ public class Diet extends AppCompatActivity {
 
         lunchQuantity = new ArrayList<>();
         mealQuantityLists.put("Lunch",lunchQuantity);
+
+        lunchPotassium = new ArrayList<>();
+        mealPotassiumLists.put("Lunch", lunchPotassium);
+
+        lunchPhosphorus = new ArrayList<>();
+        mealPhosphrusLists.put("Lunch", lunchPhosphorus);
+
+        lunchSodium = new ArrayList<>();
+        mealSodiumLists.put("Lunch", lunchSodium);
 
         dinnerNames = new ArrayList<>();
         mealNameLists.put("Dinner",dinnerNames);
@@ -132,6 +171,15 @@ public class Diet extends AppCompatActivity {
         dinnerQuantity = new ArrayList<>();
         mealQuantityLists.put("Dinner", dinnerQuantity);
 
+        dinnerPotassium = new ArrayList<>();
+        mealPotassiumLists.put("Dinner", dinnerPotassium);
+
+        dinnerPhosphorus = new ArrayList<>();
+        mealPhosphrusLists.put("Dinner", dinnerPhosphorus);
+
+        dinnerSodium = new ArrayList<>();
+        mealSodiumLists.put("Dinner", dinnerSodium);
+
         snackNames = new ArrayList<>();
         mealNameLists.put("Snacks",snackNames);
 
@@ -141,14 +189,20 @@ public class Diet extends AppCompatActivity {
         snackQuantity = new ArrayList<>();
         mealQuantityLists.put("Snacks",snackQuantity);
 
+        snackPotassium = new ArrayList<>();
+        mealPotassiumLists.put("Snacks", snackPotassium);
+
+        snackPhosphorus = new ArrayList<>();
+        mealPhosphrusLists.put("Snacks", snackPhosphorus);
+
+        snackSodium = new ArrayList<>();
+        mealSodiumLists.put("Snacks", snackSodium);
+
     }
 
-    private void setOnClickListeners()
-    {
-        btnAddBreakfast.setOnClickListener(new View.OnClickListener()
-        {
-            public void onClick(View v)
-            {
+    private void setOnClickListeners() {
+        btnAddBreakfast.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
                 // Indicate Breakfast Button was clicked
                 Intent intent = SearchFood.makeIntent(Diet.this);
                 //startActivity(myIntent);
@@ -156,10 +210,18 @@ public class Diet extends AppCompatActivity {
             }
         });
 
-        btnAddLunch.setOnClickListener(new View.OnClickListener()
-        {
-            public void onClick(View v)
-            {
+        btnAddNoBreakfast.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // update UI
+                updateUIForNoMeal(addMealBtns.get("Breakfast"), noMealBtns.get("Breakfast"));
+
+                // call add no meal function
+                addNoMealToDatabase(REQUEST_CODE_Breakfast);
+            }
+        });
+
+        btnAddLunch.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
                 // Indicate Lunch Button was clicked
                 Intent intent = SearchFood.makeIntent(Diet.this);
                 //startActivity(myIntent);
@@ -167,11 +229,19 @@ public class Diet extends AppCompatActivity {
             }
         });
 
-        btnAddDinner.setOnClickListener(new View.OnClickListener()
-        {
+        btnAddNoLunch.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // update UI
+                updateUIForNoMeal(addMealBtns.get("Lunch"), noMealBtns.get("Lunch"));
 
-            public void onClick(View v)
-            {
+                // call add no meal function
+                addNoMealToDatabase(REQUEST_CODE_Lunch);
+            }
+        });
+
+        btnAddDinner.setOnClickListener(new View.OnClickListener() {
+
+            public void onClick(View v) {
                 // Indicate Breakfast Button was clicked
                 Intent intent = SearchFood.makeIntent(Diet.this);
                 //startActivity(myIntent);
@@ -179,27 +249,63 @@ public class Diet extends AppCompatActivity {
             }
         });
 
-        btnAddSnacks.setOnClickListener(new View.OnClickListener()
-        {
+        btnAddNoDinner.setOnClickListener(new View.OnClickListener() {
 
-            public void onClick(View v)
-            {
+            public void onClick(View v) {
+                // update UI
+                updateUIForNoMeal(addMealBtns.get("Dinner"), noMealBtns.get("Dinner"));
+
+                // call add no meal function
+                addNoMealToDatabase(REQUEST_CODE_Dinner);
+            }
+        });
+
+        btnAddSnacks.setOnClickListener(new View.OnClickListener() {
+
+            public void onClick(View v) {
                 // Indicate Breakfast Button was clicked
                 Intent intent = SearchFood.makeIntent(Diet.this);
                 //startActivity(myIntent);
                 startActivityForResult(intent, REQUEST_CODE_Snacks);
             }
         });
+
+        btnAddNoSnacks.setOnClickListener(new View.OnClickListener() {
+
+            public void onClick(View v) {
+                // update UI
+                updateUIForNoMeal(addMealBtns.get("Snacks"), noMealBtns.get("Snacks"));
+
+                // call add no meal function
+                addNoMealToDatabase(REQUEST_CODE_Snacks);
+            }
+        });
     }
 
     private void initializeButtons()
     {
+        // Initialize buttons by the ID and add them to corresponding Map to update UI if needed
         btnAddBreakfast = findViewById(R.id.addBreakfast_btn);
+        addMealBtns.put("Breakfast", btnAddBreakfast);
+        btnAddNoBreakfast = findViewById(R.id.addNoBreakfast_btn);
+        noMealBtns.put("Breakfast", btnAddNoBreakfast);
         btnAddLunch = findViewById(R.id.addLunch_btn);
+        addMealBtns.put("Lunch", btnAddLunch);
+        btnAddNoLunch = findViewById(R.id.addNoLunch_btn);
+        noMealBtns.put("Lunch", btnAddNoLunch);
         btnAddDinner = findViewById(R.id.addDinner_btn);
+        addMealBtns.put("Dinner", btnAddDinner);
+        btnAddNoDinner = findViewById(R.id.addNoDinner_btn);
+        noMealBtns.put("Dinner", btnAddNoDinner);
         btnAddSnacks = findViewById(R.id.addSnacks_btn);
+        addMealBtns.put("Snacks", btnAddSnacks);
+        btnAddNoSnacks = findViewById(R.id.addNoSnacks_btn);
+        noMealBtns.put("Snacks", btnAddNoSnacks);
+
         btnHome = findViewById(R.id.Diet_BTN_Home);
         btnHome = AppData.activateHomeButton(btnHome,Diet.this);
+
+
     }
 
     private void grabAllUsersDietSubmissions()
@@ -226,9 +332,22 @@ public class Diet extends AppCompatActivity {
 
             private void grabMealSubmitted(String meal, DataSnapshot d)
             {
+                // Initial Check from Database for if the user ate or not
+                boolean noMeal = (Boolean) d.child("noMeal").getValue();
+
+                // If they did not eat update UI and return immediately
+                if (noMeal)
+                {
+                    updateUIForNoMeal(addMealBtns.get(meal), noMealBtns.get(meal));
+                    return;
+                }
+
                 String foodID = (String) d.child("Food NDBs").getValue();
                 String foodNames = (String) d.child("Food Names").getValue();
                 String foodQuantity = (String) d.child("Food Quantity").getValue();
+                String PotassiumLvl = (String) d.child("Potassium Values").getValue();
+                String PhosphorusLvl = (String) d.child("Phosphorus Values").getValue();
+                String SodiumLvl = (String) d.child("Sodium Values").getValue();
 
                 assert foodNames != null;
                 foodNames = foodNames.replace("[" ,"");
@@ -242,17 +361,36 @@ public class Diet extends AppCompatActivity {
                 foodQuantity = foodQuantity.replace("[","");
                 foodQuantity = foodQuantity.replace("]","");
 
+                assert PotassiumLvl != null;
+                PotassiumLvl = PotassiumLvl.replace("[","");
+                PotassiumLvl = PotassiumLvl.replace("]","");
+
+                assert PhosphorusLvl != null;
+                PhosphorusLvl = PhosphorusLvl.replace("[","");
+                PhosphorusLvl = PhosphorusLvl.replace("]","");
+
+                assert SodiumLvl != null;
+                SodiumLvl = SodiumLvl.replace("[","");
+                SodiumLvl = SodiumLvl.replace("]","");
+
                 // Commas within the Name of each food item are currently replaced with "_"
                 ArrayList<String> ndbnoList = new ArrayList<>(Arrays.asList(foodID.split(",")));
                 ArrayList<String> nameList  = new ArrayList<>(Arrays.asList(foodNames.split(",")));
                 ArrayList<String> quantityList  = new ArrayList<>(Arrays.asList(foodQuantity.split(",")));
+                ArrayList<String> potassiumList  = new ArrayList<>(Arrays.asList(PotassiumLvl.split(",")));
+                ArrayList<String> phosphorusList  = new ArrayList<>(Arrays.asList(PhosphorusLvl.split(",")));
+                ArrayList<String> sodiumList  = new ArrayList<>(Arrays.asList(SodiumLvl.split(",")));
 
 
                 // Stores the data into the HashMap for corresponding meal
                 mealNameLists.get(meal).addAll(nameList);
                 mealNdbnoLists.get(meal).addAll(ndbnoList);
                 mealQuantityLists.get(meal).addAll(quantityList);
+                mealPotassiumLists.get(meal).addAll(potassiumList);
+                mealPhosphrusLists.get(meal).addAll(phosphorusList);
+                mealSodiumLists.get(meal).addAll(sodiumList);
 
+                disableNoMealBtn(noMealBtns.get(meal));
                 updateUI(meal);
             }
 
@@ -271,8 +409,11 @@ public class Diet extends AppCompatActivity {
         //This prevents the UI from adding views already added into the LL
         int start = linear.getChildCount();
 
-        ArrayList<String> nameList = mealNameLists.get(meal);
-        ArrayList<String> quantityList = mealQuantityLists.get(meal);
+         ArrayList<String> nameList = mealNameLists.get(meal);
+         ArrayList<String> quantityList = mealQuantityLists.get(meal);
+         ArrayList<String> potassiumList = mealPhosphrusLists.get(meal);
+         ArrayList<String> phosphrusList = mealPhosphrusLists.get(meal);
+         ArrayList<String> sodiumList = mealSodiumLists.get(meal);
 
          DisplayMetrics dm = new DisplayMetrics();
 
@@ -311,14 +452,46 @@ public class Diet extends AppCompatActivity {
             fquantity.setTypeface(null, Typeface.ITALIC);
             fquantity.setGravity(Gravity.START | Gravity.CENTER);
 
-            fName.setText(nameList.get(j).replaceAll("_",","));
-            fquantity.setText("Quantity: ".concat(quantityList.get(j)));
+            if (Integer.parseInt(potassiumList.get(j).trim()) > POTASSIUM_THRESHOLD)
+            {
+                fquantity.setBackgroundColor(Color.GREEN);
+                fName.setBackgroundColor(Color.GREEN);
+                msg += " Potassium";
+            }
+
+            else if (Integer.parseInt(phosphrusList.get(j).trim()) > PHOSPHORUS_THRESHOLD)
+            {
+                fquantity.setBackgroundColor(Color.YELLOW);
+                fName.setBackgroundColor(Color.YELLOW);
+                msg += " Phosphorus";
+            }
+
+            else if (Integer.parseInt(sodiumList.get(j).trim()) > SODIUM_THRESHOLD)
+            {
+                fquantity.setBackgroundColor(Color.RED);
+                fName.setBackgroundColor(Color.RED);
+                msg += " Sodium";
+            }
+
+            if (msg != "")
+            {
+                fName.setText(nameList.get(j).replaceAll("_",","));
+                fquantity.setText("Quantity: ".concat(quantityList.get(j)) + " (High in" +msg + ")");
+            }
+
+            else
+            {
+                fName.setText(nameList.get(j).replaceAll("_",","));
+                fquantity.setText("Quantity: ".concat(quantityList.get(j)));
+            }
+
 
             childLayout.addView(fName);
             childLayout.addView(fquantity);
 
             linear.addView(childLayout);
             linear.setBackground(this.getResources().getDrawable(R.drawable.rounded_corner_textview));
+            msg = "";
 
         }
 
@@ -332,9 +505,20 @@ public class Diet extends AppCompatActivity {
         {
             thisFoodName = data.getStringExtra("FoodName");
             thisFoodNbdNo = data.getIntExtra("NdbNo", 0);
-            thisFoodQuantity = data.getStringExtra("Quantity");
+            thisFoodQuantity = data.getIntExtra("Quantity", 0);
+            Potassium = data.getIntExtra("Potassium", 0);
+            Phosphorus =  data.getIntExtra("Phosphorus", 0);
+            Sodium =  data.getIntExtra("Sodium", 0);
 
-            enterSelectedFoodItemIntoDatabase(requestCode, thisFoodName, thisFoodNbdNo,thisFoodQuantity);
+            Log.i("Potassium Diet.java:", String.valueOf(Potassium));
+            Log.i("Phosphorus Diet.java:", String.valueOf(Phosphorus));
+            Log.i("Sodium Diet.java:", String.valueOf(Sodium));
+
+            Potassium *= thisFoodQuantity;
+            Phosphorus *= thisFoodQuantity;
+            Sodium *= thisFoodQuantity;
+
+            enterSelectedFoodItemIntoDatabase(requestCode, thisFoodName, thisFoodNbdNo,thisFoodQuantity, Potassium, Phosphorus, Sodium);
             updateUI(getMeal(requestCode));
         }
 
@@ -344,7 +528,8 @@ public class Diet extends AppCompatActivity {
         }
     }
 
-    private void enterSelectedFoodItemIntoDatabase(int requestCode, String thisFoodName, int thisFoodNbdNo, String quantity)
+    private void enterSelectedFoodItemIntoDatabase(int requestCode, String thisFoodName, int thisFoodNbdNo,
+                                                   int quantity, int PotassiumLvl, int PhosphorusLvl, int SodiumLvl)
     {
         String meal = getMeal(requestCode);
         String date = AppData.getTodaysDate();
@@ -357,15 +542,62 @@ public class Diet extends AppCompatActivity {
 
         mealNameLists.get(meal).add(thisFoodName);
         mealNdbnoLists.get(meal).add(String.valueOf(thisFoodNbdNo));
-        mealQuantityLists.get(meal).add(quantity);
+        mealQuantityLists.get(meal).add(String.valueOf(quantity));
+        mealPotassiumLists.get(meal).add(String.valueOf(PotassiumLvl));
+        mealPhosphrusLists.get(meal).add(String.valueOf(PhosphorusLvl));
+        mealSodiumLists.get(meal).add(String.valueOf(SodiumLvl));
 
         String fnames = mealNameLists.get(meal).toString();
         String fndbs = mealNdbnoLists.get(meal).toString();
         String fQuantity = mealQuantityLists.get(meal).toString();
+        String fPotassium = mealPotassiumLists.get(meal).toString();
+        String fPhosphorus = mealPhosphrusLists.get(meal).toString();
+        String fSodium = mealSodiumLists.get(meal).toString();
 
+        Date_node.child(meal).child("noMeal").setValue(false);
         Date_node.child(meal).child("Food Names").setValue(fnames);
         Date_node.child(meal).child("Food NDBs").setValue(fndbs);
         Date_node.child(meal).child("Food Quantity").setValue(fQuantity);
+        Date_node.child(meal).child("Potassium Values").setValue(fPotassium);
+        Date_node.child(meal).child("Phosphorus Values").setValue(fPhosphorus);
+        Date_node.child(meal).child("Sodium Values").setValue(fSodium);
+
+    }
+
+    private void addNoMealToDatabase(int requestCode)
+    {
+        String meal = getMeal(requestCode);
+        String date = AppData.getTodaysDate();
+
+        // Navigates to the correct date under the corresponding user
+        DatabaseReference Diet_node = db.getReference().child("Data").child("Diet");
+        DatabaseReference Date_node = Diet_node
+                .child(UID)
+                .child(date);
+
+        Date_node.child(meal).child("noMeal").setValue(true);
+    }
+
+    public void updateUIForNoMeal(Button addMeal, Button addNoMeal)
+    {
+
+        addNoMeal.setEnabled(false);
+        addMeal.setEnabled(false);
+        addNoMeal.setClickable(false);
+        addMeal.setClickable(false);
+        addNoMeal.setText("No Meals");
+        addMeal.setText("");
+        addNoMeal.setBackgroundColor(Color.WHITE);
+        addMeal.setBackgroundColor(Color.TRANSPARENT);
+
+    }
+
+    public void disableNoMealBtn(Button addNoMeal)
+    {
+        addNoMeal.setEnabled(false);
+        addNoMeal.setClickable(false);
+        addNoMeal.setBackgroundColor(Color.TRANSPARENT);
+        addNoMeal.setText("");
     }
 
     private String getMeal(int requestCode)
@@ -384,8 +616,7 @@ public class Diet extends AppCompatActivity {
             case 4444: // Snacks
                 return "Snacks";
 
-                    // Incorrect requestCode
-            default:
+            default: // Incorrect requestCode
                 return "Breakfast";
         }
     }
