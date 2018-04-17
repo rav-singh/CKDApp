@@ -64,7 +64,7 @@ public class Diet extends AppCompatActivity {
 
     private Button btnAddBreakfast, btnAddNoBreakfast, btnAddLunch, btnAddNoLunch,
                     btnAddDinner, btnAddNoDinner, btnAddSnacks, btnAddNoSnacks,
-                    btnHome;
+                    btnHome, btnNutritionBlog;
 
     // Variables to hold return of intent
     private String thisFoodName;
@@ -280,6 +280,15 @@ public class Diet extends AppCompatActivity {
                 addNoMealToDatabase(REQUEST_CODE_Snacks);
             }
         });
+
+        btnNutritionBlog.setOnClickListener(new View.OnClickListener() {
+
+            public void onClick(View v) {
+                // Redirect user to nutrition blog page
+                Intent myIntent = new Intent(CKD.Android.Diet.this,NutritionBlog.class);
+                startActivity(myIntent);
+            }
+        });
     }
 
     private void initializeButtons()
@@ -305,6 +314,7 @@ public class Diet extends AppCompatActivity {
         btnHome = findViewById(R.id.Diet_BTN_Home);
         btnHome = AppData.activateHomeButton(btnHome,Diet.this);
 
+        btnNutritionBlog = findViewById(R.id.Diet_BTN_NutritionBlog);
 
     }
 
@@ -411,8 +421,8 @@ public class Diet extends AppCompatActivity {
 
          ArrayList<String> nameList = mealNameLists.get(meal);
          ArrayList<String> quantityList = mealQuantityLists.get(meal);
-         ArrayList<String> potassiumList = mealPhosphrusLists.get(meal);
-         ArrayList<String> phosphrusList = mealPhosphrusLists.get(meal);
+         ArrayList<String> phosphorusList = mealPhosphrusLists.get(meal);
+         ArrayList<String> potassiumList = mealPotassiumLists.get(meal);
          ArrayList<String> sodiumList = mealSodiumLists.get(meal);
 
          DisplayMetrics dm = new DisplayMetrics();
@@ -452,18 +462,18 @@ public class Diet extends AppCompatActivity {
             fquantity.setTypeface(null, Typeface.ITALIC);
             fquantity.setGravity(Gravity.START | Gravity.CENTER);
 
-            if (Integer.parseInt(potassiumList.get(j).trim()) > POTASSIUM_THRESHOLD)
-            {
-                fquantity.setBackgroundColor(Color.GREEN);
-                fName.setBackgroundColor(Color.GREEN);
-                msg += " Potassium";
-            }
-
-            else if (Integer.parseInt(phosphrusList.get(j).trim()) > PHOSPHORUS_THRESHOLD)
+            if (Integer.parseInt(phosphorusList.get(j).trim()) > PHOSPHORUS_THRESHOLD)
             {
                 fquantity.setBackgroundColor(Color.YELLOW);
                 fName.setBackgroundColor(Color.YELLOW);
                 msg += " Phosphorus";
+            }
+
+            else if (Integer.parseInt(potassiumList.get(j).trim()) > POTASSIUM_THRESHOLD)
+            {
+                fquantity.setBackgroundColor(Color.GREEN);
+                fName.setBackgroundColor(Color.GREEN);
+                msg += " Potassium";
             }
 
             else if (Integer.parseInt(sodiumList.get(j).trim()) > SODIUM_THRESHOLD)
@@ -555,6 +565,7 @@ public class Diet extends AppCompatActivity {
         String fSodium = mealSodiumLists.get(meal).toString();
 
         Date_node.child(meal).child("noMeal").setValue(false);
+        disableNoMealBtn(noMealBtns.get(meal));
         Date_node.child(meal).child("Food Names").setValue(fnames);
         Date_node.child(meal).child("Food NDBs").setValue(fndbs);
         Date_node.child(meal).child("Food Quantity").setValue(fQuantity);

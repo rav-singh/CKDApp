@@ -508,6 +508,7 @@ public class ThreadsList extends AppCompatActivity
                         Integer count = dataSnapshot.getValue(Integer.class);
                         if(isSelected)
                         {
+                            // Call setter to update likes instance variable in (ThreadsClass)
                             Likes_Node.setValue(++count);
                             arrow.setColorFilter(Color.GREEN);
                         }

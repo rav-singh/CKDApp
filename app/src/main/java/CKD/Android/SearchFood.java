@@ -60,6 +60,7 @@ public class SearchFood extends AppCompatActivity {
     private ListView lv;
     private int quantity;
     private Intent myIntent = new Intent();
+    boolean grabbedP = false, grabbedK = false, grabbedNa = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -186,16 +187,17 @@ public class SearchFood extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         String grabQuantity = input.getText().toString();
+
                         quantity = Integer.parseInt(grabQuantity);
                         myIntent.putExtra("Quantity", quantity);
 
                         int cnt = 1;
                         while (cnt <= 3) {
                             if (cnt == 1)
-                                getNutritionFacts(305, "Potassium", cnt);
+                                getNutritionFacts(305, "Phosphorus", cnt);
 
                             if (cnt == 2)
-                                getNutritionFacts(306, "Phosphorus", cnt);
+                                getNutritionFacts(306, "Potassium", cnt);
 
                             if (cnt == 3)
                                 getNutritionFacts(307, "Sodium", cnt);
@@ -258,7 +260,7 @@ public class SearchFood extends AppCompatActivity {
         parsedFoodsList.add(updatedFoodItem);
     }
 
-    private void getNutritionFacts(int nutrientId, final String nutrient, final int count) {
+    private void getNutritionFacts(final int nutrientId, final String nutrient, final int count) {
 
     // Build API Request URL
     String url = "https://api.nal.usda.gov/ndb/nutrients/?format=json&api_key=" + apiKey + "&nutrients=" + nutrientId + "&ndbno=" + chosenNDBNO + "";
@@ -291,31 +293,73 @@ public class SearchFood extends AppCompatActivity {
                 JSONObject report = jsonObj.getJSONObject("report");
                 JSONArray foodsArray = report.getJSONArray("foods");
 
-                int length = foodsArray.length();
                 // Missing Nutrient Information
                 if (foodsArray.length() == 0)
-                    return;
+                {
+                    myIntent.putExtra(nutrient, 0);
 
-                // looping through all Food results
+                    if(nutrientId == 305)
+                    {
+                        Log.i("SearchFood.java", "No results for phosphorus");
+                        grabbedP = true;
+                        checkNutrientsForReturn();
+                    }
+
+                    else if(nutrientId ==  306)
+                    {
+                        Log.i("SearchFood.java", "No results for Potassium");
+                        grabbedK = true;
+                        checkNutrientsForReturn();
+                    }
+
+                    else
+                    {
+                        Log.i("SearchFood.java", "No results for Sodium");
+                        grabbedNa = true;
+                        checkNutrientsForReturn();
+                    }
+
+                    return;
+                }
+
+
+                // Looping through array to grab nutrient info
                 for (int i = 0; i < foodsArray.length(); i++) {
-                    //JSONArray nutrients = foodsArray.getJSONArray(i);
+                    // Grab JSON object and then the containing array
                     JSONObject postObject = foodsArray.getJSONObject(i);
                     JSONArray nutrientInfo = postObject.getJSONArray("nutrients");
+
                     for (int j = 0; j < nutrientInfo.length(); j++) {
+
                         JSONObject postObjectInner = nutrientInfo.getJSONObject(j);
                         int nutrientVal = postObjectInner.getInt("value");
                         myIntent.putExtra(nutrient, nutrientVal);
                         Log.i(nutrient, String.valueOf(nutrientVal));
+
+                        if(nutrientId == 305)
+                        {
+                            Log.i("SearchFood.java", "Grabbed Phosphorus value");
+                            grabbedP = true;
+                            checkNutrientsForReturn();
+                        }
+
+                        else if(nutrientId ==  306)
+                        {
+                            Log.i("SearchFood.java", "Grabbed Potassium Value");
+                            grabbedK = true;
+                            checkNutrientsForReturn();
+                        }
+
+                        else
+                        {
+                            Log.i("SearchFood.java", "Grabbed Sodium Value");
+                            grabbedNa = true;
+                            checkNutrientsForReturn();
+                        }
+
                     }
                 }
 
-                if(count == 3)
-                {
-                    setResult(Activity.RESULT_OK, myIntent);
-                    AppData.updateDailyChecklist("Diet");
-                    finish();
-
-                }
             }
 
             catch (JSONException e) {
@@ -329,6 +373,15 @@ public class SearchFood extends AppCompatActivity {
 
 }
 
+    public void checkNutrientsForReturn()
+    {
+        if (grabbedP && grabbedK && grabbedNa)
+        {
+            setResult(Activity.RESULT_OK, myIntent);
+            AppData.updateDailyChecklist("Diet");
+            finish();
+        }
+    }
 
     public static Intent makeIntent(Context context)
     {

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/main_background_gradient"
+    android:orientation="vertical"
+    android:weightSum="2"
+    tools:context="CKD.Android.NutritionBlog">
+
+
+    <TextView
+        android:id="@+id/NutritionBlog_TF_Title"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:text="Nutrition BLOG"
+        android:textAlignment="center"
+        android:textSize="30dp" />
+
+    <TextView
+        android:id="@+id/NutritionBlog_TF_Date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Put Date Here"
+        android:textAlignment="center"
+        android:textSize="30dp" />
+
+    <TextView
+        android:id="@+id/NutritionBlog_TF_Blog_Title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Blog Title"
+        android:textAlignment="center"
+        android:textSize="30dp" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:id="@+id/NutritionBlog_TF_Blog_Text"
+            android:layout_width="match_parent"
+            android:layout_height="275dp"
+            android:text="Blog Content Text"
+            android:textAlignment="center"
+            android:textSize="30dp" />
+    </ScrollView>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="75dp">
+
+        <Button
+            android:id="@+id/NutritionBlog_btn_ActivityDietLog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/button_home_background"
+            android:padding="10dp"
+            android:text="Nutrition Log"
+            android:textSize="20sp" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="75dp">
+
+        <Button
+            android:id="@+id/NutritionBlog_btn_home"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/button_home_background"
+            android:padding="10dp"
+            android:text="Home"
+            android:textSize="20sp" />
+    </RelativeLayout>
+</LinearLayout>

@@ -42,9 +42,11 @@
         <activity android:name=".Thread" />
         <activity android:name=".NewThread" />
         <activity android:name=".Comment" />
-        <activity android:name=".SearchFood"/>
-        <activity android:name=".Pop"
-                  android:theme="@style/AppTheme.CustomTheme"  />
+        <activity android:name=".SearchFood" />
+        <activity
+            android:name=".Pop"
+            android:theme="@style/AppTheme.CustomTheme" />
+        <activity android:name=".NutritionBlog"></activity>
     </application>
 
 </manifest>
