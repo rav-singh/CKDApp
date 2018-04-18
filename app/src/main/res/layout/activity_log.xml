@@ -13,10 +13,22 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/rounded_corner_textview"
-        android:layout_margin="15dp"
-        android:textSize="24sp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="10dp"
+        android:textSize="@dimen/text_size_large"
         android:hint="Activity Name"
         android:inputType="textPersonName" />
+
+    <TextView
+        android:id="@+id/activity_examples"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/example_activities"
+        android:textSize="@dimen/text_size_small"
+        android:textColor="@color/Black"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"/>
 
     <Button
         android:id="@+id/addActivity_Button"
@@ -24,8 +36,11 @@
         android:layout_height="wrap_content"
         android:background="@drawable/button_background"
         android:text="Add Activity"
+        android:padding="10dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
         android:layout_gravity="end"
-        android:textSize="24sp"/>
+        android:textSize="@dimen/text_size_medium"/>
 
     <RelativeLayout
         android:id="@+id/ActivityLog_RL"

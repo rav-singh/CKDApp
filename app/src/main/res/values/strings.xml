@@ -13,6 +13,7 @@
     <string name="error_field_required">This field is required</string>
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions." </string>
+    <string name="example_activities"> <b> Examples: </b> <i>Gardening, Walking The Dog, Yard Work, Sweeping </i> </string>
     <string name="next_button">"Next" </string>
 
     <!-- Strings related to demographics -->
