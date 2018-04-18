@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -9,7 +8,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <TextView
@@ -19,7 +18,7 @@
             android:text="THREAD TITLE"
             android:textColor="@android:color/black"
             android:layout_margin ="10dp"
-            android:textSize="30sp"
+            android:textSize="@dimen/text_size_large"
             android:padding="5dp"
             android:background="@drawable/rounded_corner_textview"
             android:layout_marginBottom="20dp"/>
@@ -29,7 +28,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="   This is where the users post will be put!"
-            android:textSize="22sp"
+            android:textSize="@dimen/text_size_medium"
             android:textColor="@android:color/black"
             android:padding="5dp"
             android:background="@drawable/rounded_corner_textview"
@@ -46,7 +45,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Thread auth"
-                    android:textSize="18sp"
+                    android:textSize="@dimen/text_size_small"
                     android:textColor="@android:color/black"
                     android:padding="5dp"
                     android:background="@drawable/rounded_corner_textview"
@@ -62,6 +61,7 @@
                 android:background="@drawable/button_background"
                 android:padding="5dp"
                 android:text="Make comment"
+                android:textSize="@dimen/text_size_medium"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true" />
 
@@ -69,11 +69,10 @@
 
         <android.support.v4.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="250dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:background="@android:color/transparent"
-            tools:layout_editor_absoluteY="81dp">
+            android:background="@android:color/transparent">
 
             <LinearLayout
                 android:id="@+id/Thread_LL_Comments"
@@ -81,6 +80,7 @@
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
                 android:orientation="vertical">
+
             </LinearLayout>
         </android.support.v4.widget.NestedScrollView>
 
@@ -98,7 +98,7 @@
                 android:background="@drawable/button_home_background"
                 android:padding="10dp"
                 android:text="Home"
-                android:textSize="20sp" />
+                android:textSize="@dimen/text_size_medium"/>
 
         </RelativeLayout>
     </LinearLayout>
