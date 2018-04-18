@@ -11,7 +11,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAlignment="center"
-            android:textSize="32sp"
+            android:textSize="@dimen/text_size_xlarge"
             android:layout_margin="10dp"
             tools:text="Category"
             android:background="@drawable/rounded_corner_textview"/>
@@ -31,7 +31,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Threads Per Page"
-                    android:textSize="20sp"
+                    android:textSize="@dimen/text_size_medium"
                     android:textStyle="bold"/>
 
                 <Spinner
@@ -52,8 +52,9 @@
                 android:background="@drawable/button_background"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="10dp"
-                android:layout_alignParentRight="true"
-                android:text="New Thread" />
+                android:layout_alignParentEnd="true"
+                android:text="New Thread"
+                android:textSize="@dimen/text_size_medium"/>
         </RelativeLayout>
     <ScrollView
             android:layout_width="match_parent"
