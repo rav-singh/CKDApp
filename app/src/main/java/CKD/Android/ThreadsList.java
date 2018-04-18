@@ -83,6 +83,9 @@ public class ThreadsList extends AppCompatActivity
             {
                int num = Integer.parseInt(spinner.getSelectedItem().toString());
 
+               if(threadsList.size()== 0)
+                   return;
+
                 // They selected the same number so nothing needs to be done
                if(num == threadsPerPage)
                {
@@ -450,7 +453,7 @@ public class ThreadsList extends AppCompatActivity
 
             arrow.setImageDrawable(this.getResources().getDrawable(android.R.drawable.arrow_up_float));
             arrow.setBackgroundResource(0);
-            arrow = setOnClickUpVote(arrow,pageOfKeys.get(i));
+            arrow = setOnClickUpVote(arrow,pageOfKeys.get(i), currentThread);
 
             likesView.addView(arrow);
 
@@ -483,7 +486,7 @@ public class ThreadsList extends AppCompatActivity
 
     }
 
-    private ImageButton setOnClickUpVote(final ImageButton arrow, final String threadKey)
+    private ImageButton setOnClickUpVote(final ImageButton arrow, final String threadKey, final ThreadClass currentThread)
     {
         arrow.setOnClickListener( new View.OnClickListener()
         {
@@ -508,13 +511,16 @@ public class ThreadsList extends AppCompatActivity
                         Integer count = dataSnapshot.getValue(Integer.class);
                         if(isSelected)
                         {
-                            // Call setter to update likes instance variable in (ThreadsClass)
+                            // Updates the database value for likes
+                            // Updates the ThreadClass Object counter for likes
                             Likes_Node.setValue(++count);
+                            currentThread.setLikes(count);
                             arrow.setColorFilter(Color.GREEN);
                         }
                         else
                         {
                             Likes_Node.setValue(--count);
+                            currentThread.setLikes(count);
                             arrow.setColorFilter(Color.WHITE);
                         }
                         upDateUpVoteCounter(count);
