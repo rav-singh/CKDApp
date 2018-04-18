@@ -1,79 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@drawable/main_background_gradient">
 
-    <TextView
-        android:id="@+id/NewThread_TV_Header"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Create New Post"
-        android:layout_margin="10dp"
-        android:textAlignment="center"
-        android:textColor="@android:color/white"
-        android:textSize="36sp"/>
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/Title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Title"
-        android:layout_margin="10dp"
-        android:textColor="@android:color/white"
-        android:textSize="30sp"
- />
+        <TextView
+            android:id="@+id/NewThread_TV_Header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Create New Post"
+            android:textStyle="bold"
+            android:layout_margin="10dp"
+            android:textAlignment="center"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/text_size_xlarge"/>
 
-    <EditText
-        android:id="@+id/NewThread_TE_Title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/rounded_corner_textview"
-        android:hint="Enter your Title Here...."
-        android:textSize="28sp"
-        android:layout_margin="10dp"
- />
+        <TextView
+            android:id="@+id/Title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Title"
+            android:textStyle="bold"
+            android:layout_margin="10dp"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/text_size_large"
+     />
 
-    <EditText
-        android:id="@+id/NewThread_TE_Body"
-        android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:background="@drawable/rounded_corner_textview"
-        android:gravity="top"
-        android:textSize="22sp"
-        android:hint="Enter your Post here"
-        android:layout_margin="10dp"
-        android:inputType="textMultiLine" />
+        <EditText
+            android:id="@+id/NewThread_TE_Title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_corner_textview"
+            android:maxLength="35"
+            android:hint="Enter your title here"
+            android:textSize="@dimen/text_size_large"
+            android:layout_margin="10dp"
+     />
 
+        <EditText
+            android:id="@+id/NewThread_TE_Body"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:background="@drawable/rounded_corner_textview"
+            android:gravity="top"
+            android:textSize="@dimen/text_size_medium"
+            android:hint="Enter your Post here"
+            android:layout_margin="10dp"
+            android:inputType="textMultiLine" />
 
-    <Button
-        android:id="@+id/NewThread_Btn_Submit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:textSize="24sp"
-        android:background="@drawable/button_background"
-        android:layout_margin="10dp"
-        android:layout_gravity="end"
-        android:text="Submit" />
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
 
         <Button
-            android:id="@+id/NewThread_Btn_home"
-            android:layout_height="wrap_content"
+            android:id="@+id/NewThread_Btn_Submit"
             android:layout_width="wrap_content"
-            android:text="Home"
-            android:textSize="20sp"
-            android:padding="10dp"
-            android:layout_marginBottom="10dp"
-            android:background="@drawable/button_home_background"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"/>
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_size_medium"
+            android:background="@drawable/button_background"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="5dp"
+            android:layout_gravity="end"
+            android:text="Submit" />
 
-    </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-</LinearLayout>
+            <Button
+                android:id="@+id/NewThread_Btn_home"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:text="Home"
+                android:textSize="@dimen/text_size_medium"
+                android:padding="10dp"
+                android:layout_marginBottom="15dp"
+                android:background="@drawable/button_home_background"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"/>
+
+        </RelativeLayout>
+    </LinearLayout>
+</ScrollView>
