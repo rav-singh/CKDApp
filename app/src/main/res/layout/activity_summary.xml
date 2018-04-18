@@ -1,21 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/main_background_gradient">
+    android:background="@drawable/main_background_gradient"
+    android:weightSum="10">
 
     <TextView
         android:id="@+id/Summary_TV_Prompt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Please select which admins you would like to export your data to"
-        android:textSize="28sp"
+        android:text="Please select which person(s) you would like to export your data to"
+        android:textSize="@dimen/text_size_large"
         android:textStyle="bold"
         android:padding="10dp"
         android:layout_margin="20dp"
-        android:background="@drawable/rounded_corner_textview"/>
+        android:background="@drawable/rounded_corner_textview" />
 
 
     <ScrollView
@@ -36,10 +37,10 @@
         android:id="@+id/Summary_Export"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Export"
-        android:padding="5dp"
-        android:layout_margin="5dp"
-        android:layout_marginTop="10dp"
+        android:text="Send"
+        android:padding="10dp"
+        android:layout_margin="10dp"
+        android:textSize="@dimen/text_size_large"
         android:background="@drawable/button_background"/>
 
     <RelativeLayout
