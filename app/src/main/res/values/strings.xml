@@ -26,6 +26,7 @@
         <item>65 to 74 years</item>
         <item>75 or older</item>
     </string-array>
+
     <string name="marital_prompt">What is your marital status?</string>
     <string-array name="marital_array">
         <item>Single (never married)</item>
@@ -42,7 +43,6 @@
         category(ies) that best describes the <i>race</i> of your family and yourself.</string>
 
     <string name="education_prompt">What is your highest level of education?</string>
-
       <string-array name="education_array">
         <item>Please select an option from the drop down menu</item>
         <item>Grade school/Intermediate school</item>
@@ -69,35 +69,32 @@
     <string name="comorbidities_prompt">Please select which of the following conditions you have had or do have</string>
 
     <string-array name="activity_array">
-        <item>Select Activity Level</item>
-        <item>1 (Very Inactive)</item>
-        <item>2</item>
-        <item>3</item>
-        <item>4</item>
-        <item>5</item>
-        <item>6</item>
-        <item>7</item>
-        <item>8</item>
-        <item>9</item>
-        <item>10 (Very Active)</item>
-        </string-array>
+        <item>Select level of activity</item>
+        <item>I don't exercise/I exercise infrequently</item>
+        <item>I exercise about once every two weeks</item>
+        <item>I exercise about once a week</item>
+        <item>I exercise 2–3 times a week</item>
+        <item>I exercise everyday</item>
+        <item>I exercise more than once a day</item>
+    </string-array>
 
     <string-array name="appetite_array">
         <item>Select Appetite</item>
-        <item>Good Appetite</item>
-        <item>Great Appetite</item>
-        <item>Average Appetite</item>
-        <item>Bad Appetite</item>
-        <item>No Appetite</item>
+        <item>Very Good</item>
+        <item>Good</item>
+        <item>Average</item>
+        <item>Poor</item>
+        <item>Very Poor</item>
     </string-array>
 
+    <string name = "fatigue_prompt">How often did you experience fatigue within the last 24 hours </string>
     <string-array name="fatigue_array">
         <item>Select fatigue</item>
-        <item>Tired</item>
-        <item>Not Tired</item>
-        <item>Really Tired</item>
-        <item>Really Not Tired</item>
-        <item>Great!</item>
+        <item>None</item>
+        <item>Rarely</item>
+        <item>Sometimes</item>
+        <item>Often</item>
+        <item>Almost Always</item>
     </string-array>
 
     <string-array name="num_threads_array">
