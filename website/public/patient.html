@@ -106,11 +106,6 @@
             if (typeof act === "undefined")
               act = null;
 
-            firebase.database().ref("Users/" + uid + "/Additional/Diseases/").on("value", function(snap)
-            {
-
-            });
-
             csv += id +","+ age +","+gender+","+work+"," + marriage+","+edu+","+health+","+ act+"\n";
           });
         }).then(function(){
