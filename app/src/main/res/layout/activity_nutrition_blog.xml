@@ -6,15 +6,13 @@
     android:layout_height="match_parent"
     android:background="@drawable/main_background_gradient"
     android:orientation="vertical"
-    android:weightSum="2"
     tools:context="CKD.Android.NutritionBlog">
 
 
     <TextView
         android:id="@+id/NutritionBlog_TF_Title"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="wrap_content"
         android:text="Nutrition BLOG"
         android:textAlignment="center"
         android:textSize="30dp" />
@@ -37,7 +35,7 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="250dp"
+        android:layout_height="400dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginTop="10dp">
@@ -45,7 +43,7 @@
         <TextView
             android:id="@+id/NutritionBlog_TF_Blog_Text"
             android:layout_width="match_parent"
-            android:layout_height="275dp"
+            android:layout_height="wrap_content"
             android:text="Blog Content Text"
             android:textAlignment="center"
             android:textSize="30dp" />

@@ -89,7 +89,8 @@ public class SearchFood extends AppCompatActivity {
                 if (!item.isEmpty()) {
                     usdaURL = "https://api.nal.usda.gov/ndb/search/?format=json&q=" + item + "&sort=n&max=25&offset=0&api_key=" + apiKey;
                 } else {
-                    // handle error of empty search field
+                    //Toast toast = Toast.makeText("Please enter a food");
+                    //toast.show();
                 }
 
                 // Initialize a http client
@@ -191,19 +192,11 @@ public class SearchFood extends AppCompatActivity {
                         quantity = Integer.parseInt(grabQuantity);
                         myIntent.putExtra("Quantity", quantity);
 
-                        int cnt = 1;
-                        while (cnt <= 3) {
-                            if (cnt == 1)
-                                getNutritionFacts(305, "Phosphorus", cnt);
+                        getNutritionFacts(305, "Phosphorus");
 
-                            if (cnt == 2)
-                                getNutritionFacts(306, "Potassium", cnt);
+                        getNutritionFacts(306, "Potassium");
 
-                            if (cnt == 3)
-                                getNutritionFacts(307, "Sodium", cnt);
-
-                            cnt++;
-                        }
+                        getNutritionFacts(307, "Sodium");
 
                     }
                 });
@@ -260,7 +253,7 @@ public class SearchFood extends AppCompatActivity {
         parsedFoodsList.add(updatedFoodItem);
     }
 
-    private void getNutritionFacts(final int nutrientId, final String nutrient, final int count) {
+    private void getNutritionFacts(final int nutrientId, final String nutrient) {
 
     // Build API Request URL
     String url = "https://api.nal.usda.gov/ndb/nutrients/?format=json&api_key=" + apiKey + "&nutrients=" + nutrientId + "&ndbno=" + chosenNDBNO + "";

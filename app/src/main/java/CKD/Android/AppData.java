@@ -2,6 +2,7 @@ package CKD.Android;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -319,5 +320,21 @@ public final class  AppData
 
             }
         });
+    }
+
+    static void disableBtn(Button b)
+    {
+        b.setEnabled(false);
+        b.setClickable(false);
+        b.setBackgroundColor(Color.TRANSPARENT);
+        b.setText("");
+    }
+
+    static void enableBtn(Button b)
+    {
+        b.setEnabled(true);
+        b.setClickable(true);
+        b.setBackgroundColor(Color.WHITE);
+        b.setText("Nutrition Blog");
     }
 }
