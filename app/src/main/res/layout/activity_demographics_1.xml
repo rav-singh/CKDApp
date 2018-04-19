@@ -23,7 +23,7 @@
                 android:layout_height="wrap_content"
                 android:hint="Full Name"
                 android:inputType="textPersonName"
-                android:textSize="30sp"
+                android:textSize="@dimen/text_size_medium"
                 android:background="@drawable/rounded_corner_textview"
            />
 
@@ -33,7 +33,7 @@
                 android:layout_margin="10dp"
                 android:layout_height="wrap_content"
                 android:inputType="textEmailAddress"
-                android:textSize="30sp"
+                android:textSize="@dimen/text_size_medium"
                 android:enabled="false"
                 android:background="@drawable/rounded_corner_textview"/>
 
@@ -44,29 +44,29 @@
                 android:layout_height="wrap_content"
                 android:hint="Confirm Email"
                 android:inputType="textEmailAddress"
-                android:textSize="30sp"
+                android:textSize="@dimen/text_size_medium"
                 android:background="@drawable/rounded_corner_textview"
              />
 
             <EditText
                 android:id="@+id/Demo_TF_Phone"
                 android:layout_width="match_parent"
-                android:layout_margin="10dp"
                 android:layout_height="wrap_content"
+                android:layout_margin="10dp"
                 android:hint="Phone Number"
                 android:inputType="number|phone"
-                android:textSize="30sp"
+                android:textSize="@dimen/text_size_medium"
                 android:background="@drawable/rounded_corner_textview"/>
 
             <Spinner
                 android:id="@+id/Demo_Spn_ActivityL"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:entries="@array/activity_array"
-                android:layout_margin="10dp"
                 android:textColor="@android:color/black"
                 android:spinnerMode="dropdown"
-                android:theme="@style/Spinner1" />
+                android:theme="@style/Spinner1"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -217,9 +217,6 @@
                 android:layout_margin="10dp"
                 android:padding="15dp"/>
         </LinearLayout>
-
-
-
         </LinearLayout>
     </ScrollView>
 </RelativeLayout>
