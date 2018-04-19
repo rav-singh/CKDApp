@@ -1,29 +1,17 @@
 package CKD.Android;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.Typeface;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.TextUtils;
-import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Gravity;
-import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TableLayout;
 import android.widget.TextView;
 
@@ -34,16 +22,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import org.w3c.dom.Text;
-import org.xmlpull.v1.XmlPullParser;
-
-import java.lang.reflect.Array;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.HashMap;
-import java.util.Locale;
 import java.util.Map;
 
 public class Diet extends AppCompatActivity {
@@ -57,10 +38,10 @@ public class Diet extends AppCompatActivity {
     // Threshold Values
     public static final int POTASSIUM_THRESHOLD = 1000;
     public static final int PHOSPHORUS_THRESHOLD = 1000;
-    public static final int SODIUM_THRESHOLD = 1000;
+    public static final int SODIUM_THRESHOLD = 770;
 
     // String for nutrients thresholds
-    String msg = "";
+    String PhosphorusMsg = "", PotassiumMsg = "", SodiumMsg = "";
 
     private Button btnAddBreakfast, btnAddNoBreakfast, btnAddLunch, btnAddNoLunch,
                     btnAddDinner, btnAddNoDinner, btnAddSnacks, btnAddNoSnacks,
@@ -315,6 +296,7 @@ public class Diet extends AppCompatActivity {
         btnHome = AppData.activateHomeButton(btnHome,Diet.this);
 
         btnNutritionBlog = findViewById(R.id.Diet_BTN_NutritionBlog);
+        AppData.disableBtn(btnNutritionBlog);
 
     }
 
@@ -342,6 +324,10 @@ public class Diet extends AppCompatActivity {
 
             private void grabMealSubmitted(String meal, DataSnapshot d)
             {
+
+                if (meal != null)
+                    AppData.enableBtn(btnNutritionBlog);
+
                 // Initial Check from Database for if the user ate or not
                 boolean noMeal = (Boolean) d.child("noMeal").getValue();
 
@@ -400,7 +386,7 @@ public class Diet extends AppCompatActivity {
                 mealPhosphrusLists.get(meal).addAll(phosphorusList);
                 mealSodiumLists.get(meal).addAll(sodiumList);
 
-                disableNoMealBtn(noMealBtns.get(meal));
+                AppData.disableBtn(noMealBtns.get(meal));
                 updateUI(meal);
             }
 
@@ -462,37 +448,69 @@ public class Diet extends AppCompatActivity {
             fquantity.setTypeface(null, Typeface.ITALIC);
             fquantity.setGravity(Gravity.START | Gravity.CENTER);
 
-            if (Integer.parseInt(phosphorusList.get(j).trim()) > PHOSPHORUS_THRESHOLD)
+            fquantity.setBackgroundColor(Color.GREEN);
+            fName.setBackgroundColor(Color.GREEN);
+
+            if (Integer.parseInt(phosphorusList.get(j).trim()) > PHOSPHORUS_THRESHOLD - 500)
             {
+
                 fquantity.setBackgroundColor(Color.YELLOW);
                 fName.setBackgroundColor(Color.YELLOW);
-                msg += " Phosphorus";
+                PhosphorusMsg = " * Moderately high in Phosphorus";
+
+                if (Integer.parseInt(phosphorusList.get(j).trim()) > PHOSPHORUS_THRESHOLD)
+                {
+                    fquantity.setBackgroundColor(getResources().getColor(R.color.IndianRed));
+                    fName.setBackgroundColor(getResources().getColor(R.color.IndianRed));
+                    PhosphorusMsg = " * High in Phosphorus";
+
+                }
+
             }
 
-            else if (Integer.parseInt(potassiumList.get(j).trim()) > POTASSIUM_THRESHOLD)
+            else if (Integer.parseInt(potassiumList.get(j).trim()) > POTASSIUM_THRESHOLD - 500)
             {
-                fquantity.setBackgroundColor(Color.GREEN);
-                fName.setBackgroundColor(Color.GREEN);
-                msg += " Potassium";
+
+                fquantity.setBackgroundColor(Color.YELLOW);
+                fName.setBackgroundColor(Color.YELLOW);
+                PotassiumMsg = " * Moderately high in Potassium";
+
+                if (Integer.parseInt(potassiumList.get(j).trim()) > POTASSIUM_THRESHOLD)
+                {
+                    fquantity.setBackgroundColor(getResources().getColor(R.color.IndianRed));
+                    fName.setBackgroundColor(getResources().getColor(R.color.IndianRed));
+                    PotassiumMsg = " * High in Potassium";
+                }
+
             }
 
-            else if (Integer.parseInt(sodiumList.get(j).trim()) > SODIUM_THRESHOLD)
+            if (Integer.parseInt(sodiumList.get(j).trim()) > SODIUM_THRESHOLD - 500)
             {
-                fquantity.setBackgroundColor(Color.RED);
-                fName.setBackgroundColor(Color.RED);
-                msg += " Sodium";
+
+                fquantity.setBackgroundColor(Color.YELLOW);
+                fName.setBackgroundColor(Color.YELLOW);
+                SodiumMsg = " * Moderately high in Sodium";
+
+                if (Integer.parseInt(sodiumList.get(j).trim()) > SODIUM_THRESHOLD)
+                {
+                    fquantity.setBackgroundColor(getResources().getColor(R.color.IndianRed));
+                    fName.setBackgroundColor(getResources().getColor(R.color.IndianRed));
+                    SodiumMsg = " * High in Sodium";
+
+                }
+
             }
 
-            if (msg != "")
+            if (PhosphorusMsg == "" && PotassiumMsg == "" && SodiumMsg == "")
             {
                 fName.setText(nameList.get(j).replaceAll("_",","));
-                fquantity.setText("Quantity: ".concat(quantityList.get(j)) + " (High in" +msg + ")");
+                fquantity.setText("Quantity: ".concat(quantityList.get(j)));
             }
 
             else
             {
                 fName.setText(nameList.get(j).replaceAll("_",","));
-                fquantity.setText("Quantity: ".concat(quantityList.get(j)));
+                fquantity.setText("Quantity: ".concat(quantityList.get(j)) + PhosphorusMsg + PotassiumMsg + SodiumMsg);
             }
 
 
@@ -501,7 +519,10 @@ public class Diet extends AppCompatActivity {
 
             linear.addView(childLayout);
             linear.setBackground(this.getResources().getDrawable(R.drawable.rounded_corner_textview));
-            msg = "";
+
+            PhosphorusMsg = "";
+            PotassiumMsg = "";
+            SodiumMsg = "";
 
         }
 
@@ -565,7 +586,8 @@ public class Diet extends AppCompatActivity {
         String fSodium = mealSodiumLists.get(meal).toString();
 
         Date_node.child(meal).child("noMeal").setValue(false);
-        disableNoMealBtn(noMealBtns.get(meal));
+        AppData.disableBtn(noMealBtns.get(meal));
+        AppData.enableBtn(btnNutritionBlog);
         Date_node.child(meal).child("Food Names").setValue(fnames);
         Date_node.child(meal).child("Food NDBs").setValue(fndbs);
         Date_node.child(meal).child("Food Quantity").setValue(fQuantity);
@@ -601,14 +623,6 @@ public class Diet extends AppCompatActivity {
         addNoMeal.setBackgroundColor(Color.WHITE);
         addMeal.setBackgroundColor(Color.TRANSPARENT);
 
-    }
-
-    public void disableNoMealBtn(Button addNoMeal)
-    {
-        addNoMeal.setEnabled(false);
-        addNoMeal.setClickable(false);
-        addNoMeal.setBackgroundColor(Color.TRANSPARENT);
-        addNoMeal.setText("");
     }
 
     private String getMeal(int requestCode)
