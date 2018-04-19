@@ -1,6 +1,9 @@
 package CKD.Android;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer.ErrorReason;
@@ -13,29 +16,112 @@ import com.google.android.youtube.player.YouTubePlayer;
 
 public class Videos extends YouTubeBaseActivity implements YouTubePlayer.OnInitializedListener {
 
-    public static final String API_KEY = "AIzaSyCuC-fKLWjX1S6VgIqT11tnDQoLHUET39o";
+    private Button FeaturedButton;
+    private Button StrengthButton;
+    private Button EnduranceButton;
+    private Button RangeOfMotionButton;
 
-    public static final String VIDEO_ID = "aJ7BoNG-r2c";
+    private YouTubePlayerView youTubePlayerViewFeatured;
+    private YouTubePlayerView youTubePlayerViewStrength;
+    private YouTubePlayerView youTubePlayerViewEndurance;
+    private YouTubePlayerView youTubePlayerViewMotion;
+
+    public static final String API_KEY = "AIzaSyCuC-fKLWjX1S6VgIqT11tnDQoLHUET39o";
+    public static final String VIDEO_ID_Featured = "G1lwVhnnkoU";
+    public static final String VIDEO_ID_Strength = "TOKxtgKrGCQ";
+    public static final String VIDEO_ID_Endurance = "RZ6pv6xaW_w";
+    public static final String VIDEO_ID_Motion = "KcdkySvCRCc";
+    private String VIDEO_ID = VIDEO_ID_Featured;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_videos);
 
+        initializeElements();
 
-        YouTubePlayerView youTubePlayerViewFeatured = (YouTubePlayerView) findViewById(R.id.youtube_player_Featured);
+        FeaturedButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                VIDEO_ID = VIDEO_ID_Featured;
+                reloadVideoFeatured();
+                youTubePlayerViewFeatured.setVisibility(View.VISIBLE);
+                youTubePlayerViewStrength.setVisibility(View.GONE);
+                youTubePlayerViewEndurance.setVisibility(View.GONE);
+                youTubePlayerViewMotion.setVisibility(View.GONE);
+            }
+        });
+
+        StrengthButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                VIDEO_ID = VIDEO_ID_Strength;
+                reloadVideoStrength();
+                youTubePlayerViewFeatured.setVisibility(View.GONE);
+                youTubePlayerViewStrength.setVisibility(View.VISIBLE);
+                youTubePlayerViewEndurance.setVisibility(View.GONE);
+                youTubePlayerViewMotion.setVisibility(View.GONE);
+            }
+        });
+
+        EnduranceButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                VIDEO_ID = VIDEO_ID_Endurance;
+                reloadVideoEndurance();
+                youTubePlayerViewFeatured.setVisibility(View.GONE);
+                youTubePlayerViewStrength.setVisibility(View.GONE);
+                youTubePlayerViewEndurance.setVisibility(View.VISIBLE);
+                youTubePlayerViewMotion.setVisibility(View.GONE);
+            }
+        });
+
+        RangeOfMotionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                VIDEO_ID = VIDEO_ID_Motion;
+                reloadVideoMotion();
+                youTubePlayerViewFeatured.setVisibility(View.GONE);
+                youTubePlayerViewStrength.setVisibility(View.GONE);
+                youTubePlayerViewEndurance.setVisibility(View.GONE);
+                youTubePlayerViewMotion.setVisibility(View.VISIBLE);
+            }
+        });
+
+    }
+
+    private void initializeElements() {
+        FeaturedButton = findViewById(R.id.Videos_Btn_FeaturedVideo);
+        StrengthButton = findViewById(R.id.Videos_Btn_StrengthVideo);
+        EnduranceButton = findViewById(R.id.Videos_Btn_EnduranceVideo);
+        RangeOfMotionButton = findViewById(R.id.Videos_Btn_MotionVideo);
+
+        youTubePlayerViewFeatured = (YouTubePlayerView) findViewById(R.id.youtube_player_Featured);
+        youTubePlayerViewStrength = (YouTubePlayerView) findViewById(R.id.youtube_player_Strength);
+        youTubePlayerViewEndurance = (YouTubePlayerView) findViewById(R.id.youtube_player_Endurance);
+        youTubePlayerViewMotion = (YouTubePlayerView) findViewById(R.id.youtube_player_Motion);
+
         youTubePlayerViewFeatured.initialize(API_KEY, this);
+        youTubePlayerViewFeatured.setVisibility(View.VISIBLE);
+        youTubePlayerViewStrength.setVisibility(View.GONE);
+        youTubePlayerViewEndurance.setVisibility(View.GONE);
+        youTubePlayerViewMotion.setVisibility(View.GONE);
+    }
 
-        /*
-        YouTubePlayerView youTubePlayerViewStrength = (YouTubePlayerView) findViewById(R.id.youtube_player_Strength);
+    private void reloadVideoFeatured(){
+        youTubePlayerViewFeatured.initialize(API_KEY, this);
+    }
+
+    private void reloadVideoStrength(){
         youTubePlayerViewStrength.initialize(API_KEY, this);
+    }
 
-        YouTubePlayerView youTubePlayerViewEndurance = (YouTubePlayerView) findViewById(R.id.youtube_player_Endurance);
+    private void reloadVideoEndurance(){
         youTubePlayerViewEndurance.initialize(API_KEY, this);
+    }
 
-        YouTubePlayerView youTubePlayerViewMotion = (YouTubePlayerView) findViewById(R.id.youtube_player_Motion);
+    private void reloadVideoMotion(){
         youTubePlayerViewMotion.initialize(API_KEY, this);
-        */
     }
 
     @Override
