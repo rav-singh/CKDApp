@@ -114,6 +114,8 @@
                var timer = setTimeout(function() {
                  if (strcmp(type, "Medical") == 0)
                    window.location.href = "data.html" + "?uid=" + user.uid;
+                 else if (strcmp(type, "Research") == 0)
+                   window.location.href = "patient.html" + "?uid=" + user.uid;
                  else
                    window.location.href = "technical.html" + "?uid=" + user.uid;
                }, 1000);
