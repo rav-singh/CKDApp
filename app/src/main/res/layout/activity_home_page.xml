@@ -26,7 +26,7 @@
         android:padding="10dp"
         android:layout_margin="10dp"
         android:textSize="32sp"
-        android:text="Diet"
+        android:text="Food"
         android:background="@drawable/rounded_corner_textview"/>
 
     <Button
