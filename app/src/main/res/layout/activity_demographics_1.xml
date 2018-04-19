@@ -73,7 +73,7 @@
                 android:layout_height="wrap_content"
                 android:text="Please select your dialysis schedule"
                 android:textStyle="bold"
-                android:textSize="24sp"
+                android:textSize="@dimen/text_size_medium"
                 android:textColor="@android:color/white"
                 android:layout_margin="10dp" />
 
@@ -92,6 +92,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Sunday"
+                        android:textSize="@dimen/text_size_small"
                         android:layout_marginBottom="10dp"
                         android:gravity="center_vertical"
                         android:textStyle="bold"
@@ -109,6 +110,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Monday"
+                        android:textSize="@dimen/text_size_small"
                         android:layout_marginBottom="10dp"
                         android:gravity="center_vertical"
                         android:textStyle="bold"
@@ -125,6 +127,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Tuesday"
+                        android:textSize="@dimen/text_size_small"
                         android:layout_marginBottom="10dp"
                         android:gravity="center_vertical"
                         android:textStyle="bold"
@@ -141,6 +144,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Wednesday"
+                        android:textSize="@dimen/text_size_small"
                         android:layout_marginBottom="10dp"
                         android:gravity="center_vertical"
                         android:textStyle="bold"
@@ -151,11 +155,13 @@
                     android:id="@+id/Demo1_LL_Thursday"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
+
                     <CheckBox
                         android:id="@+id/Demo1_CB_Thursday"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Thursday"
+                        android:textSize="@dimen/text_size_small"
                         android:layout_marginBottom="10dp"
                         android:gravity="center_vertical"
                         android:textStyle="bold"
@@ -171,6 +177,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Friday"
+                        android:textSize="@dimen/text_size_small"
                         android:layout_marginBottom="10dp"
                         android:gravity="center_vertical"
                         android:textStyle="bold"
@@ -187,6 +194,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Saturday"
+                        android:textSize="@dimen/text_size_small"
                         android:textStyle="bold"
                         android:textColor="@android:color/white"/>
                 </LinearLayout>
@@ -197,17 +205,17 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:gravity="bottom|center_horizontal">
+            android:gravity="bottom|end">
 
             <Button
                 android:id="@+id/Demo_Btn_Next_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:padding="10dp"
                 android:background="@drawable/button_background"
                 android:text="@string/next_button"
-                android:textSize="30sp" />
+                android:textSize="@dimen/text_size_medium"
+                android:layout_margin="10dp"
+                android:padding="15dp"/>
         </LinearLayout>
 
 

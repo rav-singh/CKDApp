@@ -22,6 +22,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -51,8 +52,11 @@ public class ActivityLog extends AppCompatActivity {
     final float[] botLeftCorner = new float[]{0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 20.0f, 20.0f};
     final float[] leftCorners = new float[]{20.0f, 20.0f, 0.0f, 0.0f, 0.0f, 0.0f, 20.0f, 20.0f};
     final float[] rightCorners = new float[]{0.0f, 0.0f, 20.0f, 20.0f, 20.0f, 20.0f, 0.0f, 0.0f};
+
     int colorA;
     int colorB;
+
+    int sumOfMinutes = 0;
 
     FirebaseDatabase db = FirebaseDatabase.getInstance();
     String UID = FirebaseAuth.getInstance().getCurrentUser().getUid();
@@ -64,7 +68,8 @@ public class ActivityLog extends AppCompatActivity {
         setContentView(R.layout.activity_log);
 
         colorA = getResources().getColor(R.color.LightGreen);
-        colorB = getResources().getColor(R.color.LightCoral);
+        colorB = getResources().getColor(R.color.LightBlue);
+
 
         addActivity = findViewById(R.id.addActivity_Button);
         activityET = findViewById(R.id.activityInput);
@@ -84,7 +89,7 @@ public class ActivityLog extends AppCompatActivity {
 
                 // Makes sure user does not enter empty string or an exercise with a comma
                 //TODO TOAST ERROR
-                if(newActivity.length() <= 2 || newActivity.contains(","))
+                if(newActivity.length() <= 2 || newActivity.contains(",") )
                     return;
 
                 ActivityNames.add(newActivity);
@@ -185,11 +190,14 @@ public class ActivityLog extends AppCompatActivity {
     {
         int start = activitiesLL.getChildCount();
 
+        final ScrollView sv = findViewById(R.id.activityScrollView);
+        boolean svHeightMaxed = false;
+        
         LinearLayout.LayoutParams params_LL = new LinearLayout.LayoutParams
                 (LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-
+        
         LinearLayout.LayoutParams params_activity = new LinearLayout.LayoutParams
-                (0, LinearLayout.LayoutParams.WRAP_CONTENT,4);
+                (0, LinearLayout.LayoutParams.WRAP_CONTENT,9);
 
 
         LinearLayout.LayoutParams params_duration = new LinearLayout.LayoutParams
@@ -211,7 +219,7 @@ public class ActivityLog extends AppCompatActivity {
 
             singleActivity_ll.setLayoutParams(params_LL);
             singleActivity_ll.setOrientation(LinearLayout.HORIZONTAL);
-            singleActivity_ll.setWeightSum(5);
+            singleActivity_ll.setWeightSum(10);
 
             TextView name = new TextView(this);
             TextView duration = new TextView(this);
@@ -226,7 +234,13 @@ public class ActivityLog extends AppCompatActivity {
 
             duration.setTextSize(20);
             duration.setTextColor(Color.BLACK);
-            duration.setText(ActivityDurations.get(i).trim());
+
+            String duration_str = ActivityDurations.get(i).trim();
+
+            duration.setText(duration_str);
+
+            int numMinutes= Integer.parseInt(duration_str);
+            sumOfMinutes+=numMinutes;
 
             GradientDrawable d1 = new GradientDrawable();
             GradientDrawable d2 = new GradientDrawable();
@@ -290,14 +304,49 @@ public class ActivityLog extends AppCompatActivity {
                 duration.setBackgroundColor(colorB);
             }
 
-
             singleActivity_ll.addView(name);
             singleActivity_ll.addView(duration);
 
             activitiesLL.addView(singleActivity_ll);
         }
+        // If there are more than 9 activities logged and the scrollview height
+        // has not been changed from wrap_content then set its height to fit 9
+        // activities in the log
+        if(activitiesLL.getChildCount() > 9 && !svHeightMaxed)
+        {
+            final View view = activitiesLL.getChildAt(0);
+            svHeightMaxed = true;
+
+            // This waits for the first View to be ready and have a set height based on
+            // the params given in the for loop.
+            view.post(new Runnable() {
+                @Override
+                public void run() {
+                    int maxHeight = view.getHeight() * 9;
+                    //height is ready
+                    LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) sv.getLayoutParams();
+                    params.height = maxHeight;
+                    sv.setLayoutParams(params);
+                }
+            });
+        }
 
 
+        TextView total = findViewById(R.id.activity_total);
+        total.setText("Total: ".concat(String.valueOf(sumOfMinutes)));
+
+        updateTotalSumInDB();
+    }
+
+    private void updateTotalSumInDB()
+    {
+        DatabaseReference dataNode = db.getReference()
+                                        .child("Data")
+                                        .child("Exercise")
+                                        .child(UID)
+                                        .child(AppData.getTodaysDate());
+
+        dataNode.child("ActivityTotal").setValue(sumOfMinutes);
     }
 
     private void updateLastActivityCorners(int lastViewIndex)

@@ -49,13 +49,16 @@ public class Social extends AppCompatActivity
 
     private void initializeButtons()
     {
+        Button wellness = findViewById(R.id.Social_Btn_Wellness);
+        buttonMap.put(wellness,"Wellness");
+
+        Button recipes= findViewById(R.id.Social_Btn_Recipes);
+        buttonMap.put(recipes,"Recipies");
+
+        Button activities = findViewById(R.id.Social_Btn_Activities);
+        buttonMap.put(activities,"Activies");
+
         Button general = findViewById(R.id.Social_Btn_General);
         buttonMap.put(general,"General");
-        Button _new = findViewById(R.id.Social_Btn_NewMembers);
-        buttonMap.put(_new,"New Members");
-        Button recipies= findViewById(R.id.Social_Btn_Recipes);
-        buttonMap.put(recipies,"Recipies");
-        Button help = findViewById(R.id.Social_Btn_Help);
-        buttonMap.put(help,"Help");
     }
 }

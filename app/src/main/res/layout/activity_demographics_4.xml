@@ -4,8 +4,7 @@
     android:id="@+id/ScrollView_Layout_demo4"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/main_background_gradient"
-    tools:layout_editor_absoluteY="81dp">
+    android:background="@drawable/main_background_gradient">
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -18,7 +17,8 @@
             android:layout_height="wrap_content"
             android:text="@string/comorbidities_prompt"
             android:textAlignment="center"
-            android:textSize="30sp"
+            android:textSize="@dimen/text_size_large"
+            android:textStyle="bold"
             android:layout_margin="10dp"
             android:padding="5dp"
             android:textColor="@android:color/white"/>
@@ -32,7 +32,7 @@
             android:background="@android:color/transparent"
             android:textColor="@android:color/white"
             android:textStyle="bold"
-            android:textSize="20dp"
+            android:textSize="@dimen/text_size_small"
             android:text="Allergies" />
 
         <CheckBox
@@ -44,8 +44,8 @@
             android:background="@android:color/transparent"
             android:textColor="@android:color/white"
             android:textStyle="bold"
-            android:textSize="20dp"
-            android:text="Arthritis   " />
+            android:textSize="@dimen/text_size_small"
+            android:text="Arthritis" />
 
         <CheckBox
             android:id="@+id/Demo4_CB_BloodClots"
@@ -56,8 +56,8 @@
             android:background="@android:color/transparent"
             android:textColor="@android:color/white"
             android:textStyle="bold"
-            android:textSize="20dp"
-            android:text="Blood Clots   " />
+            android:textSize="@dimen/text_size_small"
+            android:text="Blood Clots" />
 
         <CheckBox
             android:id="@+id/Demo4_CB_BloodDisorder"
@@ -68,7 +68,7 @@
             android:background="@android:color/transparent"
             android:textColor="@android:color/white"
             android:textStyle="bold"
-            android:textSize="20dp"
+            android:textSize="@dimen/text_size_small"
             android:text="Blood Disorder"
             />
 
@@ -81,8 +81,8 @@
             android:background="@android:color/transparent"
             android:textColor="@android:color/white"
             android:textStyle="bold"
-            android:textSize="20dp"
-            android:text="Cancer    " />
+            android:textSize="@dimen/text_size_small"
+            android:text="Cancer" />
 
 
         <CheckBox
@@ -94,8 +94,8 @@
             android:background="@android:color/transparent"
             android:textColor="@android:color/white"
             android:textStyle="bold"
-            android:textSize="20dp"
-            android:text="COPD   " />
+            android:textSize="@dimen/text_size_small"
+            android:text="COPD" />
 
         <CheckBox
             android:id="@+id/Demo4_CB_Dementia"
@@ -106,8 +106,8 @@
             android:background="@android:color/transparent"
             android:textColor="@android:color/white"
             android:textStyle="bold"
-            android:textSize="20dp"
-            android:text="Dementia   " />
+            android:textSize="@dimen/text_size_small"
+            android:text="Dementia" />
 
         <CheckBox
             android:id="@+id/Demo4_CB_Depression"
@@ -118,8 +118,8 @@
             android:background="@android:color/transparent"
             android:textColor="@android:color/white"
             android:textStyle="bold"
-            android:textSize="20dp"
-            android:text="Depression   " />
+            android:textSize="@dimen/text_size_small"
+            android:text="Depression" />
 
         <CheckBox
             android:id="@+id/Demo4_CB_Diabetes"
@@ -130,8 +130,8 @@
             android:background="@android:color/transparent"
             android:textColor="@android:color/white"
             android:textStyle="bold"
-            android:textSize="20dp"
-            android:text="Diabetes   " />
+            android:textSize="@dimen/text_size_small"
+            android:text="Diabetes" />
 
         <CheckBox
             android:id="@+id/Demo4_CB_Glaucoma"
@@ -142,7 +142,7 @@
             android:background="@android:color/transparent"
             android:textColor="@android:color/white"
             android:textStyle="bold"
-            android:textSize="20dp"
+            android:textSize="@dimen/text_size_small"
             android:text="Glaucoma" />
 
         <CheckBox
@@ -154,7 +154,7 @@
             android:background="@android:color/transparent"
             android:textColor="@android:color/white"
             android:textStyle="bold"
-            android:textSize="20dp"
+            android:textSize="@dimen/text_size_small"
             android:text="Heart Disease" />
 
         <CheckBox
@@ -166,8 +166,8 @@
             android:background="@android:color/transparent"
             android:textColor="@android:color/white"
             android:textStyle="bold"
-            android:textSize="20dp"
-            android:text="High BP/Cholesterol   " />
+            android:textSize="@dimen/text_size_small"
+            android:text="High BP/Cholesterol" />
 
         <CheckBox
             android:id="@+id/Demo4_CB_KidneyDisease"
@@ -178,8 +178,8 @@
             android:background="@android:color/transparent"
             android:textColor="@android:color/white"
             android:textStyle="bold"
-            android:textSize="20dp"
-            android:text="Kidney Disease   " />
+            android:textSize="@dimen/text_size_small"
+            android:text="Kidney Disease" />
 
         <CheckBox
             android:id="@+id/Demo4_CB_LiverDiesease"
@@ -190,8 +190,8 @@
             android:background="@android:color/transparent"
             android:textColor="@android:color/white"
             android:textStyle="bold"
-            android:textSize="20dp"
-            android:text="Liver Disease   " />
+            android:textSize="@dimen/text_size_small"
+            android:text="Liver Disease" />
 
         <CheckBox
             android:id="@+id/Demo4_CB_Lupus"
@@ -202,8 +202,8 @@
             android:background="@android:color/transparent"
             android:textColor="@android:color/white"
             android:textStyle="bold"
-            android:textSize="20dp"
-            android:text="Lupus   " />
+            android:textSize="@dimen/text_size_small"
+            android:text="Lupus" />
 
         <CheckBox
             android:id="@+id/Demo4_CB_MacularDegen"
@@ -214,8 +214,8 @@
             android:background="@android:color/transparent"
             android:textColor="@android:color/white"
             android:textStyle="bold"
-            android:textSize="20dp"
-            android:text="Macular Degeneration   " />
+            android:textSize="@dimen/text_size_small"
+            android:text="Macular Degeneration" />
 
         <CheckBox
             android:id="@+id/Demo4_CB_MentalHthCond"
@@ -226,7 +226,7 @@
             android:background="@android:color/transparent"
             android:textColor="@android:color/white"
             android:textStyle="bold"
-            android:textSize="20dp"
+            android:textSize="@dimen/text_size_small"
             android:text="Mental Health Disease" />
 
         <CheckBox
@@ -238,8 +238,8 @@
             android:background="@android:color/transparent"
             android:textColor="@android:color/white"
             android:textStyle="bold"
-            android:textSize="20dp"
-            android:text="Migraines   " />
+            android:textSize="@dimen/text_size_small"
+            android:text="Migraines" />
 
         <CheckBox
             android:id="@+id/Demo4_CB_MS"
@@ -250,8 +250,8 @@
             android:background="@android:color/transparent"
             android:textColor="@android:color/white"
             android:textStyle="bold"
-            android:textSize="20dp"
-            android:text="Multiple Sclerosis   " />
+            android:textSize="@dimen/text_size_small"
+            android:text="Multiple Sclerosis" />
 
         <CheckBox
             android:id="@+id/Demo4_CB_ParkDis"
@@ -262,8 +262,8 @@
             android:background="@android:color/transparent"
             android:textColor="@android:color/white"
             android:textStyle="bold"
-            android:textSize="20dp"
-            android:text="Parkinson's Disease   " />
+            android:textSize="@dimen/text_size_small"
+            android:text="Parkinson's Disease" />
 
         <CheckBox
             android:id="@+id/Demo4_CB_Stroke"
@@ -274,7 +274,7 @@
             android:background="@android:color/transparent"
             android:textColor="@android:color/white"
             android:textStyle="bold"
-            android:textSize="20dp"
+            android:textSize="@dimen/text_size_small"
             android:text="Stroke" />
 
         <CheckBox
@@ -286,7 +286,7 @@
             android:background="@android:color/transparent"
             android:textColor="@android:color/white"
             android:textStyle="bold"
-            android:textSize="20dp"
+            android:textSize="@dimen/text_size_small"
             android:text="Thyroid Disease" />
 
         <LinearLayout
@@ -303,7 +303,7 @@
                 android:background="@android:color/transparent"
                 android:textColor="@android:color/white"
                 android:textStyle="bold"
-                android:textSize="20dp"
+                android:textSize="@dimen/text_size_small"
                 android:text="Other" />
 
             <EditText
@@ -313,8 +313,9 @@
                 android:layout_margin="10dp"
                 android:padding="5dp"
                 android:background="@drawable/rounded_corner_textview"
+                tools:text="Other thing"
                 android:textStyle="bold"
-                android:textSize="20dp"
+                android:textSize="@dimen/text_size_small"
                 android:inputType="text"/>
         </LinearLayout>
 
@@ -323,10 +324,11 @@
             android:id="@+id/Demo4_Btn_Next"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:layout_margin="5dp"
-            android:padding="10dp"
+            android:textSize="@dimen/text_size_medium"
+            android:layout_margin="10dp"
+            android:padding="15dp"
             android:text="@string/next_button"
+            android:layout_gravity="end|bottom"
             android:background="@drawable/button_background"/>
 
 

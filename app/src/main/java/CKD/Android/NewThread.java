@@ -41,7 +41,6 @@ public class NewThread extends AppCompatActivity
             //TODO Make sure no fields are empty before proceeding
             public void onClick(View v)
             {
-                AppData.updateParticipation("ThreadsMade");
                 // Grabs all of the users enteries and an instance of the current time
                 // Instantiates a new Thread class with the collected variable
                 String authorUID = AppData.cur_user.getUID();
@@ -51,9 +50,15 @@ public class NewThread extends AppCompatActivity
                 String category = AppData.cur_Category;
                 String date = AppData.getTodaysDate();
 
+                if(title.isEmpty() || body.isEmpty())
+                {
+                    return;
+                }
                 ThreadClass newThread = new ThreadClass(authorName,authorUID, title, body, date, category, 0);
 
                 FirebaseDatabase db;
+
+                AppData.updateParticipation("ThreadsMade");
 
                 if(AppData.db == null)
                 {

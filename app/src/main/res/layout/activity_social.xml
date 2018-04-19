@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:text="Forums"
         android:textAlignment="center"
-        android:textSize="42sp"
+        android:textSize="@dimen/text_size_xlarge"
         android:textStyle="bold"
         android:textColor="@android:color/white"/>
 
@@ -25,27 +25,26 @@
         android:layout_gravity="center_vertical">
 
         <Button
-            android:id="@+id/Social_Btn_General"
+            android:id="@+id/Social_Btn_Wellness"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/forum_button_style"
-            android:text="General Discussion"
+            android:text="Wellness"
             android:textColor="@android:color/white"
-            android:textSize="32sp"
-            android:padding="10dp"
-            android:layout_margin="20dp"
-            />
-
-        <Button
-            android:id="@+id/Social_Btn_NewMembers"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/forum_button_style"
-            android:text="New Members"
-            android:textColor="@android:color/white"
-            android:textSize="32sp"
+            android:textSize="@dimen/text_size_large"
             android:padding="10dp"
             android:layout_margin="20dp"/>
+
+        <Button
+            android:id="@+id/Social_Btn_Activities"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/forum_button_style"
+            android:text="Activities"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/text_size_large"
+            android:padding="10dp"
+            android:layout_margin="20dp" />
 
         <Button
             android:id="@+id/Social_Btn_Recipes"
@@ -54,21 +53,20 @@
             android:background="@drawable/forum_button_style"
             android:text="Recipes"
             android:textColor="@android:color/white"
-            android:textSize="32sp"
+            android:textSize="@dimen/text_size_large"
             android:padding="10dp"
             android:layout_margin="20dp"/>
 
         <Button
-            android:id="@+id/Social_Btn_Help"
+            android:id="@+id/Social_Btn_General"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/forum_button_style"
-            android:text="HELP"
+            android:text="General"
             android:textColor="@android:color/white"
-            android:textSize="32sp"
+            android:textSize="@dimen/text_size_large"
             android:padding="10dp"
-            android:layout_margin="20dp"/>
-
+            android:layout_margin="20dp" />
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -78,17 +76,15 @@
                 android:id="@+id/Social_Btn_Home"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:text="Home"
-                android:textSize="20sp"
-                android:padding="10dp"
-                android:layout_marginBottom="10dp"
                 android:background="@drawable/button_home_background"
                 android:layout_alignParentBottom="true"
-                android:layout_centerHorizontal="true"/>
+                android:layout_centerHorizontal="true"
+                android:text="Home"
+                android:textSize="@dimen/text_size_medium"
+                android:padding="10dp"
+                android:layout_marginBottom="10dp"/>
         </RelativeLayout>
 
         </LinearLayout>
-
-
 
 </LinearLayout>
