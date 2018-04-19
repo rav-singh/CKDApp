@@ -113,8 +113,8 @@ public class Demographics_2 extends AppCompatActivity
         UID_node.child("Name").setValue(AppData.cur_user.getName());
         UID_node.child("Email").setValue(AppData.cur_user.getEmail());
         UID_node.child("Phone Number").setValue(AppData.cur_user.getPhone());
-        Add_node.child("Activity Level").setValue(AppData.cur_user.getActivityLevel());
-        Add_node.child("Marital Status").setValue(AppData.cur_user.getMarital());
+        Add_node.child("ActivityLevel").setValue(AppData.cur_user.getActivityLevel());
+        Add_node.child("MaritalStatus").setValue(AppData.cur_user.getMarital());
         Add_node.child("Gender").setValue(AppData.cur_user.getGender());
         Add_node.child("Age").setValue(AppData.cur_user.getAge());
         Add_node.child("Work").setValue(AppData.cur_user.getWorkStatus());
