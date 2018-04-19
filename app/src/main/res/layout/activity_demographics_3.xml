@@ -28,11 +28,11 @@
             android:id="@+id/Demo3_SPN_Education"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:entries="@array/education_array"
             android:layout_margin="20dp"
-            android:textColor="@android:color/black"
+            android:entries="@array/education_array"
             android:spinnerMode="dropdown"
-            android:theme="@style/Spinner2"/>
+            android:textColor="@android:color/black"
+            android:theme="@style/Spinner2" />
 
         <TextView
             android:id="@+id/Demo3_TV_WorkPrompt"

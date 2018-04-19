@@ -29,7 +29,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/rounded_corner_textview"
-        android:text="How are your fatigue levels today?"
+        android:text="@string/fatigue_prompt"
         android:textSize="24sp"
         android:textStyle="bold"/>
 
