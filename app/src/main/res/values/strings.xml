@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">CKDApp</string>
+    <string name="app_name">Kidney Wellness</string>
     <string name="title_activity_login">Sign in</string>
 
     <!-- Strings related to login -->
@@ -70,13 +70,13 @@
     <string name="comorbidities_prompt">Please select which of the following conditions you have had or do have</string>
 
     <string-array name="activity_array">
-        <item>Select level of activity</item>
-        <item>I don't exercise/I exercise infrequently</item>
-        <item>I exercise about once every two weeks</item>
-        <item>I exercise about once a week</item>
-        <item>I exercise 2–3 times a week</item>
-        <item>I exercise everyday</item>
-        <item>I exercise more than once a day</item>
+        <item>How often do you exercise</item>
+        <item>I do not exercise</item>
+        <item>About once every two weeks</item>
+        <item>About once a week</item>
+        <item>2–3 times a week</item>
+        <item>Everyday</item>
+        <item>More than once a day</item>
     </string-array>
 
     <string-array name="appetite_array">
@@ -103,6 +103,11 @@
         <item>15</item>
         <item>25</item>
         <item>50</item>
+    </string-array>
+
+    <string-array name="sort_by_array">
+        <item>Date</item>
+        <item>Likes</item>
     </string-array>
 
     <string-array name="times_array">
