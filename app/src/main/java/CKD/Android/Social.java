@@ -22,8 +22,20 @@ public class Social extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_social);
 
-        initializeButtons();
+        Button pPost = findViewById(R.id.Social_Btn_PinnedPost);
 
+        pPost.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Intent launchActivity1=
+                        new Intent(CKD.Android.Social.this,PinnedPost.class);
+                startActivity(launchActivity1);
+            }
+        });
+
+        initializeButtons();
         for(Button b : buttonMap.keySet())
             setOnClickListeners(b);
 

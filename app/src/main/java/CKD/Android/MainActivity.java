@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 
 import android.util.Log;
+import android.widget.ImageView;
 
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -33,6 +34,9 @@ public class MainActivity extends AppCompatActivity {
         Button Login = findViewById(R.id.Main_Btn_Login);
 
         Button Register = findViewById(R.id.Main_Btn_Register);
+
+        ImageView image = findViewById(R.id.Main_IV_logo);
+        image.setImageResource(R.drawable.logo_transparent);
 
         isUserLoggedIn();
 

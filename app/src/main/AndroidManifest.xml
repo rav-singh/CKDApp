@@ -46,7 +46,8 @@
         <activity
             android:name=".Pop"
             android:theme="@style/AppTheme.CustomTheme" />
-        <activity android:name=".NutritionBlog"></activity>
+        <activity android:name=".NutritionBlog"/>
+        <activity android:name=".PinnedPost"/>
     </application>
 
 </manifest>
