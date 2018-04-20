@@ -35,7 +35,7 @@
             android:maxHeight="300dp"
             android:scaleType="fitCenter"
 
-            android:src="@drawable/logo_transparent"
+            android:src="@drawable/logotransparent"
             android:contentDescription="@string/app_name" />
 
         <Button

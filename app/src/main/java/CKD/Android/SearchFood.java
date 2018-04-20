@@ -5,11 +5,13 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.provider.Contacts;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.InputType;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -55,8 +57,8 @@ public class SearchFood extends AppCompatActivity {
     private EditText searchedFood;
     private int ndbno, chosenNDBNO;
     private foodItem foods;
-    ArrayList<foodItem> foodsList = new ArrayList<foodItem>();
-    ArrayList<foodItem> parsedFoodsList = new ArrayList<foodItem>();
+    ArrayList<foodItem> foodsList = new ArrayList<>();
+    ArrayList<foodItem> parsedFoodsList = new ArrayList<>();
     private ListView lv;
     private int quantity;
     private Intent myIntent = new Intent();
@@ -76,10 +78,23 @@ public class SearchFood extends AppCompatActivity {
 
         lv = findViewById(R.id.foods_LV);
 
+        // This is the array adapter, it takes the context of the activity as a
+        // first parameter, the type of list view as a second parameter and your
+        // array as a third parameter.
+        final ArrayAdapter<foodItem> arrayAdapter = new ArrayAdapter<>(
+                this,
+                android.R.layout.simple_list_item_1,
+                parsedFoodsList);
+
+        lv.setAdapter(arrayAdapter);
+
         btnSearchFood.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
+                // clears out the list every time a new search is executed
                 foodsList.clear();
+                arrayAdapter.clear();
+
 
                 // Grab keywords from text field
                 String item = searchedFood.getText().toString();
@@ -89,8 +104,8 @@ public class SearchFood extends AppCompatActivity {
                 if (!item.isEmpty()) {
                     usdaURL = "https://api.nal.usda.gov/ndb/search/?format=json&q=" + item + "&sort=n&max=25&offset=0&api_key=" + apiKey;
                 } else {
-                    //Toast toast = Toast.makeText("Please enter a food");
-                    //toast.show();
+                    setCustomToast("Please enter a food in search box");
+                    return;
                 }
 
                 // Initialize a http client
@@ -108,11 +123,13 @@ public class SearchFood extends AppCompatActivity {
                     @Override
                     public void onResponse(Call call, Response response) throws IOException {
                         String jsonData = response.body().string();
-                        Log.i(TAG, jsonData);
-                        if (jsonData.contains("timeout") || jsonData.contains("error")) ;
+                        Log.i("json data:", jsonData);
+                        if (jsonData.contains("timeout") || jsonData.contains("error"))
                         {
-                            // handle api being down
+                            setCustomToast("Timeout/Error on call to API");
+                            return;
                         }
+
                         // Parse the JSON into foodItem Class
                         try {
 
@@ -137,20 +154,18 @@ public class SearchFood extends AppCompatActivity {
                         }
 
                     }
+
+
                 });
+
+                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
+                lv.deferNotifyDataSetChanged();
+
+                arrayAdapter.notifyDataSetChanged();
+
             }
         });
-
-
-        // This is the array adapter, it takes the context of the activity as a
-        // first parameter, the type of list view as a second parameter and your
-        // array as a third parameter.
-        ArrayAdapter<foodItem> arrayAdapter = new ArrayAdapter<foodItem>(
-                this,
-                android.R.layout.simple_list_item_1,
-                parsedFoodsList);
-
-        lv.setAdapter(arrayAdapter);
 
         // Grab the user`s choice
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -190,12 +205,17 @@ public class SearchFood extends AppCompatActivity {
                         String grabQuantity = input.getText().toString();
 
                         quantity = Integer.parseInt(grabQuantity);
+
+                        if(quantity == 0 || quantity > 50)
+                        {
+                            setCustomToast("Invalid Quantity Try Again");
+                            return;
+                        }
+
                         myIntent.putExtra("Quantity", quantity);
 
                         getNutritionFacts(305, "Phosphorus");
-
                         getNutritionFacts(306, "Potassium");
-
                         getNutritionFacts(307, "Sodium");
 
                     }
@@ -275,9 +295,10 @@ public class SearchFood extends AppCompatActivity {
             String jsonDataNutrients = response.body().string();
             Log.i(TAG, jsonDataNutrients);
 
-            if (jsonDataNutrients.contains("timeout") || jsonDataNutrients.contains("error")) ;
+            if (jsonDataNutrients.contains("timeout") || jsonDataNutrients.contains("error"))
             {
-                // handle api being down
+                setCustomToast("Timeout/Error on call to API");
+                return;
             }
             // Parse the JSON
             try {
@@ -365,6 +386,15 @@ public class SearchFood extends AppCompatActivity {
     });
 
 }
+
+    public void setCustomToast(CharSequence text)
+    {
+        Context context = getApplicationContext();
+        int duration = Toast.LENGTH_SHORT;
+
+        Toast toast = Toast.makeText(context, text, duration);
+        toast.show();
+    }
 
     public void checkNutrientsForReturn()
     {

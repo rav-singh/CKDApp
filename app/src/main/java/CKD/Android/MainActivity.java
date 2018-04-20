@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         Button Register = findViewById(R.id.Main_Btn_Register);
 
         ImageView image = findViewById(R.id.Main_IV_logo);
-        image.setImageResource(R.drawable.logo_transparent);
+        image.setImageResource(R.drawable.logotransparent);
 
         isUserLoggedIn();
 
