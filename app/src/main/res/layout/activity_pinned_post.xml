@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/main_background_gradient"
+    android:orientation="vertical"
+    tools:context="CKD.Android.PinnedPost">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Announcement"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                android:textSize="@dimen/text_size_xlarge" />
+
+            <TextView
+                android:id="@+id/PP_TF_Title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                tools:text="Announcement Title"
+                android:textAlignment="center"
+                android:textSize="@dimen/text_size_large" />
+
+                <TextView
+                    android:id="@+id/PP_TF_Body"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/rounded_corner_textview"
+                    android:textColor="@color/Black"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:textSize="@dimen/text_size_medium"
+                    tools:text="@string/long_test_string"/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Author:"
+                        android:textStyle="bold"
+                        android:layout_marginLeft="20dp"
+                        android:textSize="@dimen/text_size_medium"
+                        android:paddingRight="10dp"/>
+
+                    <TextView
+                        android:id="@+id/PP_TF_Author"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        tools:text="AUTHOR NAME"
+                        android:textSize="@dimen/text_size_medium"
+                        android:textStyle="italic" />
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <Button
+                    android:id="@+id/PP_btn_home"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/button_home_background"
+                    android:padding="10dp"
+                    android:text="Home"
+                    android:textSize="@dimen/text_size_medium" />
+            </RelativeLayout>
+    </LinearLayout>
+</ScrollView>

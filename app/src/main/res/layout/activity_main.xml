@@ -26,16 +26,17 @@
         android:gravity="center|bottom"
         android:layout_gravity="center_vertical">
 
-        <ImageView android:id="@+id/image_view"
+        <ImageView
+            android:id="@+id/Main_IV_logo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:adjustViewBounds="true"
             android:maxWidth="300dp"
             android:maxHeight="300dp"
             android:scaleType="fitCenter"
-            android:layout_marginLeft="3dp"
-            android:src="@drawable/Logo_Transparent"
-            />
+
+            android:src="@drawable/logo_transparent"
+            android:contentDescription="@string/app_name" />
 
         <Button
             android:id="@+id/Main_Btn_Login"
