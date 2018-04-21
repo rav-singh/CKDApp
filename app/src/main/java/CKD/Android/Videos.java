@@ -31,7 +31,7 @@ public class Videos extends YouTubeBaseActivity implements YouTubePlayer.OnIniti
     public static final String VIDEO_ID_Strength = "TOKxtgKrGCQ";
     public static final String VIDEO_ID_Endurance = "RZ6pv6xaW_w";
     public static final String VIDEO_ID_Motion = "KcdkySvCRCc";
-    private String VIDEO_ID = VIDEO_ID_Featured;
+    private String VIDEO_ID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,6 +91,8 @@ public class Videos extends YouTubeBaseActivity implements YouTubePlayer.OnIniti
     }
 
     private void initializeElements() {
+
+        VIDEO_ID = VIDEO_ID_Featured;
         FeaturedButton = findViewById(R.id.Videos_Btn_FeaturedVideo);
         StrengthButton = findViewById(R.id.Videos_Btn_StrengthVideo);
         EnduranceButton = findViewById(R.id.Videos_Btn_EnduranceVideo);
