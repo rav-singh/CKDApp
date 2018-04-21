@@ -16,8 +16,7 @@ import com.google.firebase.database.ValueEventListener;
 
 public class NutritionBlog extends AppCompatActivity {
 
-    private TextView dateBox;
-    String todaysDate;
+    private TextView authorName;
     private Button NutritionLogButton;
     private TextView blogTitle;
     private TextView blogContent;
@@ -29,12 +28,8 @@ public class NutritionBlog extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nutrition_blog);
 
-        dateBox = findViewById(R.id.NutritionBlog_TF_Date);
-        todaysDate = AppData.getTodaysDate();
-        Log.i("Today's Date", todaysDate);
-        dateBox.setText(todaysDate);
-
         blogTitle = findViewById(R.id.NutritionBlog_TF_Blog_Title);
+        authorName = findViewById(R.id.NutritionBlog_TF_Author);
         blogContent = findViewById(R.id.NutritionBlog_TF_Blog_Text);
 
         DatabaseReference dataNode = db.getReference().child("Admins").child("DietBlog");
@@ -44,7 +39,9 @@ public class NutritionBlog extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 String title = dataSnapshot.child("Title").getValue(String.class);
                 String body = dataSnapshot.child("Body").getValue(String.class);
+                String author = dataSnapshot.child("Author").getValue(String.class);
                 blogTitle.setText(title);
+                authorName.setText(author);
                 blogContent.setText(body);
             }
 

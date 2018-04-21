@@ -5,7 +5,6 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.provider.Contacts;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.InputType;
@@ -20,25 +19,11 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.gson.Gson;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.IOException;
-import java.lang.reflect.Array;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
-import java.util.jar.Attributes;
-
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.OkHttpClient;
@@ -55,12 +40,11 @@ public class SearchFood extends AppCompatActivity {
     private String usdaURL;
     private Button btnSearchFood, btnHome;
     private EditText searchedFood;
-    private int ndbno, chosenNDBNO;
+    private int ndbno, chosenNDBNO, quantity;
     private foodItem foods;
     ArrayList<foodItem> foodsList = new ArrayList<>();
     ArrayList<foodItem> parsedFoodsList = new ArrayList<>();
     private ListView lv;
-    private int quantity;
     private Intent myIntent = new Intent();
     boolean grabbedP = false, grabbedK = false, grabbedNa = false;
 
@@ -70,12 +54,9 @@ public class SearchFood extends AppCompatActivity {
         setContentView(R.layout.activity_search_food);
 
         btnSearchFood = findViewById(R.id.searchFood_btn);
-
         btnHome = findViewById(R.id.searchFood_btn_home);
         btnHome = AppData.activateHomeButton(btnHome, SearchFood.this);
-
         searchedFood = findViewById(R.id.searchFood_EF);
-
         lv = findViewById(R.id.foods_LV);
 
         // This is the array adapter, it takes the context of the activity as a
@@ -98,7 +79,6 @@ public class SearchFood extends AppCompatActivity {
 
                 // Grab keywords from text field
                 String item = searchedFood.getText().toString();
-                Log.i(TAG, "You typed: " + item);
 
                 // Generate api url based on user input , check for not null
                 if (!item.isEmpty()) {
@@ -108,9 +88,9 @@ public class SearchFood extends AppCompatActivity {
                     return;
                 }
 
-                // Initialize a http client
+                // Initialize http client
                 okHttpClient = new OkHttpClient();
-                // Initialize a request
+                // Initialize a request based on url
                 request = new Request.Builder().url(usdaURL).build();
 
                 // Execute the request
@@ -130,7 +110,7 @@ public class SearchFood extends AppCompatActivity {
                             return;
                         }
 
-                        // Parse the JSON into foodItem Class
+                        // Parse the JSON into foodItem class
                         try {
 
                             JSONObject jsonObj = new JSONObject(jsonData);
@@ -139,14 +119,13 @@ public class SearchFood extends AppCompatActivity {
                             // looping through all Food results
                             for (int i = 0; i < dataInner.length(); i++) {
                                 JSONObject postObject = dataInner.getJSONObject(i);
-
                                 ndbno = postObject.getInt("ndbno");
-
                                 String foodName = postObject.getString("name");
 
                                 foods = new foodItem(foodName, ndbno);
                                 foodsList.add(foods);
                             }
+                            // remove unwanted characters
                             parseNameStringsInFoodsList();
 
                         } catch (JSONException e) {
@@ -155,9 +134,9 @@ public class SearchFood extends AppCompatActivity {
 
                     }
 
-
                 });
 
+                // Hide keyboard on search
                 InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                 imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
                 lv.deferNotifyDataSetChanged();
@@ -214,6 +193,8 @@ public class SearchFood extends AppCompatActivity {
 
                         myIntent.putExtra("Quantity", quantity);
 
+                        // Make 3 calls separately so that we still get a JSON response even
+                        // though one of the nutrients is missing
                         getNutritionFacts(305, "Phosphorus");
                         getNutritionFacts(306, "Potassium");
                         getNutritionFacts(307, "Sodium");
@@ -387,15 +368,22 @@ public class SearchFood extends AppCompatActivity {
 
 }
 
-    public void setCustomToast(CharSequence text)
+    // Set custom toast messages
+    public void setCustomToast(final CharSequence text)
     {
-        Context context = getApplicationContext();
-        int duration = Toast.LENGTH_SHORT;
-
-        Toast toast = Toast.makeText(context, text, duration);
-        toast.show();
+        final Context context = getApplicationContext();
+        final int duration = Toast.LENGTH_SHORT;
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
+            }
+        });
     }
 
+    // Checks if all values have been set so that all nutrients have a value
+    // before returning intent
     public void checkNutrientsForReturn()
     {
         if (grabbedP && grabbedK && grabbedNa)
