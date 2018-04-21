@@ -19,44 +19,44 @@
         android:textSize="50sp" />
 
     <LinearLayout
+        android:id="@+id/Main_LL_Inner"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:id="@+id/Main_LL_Inner"
+        android:layout_gravity="center_vertical"
         android:gravity="center|bottom"
-        android:layout_gravity="center_vertical">
+        android:orientation="vertical">
 
         <ImageView
             android:id="@+id/Main_IV_logo"
-            android:layout_width="wrap_content"
+            android:layout_width="@android:dimen/thumbnail_width"
             android:layout_height="wrap_content"
             android:adjustViewBounds="true"
-            android:maxWidth="300dp"
-            android:maxHeight="300dp"
-            android:scaleType="fitCenter"
 
-            android:src="@drawable/logotransparent"
-            android:contentDescription="@string/app_name" />
+            android:contentDescription="@string/app_name"
+            android:maxHeight="300dp"
+            android:maxWidth="300dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/logotransparent" />
 
         <Button
             android:id="@+id/Main_Btn_Login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Login"
-            android:textSize="32sp"
-            android:padding="5dp"
             android:layout_margin="20dp"
-            android:background="@drawable/rounded_corner_textview"/>
+            android:background="@drawable/rounded_corner_textview"
+            android:padding="5dp"
+            android:text="Login"
+            android:textSize="32sp" />
 
-         <Button
+        <Button
             android:id="@+id/Main_Btn_Register"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Register"
             android:layout_margin="20dp"
-            android:textSize="32sp"
+            android:background="@drawable/rounded_corner_textview"
             android:padding="5dp"
-            android:background="@drawable/rounded_corner_textview"/>
+            android:text="Register"
+            android:textSize="32sp" />
     </LinearLayout>
 
 </RelativeLayout>
