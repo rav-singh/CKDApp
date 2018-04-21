@@ -15,6 +15,7 @@
         completions." </string>
     <string name="example_activities"> <b> Examples: </b> <i>Gardening, Walking The Dog, Yard Work, Sweeping </i> </string>
     <string name="next_button">"Next" </string>
+    <string name="long_test_string">"This is a really really long string. This is a really really long string. This is a really really long string. This is a really really long string. This is a really really long string. This is a really really long string. This is a really really long string. This is a really really long string. This is a really really long string. This is a really really long string. This is a really really long string. This is a really really long string. This is a really really long string. This is a really really long string. This is a really really long string. This is a really really long string. This is a really really long string. This is a really really long string. This is a really really long string. This is a really really long string. This is a really really long string. This is a really really long string. This is a really really long string. This is a really really long string. This is a really really long string. This is a really really long string. This is a really really long string. This is a really really long string. This is a really really long string. This is a really really long string. This is a really really long string. This is a really really long string. " </string>
 
     <!-- Strings related to demographics -->
     <string name="age_prompt">What is your age?</string>
