@@ -1,7 +1,9 @@
 package CKD.Android;
 
 
-public class ThreadClass {
+import android.support.annotation.NonNull;
+
+public class ThreadClass implements Comparable<ThreadClass>{
     private String author;
     private String authorUID;
     private String title;
@@ -9,6 +11,7 @@ public class ThreadClass {
     private String date;
     private String category;
     private int likes;
+    private String threadUID;
 
 
     public ThreadClass()
@@ -17,7 +20,7 @@ public class ThreadClass {
     }
 
 
-    public ThreadClass(String author, String authorUID, String title, String body, String date, String category,int likes) {
+    ThreadClass(String author, String authorUID, String title, String body, String date, String category, int likes) {
         this.author = author;
         this.authorUID = authorUID;
         this.title = title;
@@ -27,7 +30,7 @@ public class ThreadClass {
         this.likes = likes;
     }
 
-    public String getAuthor() {
+    String getAuthor() {
         return author;
     }
 
@@ -79,4 +82,20 @@ public class ThreadClass {
 
     public int getLikes(){return this.likes;}
 
+    @Override
+    public int compareTo(@NonNull ThreadClass thread2) {
+        int likes1 = this.getLikes();
+        int likes2 = thread2.getLikes();
+
+        return Integer.compare(likes2,likes1);
+    }
+
+    public String getThreadUID()
+    {
+        return threadUID;
+    }
+
+    public void setThreadUID(String threadUID) {
+        this.threadUID = threadUID;
+    }
 }

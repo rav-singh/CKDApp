@@ -21,28 +21,58 @@
             android:layout_height="wrap_content">
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_centerVertical="true"
-                android:orientation="horizontal">
+                android:orientation="vertical">
 
-                <TextView
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Threads Per Page"
-                    android:textSize="@dimen/text_size_medium"
-                    android:textStyle="bold"/>
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="10dp">
 
-                <Spinner
-                    android:id="@+id/ThreadsList_SPN_ThreadsPerPage"
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Threads Per Page: "
+                        android:textSize="@dimen/text_size_small"
+                        android:textStyle="bold"/>
+
+                    <Spinner
+                        android:id="@+id/ThreadsList_SPN_ThreadsPerPage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:entries="@array/num_threads_array"
+                        android:layout_marginStart="10dp"
+                        android:textColor="@android:color/black"
+                        android:spinnerMode="dropdown"
+                        android:theme="@style/Spinner2"  />
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:entries="@array/num_threads_array"
-                    android:layout_marginLeft="10dp"
-                    android:textColor="@android:color/black"
-                    android:spinnerMode="dropdown"
-                    android:theme="@style/Spinner2"  />
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Sort By: "
+                        android:textSize="@dimen/text_size_small"
+                        android:textStyle="bold"/>
+
+                    <Spinner
+                        android:id="@+id/ThreadsList_SPN_SortBy"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:entries="@array/sort_by_array"
+                        android:layout_marginStart="10dp"
+                        android:textColor="@android:color/black"
+                        android:spinnerMode="dropdown"
+                        android:theme="@style/Spinner2"  />
+                </LinearLayout>
+
+
             </LinearLayout>
 
             <Button
@@ -53,12 +83,14 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="10dp"
                 android:layout_alignParentEnd="true"
-                android:text="New Thread"
-                android:textSize="@dimen/text_size_medium"/>
+                android:text="New Post"
+                android:textSize="@dimen/text_size_xsmall"/>
         </RelativeLayout>
+
+
     <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="400dp"
+            android:layout_height="300dp"
             android:layout_marginLeft= "10dp"
             android:layout_marginRight="10dp"
             android:layout_marginTop="10dp">

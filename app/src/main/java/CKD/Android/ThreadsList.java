@@ -1,5 +1,6 @@
 package CKD.Android;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -28,21 +29,32 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 
 public class ThreadsList extends AppCompatActivity
 {
-    List<String> keyList= new ArrayList<>();
     List<Button> activeThreadBtnList= new ArrayList<>();
     List<TextView> textViewsList = new ArrayList<>();
+
     List<ThreadClass> threadsList= new ArrayList<>();
+    List<ThreadClass> threadsListByDate= new ArrayList<>();
+    List<ThreadClass> threadsListByLikes= new ArrayList<>();
 
+    List<String> keyList= new ArrayList<>();
+    List<String> keyListByDate= new ArrayList<>();
+    List<String> keyListByLikes= new ArrayList<>();
 
+    @SuppressLint("UseSparseArrays")
     Map<Integer,List<ThreadClass>> threadsMap = new HashMap<>();
+    @SuppressLint("UseSparseArrays")
     Map<Integer,List<String>> threadsKeyMap = new HashMap<>();
-    int threadsPerPage;
 
-    Spinner spinner;
+    int threadsPerPage;
+    String sortBy;
+
+    Spinner perPageSpinner;
+    Spinner sortBySpinner;
 
     LinearLayout listOfThreads;
 
@@ -58,30 +70,33 @@ public class ThreadsList extends AppCompatActivity
 
         listOfThreads = findViewById(R.id.ThreadsList_Layout);
 
-        spinner = findViewById(R.id.ThreadsList_SPN_ThreadsPerPage);
+        perPageSpinner = findViewById(R.id.ThreadsList_SPN_ThreadsPerPage);
+        sortBySpinner = findViewById(R.id.ThreadsList_SPN_SortBy);
 
         currentPage=1;
         threadsPerPage = 10;
+        sortBy = "Date";
 
         initializeButtons();
-
-        TextView categoryTitle = findViewById(R.id.ThreadsList_TV_Category);
+        initializePerPageSpinner();
+        initializeSortBySpinner();
 
         // Sets the header to the current category
+        TextView categoryTitle = findViewById(R.id.ThreadsList_TV_Category);
         categoryTitle.setText(AppData.cur_Category);
 
         grabKeysInCategory();
 
-        initializeSpinner();
+
     }
 
-    private void initializeSpinner()
+    private void initializePerPageSpinner()
     {
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        perPageSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
             public void onItemSelected(AdapterView<?> arg0, View view, int position, long id)
             {
-               int num = Integer.parseInt(spinner.getSelectedItem().toString());
+               int num = Integer.parseInt(perPageSpinner.getSelectedItem().toString());
 
                if(threadsList.size()== 0)
                    return;
@@ -93,11 +108,7 @@ public class ThreadsList extends AppCompatActivity
                }
                 //Reset all the mappings and data structures for new mappings based on threads
                 //Per Page the user selected
-               listOfThreads.removeAllViews();
-               threadsKeyMap.clear();
-               threadsMap.clear();
-               activeThreadBtnList.clear();
-               textViewsList.clear();
+                clearAllMappings();
 
                // Update variable to users selection and set user back to page 1
                 threadsPerPage = num;
@@ -157,6 +168,103 @@ public class ThreadsList extends AppCompatActivity
 
             public void onNothingSelected(AdapterView<?> arg0) { }
         });
+    }
+
+    private void initializeSortBySpinner()
+    {
+        sortBySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            public void onItemSelected(AdapterView<?> arg0, View view, int position, long id)
+            {
+                String sort = sortBySpinner.getSelectedItem().toString();
+
+                // There are no threads so do nothing
+                if(threadsList.size()== 0)
+                    return;
+
+                // They selected the same Sort By so do nothing
+                if(Objects.equals(sort, sortBy))
+                {
+                    return;
+                }
+
+                sortBy = sort;
+                // Reset all the mappings and data structures for new mappings based on threads
+                // Per Page the user selected
+                clearAllMappings();
+
+                if(sort.equals("Date"))
+                {
+                    keyList.clear();
+                    keyList.addAll(keyListByDate);
+
+                    threadsList.clear();
+                    threadsList.addAll(threadsListByDate);
+                }
+                else
+                {
+                    keyList.clear();
+                    keyList.addAll(keyListByLikes);
+
+                    threadsList.clear();
+                    threadsList.addAll(threadsListByLikes);
+                }
+
+                resortPagesIntoMap();
+                resortKeysIntoMap();
+
+                updateUI();
+            }
+
+            private void resortKeysIntoMap()
+            {
+                List<String> threadKey;
+
+                for (int pagenum = 1; pagenum <= maxPages; pagenum++)
+                {
+                    if (pagenum == maxPages)
+                    {
+                        threadKey = keyList.subList((pagenum-1) * threadsPerPage, threadsList.size());
+
+                    } else
+                    {
+                        threadKey = keyList.subList((pagenum-1) * threadsPerPage, (pagenum-1) + threadsPerPage);
+                    }
+
+                    threadsKeyMap.put(pagenum , threadKey);
+                }
+            }
+
+            private void resortPagesIntoMap()
+            {
+                List<ThreadClass> pageOfThreads;
+
+                for(int pagenum = 1; pagenum <= maxPages; pagenum++)
+                {
+                    if(pagenum == maxPages)
+                    {
+                        pageOfThreads = threadsList.subList((pagenum-1)*threadsPerPage,threadsList.size());
+                    }
+                    else
+                    {
+                        pageOfThreads = threadsList.subList((pagenum-1)*threadsPerPage, (pagenum-1) + threadsPerPage);
+                    }
+
+                    threadsMap.put(pagenum,pageOfThreads);
+                }
+            }
+
+            public void onNothingSelected(AdapterView<?> arg0) { }
+        });
+    }
+
+    private void clearAllMappings()
+    {
+        listOfThreads.removeAllViews();
+        threadsKeyMap.clear();
+        threadsMap.clear();
+        activeThreadBtnList.clear();
+        textViewsList.clear();
     }
 
     private void initializeButtons()
@@ -318,9 +426,12 @@ public class ThreadsList extends AppCompatActivity
             {
                 for(DataSnapshot d : dataSnapshot.getChildren())
                 {
+                    String threadUID = d.getKey();
                     ThreadClass thread = d.getValue(ThreadClass.class);
+
+                    thread.setThreadUID(threadUID);
                     threadsList.add(thread);
-                    keyList.add(d.getKey());
+                    keyList.add(threadUID);
                 }
 
                 int numThreads = keyList.size();
@@ -335,12 +446,23 @@ public class ThreadsList extends AppCompatActivity
                 if(threadsList.size() == 0)
                 {
                     noThreadsHere();
-
                     return;
                 }
 
                 Collections.reverse(keyList);
                 Collections.reverse(threadsList);
+
+                threadsListByDate.addAll(threadsList);
+                threadsListByLikes.addAll(threadsList);
+
+                keyListByDate.addAll(keyList);
+
+                Collections.sort(threadsListByLikes);
+
+                for(int i = 0; i < threadsListByLikes.size() ;i++)
+                {
+                    keyListByLikes.add(threadsListByLikes.get(i).getThreadUID());
+                }
 
                 sortPagesIntoMap();
                 sortKeysIntoMap();
@@ -450,7 +572,6 @@ public class ThreadsList extends AppCompatActivity
             ImageButton arrow = new ImageButton(this);
 
             arrow.setLayoutParams(likesViewParams);
-
             arrow.setImageDrawable(this.getResources().getDrawable(android.R.drawable.arrow_up_float));
             arrow.setBackgroundResource(0);
             arrow = setOnClickUpVote(arrow,pageOfKeys.get(i), currentThread);
@@ -470,7 +591,7 @@ public class ThreadsList extends AppCompatActivity
 
             Button thread = new Button(this);
             thread.setLayoutParams(threadParams);
-            thread.setText(currentThread.getTitle());
+            thread.setText(currentThread.getTitle().concat("      ").concat(String.valueOf(currentThread.getLikes())));
             thread.setGravity(Gravity.LEFT);
             thread.setBackground(this.getResources().getDrawable(R.drawable.rounded_corner_textview));
 
