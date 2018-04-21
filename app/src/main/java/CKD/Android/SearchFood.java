@@ -5,11 +5,13 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.InputType;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -17,13 +19,18 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
+
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
+
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.OkHttpClient;
@@ -44,7 +51,8 @@ public class SearchFood extends AppCompatActivity {
     private foodItem foods;
     ArrayList<foodItem> foodsList = new ArrayList<>();
     ArrayList<foodItem> parsedFoodsList = new ArrayList<>();
-    private ListView lv;
+    boolean databaseDoneReading = false;
+    boolean foodsParsed = false;
     private Intent myIntent = new Intent();
     boolean grabbedP = false, grabbedK = false, grabbedNa = false;
 
@@ -57,25 +65,13 @@ public class SearchFood extends AppCompatActivity {
         btnHome = findViewById(R.id.searchFood_btn_home);
         btnHome = AppData.activateHomeButton(btnHome, SearchFood.this);
         searchedFood = findViewById(R.id.searchFood_EF);
-        lv = findViewById(R.id.foods_LV);
 
-        // This is the array adapter, it takes the context of the activity as a
-        // first parameter, the type of list view as a second parameter and your
-        // array as a third parameter.
-        final ArrayAdapter<foodItem> arrayAdapter = new ArrayAdapter<>(
-                this,
-                android.R.layout.simple_list_item_1,
-                parsedFoodsList);
-
-        lv.setAdapter(arrayAdapter);
-
-        btnSearchFood.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-
+        btnSearchFood.setOnClickListener(new View.OnClickListener()
+        {
+            public void onClick(View v)
+            {
                 // clears out the list every time a new search is executed
                 foodsList.clear();
-                arrayAdapter.clear();
-
 
                 // Grab keywords from text field
                 String item = searchedFood.getText().toString();
@@ -104,8 +100,7 @@ public class SearchFood extends AppCompatActivity {
                     public void onResponse(Call call, Response response) throws IOException {
                         String jsonData = response.body().string();
                         Log.i("json data:", jsonData);
-                        if (jsonData.contains("timeout") || jsonData.contains("error"))
-                        {
+                        if (jsonData.contains("timeout") || jsonData.contains("error")) {
                             setCustomToast("Timeout/Error on call to API");
                             return;
                         }
@@ -117,110 +112,167 @@ public class SearchFood extends AppCompatActivity {
                             JSONObject foodItems = jsonObj.getJSONObject("list");
                             JSONArray dataInner = foodItems.getJSONArray("item");
                             // looping through all Food results
-                            for (int i = 0; i < dataInner.length(); i++) {
+                            for (int i = 0; i < dataInner.length(); i++)
+                            {
                                 JSONObject postObject = dataInner.getJSONObject(i);
                                 ndbno = postObject.getInt("ndbno");
                                 String foodName = postObject.getString("name");
 
                                 foods = new foodItem(foodName, ndbno);
                                 foodsList.add(foods);
+                                if(i == dataInner.length()-1)
+                                {
+                                    databaseDoneReading = true;
+                                    parseNameStringsInFoodsList();
+                                }
                             }
-                            // remove unwanted characters
-                            parseNameStringsInFoodsList();
 
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-
                     }
 
                 });
-
-                // Hide keyboard on search
-                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
-                lv.deferNotifyDataSetChanged();
-
-                arrayAdapter.notifyDataSetChanged();
-
+                        upDateUI();
             }
+
         });
 
-        // Grab the user`s choice
-        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                foodItem selectedFood = (foodItem) lv.getItemAtPosition(i);
+    }
 
-                myIntent.putExtra("FoodName", selectedFood.getName());
-                myIntent.putExtra("NdbNo", selectedFood.getNdbno());
 
-                chosenNDBNO = selectedFood.getNdbno();
+    private void upDateUI()
+    {
+        while(!databaseDoneReading && !foodsParsed)
+        {
+            System.out.println("WAITINGGGG");
+        }
+        // Removes all views from previous search
+        final ScrollView SV = findViewById(R.id.foods_SV);
+        SV.removeAllViews();
 
-                AlertDialog.Builder builder = new AlertDialog.Builder(SearchFood.this);
+        // Creates a new Linearlayout to add to the main LL.
+        final LinearLayout templl = new LinearLayout(getApplicationContext());
 
-                builder.setTitle("Confirm Selection and Select Quantity");
+        LinearLayout.LayoutParams llParams =
+                new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT);
 
-                LinearLayout ll = new LinearLayout(SearchFood.this);
-                ll.setOrientation(LinearLayout.VERTICAL);
+        templl.setLayoutParams(llParams);
+        templl.setOrientation(LinearLayout.VERTICAL);
 
-                TextView selectedFoodName = new TextView(SearchFood.this);
+        LinearLayout.LayoutParams tvParams =
+                new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT);
+        tvParams.setMargins(0,0,0,10);
 
-                selectedFoodName.setText("You Selected: ".concat(selectedFood.getName()));
-                ll.addView(selectedFoodName);
 
-                final EditText input = new EditText(SearchFood.this);
+        for (int i = 0; i < parsedFoodsList.size(); i++)
+        {
+            TextView food = new TextView(this);
+            food.setLayoutParams(tvParams);
 
-                input.setInputType(InputType.TYPE_CLASS_NUMBER);
+            food.setText(parsedFoodsList.get(i).getName());
+            food.setTextSize(20);
+            food.setBackground(getResources().getDrawable(R.drawable.rounded_corner_textview));
+            food.setTextColor(Color.BLACK);;
+            templl.addView(food);
+        }
 
-                ll.addView(input);
+            setOnClickListeners(templl);
+            SV.addView(templl);
+        // Hide keyboard on search
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
 
-                builder.setView(ll);
+    }
 
-                // Set up the buttons
-                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        String grabQuantity = input.getText().toString();
+    private void setOnClickListeners(LinearLayout templl)
+    {
+        int numFoods = parsedFoodsList.size();
 
-                        quantity = Integer.parseInt(grabQuantity);
+        for(int i=0; i<numFoods;i++)
+        {
+            TextView view = (TextView) templl.getChildAt(i);
+            final foodItem selectedFood = parsedFoodsList.get(i);
 
-                        if(quantity == 0 || quantity > 50)
-                        {
-                            setCustomToast("Invalid Quantity Try Again");
-                            return;
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v)
+                {
+                    myIntent.putExtra("FoodName", selectedFood.getName());
+                    myIntent.putExtra("NdbNo", selectedFood.getNdbno());
+
+                    chosenNDBNO = selectedFood.getNdbno();
+
+                    AlertDialog.Builder builder = new AlertDialog.Builder(SearchFood.this);
+
+                    builder.setTitle("Confirm Selection and Select Quantity");
+
+                    LinearLayout ll = new LinearLayout(SearchFood.this);
+                    ll.setOrientation(LinearLayout.VERTICAL);
+
+                    TextView selectedFoodName = new TextView(SearchFood.this);
+
+                    selectedFoodName.setText("You Selected: ".concat(selectedFood.getName()));
+                    ll.addView(selectedFoodName);
+
+                    final EditText input = new EditText(SearchFood.this);
+
+                    input.setInputType(InputType.TYPE_CLASS_NUMBER);
+
+                    ll.addView(input);
+
+                    builder.setView(ll);
+
+                    // Set up the buttons
+                    builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            String grabQuantity = input.getText().toString();
+
+                            quantity = Integer.parseInt(grabQuantity);
+
+                            if(quantity == 0 || quantity > 50)
+                            {
+                                setCustomToast("Invalid Quantity Try Again");
+                                return;
+                            }
+
+                            myIntent.putExtra("Quantity", quantity);
+
+                            // Make 3 calls separately so that we still get a JSON response even
+                            // though one of the nutrients is missing
+                            getNutritionFacts(305, "Phosphorus");
+                            getNutritionFacts(306, "Potassium");
+                            getNutritionFacts(307, "Sodium");
+
                         }
+                    });
 
-                        myIntent.putExtra("Quantity", quantity);
+                    builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener()
+                    {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
+                        }
+                    });
 
-                        // Make 3 calls separately so that we still get a JSON response even
-                        // though one of the nutrients is missing
-                        getNutritionFacts(305, "Phosphorus");
-                        getNutritionFacts(306, "Potassium");
-                        getNutritionFacts(307, "Sodium");
+                    builder.show();
 
-                    }
-                });
+                }
+            });
 
-                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.cancel();
-                    }
-                });
-
-                builder.show();
-
-            }
-        });
-
+        }
     }
 
     // Each Foodname inside each FoodItem Class contains a Name with a UPC number
     // as well as commas within the name itself. We need to remove the UPC number
     // as well as commas with the name
-    private void parseNameStringsInFoodsList() {
-        for (foodItem food : foodsList) {
+    private void parseNameStringsInFoodsList()
+    {
+        for (foodItem food : foodsList)
+        {
             // Contains name with commas and UPC number
             String name = food.getName();
             int ndbo = food.getNdbno();
@@ -234,6 +286,7 @@ public class SearchFood extends AppCompatActivity {
             }
 
         }
+        foodsParsed = true;
     }
 
     private void parseUPCorGTIN(String name, String remove, int ndbo) {
