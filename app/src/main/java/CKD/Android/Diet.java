@@ -12,6 +12,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TableLayout;
 import android.widget.TextView;
 
@@ -326,8 +327,10 @@ public class Diet extends AppCompatActivity {
             {
 
                 if (meal != null)
+                {
                     AppData.enableBtn(btnNutritionBlog);
-
+                    btnNutritionBlog.setBackground(getResources().getDrawable(R.drawable.rounded_corner_textview));
+                }
                 // Initial Check from Database for if the user ate or not
                 boolean noMeal = (Boolean) d.child("noMeal").getValue();
 
@@ -616,11 +619,18 @@ public class Diet extends AppCompatActivity {
 
         addNoMeal.setEnabled(false);
         addMeal.setEnabled(false);
+
         addNoMeal.setClickable(false);
         addMeal.setClickable(false);
-        addNoMeal.setText("No Meals");
+
+        addNoMeal.setText("     No Meals Recorded     ");
+        RelativeLayout.LayoutParams rlParams = (RelativeLayout.LayoutParams) addMeal.getLayoutParams();
+        rlParams.setMarginStart(50);
+        addMeal.setLayoutParams(rlParams);
+
         addMeal.setText("");
-        addNoMeal.setBackgroundColor(Color.WHITE);
+
+        addNoMeal.setBackground(getResources().getDrawable(R.drawable.rounded_corner_textview));
         addMeal.setBackgroundColor(Color.TRANSPARENT);
 
     }
