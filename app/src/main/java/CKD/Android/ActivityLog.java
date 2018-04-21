@@ -95,8 +95,6 @@ public class ActivityLog extends AppCompatActivity {
                 ActivityNames.add(newActivity);
 
                 askDuration();
-                activityET.setText("");
-
             }
             private void askDuration()
             {
@@ -128,7 +126,7 @@ public class ActivityLog extends AppCompatActivity {
 
                         dataNode.child("ActivityNames").setValue(ActivityNames.toString());
                         dataNode.child("ActivityDurations").setValue(ActivityDurations.toString());
-
+                        activityET.setText("");
                         displayEntries();
                     }
                 });
