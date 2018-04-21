@@ -454,14 +454,14 @@ public class Diet extends AppCompatActivity {
             if (Integer.parseInt(phosphorusList.get(j).trim()) > PHOSPHORUS_THRESHOLD - 500)
             {
 
-                fquantity.setBackgroundColor(Color.YELLOW);
+                fquantity.setBackgroundColor(getResources().getColor(R.color.LightYellow));
                 fName.setBackgroundColor(Color.YELLOW);
                 PhosphorusMsg = " * Moderately high in Phosphorus";
 
                 if (Integer.parseInt(phosphorusList.get(j).trim()) > PHOSPHORUS_THRESHOLD)
                 {
-                    fquantity.setBackgroundColor(getResources().getColor(R.color.IndianRed));
-                    fName.setBackgroundColor(getResources().getColor(R.color.IndianRed));
+                    fquantity.setBackgroundColor(getResources().getColor(R.color.LightCoral));
+                    fName.setBackgroundColor(getResources().getColor(R.color.LightCoral));
                     PhosphorusMsg = " * High in Phosphorus";
 
                 }
@@ -477,8 +477,8 @@ public class Diet extends AppCompatActivity {
 
                 if (Integer.parseInt(potassiumList.get(j).trim()) > POTASSIUM_THRESHOLD)
                 {
-                    fquantity.setBackgroundColor(getResources().getColor(R.color.IndianRed));
-                    fName.setBackgroundColor(getResources().getColor(R.color.IndianRed));
+                    fquantity.setBackgroundColor(getResources().getColor(R.color.LightCoral));
+                    fName.setBackgroundColor(getResources().getColor(R.color.LightCoral));
                     PotassiumMsg = " * High in Potassium";
                 }
 
@@ -493,8 +493,8 @@ public class Diet extends AppCompatActivity {
 
                 if (Integer.parseInt(sodiumList.get(j).trim()) > SODIUM_THRESHOLD)
                 {
-                    fquantity.setBackgroundColor(getResources().getColor(R.color.IndianRed));
-                    fName.setBackgroundColor(getResources().getColor(R.color.IndianRed));
+                    fquantity.setBackgroundColor(getResources().getColor(R.color.LightCoral));
+                    fName.setBackgroundColor(getResources().getColor(R.color.LightCoral));
                     SodiumMsg = " * High in Sodium";
 
                 }
