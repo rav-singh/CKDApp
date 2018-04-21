@@ -18,10 +18,10 @@
         android:textSize="30dp" />
 
     <TextView
-        android:id="@+id/Exercise_TF_Date"
+        android:id="@+id/Exercise_TF_Author"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Put Date Here"
+        android:text="Author Name"
         android:textAlignment="center"
         android:textSize="30dp" />
 
