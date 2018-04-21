@@ -20,8 +20,8 @@ import com.google.firebase.database.ValueEventListener;
 public class Exercise extends AppCompatActivity
 {
     Boolean checklistUpdated = false;
-    private TextView dateBox;
-    String todaysDate;
+    private TextView authorBox;
+    String title, body, author;
     private Button ActivityLogButton;
     private Button YTVideos;
     private TextView blogTitle;
@@ -34,22 +34,21 @@ public class Exercise extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exercise);
 
-        dateBox = findViewById(R.id.Exercise_TF_Date);
-        todaysDate = AppData.getTodaysDate();
-        Log.i("Today's Date", todaysDate);
-        dateBox.setText(todaysDate);
-
         blogTitle = findViewById(R.id.Exercise_TF_Blog_Title);
         blogContent = findViewById(R.id.Exercise_TF_Blog_Text);
+        authorBox = findViewById(R.id.Exercise_TF_Author);
 
         DatabaseReference dataNode = db.getReference().child("Admins").child("ExerciseBlog");
         dataNode.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                String title = dataSnapshot.child("Title").getValue(String.class);
-                String body = dataSnapshot.child("Body").getValue(String.class);
+                title = dataSnapshot.child("Title").getValue(String.class);
+                body = dataSnapshot.child("Body").getValue(String.class);
+                author = dataSnapshot.child("Author").getValue(String.class);
+
                 blogTitle.setText(title);
                 blogContent.setText(body);
+                authorBox.setText(author);
             }
 
             @Override
