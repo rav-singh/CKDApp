@@ -70,10 +70,6 @@ public class SearchFood extends AppCompatActivity {
         {
             public void onClick(View v)
             {
-                // Hide keyboard on search
-                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
-
                 // clears out the list every time a new search is executed
                 foodsList.clear();
 
@@ -185,6 +181,9 @@ public class SearchFood extends AppCompatActivity {
 
             setOnClickListeners(templl);
             SV.addView(templl);
+        // Hide keyboard on search
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
 
     }
 
@@ -251,7 +250,8 @@ public class SearchFood extends AppCompatActivity {
                         }
                     });
 
-                    builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener()
+                    {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             dialog.cancel();
