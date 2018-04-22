@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Html;
+import android.text.Spanned;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.View;
@@ -591,7 +593,14 @@ public class ThreadsList extends AppCompatActivity
 
             Button thread = new Button(this);
             thread.setLayoutParams(threadParams);
-            thread.setText(currentThread.getTitle());
+
+            Spanned title = Html.fromHtml("<html><b>"
+                            .concat(currentThread.getTitle())
+                            .concat("</b><br/><i>")
+                            .concat(currentThread.getDate())
+                            .concat("</i></html>"));
+
+            thread.setText(title);
             thread.setGravity(Gravity.LEFT);
             thread.setBackground(this.getResources().getDrawable(R.drawable.rounded_corner_textview));
 
