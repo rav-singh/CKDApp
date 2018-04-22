@@ -214,7 +214,7 @@ public class Thread extends AppCompatActivity
                 GradientDrawable body = new GradientDrawable();
                 GradientDrawable auth = new GradientDrawable();
 
-                body.setCornerRadii(notBottomLeftCorner);
+                body.setCornerRadii(topCorners);
                 body.setColor(Color.WHITE);
 
                 auth.setCornerRadii(bottomCorners);
