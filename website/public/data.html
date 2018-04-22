@@ -67,8 +67,8 @@
     <div id="loader"></div>
     <div style="display:none;" id="myDiv" class="animate-bottom">
       <div id="message">
-        <h2>Data</h2>
-        <h3>Recent mood entries over the last seven days<br/>Download an individuals' information by clicking on their name<br/>Patients in red should recieve attention from their provider</h3>
+        <h2>Your Patients' Medical Data</h2>
+        <h3>This table displays the 7 most recent mood entries<br/>Patients in red should recieve attention from their provider</h3>
           <p id="moodData">
             <div style="text-align: center; margin: 16px auto 16px;">
               <button id="downloadData" onClick="download_CSV()">Download Patient Data</button>
@@ -228,7 +228,7 @@
               usedDateArray.push(date);
               var mood = null;
               var view = null, made = null, com = null, treat = null, act = null;
-              var meals = null;
+              var meals = null, na = null, k = null, p = null;
               var app = null, fat  = null;
 
               row.push(uid);
@@ -251,15 +251,16 @@
               if (dietNodes.length != 0 && dietDates.findIndex(getdate, date) != -1)
               {
                 var foods = dietNodes[dietDates.findIndex(getdate, date)].val();
-                meals = 0;
-                if (strcmp(typeof foods.Breakfast,"undefined") != 0)
-                  meals++
-                if (strcmp(typeof foods.Lunch,"undefined") != 0)
-                  meals++
-                if (strcmp(typeof foods.Dinner,"undefined") != 0)
-                  meals++
-                if (strcmp(typeof foods.Snacks,"undefined") != 0)
-                  meals++
+
+                meals = 0; 
+                if (strcmp(typeof foods.Breakfast,"undefined") == 0 || (strcmp(typeof foods.Breakfast.noMeal,"undefined") != 0 && strcmp(foods.Breakfast.noMeal, "false") == 0))
+                  meals++;
+                if (strcmp(typeof foods.Lunch,"undefined") == 0 || (strcmp(typeof foods.Lunch.noMeal,"undefined") != 0 && strcmp(foods.Lunch.noMeal, "false") == 0))
+                  meals++;
+                if (strcmp(typeof foods.Dinner,"undefined") == 0 || (strcmp(typeof foods.Dinner.noMeal,"undefined") != 0 && strcmp(foods.Dinner.noMeal, "false") == 0))
+                  meals++;
+                if (strcmp(typeof foods.Snacks,"undefined") == 0 || (strcmp(typeof foods.Snacks.noMeal,"undefined") != 0 && strcmp(foods.Snacks.noMeal, "false") == 0))
+                  meals++; 
               }
 
               if (appNodes.length != 0 && appDates.findIndex(getdate, date) != -1)
@@ -374,15 +375,15 @@
       {
         var date = null;
 
-        if (0 < appDates.length)
-          for (var i = 0, date = appDates[0]; i < appDates.length && inUsedDateArray(date, usedDateArray); i++)
-            date = appDates[i];
+        if (0 < moodDates.length)
+          for (var i = 0, date = appDates[0]; i < moodDates.length && inUsedDateArray(date, usedDateArray); i++)
+            date = moodDates[i];
         if (0 < dietDates.length && inUsedDateArray(date, usedDateArray))
           for (var i = 0, date = appDates[0]; i < dietDates.length && inUsedDateArray(date, usedDateArray); i++)
             date = dietDates[i];
-        if (0 < moodDates.length && inUsedDateArray(date, usedDateArray))
-          for (var i = 0, date = appDates[0]; i < moodDates.length && inUsedDateArray(date, usedDateArray); i++)
-            date = moodDates[i];
+        if (0 < appDates.length && inUsedDateArray(date, usedDateArray))
+          for (var i = 0, date = appDates[0]; i < appDates.length && inUsedDateArray(date, usedDateArray); i++)
+            date = appDates[i];
         if (0 < partDates.length && inUsedDateArray(date, usedDateArray))
           for (var i = 0, date = appDates[0]; i < partDates.length && inUsedDateArray(date, usedDateArray); i++)
             date = partDates[i];

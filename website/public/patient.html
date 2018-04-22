@@ -63,7 +63,6 @@
       var queryString = decodeURIComponent(window.location.search);
       queries = queryString.substring(1).split("=");
       var ref = firebase.database().ref("Admins/Research/" + queries[1] + "/");
-      var csv = "Patient ID,Age,Gender,Work,Marital,Education,Health,Activity\n";
 
       ref.on("value", function(snapshot)
       {
@@ -79,7 +78,9 @@
 
       function clickedTheBigButton()
       {
+        var csv = "Patient ID,Age,Gender,Work,Marital,Education,Health,Activity, Races, Dieases\n";
         var id, age, gender, work, marriage, edu, health, act;
+        var diseases, races;
         firebase.database().ref("Users/").once("value", function(snapshot){
           snapshot.forEach(function(uid) {
             id = uid.key;
@@ -90,6 +91,17 @@
             edu = uid.val().Additional.Education;
             health = uid.val().Additional.Health;
             act = uid.val().Additional.ActivityLevel;
+            diseases = uid.val().Additional.Diseases;
+            races = uid.val().Additional.Races;
+
+            if (typeof diseases !== "undefined")
+              diseases = diseases.toString().replace("\"", "").replace("[","").replace("]", "").split(",").join("-");
+            else
+              diseases = "";
+            if (typeof races !== "undefined")
+              races = races.toString().replace("\"", "").replace("[","").replace("]", "").split(",").join("-");
+            else 
+              races = "";
 
             if (typeof age === "undefined")
               age = "";
@@ -106,7 +118,7 @@
             if (typeof act === "undefined")
               act = "";
 
-            csv += id +","+ age +","+gender+","+work+"," + marriage+","+edu+","+health+","+ act+"\n";
+            csv += id +","+ age +","+gender+","+work+"," + marriage+","+edu+","+health+","+ act+","+races+","+diseases+"\n";
           });
         }).then(function(){
           var d = new Date();
