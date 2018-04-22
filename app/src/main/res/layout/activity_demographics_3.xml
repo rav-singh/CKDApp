@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     tools:context="CKD.Android.Demographics_3"
     android:orientation="vertical"
-    android:background="@drawable/main_background_gradient">
+    android:background="@drawable/main_background_gradient1">
 
     <LinearLayout
         android:layout_width="match_parent"

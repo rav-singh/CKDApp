@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/main_background_gradient"
+    android:background="@drawable/main_background_gradient1"
     android:orientation="vertical">
 
 
@@ -12,8 +12,10 @@
         android:layout_height="wrap_content"
         android:background="@drawable/rounded_corner_textview"
         android:text="How is your appetite today?"
-        android:textSize="24sp"
-        android:textStyle="bold"/>
+        android:textColor="@color/Black"
+        android:textSize="@dimen/text_size_medium"
+        android:textStyle="bold"
+        android:layout_margin="20dp"/>
 
     <Spinner
         android:id="@+id/app_SPN_appetite"
@@ -30,8 +32,10 @@
         android:layout_height="wrap_content"
         android:background="@drawable/rounded_corner_textview"
         android:text="@string/fatigue_prompt"
-        android:textSize="24sp"
-        android:textStyle="bold"/>
+        android:textSize="@dimen/text_size_medium"
+        android:textColor="@color/Black"
+        android:textStyle="bold"
+        android:layout_margin="20dp"/>
 
     <Spinner
         android:id="@+id/app_SPN_fatigue"
@@ -43,14 +47,6 @@
         android:spinnerMode="dropdown"
         android:theme="@style/Spinner2"  />
 
-    <Button
-        android:id="@+id/app_Btn_Next"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/button_background"
-        android:text="Next"
-        android:textSize="24sp"/>
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -60,12 +56,26 @@
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:text="Home"
-            android:textSize="20sp"
+            android:textSize="@dimen/text_size_medium"
             android:padding="10dp"
             android:layout_marginBottom="30dp"
             android:background="@drawable/button_home_background"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"/>
+
+        <Button
+            android:id="@+id/app_Btn_Next"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_background"
+            android:text="Submit"
+            android:textSize="@dimen/text_size_medium"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:padding="10dp"
+            android:layout_marginBottom="30dp"
+            android:layout_marginRight="10dp" />
+
     </RelativeLayout>
 
 </LinearLayout>

@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="CKD.Android.Demographics_1"
-    android:background="@drawable/main_background_gradient">
+    android:background="@drawable/main_background_gradient1">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -13,8 +13,7 @@
      <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:background="@drawable/main_background_gradient">
+            android:orientation="vertical">
 
             <EditText
                 android:id="@+id/Demo_TF_Name"
@@ -74,7 +73,7 @@
                 android:text="Please select your dialysis schedule"
                 android:textStyle="bold"
                 android:textSize="@dimen/text_size_medium"
-                android:textColor="@android:color/white"
+                android:textColor="@android:color/black"
                 android:layout_margin="10dp" />
 
             <LinearLayout
@@ -96,7 +95,7 @@
                         android:layout_marginBottom="10dp"
                         android:gravity="center_vertical"
                         android:textStyle="bold"
-                        android:textColor="@android:color/white"/>
+                        android:textColor="@android:color/black"/>
 
                 </LinearLayout>
 
@@ -114,7 +113,7 @@
                         android:layout_marginBottom="10dp"
                         android:gravity="center_vertical"
                         android:textStyle="bold"
-                        android:textColor="@android:color/white"/>
+                        android:textColor="@android:color/black"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -131,7 +130,7 @@
                         android:layout_marginBottom="10dp"
                         android:gravity="center_vertical"
                         android:textStyle="bold"
-                        android:textColor="@android:color/white"/>
+                        android:textColor="@android:color/black"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -148,7 +147,7 @@
                         android:layout_marginBottom="10dp"
                         android:gravity="center_vertical"
                         android:textStyle="bold"
-                        android:textColor="@android:color/white"/>
+                        android:textColor="@android:color/black"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -165,7 +164,7 @@
                         android:layout_marginBottom="10dp"
                         android:gravity="center_vertical"
                         android:textStyle="bold"
-                        android:textColor="@android:color/white"/>
+                        android:textColor="@android:color/black"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -181,7 +180,7 @@
                         android:layout_marginBottom="10dp"
                         android:gravity="center_vertical"
                         android:textStyle="bold"
-                        android:textColor="@android:color/white"/>
+                        android:textColor="@android:color/black"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -196,7 +195,7 @@
                         android:text="Saturday"
                         android:textSize="@dimen/text_size_small"
                         android:textStyle="bold"
-                        android:textColor="@android:color/white"/>
+                        android:textColor="@android:color/black"/>
                 </LinearLayout>
 
         </LinearLayout>
