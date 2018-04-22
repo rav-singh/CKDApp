@@ -3,6 +3,8 @@ package CKD.Android;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Typeface;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
@@ -32,14 +34,13 @@ public class Thread extends AppCompatActivity
     List<CommentClass> commentClassList = new ArrayList<>();
 
     DataSnapshot DS;
-    int currentPage = 1;
-    int maxPages;
-    int threadsPerPage = 10;
-    Map<String,List<CommentClass>> CommentMap = new HashMap<>();
     LinearLayout LLinScrollView;
 
-    //TODO Fix the XML file so that longer threads do not cause the navigation
-    //TODO buttons to go off screen
+    final float[] topCorners = new float[]{20.0f, 20.0f, 20.0f, 20.0f, 0.0f, 0.0f, 0.0f, 0.0f};
+    final float[] bottomCorners = new float[]{0.0f, 0.0f, 0.0f, 0.0f, 20.0f, 20.0f, 20.0f, 20.0f};
+    final float[] notBottomLeftCorner = new float[]{20.0f, 20.0f, 20.0f, 20.0f, 20.0f, 20.0f, 0.0f, 0.0f};
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,8 +67,6 @@ public class Thread extends AppCompatActivity
         getComments();
 
         setOnClickListeners();
-
-
     }
 
     private void setOnClickListeners()
@@ -126,10 +125,9 @@ public class Thread extends AppCompatActivity
     {
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
-        int width = (int) (dm.widthPixels*.80);
+        int width = (int) (dm.widthPixels*.90);
 
-
-        LLinScrollView.removeAllViews();
+      //  LLinScrollView.removeAllViews();
 
         LinearLayout.LayoutParams commentLLParams = new LinearLayout.LayoutParams
                 (LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
@@ -137,16 +135,22 @@ public class Thread extends AppCompatActivity
 
         LinearLayout.LayoutParams commentParams = new LinearLayout.LayoutParams
                 (width, LinearLayout.LayoutParams.WRAP_CONTENT);
-        commentParams.setMargins(0,0,0,0);
 
         LinearLayout.LayoutParams authParams = new LinearLayout.LayoutParams
-                (LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        commentParams.setMargins(0,0,0,0);
+                (width, LinearLayout.LayoutParams.WRAP_CONTENT);
 
         LinearLayout commentListLL = new LinearLayout(this);
         commentListLL.setOrientation(LinearLayout.VERTICAL);
 
         commentListLL.setLayoutParams(commentLLParams);
+
+        GradientDrawable top = new GradientDrawable();
+        GradientDrawable bottom = new GradientDrawable();
+
+        top.setCornerRadii(topCorners);
+        bottom.setCornerRadii(bottomCorners);
+        top.setColor(Color.WHITE);
+        bottom.setColor(Color.WHITE);;
 
         for(CommentClass cmt : commentClassList)
         {
@@ -155,34 +159,30 @@ public class Thread extends AppCompatActivity
             commentLL.setLayoutParams(commentLLParams);
 
             TextView body = new TextView(this);
+
             body.setLayoutParams(commentParams);
-            body.setTextSize(18);
+            body.setTextSize(getResources().getInteger(R.integer.java_text_size_small));
+            body.setTextColor(Color.BLACK);
+            body.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
             body.setText(cmt.getComment());
-            body.setBackground(this.getResources().getDrawable(R.drawable.rounded_corner_textview));
+            body.setBackground(top);
+
             commentLL.addView(body);
 
             TextView author = new TextView(this);
+
             author.setLayoutParams(authParams);
-            author.setTextSize(16);
+            author.setTextSize(getResources().getInteger(R.integer.java_text_size_xsmall));
+            author.setTypeface(Typeface.defaultFromStyle(Typeface.ITALIC));
             author.setText("By: ".concat(cmt.getUserName()));
-            author.setBackground(this.getResources().getDrawable(R.drawable.rounded_corner_textview));
+
+            author.setBackground(bottom);
 
             commentLL.addView(author);
 
             commentListLL.addView(commentLL);
         }
         LLinScrollView.addView(commentListLL);
-    }
-
-    private void fillInThread(ThreadClass thread)
-    {
-        TextView threadTitle = findViewById(R.id.Thread_TV_ThreadTitle);
-        TextView threadBody = findViewById(R.id.Thread_TV_ThreadBody);
-        TextView threadAuthor = findViewById(R.id.Thread_TV_ThreadAuthor);
-
-        threadTitle.setText(thread.getTitle());
-        threadAuthor.setText(thread.getAuthor());
-        threadBody.setText(thread.getBody());
     }
 
     private void getCurrentThread()
@@ -194,17 +194,39 @@ public class Thread extends AppCompatActivity
                                             .child(AppData.cur_Category)
                                             .child(AppData.cur_Thread_Key);
 
-        Thread_node.addValueEventListener(new ValueEventListener() {
+        Thread_node.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
 
                 // Use this thread to fill the values on the page
                 ThreadClass thread = dataSnapshot.getValue(ThreadClass.class);
                 fillInThread(thread);
 
                 AppData.setCurrentThread(thread);
+            }
+
+            private void fillInThread(ThreadClass thread)
+            {
+                TextView threadTitle = findViewById(R.id.Thread_TV_ThreadTitle);
+                TextView threadBody = findViewById(R.id.Thread_TV_ThreadBody);
+                TextView threadAuthor = findViewById(R.id.Thread_TV_ThreadAuthor);
+
+                GradientDrawable body = new GradientDrawable();
+                GradientDrawable auth = new GradientDrawable();
+
+                body.setCornerRadii(notBottomLeftCorner);
+                body.setColor(Color.WHITE);
+
+                auth.setCornerRadii(bottomCorners);
+                auth.setColor(Color.WHITE);
+
+                threadTitle.setText(thread.getTitle());
+
+                threadBody.setText(thread.getBody());
+                threadBody.setBackground(body);
+
+                threadAuthor.setText("By: ".concat(thread.getAuthor()));
+                threadAuthor.setBackground(auth);
             }
 
             @Override

@@ -1,84 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:background="@drawable/main_background_gradient">
 
-        <TextView
-            android:id="@+id/Comment_TV_ThreadTitle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="This is the location of the thread title"
-            android:textSize="28sp"
-            android:padding="5dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginBottom="5dp"
-            android:background="@drawable/rounded_corner_textview"
-            />
-
-        <TextView
-            android:id="@+id/Comment_TV_ThreadBody"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:gravity="top"
-            android:padding="5dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginBottom="5dp"
-            android:scrollbars="vertical"
-            android:text="Thread Body"
-            android:textSize="20sp"
-            android:background="@drawable/rounded_corner_textview"/>
-
-        <EditText
-            android:id="@+id/Comment_TE_Comment"
-            android:layout_width="match_parent"
-            android:layout_height="75dp"
-            android:padding="5dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginBottom="5dp"
-            android:gravity="top"
-            android:hint="This is where you comment"
-            android:inputType="textMultiLine"
-            android:scrollbars="vertical"
-            android:background="@drawable/rounded_corner_textview"
-             />
-
-
-        <Button
-            android:id="@+id/Comment_Btn_Submit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:text="Submit"
-            android:background="@drawable/button_background"
-            android:layout_gravity="end"
-            android:textSize="20sp"
-            android:layout_margin="10dp"
-          />
-
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-        <Button
-            android:id="@+id/Comment_Btn_Home"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:text="Home"
-            android:textSize="20sp"
-            android:padding="10dp"
-            android:layout_marginBottom="30dp"
-            android:background="@drawable/button_home_background"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"/>
-    </RelativeLayout>
+            <TextView
+                android:id="@+id/Comment_TV_ThreadTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="This is the location of the thread title"
+                android:textSize="28sp"
+                android:padding="5dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/rounded_corner_textview"
+                />
 
+            <TextView
+                android:id="@+id/Comment_TV_ThreadBody"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="top"
+                android:padding="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="5dp"
+                android:scrollbars="vertical"
+                tools:text="@string/long_test_string"
+                android:textSize="20sp"
+                android:background="@drawable/rounded_corner_textview"/>
+
+            <EditText
+                android:id="@+id/Comment_TE_Comment"
+                android:layout_width="match_parent"
+                android:layout_height="75dp"
+                android:padding="5dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="5dp"
+                android:gravity="top"
+                android:hint="This is where you comment"
+                android:inputType="textMultiLine"
+                android:scrollbars="vertical"
+                android:background="@drawable/rounded_corner_textview"
+                 />
+
+
+            <Button
+                android:id="@+id/Comment_Btn_Submit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="Submit"
+                android:background="@drawable/button_background"
+                android:layout_gravity="end"
+                android:textSize="20sp"
+                android:layout_margin="10dp"
+              />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Button
+                android:id="@+id/Comment_Btn_Home"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:text="Home"
+                android:textSize="20sp"
+                android:padding="10dp"
+                android:layout_marginBottom="30dp"
+                android:background="@drawable/button_home_background"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"/>
+        </RelativeLayout>
     </LinearLayout>
+</ScrollView>

@@ -19,7 +19,6 @@ public class ThreadClass implements Comparable<ThreadClass>{
 
     }
 
-
     ThreadClass(String author, String authorUID, String title, String body, String date, String category, int likes) {
         this.author = author;
         this.authorUID = authorUID;
@@ -30,7 +29,7 @@ public class ThreadClass implements Comparable<ThreadClass>{
         this.likes = likes;
     }
 
-    String getAuthor() {
+    public String getAuthor() {
         return author;
     }
 
