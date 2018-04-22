@@ -269,38 +269,38 @@
                 if (strcmp(typeof data.Appetite,"undefined") != 0)
                 {
                   app = data.Appetite;
-                  if (strcmp(app, "Great Appetite") == 0)
+                  if ((strcmp(app, "Great Appetite") == 0) || (strcmp(app, "Very Good") == 0))
                     app = 5;
 
-                  else if (strcmp(app, "Good Appetite") == 0)
+                  else if ((strcmp(app, "Good Appetite") == 0) || (strcmp(app, "Good") == 0))
                     app = 4;
 
-                  else if (strcmp(app, "Average Appetite") == 0)
+                  else if ((strcmp(app, "Average Appetite") == 0) || (strcmp(app, "Average") == 0))
                     app = 3;
 
-                  else if (strcmp(app, "Bad Appetite") == 0)
+                  else if ((strcmp(app, "Bad Appetite") == 0) || (strcmp(app, "Poor") == 0))
                     app = 2;
 
-                  else if (strcmp(app, "No Appetite") == 0)
+                  else if ((strcmp(app, "No Appetite") == 0) || (strcmp(app, "Very Poor") == 0))
                     app = 1;
                 }
 
                 if (strcmp(typeof data.Fatigue,"undefined") != 0)
                 {
                   fat = data.Fatigue;
-                  if (strcmp(fat, "Great!") == 0)
+                  if ((strcmp(fat, "Great!") == 0) || (strcmp(fat, "None") == 0))
                     fat = 5;
 
-                  else if (strcmp(fat, "Really Not Tired") == 0)
+                  else if ((strcmp(fat, "Really Not Tired") == 0) || (strcmp(fat, "Rarely") == 0))
                     fat = 4;
 
-                  else if (strcmp(fat, "Not Tired") == 0)
+                  else if ((strcmp(fat, "Not Tired") == 0)  || (strcmp(fat, "Sometimes") == 0))
                     fat = 3;
 
-                  else if (strcmp(fat, "Tired") == 0)
+                  else if ((strcmp(fat, "Tired") == 0)  || (strcmp(fat, "Often") == 0))
                     fat = 2;
 
-                  else if (strcmp(fat, "Really Tired") == 0)
+                  else if ((strcmp(fat, "Really Tired") == 0)  || (strcmp(fat, "Almost Always") == 0))
                     fat = 1;
                 }
               }

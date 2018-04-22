@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context="CKD.Android.SearchFood"
     android:orientation="vertical"
-    android:background="@drawable/main_background_gradient">
+    android:background="@drawable/main_background_gradient4">
 
     <EditText
         android:id="@+id/searchFood_EF"
