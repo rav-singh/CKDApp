@@ -1,5 +1,6 @@
 package CKD.Android;
 
+import android.accessibilityservice.AccessibilityService;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
@@ -599,10 +600,15 @@ public class ThreadsList extends AppCompatActivity
                             .concat("</b><br/><i>")
                             .concat(currentThread.getDate())
                             .concat("</i></html>"));
+            int paddingDp = 25;
+            float density = this.getResources().getDisplayMetrics().density;
+            int paddingPixel = (int)(paddingDp * density);
 
+            thread.setPadding(paddingPixel,0,0,0);
             thread.setText(title);
             thread.setGravity(Gravity.LEFT);
             thread.setBackground(this.getResources().getDrawable(R.drawable.rounded_corner_textview));
+            thread.setGravity(Gravity.CENTER_VERTICAL);
 
             threadView.addView(thread);
             activeThreadBtnList.add(thread);
@@ -645,7 +651,7 @@ public class ThreadsList extends AppCompatActivity
                             // Updates the ThreadClass Object counter for likes
                             Likes_Node.setValue(++count);
                             currentThread.setLikes(count);
-                            arrow.setColorFilter(Color.GREEN);
+                            arrow.setColorFilter(getResources().getColor(R.color.DarkGreen));
                         }
                         else
                         {
