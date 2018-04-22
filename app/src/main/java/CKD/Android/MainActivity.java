@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
             updateFirebaseInAppData();
             loadUserClass();
 
-            Intent launchActivity1 = new Intent(MainActivity.this, HomePage.class);
+            Intent launchActivity1 = new Intent(MainActivity.this, Mood.class);
             startActivity(launchActivity1);
         }
     }

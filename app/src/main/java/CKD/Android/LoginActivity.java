@@ -151,7 +151,7 @@ public class LoginActivity extends AppCompatActivity
     private void switchPages()
     {
         Intent launchActivity1= new Intent(
-                CKD.Android.LoginActivity.this,HomePage.class);
+                CKD.Android.LoginActivity.this,Mood.class);
         startActivity(launchActivity1);
 
     }
