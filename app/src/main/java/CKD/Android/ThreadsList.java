@@ -591,7 +591,7 @@ public class ThreadsList extends AppCompatActivity
 
             Button thread = new Button(this);
             thread.setLayoutParams(threadParams);
-            thread.setText(currentThread.getTitle().concat("      ").concat(String.valueOf(currentThread.getLikes())));
+            thread.setText(currentThread.getTitle());
             thread.setGravity(Gravity.LEFT);
             thread.setBackground(this.getResources().getDrawable(R.drawable.rounded_corner_textview));
 
@@ -645,6 +645,7 @@ public class ThreadsList extends AppCompatActivity
                             arrow.setColorFilter(Color.WHITE);
                         }
                         upDateUpVoteCounter(count);
+                        Collections.sort(threadsListByLikes);
                     }
 
                     private void upDateUpVoteCounter(int count)
