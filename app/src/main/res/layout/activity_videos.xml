@@ -73,5 +73,16 @@
         android:layout_width="match_parent"
         android:layout_height="213dp"
         android:background="#ffff" />
+
+        <Button
+            android:id="@+id/videos_homebtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="home"
+            android:textSize="@dimen/text_size_medium"
+            android:padding="10dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/button_home_background"
+            android:layout_gravity="center"/>
 </LinearLayout>
 </ScrollView>

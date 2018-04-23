@@ -88,6 +88,8 @@ public class Videos extends YouTubeBaseActivity implements YouTubePlayer.OnIniti
             }
         });
 
+        Button home = findViewById(R.id.videos_homebtn);
+        home = AppData.activateHomeButton(home,this);
     }
 
     private void initializeElements() {

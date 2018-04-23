@@ -57,10 +57,6 @@ public class Exercise extends AppCompatActivity
             }
         });
 
-
-
-
-
         ActivityLogButton = findViewById(R.id.Exercise_btn_ActivityLog);
         YTVideos = findViewById(R.id.Exercise_btn_YouTubeVideos);
 
@@ -89,9 +85,6 @@ public class Exercise extends AppCompatActivity
             AppData.updateDailyChecklist("Exercise");
             checklistUpdated = true;
         }
-
-        Button home_btn = findViewById(R.id.Exercise_btn_home);
-        home_btn = AppData.activateHomeButton(home_btn,Exercise.this);
     }
 }
 
