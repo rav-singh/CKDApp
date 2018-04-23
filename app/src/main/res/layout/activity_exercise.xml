@@ -15,27 +15,27 @@
         android:layout_height="wrap_content"
         android:text="ACTIVITY BLOG"
         android:textAlignment="center"
-        android:textSize="30dp" />
+        android:textSize="@dimen/text_size_large" />
 
     <TextView
         android:id="@+id/Exercise_TF_Author"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Author Name"
+        tools:text="Author Name"
         android:textAlignment="center"
-        android:textSize="30dp" />
+        android:textSize="@dimen/text_size_medium" />
 
     <TextView
         android:id="@+id/Exercise_TF_Blog_Title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Blog Title"
+        tools:text="Blog Title"
         android:textAlignment="center"
-        android:textSize="30dp" />
+        android:textSize="@dimen/text_size_large" />
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="400dp"
+        android:layout_height="350dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginTop="10dp">
@@ -44,57 +44,37 @@
             android:id="@+id/Exercise_TF_Blog_Text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Blog Content Text"
+            tools:text="Blog Content Text"
             android:textAlignment="center"
-            android:textSize="30dp" />
+            android:textSize="@dimen/text_size_large" />
     </ScrollView>
 
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="75dp">
+        android:layout_height="match_parent">
 
         <Button
             android:id="@+id/Exercise_btn_ActivityLog"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="43dp"
+            android:layout_marginStart="10dp"
             android:background="@drawable/button_home_background"
             android:padding="10dp"
             android:text="Activity Log"
-            android:textSize="20sp" />
+            android:textSize="@dimen/text_size_medium" />
 
         <Button
             android:id="@+id/Exercise_btn_YouTubeVideos"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/Exercise_btn_ActivityLog"
-            android:layout_alignBottom="@+id/Exercise_btn_ActivityLog"
             android:layout_alignParentEnd="true"
-            android:layout_marginEnd="40dp"
             android:background="@drawable/button_home_background"
+            android:layout_marginEnd="10dp"
             android:padding="10dp"
             android:text="Videos"
-            android:textSize="20sp" />
+            android:textSize="@dimen/text_size_medium" />
 
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="75dp">
-
-        <Button
-            android:id="@+id/Exercise_btn_home"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="10dp"
-            android:background="@drawable/button_home_background"
-            android:padding="10dp"
-            android:text="Home"
-            android:textSize="20sp" />
     </RelativeLayout>
 </LinearLayout>
