@@ -623,7 +623,7 @@ public class Diet extends AppCompatActivity {
         addNoMeal.setClickable(false);
         addMeal.setClickable(false);
 
-        addNoMeal.setText("No Meals Recorded");
+        addNoMeal.setText("No Meal");
         addMeal.setText("");
 
         addNoMeal.setBackground(getResources().getDrawable(R.drawable.rounded_corner_textview));
