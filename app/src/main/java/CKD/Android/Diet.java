@@ -341,12 +341,12 @@ public class Diet extends AppCompatActivity {
                     return;
                 }
 
-                String foodID = (String) d.child("Food NDBs").getValue();
-                String foodNames = (String) d.child("Food Names").getValue();
-                String foodQuantity = (String) d.child("Food Quantity").getValue();
-                String PotassiumLvl = (String) d.child("Potassium Values").getValue();
-                String PhosphorusLvl = (String) d.child("Phosphorus Values").getValue();
-                String SodiumLvl = (String) d.child("Sodium Values").getValue();
+                String foodID = (String) d.child("FoodNDBs").getValue();
+                String foodNames = (String) d.child("FoodNames").getValue();
+                String foodQuantity = (String) d.child("FoodQuantity").getValue();
+                String PotassiumLvl = (String) d.child("PotassiumValues").getValue();
+                String PhosphorusLvl = (String) d.child("PhosphorusValues").getValue();
+                String SodiumLvl = (String) d.child("SodiumValues").getValue();
 
                 assert foodNames != null;
                 foodNames = foodNames.replace("[" ,"");
@@ -591,12 +591,12 @@ public class Diet extends AppCompatActivity {
         Date_node.child(meal).child("noMeal").setValue(false);
         AppData.disableBtn(noMealBtns.get(meal));
         AppData.enableBtn(btnNutritionBlog);
-        Date_node.child(meal).child("Food Names").setValue(fnames);
-        Date_node.child(meal).child("Food NDBs").setValue(fndbs);
-        Date_node.child(meal).child("Food Quantity").setValue(fQuantity);
-        Date_node.child(meal).child("Potassium Values").setValue(fPotassium);
-        Date_node.child(meal).child("Phosphorus Values").setValue(fPhosphorus);
-        Date_node.child(meal).child("Sodium Values").setValue(fSodium);
+        Date_node.child(meal).child("FoodNames").setValue(fnames);
+        Date_node.child(meal).child("FoodNDBs").setValue(fndbs);
+        Date_node.child(meal).child("FoodQuantity").setValue(fQuantity);
+        Date_node.child(meal).child("PotassiumValues").setValue(fPotassium);
+        Date_node.child(meal).child("PhosphorusValues").setValue(fPhosphorus);
+        Date_node.child(meal).child("SodiumValues").setValue(fSodium);
 
     }
 

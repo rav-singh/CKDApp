@@ -235,6 +235,10 @@
 
         function submitExerciseBlog()
         {
+          var today = new Date();
+          var cur = today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate() + "/";
+          cur = cur.toString();
+
           firebase.database().ref('Admins/ExerciseBlog/').set({
             AuthorUID: queries[1],
             Author: techName,
@@ -246,6 +250,14 @@
             document.querySelector('#exerciseBlogTitle').value ="";
             document.querySelector('#exerciseBlogBody').value ="";
             document.querySelector('#exerciseBlogYoutubeLinks').value = "";
+          });
+
+          firebase.database().ref('Admins/ExerciseBlog/History/' + cur).set({
+            AuthorUID: queries[1],
+            Author: techName,
+            Title: document.querySelector('#exerciseBlogTitle').value,
+            Body: document.querySelector('#exerciseBlogBody').value,
+            Links: document.querySelector('#exerciseBlogYoutubeLinks').value.split("\n").join(";")
           });
         }
 
@@ -265,6 +277,10 @@
 
         function submitDietBlog()
         {
+          var today = new Date();
+          var cur = today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate() + "/";
+          cur = cur.toString();
+          
           firebase.database().ref('Admins/DietBlog/').set({
             AuthorUID: queries[1],
             Author: techName,
@@ -274,6 +290,14 @@
             alert("Post submitted!");
             document.querySelector('#dietBlogTitle').value ="";
             document.querySelector('#dietBlogBody').value ="";
+          });
+
+          firebase.database().ref('Admins/DietBlog/History/' + cur).set({
+            AuthorUID: queries[1],
+            Author: techName,
+            Title: document.querySelector('#exerciseBlogTitle').value,
+            Body: document.querySelector('#exerciseBlogBody').value,
+            Links: document.querySelector('#exerciseBlogYoutubeLinks').value.split("\n").join(";")
           });
         }
 
